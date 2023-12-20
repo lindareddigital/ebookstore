@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import {getCategory} from '../pages/api/main';
+import {getCategory} from './api/api';
+// import {topFunction} from '../js/main';
+
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 
@@ -20,6 +22,11 @@ import { useEffect, useRef,useState } from 'react';
 
 
 export default function Home() {
+
+  const topFunction = () =>{
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
 
   
   const [categories, setCategories] = useState([]);
@@ -59,7 +66,7 @@ export default function Home() {
           <a aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></a>
         </div>
         </div>
-        <div onClick="topFunction()" class="d-none d-lg-flex back-to-top">
+        <div onClick={topFunction} class="d-none d-lg-flex back-to-top">
           <span>返回頂端</span>
         </div>
       </div>
@@ -78,7 +85,7 @@ export default function Home() {
           <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt=""></img>
         </div>
         <div class="">
-          <button onclick="topFunction()" id="topBtn">Top</button>
+          <button onClick={topFunction()} id="topBtn">Top</button>
         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -125,7 +132,7 @@ export default function Home() {
         <div class="container-fluid header-main">
 
           <div class="header-search-bar">
-            <img class="logo" src="./images/logo.jpeg" alt=""></img>
+            <img class="logo" src="/images/logo.jpeg" alt=""></img>
             <div class="">
               <div class="label-group">
                 <button type="button" class="btn">海濱</button>
@@ -499,10 +506,10 @@ export default function Home() {
           <div class="yt-block">
 
 
-            <iframe width="560" height="334" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe width="560" height="334" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
             <div class="more">
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
             </div>
          
           </div>

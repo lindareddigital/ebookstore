@@ -6,7 +6,8 @@ export function handler(req, res) {
 
 
 export async function getCategory() {
-  return fetch('http://localhost:8055/items/Book?fields=Category.*', {
+  return fetch('http://localhost:8055/items/Category', {
+      method: 'GET',
       mode: 'no-cors',
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -26,3 +27,4 @@ export async function getCategory() {
       console.log("Fetch error occurred.", err);
     });
 }
+
