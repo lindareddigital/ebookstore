@@ -1,54 +1,95 @@
+'use client';
+
+
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import {getCategory} from './api/api';
+import { getAllCategory } from './api/api';
 // import {topFunction} from '../js/main';
-
+import useSwiperFunc from '@/hooks/useSwiperFunc';
+import HomeTab from './components/HomeTab';
+import apiManager from '@/pages/api/api';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-
-
-// const getData = cache(async () => {
-//   try {
-//     const result = await getCategory();
-//     return result;
-//   } catch (e) {
-//     console.log('error', e);
-//   }
-// });
-
-
-
+import Link from 'next/link';
+import 'swiper/css';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 
 export default function Home() {
+  const [categories, setCategories] = useState([]);
+  const [books, setBooks] = useState([]);
+  const swiperRef = useRef(null);
+
+  const { next, previous } = useSwiperFunc(swiperRef);
+  const containerRef = useRef(null);
+
+
+  const getAllCategory = (async () => {
+  try {
+    const data = await apiManager.getAllCategory();
+    console.log(data);
+    setCategories(data.data)
+    return data;
+  } catch (e) {
+    console.log('error', e);
+  }
+});
+
+const getAllBooks = (async () => {
+  try {
+    const data = await apiManager.getAllBooks();
+    setBooks(data.data)
+
+    console.log(data, 'books');
+    return data;
+  } catch (e) {
+    console.log('error', e);
+  }
+});
+
+
+  const [activeTab, setActiveTab] = useState('');
+
+  const tabChange = (async(title) => {
+    // setActiveTab(title)
+
+    const data = await apiManager.getCategoryList(title);
+
+    console.log('CategoryList',data);
+      
+  });
+
+
 
   const topFunction = () =>{
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    // const top = el.getBoundingClientRect().top;
+
+    containerRef.current?.scroll({
+      top: 0
+    });
+
+    // document.body.scrollTop = 0; // For Safari
+    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
-  
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    getCategory().then(data => {
-      setCategories(data);
-    });
+  useEffect( () => {
+    getAllCategory()
+    getAllBooks()
+    // getCategoryList()
   }, []);
 
 
   return(
-    <div class="home-page">
+    <div class="home-page" ref={containerRef}>
     
-
-
 
        <div class="sidebar-wrapper scroll-cling-top">
         <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
-          <a aria-current="page" href="" class="router-link-active router-link-exact-active">
+          <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
             <span>【益智桌遊】10/31上市</span>
-          </a>
+          </Link>
         </div>
         <div class="d-none d-lg-flex tab active">
           <a aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></a>
@@ -231,9 +272,9 @@ export default function Home() {
 
           <aside class="list-aside">
             <ul>
-              {categories.map((item, index) => (
-                <li key={index}>
-                  <a href="">{item.Category.Title}</a>
+              {categories.map((item) => (
+                <li key={item.id}>
+                  <a onClick={() => tabChange(item.Title)}>{item.Title}</a>
                 </li>
               ))}
             </ul>
@@ -315,70 +356,56 @@ export default function Home() {
 
 
           <div class="right-side">
-
-
-
-            <div class="test"></div>
-
            
 
             <div class="dvSlider">
+
+            <HomeTab />
+
+            <Swiper
+              ref={swiperRef}
+              rewind={false}
+              className={`booklist-carousel`}
+              slidesPerView={5}
+            >
+              <div class="title">slider</div>
+              <hr></hr>
+              <div class="swiper-wrapper booklist-carousel-inner">
+                {books.map((item) => {
+                  return (
+                    <SwiperSlide
+                      className="swiper-slide"
+                      key={`${item.id}`}
+                    >
+                      <div class="book-item">
+                        <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
+                        <div className="desc mt-2">{item.Title}</div>
+                        <div className="price-num">{item.Price}</div>
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
+                </div>
+                <div onClick={previous} class="swiper-button-prev"></div>
+                <div onClick={next} class="swiper-button-next"></div>
+            </Swiper>
                 <div class="swiper swiper-js booklist-carousel">
-                  <div class="title">X萬獸探險隊</div>
+                  <div class="title">slider</div>
                   <hr></hr>
                   <div class="swiper-wrapper booklist-carousel-inner">
-                      <div class="swiper-slide">
-                        <div href="detail.html" class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
 
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
+                     {
+                       books.map((item) => (
+                        <div key={item.id} className="swiper-slide">
+                          <div class="book-item">
+                            <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
+                            <div className="desc mt-2">{item.Title}</div>
+                            <div className="price-num">{item.Price}</div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
+                      ))
+                     }
 
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-                      </div>
                       
                       
                   </div>

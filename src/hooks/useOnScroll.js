@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default function useOnScroll() {
-  const [scrollY, setScrollY] = useState<number>(0);
+  const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
     setScrollY(window.scrollY);
     const navbarDimensions = () => {

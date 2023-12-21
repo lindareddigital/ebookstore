@@ -359,6 +359,11 @@ a{
   /* flex-wrap: wrap; */
 }
 
+.booklist-carousel-inner .swiper-slide{
+  width: 20%;
+
+}
+
 .navbar-light .navbar-toggler{
   color: #fff;
   border: none;
@@ -413,6 +418,10 @@ a{
   color: #d00008;
   font-size: 18px;
   font-weight: 700;
+}
+
+.home-recommend-tabs .nav-item{
+  background-image: linear-gradient(to bottom,#ff7a00,#ff5c00);
 }
 
 .yt-block{
