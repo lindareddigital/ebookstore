@@ -103,6 +103,10 @@ class ApiManager {
     return this.get({path:`http://localhost:8055/items/Book`}); 
   }
 
+  getDetail = (id) =>{
+    return this.get({path:`http://localhost:8055/items/Book/${id}`}); 
+  }
+
 
 }
 

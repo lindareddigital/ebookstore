@@ -4,7 +4,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import { getAllCategory } from './api/api';
 // import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
 import HomeTab from './components/HomeTab';
@@ -48,16 +47,9 @@ const getAllBooks = (async () => {
   }
 });
 
-
-  const [activeTab, setActiveTab] = useState('');
-
   const tabChange = (async(title) => {
-    // setActiveTab(title)
-
     const data = await apiManager.getCategoryList(title);
-
     console.log('CategoryList',data);
-      
   });
 
 

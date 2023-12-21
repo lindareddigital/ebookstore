@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import {getCategory} from './api/api';
-import {topFunction} from '../js/main';
 import apiManager from '@/pages/api/api';
 // import { cache } from 'next';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 
@@ -16,7 +15,7 @@ export default function Detail() {
 
   const getData = (async () => {
   try {
-    const data = await apiManager.getDetail(id);
+    const data = await apiManager.getDetail();
     console.log('data.data', data.data);
     return data.data;
   } catch (e) {
@@ -30,12 +29,12 @@ export default function Detail() {
 
 
 
-  // useEffect(() => {
-  //   getData();
+  useEffect(() => {
+    getData();
    
     
 
-  // }, []);
+  }, []);
 
 
   return(
@@ -229,3 +228,13 @@ export default function Detail() {
   )
 
 }
+
+
+// function SlugPage() {
+//   const router = useRouter();
+//   const { slug } = router.query;
+
+//   return <div>This is the page for {slug}.</div>;
+// }
+
+// export default SlugPage;

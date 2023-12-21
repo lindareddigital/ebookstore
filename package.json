@@ -15,7 +15,8 @@
     "react": "^18",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "eslint": "^8",

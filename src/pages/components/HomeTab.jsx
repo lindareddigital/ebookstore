@@ -6,6 +6,7 @@ import apiManager from '@/pages/api/api';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
+import Link from 'next/link';
 
 
 
@@ -29,7 +30,6 @@ export default function HomeTab() {
   });
 
   const tabChange = (async(title) => {
-    // setActiveTab(title)
 
     const data = await apiManager.getCategoryList(title);
     setBooks(data.data)
@@ -43,45 +43,53 @@ export default function HomeTab() {
 
 
   return(
-    <Tab.Container displayName="yyy" class="home-recommend-tabs" id="nav-tab" defaultActiveKey="first">
-      <Nav variant="tabs">
-        {categories.map((item) => (
-          <>
-          <Nav.Item>
-            <Nav.Link onClick={() => tabChange(item.Title)} eventKey={item.id}>{item.Title}</Nav.Link>
-          </Nav.Item>
-          </>
-        ))}
-      </Nav>
-      <Tab.Content>
-        <Swiper
-          ref={swiperRef}
-          rewind={false}
-          className={`booklist-carousel`}
-          slidesPerView={5}
-        >
-          <div class="swiper-wrapper booklist-carousel-inner">
-            {books.map((item) => {
-              return (
-                <SwiperSlide
-                  className="swiper-slide"
-                  key={`${item.id}`}
-                >
-                  <div class="book-item">
-                    <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
-                    <div className="desc mt-2">{item.Title}</div>
-                    <div className="price-num">{item.Price}</div>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-            </div>
-            <div onClick={previous} class="swiper-button-prev"></div>
-            <div onClick={next} class="swiper-button-next"></div>
-        </Swiper>
-      </Tab.Content>
-    </Tab.Container>
-    
+    <div class="home-recommend-tabs">
+      <Tab.Container id="nav-tab" defaultActiveKey="first">
+        <Nav variant="tabs">
+          {categories.map((item) => (
+            <>
+            <Nav.Item key={`${item.id}`}>
+              <Nav.Link onClick={() => tabChange(item.Title)} eventKey={item.id}>{item.Title}</Nav.Link>
+            </Nav.Item>
+            </>
+          ))}
+        </Nav>
+        <Tab.Content>
+          <Swiper
+            ref={swiperRef}
+            rewind={false}
+            className={`booklist-carousel`}
+            slidesPerView={5}
+          >
+            <div class="swiper-wrapper booklist-carousel-inner">
+              {books.map((item) => {
+                return (
+                  <SwiperSlide
+                    className="swiper-slide"
+                    key={`${item.id}`}
+                  >
+                  <Link
+                    key={`${item.id}`}
+                    href={`/detail/${item.id}`}
+                    // href={`/detail`}
+                    className={``}
+                  >
+                    <div class="book-item">
+                      <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
+                      <div className="desc mt-2">{item.Title}</div>
+                      <div className="price-num">{item.Price}</div>
+                    </div>
+                  </Link>
+                  </SwiperSlide>
+                );
+              })}
+              </div>
+              <div onClick={previous} class="swiper-button-prev"></div>
+              <div onClick={next} class="swiper-button-next"></div>
+          </Swiper>
+        </Tab.Content>
+      </Tab.Container>
+    </div>
 
   )
 

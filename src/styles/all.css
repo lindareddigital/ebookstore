@@ -421,7 +421,23 @@ a{
 }
 
 .home-recommend-tabs .nav-item{
-  background-image: linear-gradient(to bottom,#ff7a00,#ff5c00);
+  border-radius: 0.375rem;
+  height: 35px;
+  margin: 0px 8px;
+  background-color: #ccc;
+}
+
+.home-recommend-tabs .nav-item.active{
+  background: linear-gradient(to bottom,#ff7a00,#ff5c00);
+}
+
+.home-recommend-tabs{
+  width: 840px;
+  height: 642px;
+}
+
+.home-recommend-tabs .nav-item a{
+  color: #fff;
 }
 
 .yt-block{
