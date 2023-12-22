@@ -6,8 +6,8 @@
 import React from 'react';
 // import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
-import HomeTab from '@/components ';
-import SidebarWrapper from '@/components/SidebarWrapper';
+import HomeTab from '@/pages/components/HomeTab';
+import SidebarWrapper from '@/pages/components/SidebarWrapper';
 import apiManager from '@/pages/api/api';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
@@ -55,23 +55,7 @@ const getAllBooks = (async () => {
 
 
 
-  const topFunction = () =>{
-    // const top = el.getBoundingClientRect().top;
-    
-    
-    if (!containerRef.current) return;
-
-    console.log('containerRef',containerRef);
-
-
-    containerRef.current?.scrollTo(0, 0);
-    containerRef.current?.scroll({
-      top: 0
-    });
-
-    // document.body.scrollTop = 0; // For Safari
-    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
+  
 
 
   useEffect( () => {
@@ -103,7 +87,7 @@ const getAllBooks = (async () => {
           <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt=""></img>
         </div>
         <div class="">
-          <button onClick={topFunction()} id="topBtn">Top</button>
+          {/* <button onClick={topFunction()} id="topBtn">Top</button> */}
         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-light">

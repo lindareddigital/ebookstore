@@ -17,6 +17,24 @@ export default function HomeTab() {
   const swiperRef = useRef(null);
   const { next, previous } = useSwiperFunc(swiperRef);
 
+  const topFunction = () =>{
+    // const top = el.getBoundingClientRect().top;
+    
+    
+    if (!containerRef.current) return;
+
+    console.log('containerRef',containerRef);
+
+
+    containerRef.current?.scrollTo(0, 0);
+    containerRef.current?.scroll({
+      top: 0
+    });
+
+    // document.body.scrollTop = 0; // For Safari
+    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
 
   const getAllCategory= (async () => {
     try {
