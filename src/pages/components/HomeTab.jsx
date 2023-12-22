@@ -1,7 +1,6 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-// import { getAllCategory,getAllBooks,getCategoryList } from '@/pages/api/api';
 import apiManager from '@/pages/api/api';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
@@ -29,9 +28,9 @@ export default function HomeTab() {
     }
   });
 
-  const tabChange = (async(title) => {
+  const tabChange = (async(id) => {
 
-    const data = await apiManager.getCategoryList(title);
+    const data = await apiManager.getCategoryList(id);
     setBooks(data.data)
     console.log('CategoryList',data);
       
@@ -49,7 +48,7 @@ export default function HomeTab() {
           {categories.map((item) => (
             <>
             <Nav.Item key={`${item.id}`}>
-              <Nav.Link onClick={() => tabChange(item.Title)} eventKey={item.id}>{item.Title}</Nav.Link>
+              <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>{item.Title}</Nav.Link>
             </Nav.Item>
             </>
           ))}
@@ -74,7 +73,6 @@ export default function HomeTab() {
                       pathname:`/detail/${item.id}`,
                       query: {id: item.id},                 
                     }}
-                    // href={`/detail`}
                     className={``}
                   >
                     <div class="book-item">

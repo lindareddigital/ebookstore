@@ -7,7 +7,7 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
       showDropDownNavbar: !prev.showDropDownNavbar
     }));
   },
-  : '',
+  lng: '',
   setLng: () => {
     set({ lng });
   }

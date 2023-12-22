@@ -6,7 +6,8 @@
 import React from 'react';
 // import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
-import HomeTab from './components/HomeTab';
+import HomeTab from '@/components ';
+import SidebarWrapper from '@/components/SidebarWrapper';
 import apiManager from '@/pages/api/api';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
@@ -47,8 +48,8 @@ const getAllBooks = (async () => {
   }
 });
 
-  const tabChange = (async(title) => {
-    const data = await apiManager.getCategoryList(title);
+  const tabChange = (async(id) => {
+    const data = await apiManager.getCategoryList(id);
     console.log('CategoryList',data);
   });
 
@@ -56,13 +57,17 @@ const getAllBooks = (async () => {
 
   const topFunction = () =>{
     // const top = el.getBoundingClientRect().top;
-    console.log('containerRef',containerRef);
     
-    // containerRef.current?.scroll({
-    //   top: 0
-    // });
-            containerRef.current?.scrollTo({ top: 0 });
+    
+    if (!containerRef.current) return;
 
+    console.log('containerRef',containerRef);
+
+
+    containerRef.current?.scrollTo(0, 0);
+    containerRef.current?.scroll({
+      top: 0
+    });
 
     // document.body.scrollTop = 0; // For Safari
     // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -80,32 +85,9 @@ const getAllBooks = (async () => {
     <div class="home-page" ref={containerRef}>
     
 
-       <div class="sidebar-wrapper scroll-cling-top">
-        <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
-          <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
-            <span>【益智桌遊】10/31上市</span>
-          </Link>
-        </div>
-        <div class="d-none d-lg-flex tab active">
-          <Link  aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
-        </div>
-        <div id="sidebar-menu-4-1" class="d-none d-lg-flex tab">
-          <Link  href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
-        </div>
-        <div class="d-none d-lg-flex tab">
-          <Link href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
-        </div>
-        <div id="sidebar-menu-4-3" class="d-none d-lg-flex tab">
-          <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
-        </div>
-        <div class="d-none d-lg-flex tab">
-          <Link  aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
-        </div>
-        </div>
-        <div onClick={topFunction} class="d-none d-lg-flex back-to-top">
-          <span>返回頂端</span>
-        </div>
-      </div>
+      
+      <SidebarWrapper/>
+
 
 
       <div class="sidebtn-container">
@@ -171,8 +153,18 @@ const getAllBooks = (async () => {
             <img class="logo" src="/images/logo.jpeg" alt=""></img>
             <div class="">
               <div class="label-group">
-                <button type="button" class="btn">海濱</button>
+                <Link href={{
+                  // pathname:`/singlepage/${item.id}`,
+                  // query: {id: item.id},                 
+                }}>
+                  <button type="button" class="btn">海濱</button>
+                </Link>
+                <Link href={{
+                  pathname:`/singlepage`,
+                  // query: {id: item.id},                 
+                }}>
                 <button type="button" class="btn">一丁</button>
+                </Link>
               </div>
               <form class="input-group">
                 <div class="dropdown">
@@ -269,7 +261,14 @@ const getAllBooks = (async () => {
             <ul>
               {categories.map((item) => (
                 <li key={item.id}>
-                  <a onClick={() => tabChange(item.Title)}>{item.Title}</a>
+                  <Link 
+                    key={`${item.id}`}
+                    href={{
+                      pathname:`/listing/${item.id}`,
+                      query: {id: item.id},                 
+                    }}>
+                    {item.Title}
+                  </Link>
                 </li>
               ))}
             </ul>

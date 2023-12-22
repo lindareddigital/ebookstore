@@ -96,11 +96,12 @@ export default function Detail() {
                 <li>定價：{item.Price}元</li>
                 <li>優惠價：<strong><b>9</b></strong>折<strong class="price01"><b>252</b></strong>元</li>
                 <li>本商品單次購買10本85折<strong>238</strong>元</li>
-              </ul></div>
+              </ul>
+            </div>
+          </div>
 
                 
 
-            </div>
 
             <div class="share-block">
                 <div class="title">買書GO</div>
@@ -113,7 +114,7 @@ export default function Detail() {
             
             </div>
 
-              
+
           </div>
 
 

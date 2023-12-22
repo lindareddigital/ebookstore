@@ -89,9 +89,9 @@ class ApiManager {
   };
 
 
-  getCategoryList = (title) =>{
+  getCategoryList = (id) =>{
     return this.get({
-      path:`http://localhost:8055/items/Book?fields=*.*&filter[Category][Title][_eq]=${title}`
+      path:`http://localhost:8055/items/Book?fields=*.*&filter[Category][_eq]=${id}`
     }); 
   }
 
