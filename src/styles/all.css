@@ -1042,6 +1042,8 @@ footer .container-fluid{
 
 @media (max-width: 992px){
 
+
+
 .booklist-carousel-inner{
   flex-wrap: wrap;
 }
@@ -1052,7 +1054,7 @@ footer .container-fluid{
 }
 
 .swiper{
-  display: none;
+  display: none !important;
 }
 
 .header-search-input{

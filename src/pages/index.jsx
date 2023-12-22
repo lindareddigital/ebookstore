@@ -56,10 +56,13 @@ const getAllBooks = (async () => {
 
   const topFunction = () =>{
     // const top = el.getBoundingClientRect().top;
+    console.log('containerRef',containerRef);
+    
+    // containerRef.current?.scroll({
+    //   top: 0
+    // });
+            containerRef.current?.scrollTo({ top: 0 });
 
-    containerRef.current?.scroll({
-      top: 0
-    });
 
     // document.body.scrollTop = 0; // For Safari
     // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -84,19 +87,19 @@ const getAllBooks = (async () => {
           </Link>
         </div>
         <div class="d-none d-lg-flex tab active">
-          <a aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></a>
+          <Link  aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
         </div>
         <div id="sidebar-menu-4-1" class="d-none d-lg-flex tab">
-          <a href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></a>
+          <Link  href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
         </div>
         <div class="d-none d-lg-flex tab">
-          <a href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></a>
+          <Link href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
         </div>
         <div id="sidebar-menu-4-3" class="d-none d-lg-flex tab">
-          <a aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></a>
+          <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
         </div>
         <div class="d-none d-lg-flex tab">
-          <a aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></a>
+          <Link  aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
         </div>
         </div>
         <div onClick={topFunction} class="d-none d-lg-flex back-to-top">
@@ -353,58 +356,36 @@ const getAllBooks = (async () => {
             <div class="dvSlider">
 
             <HomeTab />
+            <div class="swiper swiper-js booklist-carousel">
 
-            <Swiper
-              ref={swiperRef}
-              rewind={false}
-              className={`booklist-carousel`}
-              slidesPerView={5}
-            >
-              <div class="title">slider</div>
+              <div class="title">All</div>
               <hr></hr>
-              <div class="swiper-wrapper booklist-carousel-inner">
-                {books.map((item) => {
-                  return (
-                    <SwiperSlide
-                      className="swiper-slide"
-                      key={`${item.id}`}
-                    >
-                      <div class="book-item">
-                        <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
-                        <div className="desc mt-2">{item.Title}</div>
-                        <div className="price-num">{item.Price}</div>
-                      </div>
-                    </SwiperSlide>
-                  );
-                })}
-                </div>
-                <div onClick={previous} class="swiper-button-prev"></div>
-                <div onClick={next} class="swiper-button-next"></div>
-            </Swiper>
-                <div class="swiper swiper-js booklist-carousel">
-                  <div class="title">slider</div>
-                  <hr></hr>
-                  <div class="swiper-wrapper booklist-carousel-inner">
-
-                     {
-                       books.map((item) => (
-                        <div key={item.id} className="swiper-slide">
-                          <div class="book-item">
-                            <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
-                            <div className="desc mt-2">{item.Title}</div>
-                            <div className="price-num">{item.Price}</div>
-                          </div>
+              <Swiper
+                ref={swiperRef}
+                rewind={false}
+                className={`booklist-carousel`}
+                slidesPerView={5}
+              >
+                <div class="swiper-wrapper booklist-carousel-inner">
+                  {books.map((item) => {
+                    return (
+                      <SwiperSlide
+                        className="swiper-slide"
+                        key={`${item.id}`}
+                      >
+                        <div class="book-item">
+                          <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
+                          <div className="desc mt-2">{item.Title}</div>
+                          <div className="price-num">{item.Price}</div>
                         </div>
-                      ))
-                     }
-
-                      
-                      
+                      </SwiperSlide>
+                    );
+                  })}
                   </div>
-                
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
-                </div>
+                  <div onClick={previous} class="swiper-button-prev"></div>
+                  <div onClick={next} class="swiper-button-next"></div>
+              </Swiper>
+            </div>
             </div>
 
             <div id="Controls" class="booklist-carousel carousel slide" data-bs-ride="carousel">

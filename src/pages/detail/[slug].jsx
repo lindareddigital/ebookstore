@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import apiManager from '@/pages/api/api';
@@ -5,40 +6,56 @@ import apiManager from '@/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
+export async function generateMetadata({}) {
+  // const data = await getData();
+  // if (data) {
+  //   const meta = getMetaData(data.metatagNormalized);
+  //   return { ...meta, title: data.title };
+  // }
+  return { title: 'slud' };
 
-
-export default function Detail() {
-
-  
-  const [categories, setCategories] = useState([]);
-
-  const getData = (async () => {
-  try {
-    const data = await apiManager.getDetail();
-    console.log('data.data', data.data);
-    return data.data;
-  } catch (e) {
-    console.log('error', e);
-  }
-});
-
-  const item = getData()
-  console.log('item', item);
-
-
-
-
-  useEffect(() => {
-    getData();
-   
+}
     
 
-  }, []);
+// eslint-disable-next-line @next/next/no-async-client-component
+export default function Detail() {
+
+  const [item, setItem] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+
+  const router = useRouter()
+  const { id } = router.query;
+
+  console.log('id', id);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        
+        const data = await apiManager.getDetail(id);
+        console.log('data.data', data.data);
+        setItem(data.data);
+      } catch (e) {
+        console.log('error', e);
+      }
+    };
+
+    if (id) {
+      getData();
+    }
+  }, [id]);
+  
+
 
 
   return(
     <div class="detail-page">
+        <Head>
+          <title>{title}</title>
+        </Head>
 
 
 
@@ -78,27 +95,23 @@ export default function Detail() {
 
 
           <div class="content">
-
+          {item && (
+            <>
             <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
 
-
-            <div class="info">
-              <h1>X科幻冒險隊：(6) 巨蜂大惡鬥（附學習單）</h1>
-              <ul>
-                <li><a href="https://search.books.com.tw/search/query/cat/all/key/%E5%A4%BA%E5%91%BD%E5%B7%A8%E8%9C%82%E6%B1%82%E7%94%9F%E8%AE%B0">夺命巨蜂求生记</a></li>
-                <li>已追蹤作者：</li>
-                <li>作者：<a href="//search.books.com.tw/search/query/key/%E9%BB%83%E5%98%89%E4%BF%8A/adv_author/1/">{item.Author}</a></li>
-                <li>繪者：<a href="//search.books.com.tw/search/query/key/%E9%BB%83%E5%98%89%E4%BF%8A/adv_author/1/">{item.Illustrator}</a></li>
-                <li>出版社：<Link href="/singlepage"><span>大邑文化</span></Link></li>
-                <li>出版日期：{item.PublicationDate}</li>
-                <li>語言：繁體中文</li>
-                <li>定價：{item.Price}元</li>
-                <li>優惠價：<strong><b>9</b></strong>折<strong class="price01"><b>252</b></strong>元</li>
-                <li>本商品單次購買10本85折<strong>238</strong>元</li>
-              </ul></div>
-
-                
-
+              <div class="info">
+                <h1>{item.Title}</h1>
+                <ul>
+                  <li>作者：<a href="">{item.Author}</a></li>
+                  <li>繪者：<a href="//">{item.Illustrator}</a></li>
+                  <li>出版社：<Link href="/singlepage"><span>大邑文化{item.Publisher}</span></Link></li>
+                  <li>出版日期：{item.PublicationDate}</li>
+                  <li>語言：繁體中文</li>
+                  <li>定價：{item.Price}元</li>
+                </ul>
+              </div>
+            </>      
+          )}
             </div>
 
             <div class="share-block">
@@ -228,13 +241,3 @@ export default function Detail() {
   )
 
 }
-
-
-// function SlugPage() {
-//   const router = useRouter();
-//   const { slug } = router.query;
-
-//   return <div>This is the page for {slug}.</div>;
-// }
-
-// export default SlugPage;

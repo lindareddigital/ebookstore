@@ -70,7 +70,10 @@ export default function HomeTab() {
                   >
                   <Link
                     key={`${item.id}`}
-                    href={`/detail/${item.id}`}
+                    href={{
+                      pathname:`/detail/${item.id}`,
+                      query: {id: item.id},                 
+                    }}
                     // href={`/detail`}
                     className={``}
                   >
