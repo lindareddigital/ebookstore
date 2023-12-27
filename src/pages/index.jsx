@@ -1,8 +1,4 @@
 'use client';
-
-
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 // import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
@@ -14,6 +10,7 @@ import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 
 
 export default function Home() {
@@ -138,7 +135,7 @@ const getAllBooks = (async () => {
             <div class="">
               <div class="label-group">
                 <Link href={{
-                  // pathname:`/singlepage/${item.id}`,
+                  pathname:`/singlepage/`,
                   // query: {id: item.id},                 
                 }}>
                   <button type="button" class="btn">海濱</button>
@@ -191,27 +188,32 @@ const getAllBooks = (async () => {
 
         <div class="home-banner">
 
-          <div class="leftbox">
-            <div class="title">最新消息</div>
-            <div class="e-banner-product">
-              <img class="webp-image" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"></img>
-              <div class="text">
-                <div class="desc">
-                  .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
-                  .X萬獸探險隊 算數王之戰 遊戲玩法
+          <Swiper pagination={true} modules={[Pagination]} className="leftbox">
+            <SwiperSlide class="">
+              <div class="title">最新消息</div>
+                <div class="e-banner-product">
+                  <img class="webp-image" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"></img>
+                  <div class="text">
+                    <div class="desc">
+                      .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
+                      .X萬獸探險隊 算數王之戰 遊戲玩法
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="e-banner-product">
-              <img class="webp-image" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"></img>
-              <div class="text">
-                <div class="desc">
-                  .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
-                  .X萬獸探險隊 算數王之戰 遊戲玩法
+                <div class="e-banner-product">
+                  <img class="webp-image" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"></img>
+                  <div class="text">
+                    <div class="desc">
+                      .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
+                      .X萬獸探險隊 算數王之戰 遊戲玩法
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            </SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            
+          </Swiper>
           <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -339,7 +341,7 @@ const getAllBooks = (async () => {
             <div class="dvSlider">
 
             <HomeTab />
-            <div class="swiper swiper-js booklist-carousel">
+            <div class="swiper all-swiper booklist-carousel">
 
               <div class="title">All</div>
               <hr></hr>

@@ -22,7 +22,8 @@ export default function HomeTab() {
     try {
       const data = await apiManager.getAllCategory();
       setCategories(data.data)
-      return data.data;
+      const firstRender = await apiManager.getCategoryList(data.data[0].id);
+      setBooks(firstRender.data)
     } catch (e) {
       console.log('error', e);
     }
@@ -43,7 +44,7 @@ export default function HomeTab() {
 
   return(
     <div class="home-recommend-tabs">
-      <Tab.Container id="nav-tab" defaultActiveKey="first">
+      <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
         <Nav variant="tabs">
           {categories.map((item) => (
             <>

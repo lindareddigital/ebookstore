@@ -8,9 +8,7 @@ import useSwiperFunc from '@/hooks/useSwiperFunc';
 import Link from 'next/link';
 
 
-
-
-export default function HomeTab() {
+export default function SidebarWrapper() {
 
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -18,21 +16,9 @@ export default function HomeTab() {
   const { next, previous } = useSwiperFunc(swiperRef);
 
   const topFunction = () =>{
-    // const top = el.getBoundingClientRect().top;
-    
-    
-    if (!containerRef.current) return;
+ 
+    window.scrollTo(0, 0);
 
-    console.log('containerRef',containerRef);
-
-
-    containerRef.current?.scrollTo(0, 0);
-    containerRef.current?.scroll({
-      top: 0
-    });
-
-    // document.body.scrollTop = 0; // For Safari
-    // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
 

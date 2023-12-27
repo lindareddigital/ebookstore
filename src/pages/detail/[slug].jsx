@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import apiManager from '@/pages/api/api';
@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 // eslint-disable-next-line @next/next/no-async-client-component
-export default function Detail() {
+export default function Detail({ii}) {
 
   const [item, setItem] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -31,14 +31,18 @@ export default function Detail() {
   const router = useRouter()
   const { id } = router.query;
 
-  console.log('id', id);
+
+
+  console.log('id', id, router.query);
+  // console.log(item.Category.ParentMenu.Title);
+  
 
   useEffect(() => {
     const getData = async () => {
       try {
         
         const data = await apiManager.getDetail(id);
-        console.log('data.data', data.data);
+        console.log('777', data.data);
         setItem(data.data);
       } catch (e) {
         console.log('error', e);
@@ -77,24 +81,29 @@ export default function Detail() {
 
 
       <div class="container-fluid">
-
-        <nav class="breadcrumb" aria-label="breadcrumb">
-          <li class="breadcrumb-item"><a href="/" class="">首頁</a></li>
-          <li class="breadcrumb-item"><a href="/" class="">中文書</a></li>
-          <li class="breadcrumb-item"><a href="/" class="">童書/青少年文學</a></li>
-          <li class="breadcrumb-item"><a href="/" class="">知識學習漫畫</a></li>
-          <li class="breadcrumb-item"><a href="/" class="">科學/生物/環境</a></li>    
-          <li class="breadcrumb-item"><a href="/" class="">商品介紹</a></li>     
- 
-        </nav>
+        {item && ( 
+          <>
+          <nav class="breadcrumb" aria-label="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="">首頁</a></li>
+            {/* <li class="breadcrumb-item"><a href="/" class="">{item}</a></li>     */}
+            <li class="breadcrumb-item"><a href="/" class="">{item.Category.Title}</a></li>     
+          </nav>
+          </>      
+        )}
+  
 
         <div class="main-body">
+
+     
 
 
           <div class="content">
           {item && (
+            
             <>
             <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
+
+       
 
             <div class="info">
               <h1>{item.Title}</h1>
@@ -116,12 +125,15 @@ export default function Detail() {
               <div class="desc">誠品</div>
               <img class="" src={`http://localhost:8055/assets/${item.PrimaryImage}`} alt={item.title} />
             </div> 
+                        {/* </>       */}
+
+            {/* })} */}
             </>      
           )}
           </div>
 
 
-                      </div>
+          </div>
   
           </div>
 

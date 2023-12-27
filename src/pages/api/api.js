@@ -107,6 +107,11 @@ class ApiManager {
     return this.get({path:`http://localhost:8055/items/Book/${id}`}); 
   }
 
+  // getDetail = (id) =>{
+  //   return this.get({path:`http://localhost:8055/items/Book/?fields=*.*,Category.ParentMenu.*&filter[id]=${id}`}); 
+  // }
+  
+
 
 }
 
