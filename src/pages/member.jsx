@@ -153,7 +153,7 @@ export default function Home() {
               </div>
               <div class="mb-3">
                 <div class="">
-                  <label class="mb-3" htmlFor="floatingSelect">類型*</label>
+                  <label class="mb-3" htmlFor="floatingSelect">Category</label>
 
                   <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                     <option selected>1.書籍意見</option>

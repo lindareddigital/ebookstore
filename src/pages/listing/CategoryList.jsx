@@ -51,14 +51,6 @@ export default function CategoryList({props}) {
                   <div className="desc">{item.Title}</div>
                   <div className="price-num">{item.Price}</div>
                 </div>
-                {/* <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div> */}
               </Link>
             );
           })}
