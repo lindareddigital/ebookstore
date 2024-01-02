@@ -354,13 +354,14 @@ const getAllBooks = (async () => {
               >
                 <div class="swiper-wrapper booklist-carousel-inner">
                   {books.map((item) => {
+                    console.log(item.PrimaryImage?.id, 'item');
                     return (
                       <SwiperSlide
                         className="swiper-slide"
                         key={`${item.id}`}
                       >
                         <div class="book-item">
-                          <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.title} />
+                          <img src={`http://localhost:8055/assets/${item.PrimaryImage?.id}`} className="" alt={item.title} />
                           <div className="desc mt-2">{item.Title}</div>
                           <div className="price-num">{item.Price}</div>
                         </div>

@@ -99,8 +99,12 @@ class ApiManager {
     return this.get({path:`http://localhost:8055/items/Category`}); 
   }
 
+  // getAllBooks = () =>{
+  //   return this.get({path:`http://localhost:8055/items/Book`}); 
+  // }
+
   getAllBooks = () =>{
-    return this.get({path:`http://localhost:8055/items/Book`}); 
+    return this.get({path:`http://localhost:8055/items/Dayi?fields=*.*`}); 
   }
 
   getDetail = (id) =>{
