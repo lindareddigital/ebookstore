@@ -1,32 +1,49 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
-
-
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-
-
-// const getData = cache(async () => {
-//   try {
-//     const result = await getCategory();
-//     return result;
-//   } catch (e) {
-//     console.log('error', e);
-//   }
-// });
+import MobileCard from '@/pages/components/MobileCard';
+import apiManager from '@/pages/api/api';
 
 
 
 
 
-export default function Home() {
+
+export default function Singlepage() {
 
   
   const [categories, setCategories] = useState([]);
+  const [recipe, setRecipe] = useState([]);
+
+
+  const getAllCategory = (async () => {
+    try {
+      const data = await apiManager.getAllCategory();
+      console.log(data);
+      setCategories(data.data)
+      return data;
+    } catch (e) {
+      console.log('error', e);
+    }
+  });
+
+  const getRecipe = (async () => {
+    try {
+      const data = await apiManager.getRecipe();
+      console.log(data,'66');
+      setRecipe(data.data)
+      return data;
+    } catch (e) {
+      console.log('error', e);
+    }
+  });
+
+  
 
   useEffect(() => {
-    
+    getAllCategory()
+    getRecipe()
   }, []);
 
 
@@ -220,6 +237,16 @@ export default function Home() {
 
 
           <div class="right-side">
+
+            {categories.map((item) => {
+              return (
+              <>
+                <MobileCard props={item}/>
+              </>
+              );
+            })}
+
+
             <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
               <div class="title">X萬獸探險隊</div>
               <hr></hr>
@@ -371,47 +398,16 @@ export default function Home() {
           <div class="recipe-title">美味食譜</div>
           <div class="recipe-block">
             <div class="container-fluid recipe-wrapper">
+                  {recipe.map((item) => {
+                    return (
+                      <div class="recipe-card">
 
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
-                <div class="recipe-card">
-
-                  <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></img>
-                  <div class="recipe-desc">海鹽巧克力軟餅乾</div>
-                </div>
+                        <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} alt={item.title}></img>
+                        <div class="recipe-desc">{item.Title}</div>
+                      </div>
+                      );
+                  })}
+                
             </div>
           </div>
 
@@ -425,34 +421,7 @@ export default function Home() {
           <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</a></li>
         </ul>
 
-        <footer>
-          <div class="container-fluid">
-            <div class="box">
-              <li><a href="">關於我們</a></li>
-              <li><a href="">關於大邑</a></li>
-              <li><a href="">隱私/服務條款</a></li>
-            </div>
-            <div class="box">
-              <li><a href="">會員中心</a></li>
-              <li><a href="">會員專區</a></li>
-              <li><a href="">我的收藏</a></li>
-              <li><a href="">訂閱新書通知</a></li>
-              <li><a href="">查詢帳密</a></li>
-              <li><a href=""></a></li>
-
-            </div>
-            <div class="box">
-              <li><a href="">書單下載</a></li>
-              <li><a href="">常見問題</a></li>
-              <li><a href="">聯絡我們</a></li>
-            </div>
-            <div class="box">
-              <li><a href="">社群</a></li>
-              <li><a href="">大邑</a></li>
-              <li><a href="">海濱</a></li>
-            </div>
-          </div>
-        </footer>
+      
 
     </div>
 

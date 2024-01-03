@@ -107,6 +107,18 @@ class ApiManager {
     return this.get({path:`http://localhost:8055/items/Dayi?fields=*.*`}); 
   }
 
+  getHaibin = () =>{
+    return this.get({path:`http://localhost:8055/items/Haibin?fields=*.*`}); 
+  }
+
+  getHaibin = () =>{
+    return this.get({path:`http://localhost:8055/items/Haibin?fields=*.*`}); 
+  }
+
+  getRecipe = () =>{
+    return this.get({path:`http://localhost:8055/items/Haibin?filter[Category][_eq]=飲食`}); 
+  }
+
   getDetail = (id) =>{
     return this.get({path:`http://localhost:8055/items/Book/${id}`}); 
   }

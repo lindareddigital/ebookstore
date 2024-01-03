@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 // import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
 import HomeTab from '@/pages/components/HomeTab';
@@ -137,13 +136,13 @@ const getAllBooks = (async () => {
               <div class="label-group">
                 <Link href={{
                   pathname:`/singlepage/`,
-                  // query: {id: item.id},                 
+                  query: {page: 'haibin'},                 
                 }}>
                   <button type="button" class="btn">海濱</button>
                 </Link>
                 <Link href={{
                   pathname:`/singlepage`,
-                  // query: {id: item.id},                 
+                  query: {page: 'yidin'},                 
                 }}>
                 <button type="button" class="btn">一丁</button>
                 </Link>
