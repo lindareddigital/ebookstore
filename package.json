@@ -19,6 +19,8 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "eslint-config-next": "14.0.4"
+    "@types/node": "20.10.6",
+    "eslint-config-next": "14.0.4",
+    "typescript": "5.3.3"
   }
 }

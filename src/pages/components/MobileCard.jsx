@@ -3,11 +3,14 @@ import { useEffect, useRef,useState } from 'react';
 import apiManager from '@/pages/api/api';
 import 'swiper/css';
 import Link from 'next/link';
+import useCalc from '@/pages/components/atoms/useCalc';
 
 
 
 
 export default function MobileCard({props}) {
+
+  const { mobile } = useCalc();
 
   const [item, setItem] = useState(null);
 
@@ -32,7 +35,7 @@ export default function MobileCard({props}) {
 
   return(
     <>
-
+    {mobile && (
       <div id="Controls" class="booklist-carousel carousel slide" data-bs-ride="carousel">
           <div class="title">{props.Title}</div>
           <hr></hr>
@@ -86,8 +89,7 @@ export default function MobileCard({props}) {
           </div>
           
       </div>
-
-
+    )}
 
 
     </>

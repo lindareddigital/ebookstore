@@ -3,7 +3,11 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import MobileCard from '@/pages/components/MobileCard';
+import DesktopCard from '@/pages/components/DesktopCard';
+import MediaBlock from '@/pages/components/MediaBlock';
 import apiManager from '@/pages/api/api';
+import useCalc from '@/pages/components/atoms/useCalc';
+import Link from 'next/link';
 
 
 
@@ -11,29 +15,47 @@ import apiManager from '@/pages/api/api';
 
 
 export default function Singlepage() {
-
-  
+  const { mobile } = useCalc();
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState([]);
 
-
-  const getAllCategory = (async () => {
+  const getCategory = (async () => {
     try {
-      const data = await apiManager.getAllCategory();
-      console.log(data);
-      setCategories(data.data)
+      const data = await apiManager.getHaibinCategory();
+     
+      const uniqueCategories = data.data.reduce((acc, current) => {
+      const x = acc.find(item => item.Category === current.Category);
+      if (!x) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
+      console.log(uniqueCategories,'7788');
+      setCategories(uniqueCategories)
       return data;
     } catch (e) {
       console.log('error', e);
     }
   });
 
+  // const getAllCategory = (async () => {
+  //   try {
+  //     const data = await apiManager.getAllCategory();
+  //     console.log(data);
+  //     setCategories(data.data)
+  //     return data;
+  //   } catch (e) {
+  //     console.log('error', e);
+  //   }
+  // });
+
   const getRecipe = (async () => {
     try {
       const data = await apiManager.getRecipe();
-      console.log(data,'66');
+      console.log(data.data,'66');
       setRecipe(data.data)
-      return data;
+      // return data;
     } catch (e) {
       console.log('error', e);
     }
@@ -42,7 +64,8 @@ export default function Singlepage() {
   
 
   useEffect(() => {
-    getAllCategory()
+    // getAllCategory()
+    getCategory()
     getRecipe()
   }, []);
 
@@ -94,10 +117,10 @@ export default function Singlepage() {
               
 
                 <div class="header-toolbar">
-                  <button type="button" class="btn ">
+                  <Link href={{pathname:`/`}} type="button" class="btn ">
                     <i class="fa fa-home mr-2" aria-hidden="true"></i>
                     回首頁(大邑)
-                  </button>
+                  </Link>
 
                   <div class="">XXX,您好</div>  
                 </div>
@@ -239,136 +262,15 @@ export default function Singlepage() {
           <div class="right-side">
 
             {categories.map((item) => {
-              return (
-              <>
-                <MobileCard props={item}/>
-              </>
-              );
+              console.log(item,'item');
+              if(mobile)
+              return (<MobileCard category={item.Category}/>);
+              return (<DesktopCard category={item.Category} />);
             })}
 
 
-            <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
-              <div class="title">X萬獸探險隊</div>
-              <hr></hr>
-              <div class="booklist-carousel-inner">
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681546322009/ec1429824.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 12: 高原霸主大角羊VS大野牛 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681520894003/ec1388694.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 10: 巨蟲擂臺戰 蠍子VS螳螂 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681508088004/ec1357899.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 9: 毒王之王眼鏡蛇VS響尾蛇 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681494991005/ec1352472.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 8: 最強獵手灰狼VS鬣狗 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>   
-                <button class="carousel-control-prev" type="button" data-bs-target="#Controls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#Controls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>   
-              </div>
-              
-            </div>
 
-            <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
-              <div class="title">X萬獸探險隊</div>
-              <hr></hr>
-              <div class="booklist-carousel-inner">
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681546322009/ec1429824.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 12: 高原霸主大角羊VS大野牛 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681520894003/ec1388694.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 10: 巨蟲擂臺戰 蠍子VS螳螂 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681508088004/ec1357899.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 9: 毒王之王眼鏡蛇VS響尾蛇 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681494991005/ec1352472.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 8: 最強獵手灰狼VS鬣狗 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>   
-                <button class="carousel-control-prev" type="button" data-bs-target="#Controls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#Controls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>   
-              </div>
-              
-            </div>
 
-            <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
-              <div class="title">X萬獸探險隊</div>
-              <hr></hr>
-              <div class="booklist-carousel-inner">
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681546322009/ec1429824.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 12: 高原霸主大角羊VS大野牛 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681520894003/ec1388694.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 10: 巨蟲擂臺戰 蠍子VS螳螂 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681508088004/ec1357899.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 9: 毒王之王眼鏡蛇VS響尾蛇 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2681494991005/ec1352472.jpg" class="" alt="..."></img>
-                  <div class="desc">X萬獸探險隊 8: 最強獵手灰狼VS鬣狗 (附學習單)</div>
-                  <div class="price-num"> $ 300</div>
-                </div>   
-                <button class="carousel-control-prev" type="button" data-bs-target="#Controls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#Controls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>   
-              </div>
-              
-            </div>
           </div>
 
 
@@ -377,6 +279,7 @@ export default function Singlepage() {
 
  
 
+        <MediaBlock/>
 
         <div class="container-fluid media-block">
 

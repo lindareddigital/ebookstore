@@ -107,12 +107,16 @@ class ApiManager {
     return this.get({path:`http://localhost:8055/items/Dayi?fields=*.*`}); 
   }
 
-  getHaibin = () =>{
-    return this.get({path:`http://localhost:8055/items/Haibin?fields=*.*`}); 
+  getHaibinCategory = () =>{
+    return this.get({path:`http://localhost:8055/items/Haibin?fields=Category`}); 
   }
 
   getHaibin = () =>{
     return this.get({path:`http://localhost:8055/items/Haibin?fields=*.*`}); 
+  }
+
+  getHaibinParams = (params) =>{
+    return this.get({path:`http://localhost:8055/items/${params}`}); 
   }
 
   getRecipe = () =>{

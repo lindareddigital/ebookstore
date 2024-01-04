@@ -1102,7 +1102,7 @@ footer .container-fluid{
 }
 
 .book-item{
-  width: 43%;
+  width: calc(45vw - 0px);
   aspect-ratio: 4/3;
   height: auto;
   margin-bottom: 24px;
@@ -1228,7 +1228,7 @@ footer .box{
 }
 
 .book-item {
-  width: 43%;
+  width: calc(42vw - 10px);
 }
 
 .book-item img {
@@ -1252,9 +1252,6 @@ footer .container-fluid{
   flex-wrap: wrap;
 } 
 
-.book-item {
-  width: 42%;
-}
 
 }
 
