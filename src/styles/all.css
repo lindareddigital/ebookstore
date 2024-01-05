@@ -419,6 +419,7 @@ a{
 }
 
 .price-num{
+  margin-top: 4px;
   color: #d00008;
   font-size: 18px;
   font-weight: 700;
@@ -440,10 +441,85 @@ a{
   height: 642px; */
 }
 
+.home-recommend-tabs2{
+
+}
+
+.swiper-slide-tabs2 .book-item{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+}
+
+.swiper-slide-tabs2 .book-item img{
+  height: auto;
+}
+
+.swiper-slide-tabs2 .nav-link{
+  padding: 2px 6px;
+}
+
+.home-recommend-tabs3 {
+  display: flex;
+  align-items: center;
+}
+
+.home-recommend-tabs3 .left img{
+  width: 95%;
+  height: auto;
+  aspect-ratio: 2/1;
+}
+
+.home-recommend-tabs3 .right{
+  width: 40%;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.home-recommend-tabs3 .right div{
+  width: 50%;
+}
+
+.home-recommend-tabs3 .right div:nth-child(5),
+.recipe-card:nth-child(6){
+  display: none;
+}
+
+.home-recommend-tabs3 .right img{
+  width: 90px;
+  height: 90px;
+}
+
+.home-recommend-title{
+  font-size: 1.25rem;
+  line-height: 30px;
+  line-height: 1.875rem;
+  font-weight: 700;
+}
+
+.home-recommend-more{
+  color: #999999;
+}
+
+.home-recommend-toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+  border-bottom: 1px solid #dee2e6;
+}
+
+
+
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color: #fff;
-  background-color: #a02e2e;
+  background-color: #8a6927;
   border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs{
+  border-bottom: unset;
 }
 
 .home-recommend-tabs .nav-item a{
@@ -638,7 +714,7 @@ hr{
 
 .social-links img{
   margin-right: 8px;
-  width: 48px;
+  /* width: 48px; */
   height: 48px;
 }
 
@@ -677,6 +753,7 @@ hr{
   display: flex;
   margin: 0 20px;
   justify-content: center;
+  text-align: center;
  }
 
  .social-links li img{
@@ -738,7 +815,7 @@ footer .container-fluid{
     text-align: left;
     font-size: 14px;
     font-weight: bold;
-    color: #f28900;
+    color: #8a6927;
     line-height: 1.5;
     border-bottom: 1px dotted #d8d8d8;
 }
@@ -1065,6 +1142,22 @@ footer .container-fluid{
 @media (max-width: 992px){
 
 
+.home-recommend-tabs3{
+  flex-direction: column;
+}
+
+.home-recommend-tabs3 .right{
+  width: 100%;
+}
+
+.home-recommend-tabs3 .right img{
+  width: 100%;
+  height: 100%;
+}
+
+.social-links{
+  flex-wrap: wrap;
+}
 
 .booklist-carousel-inner{
   flex-wrap: wrap;

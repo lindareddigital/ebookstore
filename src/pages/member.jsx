@@ -4,18 +4,7 @@ import MediaBlock from '@/pages/components/MediaBlock';
 
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-
-
-// const getData = cache(async () => {
-//   try {
-//     const result = await getCategory();
-//     return result;
-//   } catch (e) {
-//     console.log('error', e);
-//   }
-// });
-
-
+import ListAside from '@/pages/components/molecules/ListAside';
 
 
 
@@ -33,8 +22,6 @@ export default function Member() {
 
   return(
     <div class="home-page">
-
-  
 
 
         <div class="container-fluid header-main">
@@ -94,6 +81,7 @@ export default function Member() {
           <div class="main-body">
 
 
+          <ListAside categories={categories}/>
 
           <aside class="list-aside">
             <ul>
@@ -178,12 +166,7 @@ export default function Member() {
         
 
 
-        <ul class="social-links">
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</Link></li>
-        </ul>
+        
 
     </div>
 

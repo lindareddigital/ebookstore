@@ -1,5 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+const Endpoint = 'http://localhost:8055';
+
+
 class ApiManager {
   static instance;
   defaultData= {
@@ -19,7 +22,7 @@ class ApiManager {
     const { path, data, customHeader = {} } = params;
     // const mergedDic = mergeDictionary(data, this.defaultData);
     // const fetchEndpoint = `${Endpoint}${path}${encodeQueryData(path)}`;
-    const fetchEndpoint = `${path}`;
+    const fetchEndpoint = `${Endpoint}${path}`;
 
     console.log('fetchEndpoint', fetchEndpoint);
     // await this.getToken();
@@ -91,44 +94,44 @@ class ApiManager {
 
   getCategoryList = (id) =>{
     return this.get({
-      path:`http://localhost:8055/items/Book?fields=*.*&filter[Category][_eq]=${id}`
+      path:`/items/Book?fields=*.*&filter[Category][_eq]=${id}`
     }); 
   }
 
   getAllCategory = () =>{
-    return this.get({path:`http://localhost:8055/items/Category`}); 
+    return this.get({path:`/items/Category`}); 
   }
 
   // getAllBooks = () =>{
-  //   return this.get({path:`http://localhost:8055/items/Book`}); 
+  //   return this.get({path:`/items/Book`}); 
   // }
 
   getAllBooks = () =>{
-    return this.get({path:`http://localhost:8055/items/Dayi?fields=*.*`}); 
+    return this.get({path:`/items/Dayi?fields=*.*`}); 
   }
 
   getHaibinCategory = () =>{
-    return this.get({path:`http://localhost:8055/items/Haibin?fields=Category`}); 
+    return this.get({path:`/items/Haibin?fields=Category`}); 
   }
 
   getHaibin = () =>{
-    return this.get({path:`http://localhost:8055/items/Haibin?fields=*.*`}); 
+    return this.get({path:`/items/Haibin?fields=*.*`}); 
   }
 
   getHaibinParams = (params) =>{
-    return this.get({path:`http://localhost:8055/items/${params}`}); 
+    return this.get({path:`/items/${params}`}); 
   }
 
   getRecipe = () =>{
-    return this.get({path:`http://localhost:8055/items/Haibin?filter[Category][_eq]=飲食`}); 
+    return this.get({path:`/items/Haibin?filter[Category][_eq]=飲食`}); 
   }
 
   getDetail = (id) =>{
-    return this.get({path:`http://localhost:8055/items/Book/${id}`}); 
+    return this.get({path:`/items/Book/${id}`}); 
   }
 
   // getDetail = (id) =>{
-  //   return this.get({path:`http://localhost:8055/items/Book/?fields=*.*,Category.ParentMenu.*&filter[id]=${id}`}); 
+  //   return this.get({path:`/items/Book/?fields=*.*,Category.ParentMenu.*&filter[id]=${id}`}); 
   // }
   
 

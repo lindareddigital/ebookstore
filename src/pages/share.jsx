@@ -1,9 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
-import {getCategory} from './api/api';
-import {topFunction} from '../js/main';
 
+import Link from 'next/link';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 
@@ -27,9 +23,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategory().then(data => {
-      setCategories(data);
-    });
+    
   }, []);
 
 

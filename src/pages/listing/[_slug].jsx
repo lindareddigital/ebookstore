@@ -6,6 +6,7 @@ import CategoriesList from './CategoryList';
 import SidebarWrapper from '@/pages/components/SidebarWrapper';
 import Breadcrumb from '@/pages/components/molecules/Breadcrumb';
 import MenuBar from '@/pages/components/molecules/MenuBar';
+import ListAside from '@/pages/components/molecules/ListAside';
 
 export default function Home() {
 
@@ -102,26 +103,7 @@ export default function Home() {
 
 
           
-
-          <aside class="list-aside">
-            <ul>
-              <li>
-                <Link href="">雜誌嚴選</Link>
-              </li>
-              <li>
-                <Link href="">重點新刊</Link>
-              </li>
-              <li>
-                <Link href="">焦點話題</Link>
-              </li>
-              <li>
-                <Link href="">美妝贈品</Link>
-              </li>
-            </ul>
-
-
-             
-          </aside>
+          <ListAside categories={categories}/>
 
           <div class="right-side">
             <div class="listing-toolbar">
@@ -145,53 +127,6 @@ export default function Home() {
               </div>
 
 
-            </div>
-
-            <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
-              <div class="title">新品推薦</div>
-              <hr></hr>
-              <div class="booklist-carousel-inner">        
-                <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/11/29/225_142846839_632_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/vendor/12_220231122172115/mainCoverImage1_1183119.jpg" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/12/01/288_133650440_200_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/vendor/112420231109111238/mainCoverImage1_1176964.jpg" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div>
-                <div class="book-item">
-                  <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
-                  </button>
-                  <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/12/01/288_133650440_200_mainCoverImage1.jpg" class="" alt="..."></img>
-                  <div class="desc">【8項練習洞察心理】重新思考面對衝突的方式</div>
-                  <div class="price-num"> $ 300</div>
-                </div>      
-              </div>
             </div>
 
             {categories.map((item) => {

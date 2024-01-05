@@ -31,6 +31,7 @@ export default function MediaBlock(props) {
 
 
   return(
+    <>
     <div class="container-fluid media-block">
       <div class="yt-block">
         <iframe width="560" height="334" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
@@ -50,6 +51,13 @@ export default function MediaBlock(props) {
         <img class="" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg" alt=""></img>
       </div>
     </div>
+    <ul class="social-links">
+      <li><Link href=""><img src="https://www.eslite.com/assets/logo_r-9e86acc5.webp"></img><br/>誠品</Link></li>
+      <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img><br/>博客來</Link></li>
+      <li><Link href=""><img src="https://cdn1.kingstone.com.tw/images/kingstone.svg"></img><br/>金石堂</Link></li>
+      <li><Link href=""><img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img><br/>PChome</Link></li>
+    </ul>
+    </>
   )
 
 }

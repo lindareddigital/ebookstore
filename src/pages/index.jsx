@@ -1,7 +1,7 @@
 'use client';
-// import {topFunction} from '../js/main';
 import useSwiperFunc from '@/hooks/useSwiperFunc';
 import HomeTab from '@/pages/components/HomeTab';
+import HomeTab2 from '@/pages/components/HomeTab2';
 import MobileCard from '@/pages/components/MobileCard';
 import MediaBlock from '@/pages/components/MediaBlock';
 import SidebarWrapper from '@/pages/components/SidebarWrapper';
@@ -13,6 +13,8 @@ import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import MenuBar from '@/pages/components/molecules/MenuBar';
+import ListAside from '@/pages/components/molecules/ListAside';
+
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
@@ -244,107 +246,14 @@ const getAllBooks = (async () => {
 
         <div class="container-fluid" >
           <div class="main-body">
-
-
-
-          <aside class="list-aside">
-            <ul>
-              {categories.map((item) => (
-                <li key={item.id}>
-                  <Link 
-                    key={`${item.id}`}
-                    href={{
-                      pathname:`/listing/${item.id}`,
-                      query: {id: item.id},                 
-                    }}>
-                    {item.Title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-
-
-              <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  依類別搜尋
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <ul>
-                    <li>
-                      <Link href="">知識漫畫</Link>
-                    </li>
-                    <li>
-                      <Link href="">兒童文學</Link>
-                    </li>
-                    <li>
-                      <Link href="">益智桌遊</Link>
-                    </li>
-                  
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                依系列搜尋
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <ul>
-                    <li>
-                      <Link href="">X星際探險隊</Link>
-                    </li>
-                    <li>
-                      <Link href="">X萬獸探險隊</Link>
-                    </li>
-                    <li>
-                      <Link href="">X恐龍探險隊</Link>
-                    </li>
-                    <li>
-                      <Link href="">X科幻冒險隊</Link>
-                    </li>
-                    <li>
-                      <Link href="">極限挑戰王</Link>
-                    </li>
-                    <li>
-                      <Link href="">機器人戰隊</Link>
-                    </li>
-                    <li>
-                      <Link href="">小公主成長學園</Link>
-                    </li>
-                    <li>
-                      <Link href="">世界名著</Link>
-                    </li>
-                    <li>
-                      <Link href="">超越極限</Link>
-                    </li>
-                    <li>
-                      <Link href="">魔法學園</Link>
-                    </li>
-                    <li>
-                      <Link href="">知識王</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div> 
-          </aside>
-
-
+          <ListAside categories={categories}/>
           <div class="right-side">
            
-
             <div class="dvSlider">
 
             <HomeTab />
+            <HomeTab2 />
+
             <div class="swiper all-swiper booklist-carousel">
 
               <div class="title">All</div>
@@ -405,15 +314,6 @@ const getAllBooks = (async () => {
 
         <MediaBlock/>
       
-
-
-        <ul class="social-links">
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</Link></li>
-          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</Link></li>
-        </ul>
-
 
 
   </div>
