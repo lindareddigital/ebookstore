@@ -51,12 +51,12 @@ export default function Home() {
             <div class="tab-content" id="nav-tabContent">
               <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="share-list-item overflow-hidden">
-                    <a href="/" class="post-thumb">
+                    <Link href="/" class="post-thumb">
                       <img class="q-img__image" src="https://www.froghome.org/imgs/post-cover-1363.jpg" alt=""></img>
-                    </a>
+                    </Link>
                       <div class="post-info">
                         <h4 class="post-title">
-                          <a href="/" class="">2023 年度志工大會報名開跑！</a>
+                          <Link href="/" class="">2023 年度志工大會報名開跑！</Link>
                         </h4>
                         <p class="post-excerpt">專欄主題:
                             1. 新知分享:專業文章撰文或邀稿(如自然環境、學校教師合作文章)
@@ -67,7 +67,7 @@ export default function Home() {
                             4.開放自由投稿:加強與老師、學生連結
                         </p>
                         <div class="post-meta">
-                          <a href="/posts/events" class="post-meta-tag category">活動訊息</a>
+                          <Link href="/posts/events" class="post-meta-tag category">活動訊息</Link>
                           <div class="post-meta-date">2023/09/22</div>
                         </div>
                       </div>
@@ -90,16 +90,16 @@ export default function Home() {
             <aside class="share-list">
             
               <div class="share-list-item overflow-hidden">
-                <a href="/" class="post-thumb">
+                <Link href="/" class="post-thumb">
                   <img class="q-img__image" src="https://www.froghome.org/imgs/post-cover-1363.jpg" alt=""></img>
-                </a>
+                </Link>
                   <div class="post-info">
                     <h4 class="post-title">
-                      <a href="/" class="">2023 年度志工大會報名開跑！</a>
+                      <Link href="/" class="">2023 年度志工大會報名開跑！</Link>
                     </h4>
                     <p class="post-excerpt">2023 年度台灣兩棲類保育志工大會於 2023/11/25(六) 在宜蘭頭城休閒農場舉辦，敬邀各地臺灣兩棲類保育志工夥伴們，一起回娘家！</p>
                     <div class="post-meta">
-                      <a href="/posts/events" class="post-meta-tag category">活動訊息</a>
+                      <Link href="/posts/events" class="post-meta-tag category">活動訊息</Link>
                       <div class="post-meta-date">2023/09/22</div>
                     </div>
                   </div>
@@ -115,22 +115,22 @@ export default function Home() {
                       <div class="">協會公告</div>
                       <div class="">0</div>
                   </div>
-                  <a href="" class="posts-category">
+                  <Link href="" class="posts-category">
                     <div class="">活動訊息</div>
                     <div class="">17</div>
-                  </a>
-                  <a href="" class="posts-category">
+                  </Link>
+                  <Link href="" class="posts-category">
                     <div class="">志工培訓</div>
                     <div class="">9</div>
-                  </a>
-                  <a href="/" class="posts-category">
+                  </Link>
+                  <Link href="/" class="posts-category">
                     <div class="">調查成果</div>
                     <div class="">3</div>
-                  </a>
-                  <a href="/" class="posts-category">
+                  </Link>
+                  <Link href="/" class="posts-category">
                     <div class="">年度分類</div>
                     <div class="">9</div>
-                  </a>
+                  </Link>
                 
                 </div>
 

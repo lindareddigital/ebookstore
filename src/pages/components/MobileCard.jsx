@@ -37,7 +37,7 @@ export default function MobileCard({props}) {
     <>
     {mobile && (
       <div id="Controls" class="booklist-carousel carousel slide" data-bs-ride="carousel">
-          <div class="title">{props.Title}</div>
+          {/* <div class="title">{item.Title}</div> */}
           <hr></hr>
           <div class="booklist-carousel-inner">
 

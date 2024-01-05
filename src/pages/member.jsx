@@ -1,8 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
-import {getCategory} from './api/api';
-import {topFunction} from '../js/main';
+import Link from 'next/link';
+import MenuBar from './components/molecules/MenuBar';
+import MediaBlock from '@/pages/components/MediaBlock';
 
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
@@ -21,16 +19,16 @@ import { useEffect, useRef,useState } from 'react';
 
 
 
-export default function Home() {
+export default function Member() {
 
   
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    getCategory().then(data => {
-      setCategories(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getCategory().then(data => {
+  //     setCategories(data);
+  //   });
+  // }, []);
 
 
   return(
@@ -42,7 +40,9 @@ export default function Home() {
         <div class="container-fluid header-main">
 
           <div class="header-search-bar">
-            <img class="logo" src="./images/logo.jpeg" alt=""></img>
+            <Link href="/">
+              <img class="logo" src="./images/logo.jpeg" alt=""></img>
+            </Link>
             <div class="">
               <div class="label-group">
                 <button type="button" class="btn btn-outline-secondary">海濱</button>
@@ -50,14 +50,14 @@ export default function Home() {
               </div>
               <form class="input-group">
                 <div class="dropdown">
-                  <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <Link class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     全站
-                  </a>
+                  </Link>
 
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><Link class="dropdown-item" href="#">Action</Link></li>
+                    <li><Link class="dropdown-item" href="#">Another action</Link></li>
+                    <li><Link class="dropdown-item" href="#">Something else here</Link></li>
                   </ul>
                 </div>
                 <input class="form-control header-search-input" type="text"></input>
@@ -75,34 +75,19 @@ export default function Home() {
                 </div>
               </form>
               <div class="keyword-block">
-                <a href="">全站滿額現折</a>
-                <a href="">斜槓文具5折起</a>
-                <a href="">下單抽香奈兒</a>
-                <a href=""></a>
+                <Link href="">全站滿額現折</Link>
+                <Link href="">斜槓文具5折起</Link>
+                <Link href="">下單抽香奈兒</Link>
+                <Link href=""></Link>
               </div>
             </div>
           </div>            
 
         </div>
 
-        <div class="menu-bar">
-          <div class="">
-            <a href="" class="link">全站分類</a>
-          </div>
-          <div class="">
-            <a href="" class="link">童書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">成書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">益智產品</a>
-          </div>
-          <div class="">
-            <a href="" class="link">買書GO</a>
-          </div>
+        <MenuBar />
 
-        </div>
+        
 
 
         <div class="container-fluid" >
@@ -113,19 +98,19 @@ export default function Home() {
           <aside class="list-aside">
             <ul>
               <li>
-                <a href="">會員資料管理</a>
+                <Link href="">會員資料管理</Link>
               </li>
               <li>
-                <a href="">收藏書籍</a>
+                <Link href="">收藏書籍</Link>
               </li>
               <li>
-                <a href="">訂閱新書通知</a>
+                <Link href="">訂閱新書通知</Link>
               </li>
               <li>
-                <a href="">訊息管理</a>
+                <Link href="">訊息管理</Link>
               </li>
               <li>
-                <a href="">我的投稿</a>
+                <Link href="">我的投稿</Link>
               </li>
             </ul>
 
@@ -189,73 +174,16 @@ export default function Home() {
 
  
 
-
-        <div class="container-fluid media-block">
-
-
-          <div class="yt-block">
-
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-            <div class="more">
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-            </div>
-         
-          </div>
-          <div class="share-block">
-            <div class="title">分享專欄</div>
-            <div class="desc">
-              由獨角獸計畫與500輯共同舉辦的「閱讀與思考派對」第四場由李惠貞主講「人生的解答」，以自身經驗與觀點，交融《在深夜遇見薩古魯》與《一個瑜伽士的內在喜悅工程》中薩古魯的超脫見解分享給所有讀者。
-              ◎ 講座報導紀錄 → https://reurl.cc/zbrDVk​
-              ◎ 場地協力 → Daily by Draft Land
-              ◎ 𝗙𝗢𝗟𝗟𝗢𝗪 🅘🅖 → www.instagram.com/500times_tw
-            </div>
-            <img class="" src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/vendor/12_220231122172115/mainCoverImage1_1183130.jpg" alt=""></img>
-          </div>
-
-
-
-        </div>
-
-
+        <MediaBlock/>
+        
 
 
         <ul class="social-links">
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</a></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</Link></li>
         </ul>
-
-        <footer>
-          <div class="container-fluid">
-            <div class="box">
-              <li><a href="">關於我們</a></li>
-              <li><a href="">關於大邑</a></li>
-              <li><a href="">隱私/服務條款</a></li>
-            </div>
-            <div class="box">
-              <li><a href="">會員中心</a></li>
-              <li><a href="">會員專區</a></li>
-              <li><a href="">我的收藏</a></li>
-              <li><a href="">訂閱新書通知</a></li>
-              <li><a href="">查詢帳密</a></li>
-              <li><a href=""></a></li>
-
-            </div>
-            <div class="box">
-              <li><a href="">書單下載</a></li>
-              <li><a href="">常見問題</a></li>
-              <li><a href="">聯絡我們</a></li>
-            </div>
-            <div class="box">
-              社群
-              <li><a href="">大邑</a></li>
-              <li><a href="">海濱</a></li>
-            </div>
-          </div>
-        </footer>
 
     </div>
 

@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
@@ -7,6 +5,7 @@ import apiManager from '@/pages/api/api';
 import CategoriesList from './CategoryList';
 import SidebarWrapper from '@/pages/components/SidebarWrapper';
 import Breadcrumb from '@/pages/components/molecules/Breadcrumb';
+import MenuBar from '@/pages/components/molecules/MenuBar';
 
 export default function Home() {
 
@@ -54,24 +53,9 @@ export default function Home() {
   return(
     <div class="listing-page">
 
-        <div class="menu-bar">
-          <div class="">
-            <a href="" class="link">全站分類</a>
-          </div>
-          <div class="">
-            <a href="" class="link">童書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">成書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">益智產品</a>
-          </div>
-          <div class="">
-            <a href="" class="link">買書GO</a>
-          </div>
 
-        </div>
+      <MenuBar/>
+        
 
 
       <div class="listing-banner">      
@@ -89,24 +73,24 @@ export default function Home() {
 
           <div class="sidebar-wrapper scroll-cling-top">
               <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
-                <a aria-current="page" href="" class="router-link-active router-link-exact-active">
+                <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
                   <span>【益智桌遊】10/31上市</span>
-                </a>
+                </Link>
               </div>
               <div class="d-none d-lg-flex tab active">
-                <a aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></a>
+                <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
               </div>
               <div id="sidebar-menu-4-1" class="d-none d-lg-flex tab">
-                <a href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></a>
+                <Link href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
               </div>
               <div class="d-none d-lg-flex tab">
-                <a href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></a>
+                <Link href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
               </div>
               <div id="sidebar-menu-4-3" class="d-none d-lg-flex tab">
-                <a aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></a>
+                <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
               </div>
               <div class="d-none d-lg-flex tab">
-                <a aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></a>
+                <Link aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
               </div>
             </div>
             <div class="d-none d-lg-flex back-to-top">
@@ -122,16 +106,16 @@ export default function Home() {
           <aside class="list-aside">
             <ul>
               <li>
-                <a href="">雜誌嚴選</a>
+                <Link href="">雜誌嚴選</Link>
               </li>
               <li>
-                <a href="">重點新刊</a>
+                <Link href="">重點新刊</Link>
               </li>
               <li>
-                <a href="">焦點話題</a>
+                <Link href="">焦點話題</Link>
               </li>
               <li>
-                <a href="">美妝贈品</a>
+                <Link href="">美妝贈品</Link>
               </li>
             </ul>
 
@@ -144,10 +128,10 @@ export default function Home() {
               <ul class="view_type">
                 顯示模式 
                 <li>                               
-                  <span class="type1"><a href=""></a></span>
+                  <span class="type1"><Link href=""></Link></span>
                 </li>
                 <li>                               
-                  <span class="type2 here"><a></a></span>
+                  <span class="type2 here"><Link href=""></Link></span>
                 </li>
               </ul>
               <div class="sortselect">

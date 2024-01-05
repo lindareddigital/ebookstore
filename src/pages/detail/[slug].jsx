@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import useCalc from '@/pages/components/atoms/useCalc';
 import MobileCard from '@/pages/components/MobileCard';
 import DesktopCard from '@/pages/components/DesktopCard';
+import MenuBar from '@/pages/components/MenuBar';
 
 // export async function generateMetadata({}) {
 //   // const data = await getData();
@@ -63,33 +64,18 @@ export default function Detail(props) {
   return(
     <div class="detail-page">
 
-        <div class="menu-bar">
-          <div class="">
-            <a href="" class="link">全站分類</a>
-          </div>
-          <div class="">
-            <a href="" class="link">童書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">成書</a>
-          </div>
-          <div class="">
-            <a href="" class="link">益智產品</a>
-          </div>
-          <div class="">
-            <a href="" class="link">買書GO</a>
-          </div>
 
-        </div>
+      <MenuBar />
 
+        
 
       <div class="container-fluid">
         {item && ( 
           <>
           <nav class="breadcrumb" aria-label="breadcrumb">
-            <li class="breadcrumb-item"><a href="/" class="">首頁</a></li>
-            {/* <li class="breadcrumb-item"><a href="/" class="">{item}</a></li>     */}
-            <li class="breadcrumb-item"><a href="/" class="">{item.Category.Title}</a></li>     
+            <li class="breadcrumb-item"><Link href="/" class="">首頁</Link></li>
+            {/* <li class="breadcrumb-item"><Link href="/" class="">{item}</Link></li>     */}
+            <li class="breadcrumb-item"><Link href="/" class="">{item.Category.Title}</Link></li>     
           </nav>
           </>      
         )}
@@ -111,8 +97,8 @@ export default function Detail(props) {
             <div class="info">
               <h1>{item.Title}</h1>
               <ul>
-                <li>作者：<a href="">{item.Author}</a></li>
-                <li>繪者：<a href="//">{item.Illustrator}</a></li>
+                <li>作者：<Link href="">{item.Author}</Link></li>
+                <li>繪者：<Link href="//">{item.Illustrator}</Link></li>
                 <li>出版社：<Link href="/singlepage"><span>大邑文化{item.Publisher}</span></Link></li>
                 <li>出版日期：{item.PublicationDate}</li>
                 <li>語言：繁體中文</li>

@@ -84,21 +84,21 @@ export default function Singlepage() {
       </div>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <a href="/member" class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white" title="" target="_self" aria-label="會員中心"></a>
+          <Link class="navbar-brand" href="#">Navbar</Link>
+          <Link href="/member" class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white" title="" target="_self" aria-label="會員中心"></Link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <Link class="nav-link active" aria-current="page" href="#">Home</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <Link class="nav-link" href="#">Features</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <Link class="nav-link" href="#">Pricing</Link>
               </li>
             </ul>
           </div>
@@ -109,7 +109,9 @@ export default function Singlepage() {
 
 
           <div class="header-search-bar">
-            <img class="logo" src="./images/logo.jpeg" alt=""></img>
+            <Link href="/">
+              <img class="logo" src="./images/logo.jpeg" alt="logo"></img>
+            </Link>
             <div class="">
              
               <form class="input-group">
@@ -169,16 +171,16 @@ export default function Singlepage() {
           <aside class="list-aside">
             <ul>
               <li>
-                <a href="">知識漫畫</a>
+                <Link href="">知識漫畫</Link>
               </li>
               <li>
-                <a href="">兒童文學</a>
+                <Link href="">兒童文學</Link>
               </li>
               <li>
-                <a href="">益智桌遊</a>
+                <Link href="">益智桌遊</Link>
               </li>
               <li>
-                <a href="">美妝贈品</a>
+                <Link href="">美妝贈品</Link>
               </li>
             </ul>
 
@@ -193,13 +195,13 @@ export default function Singlepage() {
                 <div class="accordion-body">
                   <ul>
                     <li>
-                      <a href="">知識漫畫</a>
+                      <Link href="">知識漫畫</Link>
                     </li>
                     <li>
-                      <a href="">兒童文學</a>
+                      <Link href="">兒童文學</Link>
                     </li>
                     <li>
-                      <a href="">益智桌遊</a>
+                      <Link href="">益智桌遊</Link>
                     </li>
                   
                   </ul>
@@ -216,40 +218,40 @@ export default function Singlepage() {
                 <div class="accordion-body">
                   <ul>
                     <li>
-                      <a href="">X星際探險隊</a>
+                      <Link href="">X星際探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X萬獸探險隊</a>
+                      <Link href="">X萬獸探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X恐龍探險隊</a>
+                      <Link href="">X恐龍探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X科幻冒險隊</a>
+                      <Link href="">X科幻冒險隊</Link>
                     </li>
                     <li>
-                      <a href="">極限挑戰王</a>
+                      <Link href="">極限挑戰王</Link>
                     </li>
                     <li>
-                      <a href="">機器人戰隊</a>
+                      <Link href="">機器人戰隊</Link>
                     </li>
                     <li>
-                      <a href="">小公主成長學園</a>
+                      <Link href="">小公主成長學園</Link>
                     </li>
                     <li>
-                      <a href="">世界名著</a>
+                      <Link href="">世界名著</Link>
                     </li>
                     <li>
-                      <a href="">超越極限</a>
+                      <Link href="">超越極限</Link>
                     </li>
                     <li>
-                      <a href="">魔法學園</a>
+                      <Link href="">魔法學園</Link>
                     </li>
                     <li>
-                      <a href="">知識王</a>
+                      <Link href="">知識王</Link>
                     </li>
                     <li>
-                      <a href=""></a>
+                      <Link href=""></Link>
                     </li>
                   </ul>
                 </div>
@@ -318,10 +320,10 @@ export default function Singlepage() {
 
 
         <ul class="social-links">
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</a></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</Link></li>
         </ul>
 
       

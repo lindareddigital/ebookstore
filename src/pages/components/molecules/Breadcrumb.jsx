@@ -40,8 +40,8 @@ export default function Breadcrumb() {
 
   return(
     <nav class="breadcrumb" aria-label="breadcrumb">
-      <li class="breadcrumb-item"><a href="/" class="">首頁</a></li>
-      <li class="breadcrumb-item"><a aria-current="page" href="/category/1/3" class="router-link-active router-link-exact-active" >中文出版</a></li>
+      <li class="breadcrumb-item"><Link href="/" class="">首頁</Link></li>
+      <li class="breadcrumb-item"><Link aria-current="page" href="/category/1/3" class="router-link-active router-link-exact-active" >中文出版</Link></li>
     </nav>
 
   )

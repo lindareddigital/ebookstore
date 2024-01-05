@@ -12,7 +12,7 @@ import Link from 'next/link';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-
+import MenuBar from '@/pages/components/molecules/MenuBar';
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
@@ -93,10 +93,10 @@ const getAllBooks = (async () => {
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars" aria-hidden="true"></i>
           </button>
-          <a class="navbar-brand" href="#">            
+          <Link class="navbar-brand" href="#">            
             大邑文化
-          </a>
-          <a href="/member" class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white" title="" target="_self" aria-label="會員中心"></a>
+          </Link>
+          <Link href="/member" class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white" title="" target="_self" aria-label="會員中心"></Link>
           <div class="nav-right">
            
             <button class="search-btn btn" type="submit">
@@ -116,13 +116,13 @@ const getAllBooks = (async () => {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <Link class="nav-link active" aria-current="page" href="#">Home</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <Link class="nav-link" href="#">Features</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <Link class="nav-link" href="#">Pricing</Link>
               </li>
             </ul>
           </div>
@@ -132,7 +132,9 @@ const getAllBooks = (async () => {
         <div class="container-fluid header-main">
 
           <div class="header-search-bar">
-            <img class="logo" src="/images/logo.jpeg" alt=""></img>
+            <Link href="/">
+              <img class="logo" src="/images/logo.jpeg" alt=""></img>
+            </Link>
             <div class="">
               <div class="label-group">
                 <Link href={{
@@ -150,14 +152,14 @@ const getAllBooks = (async () => {
               </div>
               <form class="input-group">
                 <div class="dropdown">
-                  <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <Link class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     全站
-                  </a>
+                  </Link>
 
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><Link class="dropdown-item" href="#">Action</Link></li>
+                    <li><Link class="dropdown-item" href="#">Another action</Link></li>
+                    <li><Link class="dropdown-item" href="#">Something else here</Link></li>
                   </ul>
                 </div>
                 <input class="form-control header-search-input" type="text"></input>
@@ -175,17 +177,18 @@ const getAllBooks = (async () => {
                 </div>
               </form>
               <div class="keyword-block">
-                <a href="">HOT:X星際探險隊</a>
-                <a href="">成語-民間故事</a>
-                <a href="">X極限挑戰王</a>
-                <a href=""></a>
+                <Link href="">HOT:X星際探險隊</Link>
+                <Link href="">成語-民間故事</Link>
+                <Link href="">X極限挑戰王</Link>
+                <Link href=""></Link>
               </div>
             </div>
           </div>            
 
         </div>
 
-        <div class="menu-bar"></div>
+        <MenuBar />
+        
 
         <div class="home-banner">
 
@@ -273,13 +276,13 @@ const getAllBooks = (async () => {
                 <div class="accordion-body">
                   <ul>
                     <li>
-                      <a href="">知識漫畫</a>
+                      <Link href="">知識漫畫</Link>
                     </li>
                     <li>
-                      <a href="">兒童文學</a>
+                      <Link href="">兒童文學</Link>
                     </li>
                     <li>
-                      <a href="">益智桌遊</a>
+                      <Link href="">益智桌遊</Link>
                     </li>
                   
                   </ul>
@@ -296,37 +299,37 @@ const getAllBooks = (async () => {
                 <div class="accordion-body">
                   <ul>
                     <li>
-                      <a href="">X星際探險隊</a>
+                      <Link href="">X星際探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X萬獸探險隊</a>
+                      <Link href="">X萬獸探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X恐龍探險隊</a>
+                      <Link href="">X恐龍探險隊</Link>
                     </li>
                     <li>
-                      <a href="">X科幻冒險隊</a>
+                      <Link href="">X科幻冒險隊</Link>
                     </li>
                     <li>
-                      <a href="">極限挑戰王</a>
+                      <Link href="">極限挑戰王</Link>
                     </li>
                     <li>
-                      <a href="">機器人戰隊</a>
+                      <Link href="">機器人戰隊</Link>
                     </li>
                     <li>
-                      <a href="">小公主成長學園</a>
+                      <Link href="">小公主成長學園</Link>
                     </li>
                     <li>
-                      <a href="">世界名著</a>
+                      <Link href="">世界名著</Link>
                     </li>
                     <li>
-                      <a href="">超越極限</a>
+                      <Link href="">超越極限</Link>
                     </li>
                     <li>
-                      <a href="">魔法學園</a>
+                      <Link href="">魔法學園</Link>
                     </li>
                     <li>
-                      <a href="">知識王</a>
+                      <Link href="">知識王</Link>
                     </li>
                   </ul>
                 </div>
@@ -405,10 +408,10 @@ const getAllBooks = (async () => {
 
 
         <ul class="social-links">
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</a></li>
-          <li><a href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</a></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-books-app.svg"></img><br/>誠品</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-ebooks-app.svg"></img><br/>博客來</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-fb.svg"></img><br/>金石堂</Link></li>
+          <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/social-yt.svg"></img><br/>PChome</Link></li>
         </ul>
 
 

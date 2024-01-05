@@ -10,28 +10,28 @@ export default function Footer() {
     <footer>
       <div class="container-fluid">
         <div class="box">
-          <li><a href="">關於我們</a></li>
-          <li><a href="">關於大邑</a></li>
-          <li><a href="">隱私/服務條款</a></li>
+          <li><Link href="">關於我們</Link></li>
+          <li><Link href="">關於大邑</Link></li>
+          <li><Link href="">隱私/服務條款</Link></li>
         </div>
         <div class="box">
-          <li><a href="">會員中心</a></li>
-          <li><a href="">會員專區</a></li>
-          <li><a href="">我的收藏</a></li>
-          <li><a href="">訂閱新書通知</a></li>
-          <li><a href="">查詢帳密</a></li>
-          <li><a href=""></a></li>
+          <li><Link href="/member">會員中心</Link></li>
+          <li><Link href="">會員專區</Link></li>
+          <li><Link href="">我的收藏</Link></li>
+          <li><Link href="">訂閱新書通知</Link></li>
+          <li><Link href="">查詢帳密</Link></li>
+          <li><Link href=""></Link></li>
 
         </div>
         <div class="box">
-          <li><a href="">書單下載</a></li>
-          <li><a href="">常見問題</a></li>
-          <li><a href="">聯絡我們</a></li>
+          <li><Link href="/share">書單下載</Link></li>
+          <li><Link href="">常見問題</Link></li>
+          <li><Link href="">聯絡我們</Link></li>
         </div>
         <div class="box">
-          <li><a href="">社群</a></li>
-          <li><a href="">大邑</a></li>
-          <li><a href="">海濱</a></li>
+          <li><Link href="">社群</Link></li>
+          <li><Link href="">大邑</Link></li>
+          <li><Link href="">海濱</Link></li>
         </div>
       </div>
     </footer>
