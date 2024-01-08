@@ -29,9 +29,9 @@ export default function Footer() {
           <li><Link href="">聯絡我們</Link></li>
         </div>
         <div class="box">
-          <li><Link href="">社群</Link></li>
-          <li><Link href="">大邑</Link></li>
-          <li><Link href="">海濱</Link></li>
+          <li><Link target="_blank" href="">社群</Link></li>
+          <li><Link target="_blank" href="https://www.facebook.com/polispresstw">大邑</Link></li>
+          <li><Link target="_blank" href="https://www.facebook.com/seashoretaiwan/">海濱</Link></li>
         </div>
       </div>
     </footer>

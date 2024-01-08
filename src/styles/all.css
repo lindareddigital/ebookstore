@@ -51,6 +51,10 @@ a{
   color: black;
 }
 
+a:hover{
+  color: unset;
+}
+
 .btn-outline-secondary {
     color: #B29B15 !important;
     border-color: #B29B15 !important;
@@ -235,14 +239,20 @@ a{
 }
 
 .home-banner-carousel{
-  height: 100%;
+  height: 450px;
   width: 900px;
   position: relative;
 }
 
-/* .single-page .home-banner-carousel{
+.carousel-item img{
+  width: 900px;
+  height: 450px;
+  object-fit: cover;
+}
+
+.single-page .home-banner-carousel{
   width: 1200px;
-} */
+}
 
 .e-banner-product {
   padding: 15px;
@@ -462,6 +472,7 @@ a{
 .home-recommend-tabs3 {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .home-recommend-tabs3 .left img{
@@ -488,6 +499,22 @@ a{
 .home-recommend-tabs3 .right img{
   width: 90px;
   height: 90px;
+}
+
+.home-recommend-tabs4{
+  height: 600px !important;
+}
+
+.home-recommend-tabs4 .booklist-carousel{
+  height: 500px;
+}
+
+.home-recommend-tabs4 .swiper-wrapper{
+  flex-wrap: wrap;
+}
+
+.swiper-slide-tabs4{
+  height: 50% !important;
 }
 
 .home-recommend-title{
@@ -785,7 +812,7 @@ footer .container-fluid{
   display: flex;
   color: #666;
   font-size: 13px;
-  align-items: center;
+  align-items: start;
 }
 
 .content a{
@@ -804,7 +831,7 @@ footer .container-fluid{
   color: #000;
   font-weight: bold;
   margin-bottom: 8px;
-
+  line-height: 32px;
 }
 
 .content li{
@@ -830,7 +857,7 @@ footer .container-fluid{
 
 .news-tabs .nav-link{
   border: 1px solid #ccc;
-  background: #ccc;
+  /* background: #ccc; */
   width: 50%;
   font-size: 30px;
   text-align: center;
@@ -1076,7 +1103,6 @@ footer .container-fluid{
 }
 
 .recipe-block{
-  height: 900px;
   width: 100vw;
   background: #f4f4f4;
   margin-bottom: 40px;
@@ -1141,6 +1167,13 @@ footer .container-fluid{
 
 @media (max-width: 992px){
 
+.single-page .home-banner-carousel{
+  width: 100vw;
+}
+
+.home-recommend-tabs4{
+  display: none;
+}
 
 .home-recommend-tabs3{
   flex-direction: column;
@@ -1263,7 +1296,7 @@ footer .box{
     width: calc(50vw - 32px)!important;
 }
 
-.home-banner{
+.home-page .home-banner{
   flex-direction: column;
   height: unset;
   width: calc(100vw - 32px)!important;

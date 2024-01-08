@@ -13,9 +13,23 @@ import Link from 'next/link';
 export default function HomeTab2() {
 
   const [books, setBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
+
   const [categories, setCategories] = useState([]);
   const swiperRef = useRef(null);
   const { next, previous } = useSwiperFunc(swiperRef);
+
+  const getAllBooks = (async () => {
+    try {
+      const data = await apiManager.getAllBooks();
+      setAllBooks(data.data)
+
+      console.log(data, 'AllBooks');
+      return data;
+    } catch (e) {
+      console.log('error', e);
+    }
+  });
 
 
   const getAllCategory= (async () => {
@@ -39,7 +53,10 @@ export default function HomeTab2() {
 
   useEffect( () => {
     getAllCategory()
+    getAllBooks()
   }, []);
+
+
 
 
   return(
@@ -119,11 +136,56 @@ export default function HomeTab2() {
           );
         })}
       </div>
+    </div>
 
-
-
-
-
+    <div class="home-recommend-tabs4">
+      <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
+        <Nav variant="tabs">
+          {categories.map((item) => (
+            <>
+            <Nav.Item key={`${item.id}`}>
+              <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>{item.Title}</Nav.Link>
+            </Nav.Item>
+            </>
+          ))}
+        </Nav>
+        <Tab.Content>
+          <Swiper
+            ref={swiperRef}
+            rewind={false}
+            className={`booklist-carousel`}
+            slidesPerView={4}
+          >
+            <div class="swiper-wrapper booklist-carousel-inner">
+              {allBooks.map((item) => {
+                return (
+                  <SwiperSlide
+                    className="swiper-slide swiper-slide-tabs4"
+                    key={`${item.id}`}
+                  >
+                  <Link
+                    key={`${item.id}`}
+                    href={{
+                      pathname:`/detail/${item.id}`,
+                      query: {id: item.id},                 
+                    }}
+                    className={``}
+                  >
+                    <div class="book-item">
+                      <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
+                      <div className="desc mt-2">{item.Title}</div>
+                      <div className="price-num">{item.Price}</div>
+                    </div>
+                  </Link>
+                  </SwiperSlide>
+                );
+              })}
+              </div>
+              <div onClick={previous} class="swiper-button-prev"></div>
+              <div onClick={next} class="swiper-button-next"></div>
+          </Swiper>
+        </Tab.Content>
+      </Tab.Container>
     </div>
 
     </>

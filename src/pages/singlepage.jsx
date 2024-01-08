@@ -141,13 +141,13 @@ export default function Singlepage() {
           <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
+                <img src="https://scontent.ftpe8-2.fna.fbcdn.net/v/t39.30808-6/408088533_893035896159263_5464682771439926541_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=783fdb&_nc_ohc=LF0Uj8ybI5QAX9Yixir&_nc_ht=scontent.ftpe8-2.fna&oh=00_AfAWog5j-8N-u-l9Hk6H9Ho-K_c_LOdyEwBYCFbiBMUEfA&oe=65A0D9E8" class="" alt="..."></img>
+              </div>
+              {/* <div class="carousel-item">
                 <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/2uoe0qjpbv2fhogg4qtn09ramz1e" class="d-block w-100 h-100" alt="..."></img>
-              </div>
+              </div> */}
               <div class="carousel-item">
-                <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/2uoe0qjpbv2fhogg4qtn09ramz1e" class="d-block w-100" alt="..."></img>
-              </div>
-              <div class="carousel-item">
-                <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/2uoe0qjpbv2fhogg4qtn09ramz1e" class="d-block w-100" alt="..."></img>
+                <img src="https://scontent.ftpe8-3.fna.fbcdn.net/v/t39.30808-6/327772799_1301640517048071_8576766442753076590_n.png?stp=dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=9534ce&_nc_ohc=lB02XhRLAlIAX91aCc1&_nc_ht=scontent.ftpe8-3.fna&oh=00_AfCKhmPmL846JQOJYXNuhW-ZcWpcWCv791zi9KmO7l6-3w&oe=65A07772" class="" alt="..."></img>
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

@@ -223,13 +223,13 @@ const getAllBooks = (async () => {
           <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/2uoe0qjpbv2fhogg4qtn09ramz1e" class="d-block w-100 h-100" alt="..."></img>
+                <img src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/406824790_838219834972827_5214024864756147392_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=783fdb&_nc_ohc=-KntCcPuDcIAX9Bi9IJ&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfDGJzNsiab2EHCjXgp8J3xHA5LXx0QGEvYtLzQGH6qx0w&oe=65A0B35E" class="" alt="..."></img>
               </div>
               <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1701735173211-bc2375b0909d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100 h-100" alt="..."></img>
+                <img src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/395502513_812978427496968_623681544860527899_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9534ce&_nc_ohc=Q-u5kt0V628AX-rQhOa&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfCrSoE3XN4wL6OgMj9mPvFrVjfAO7mzB2QABXg-sZUKdQ&oe=65A108F9" class="" alt="..."></img>
               </div>
               <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1701735173211-bc2375b0909d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100 h-100" alt="..."></img>
+                <img src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/381385326_794508229343988_1109377287286993521_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9534ce&_nc_ohc=-MNFjbkN90QAX_XAnVH&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfBAWk-AVMBrrQ6e80utdvyVkihaFnXPrVwe1YTSVLQ8oA&oe=65A10E05" class="" alt="..."></img>
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -293,6 +293,7 @@ const getAllBooks = (async () => {
                   <div onClick={next} class="swiper-button-next"></div>
               </Swiper>
             </div>
+
             </div>
 
             

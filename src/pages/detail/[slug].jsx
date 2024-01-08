@@ -88,7 +88,7 @@ export default function Detail(props) {
               <h1>{item.Title}</h1>
               <ul>
                 <li>作者：<Link href="">{item.Author}</Link></li>
-                <li>繪者：<Link href="//">{item.Illustrator}</Link></li>
+                <li>繪者：<Link href="/">{item.Illustrator}</Link></li>
                 <li>出版社：<Link href="/singlepage"><span>大邑文化{item.Publisher}</span></Link></li>
                 <li>出版日期：{item.PublicationDate}</li>
                 <li>語言：繁體中文</li>
@@ -98,10 +98,10 @@ export default function Detail(props) {
 
             <div class="share-block">
               <div class="title">買書GO</div>
-              <div class="desc">誠品</div>
-              <div class="desc">博客來</div>
-              <div class="desc">金石堂</div>
-              <div class="desc">誠品</div>
+              <div class="desc"><Link href="">誠品</Link></div>
+              <div class="desc"><Link href="">博客來</Link></div>
+              <div class="desc"><Link href="">金石堂</Link></div>
+              <div class="desc"><Link href="">PChome</Link></div>
               <img class="" src={`http://localhost:8055/assets/${item.PrimaryImage}`} alt={item.title} />
             </div> 
                         {/* </>       */}
