@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import MenuBar from './components/molecules/MenuBar';
-import MediaBlock from '@/pages/components/MediaBlock';
+import MediaBlock from 'src/pages/components/MediaBlock';
 
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import ListAside from '@/pages/components/molecules/ListAside';
+import ListAside from 'src/pages/components/molecules/ListAside';
 
 
 

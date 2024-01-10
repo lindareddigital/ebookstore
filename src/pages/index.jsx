@@ -1,19 +1,19 @@
 'use client';
-import useSwiperFunc from '@/hooks/useSwiperFunc';
-import HomeTab from '@/pages/components/HomeTab';
-import HomeTab2 from '@/pages/components/HomeTab2';
-import MobileCard from '@/pages/components/MobileCard';
-import MediaBlock from '@/pages/components/MediaBlock';
-import SidebarWrapper from '@/pages/components/SidebarWrapper';
-import apiManager from '@/pages/api/api';
+import useSwiperFunc from 'src/hooks/useSwiperFunc';
+import HomeTab from 'src/pages/components/HomeTab';
+import HomeTabTwo from 'src/pages/components/HomeTabTwo';
+import MobileCard from 'src/pages/components/MobileCard';
+import MediaBlock from 'src/pages/components/MediaBlock';
+import SidebarWrapper from 'src/pages/components/SidebarWrapper';
+import apiManager from 'src/pages/api/api';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import MenuBar from '@/pages/components/molecules/MenuBar';
-import ListAside from '@/pages/components/molecules/ListAside';
+import MenuBar from 'src/pages/components/molecules/MenuBar';
+import ListAside from 'src/pages/components/molecules/ListAside';
 
 
 export default function Home() {
@@ -252,7 +252,7 @@ const getAllBooks = (async () => {
             <div class="dvSlider">
 
             <HomeTab />
-            <HomeTab2 />
+            <HomeTabTwo />
 
             <div class="swiper all-swiper booklist-carousel">
 

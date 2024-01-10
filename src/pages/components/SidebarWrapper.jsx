@@ -1,10 +1,10 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import apiManager from '@/pages/api/api';
+import apiManager from 'src/pages/api/api';
 import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import useSwiperFunc from '@/hooks/useSwiperFunc';
+import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
 
 

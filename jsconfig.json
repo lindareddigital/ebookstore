@@ -1,14 +1,4 @@
 {
-  // "compilerOptions": {
-  //   "paths": {
-  //     "@/*": ["src/*"]
-  //   }
-  // }
-
-  // "compilerOptions": {
-  //   "baseUrl": "src"
-  // },
-  // "include": ["src"]
   "compilerOptions": {
         "baseUrl": "./src", // setting a value for baseUrl is required
         "moduleResolution": "node", // was not set before, but is the default

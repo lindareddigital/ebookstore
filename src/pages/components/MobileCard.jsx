@@ -1,9 +1,9 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import apiManager from '@/pages/api/api';
+import apiManager from 'src/pages/api/api';
 import 'swiper/css';
 import Link from 'next/link';
-import useCalc from '@/pages/components/atoms/useCalc';
+import useCalc from 'src/pages/components/atoms/useCalc';
 
 
 

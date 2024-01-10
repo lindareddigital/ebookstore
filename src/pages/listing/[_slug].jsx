@@ -1,12 +1,12 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
-import apiManager from '@/pages/api/api';
+import apiManager from 'src/pages/api/api';
 import CategoriesList from './CategoryList';
-import SidebarWrapper from '@/pages/components/SidebarWrapper';
-import Breadcrumb from '@/pages/components/molecules/Breadcrumb';
-import MenuBar from '@/pages/components/molecules/MenuBar';
-import ListAside from '@/pages/components/molecules/ListAside';
+import SidebarWrapper from 'src/pages/components/SidebarWrapper';
+import Breadcrumb from 'src/pages/components/molecules/Breadcrumb';
+import MenuBar from 'src/pages/components/molecules/MenuBar';
+import ListAside from 'src/pages/components/molecules/ListAside';
 
 export default function Home() {
 

@@ -1,5 +1,5 @@
-import '@/styles/all.css';
-import Footer from '@/pages/components/Footer';
+import 'src/styles/all.css';
+import Footer from 'src/pages/components/Footer';
 
 
 export default function App({ Component, pageProps }) {

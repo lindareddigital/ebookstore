@@ -1,13 +1,13 @@
 // 'use client'
-import apiManager from '@/pages/api/api';
+import apiManager from 'src/pages/api/api';
 // import { cache } from 'next';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useCalc from '@/pages/components/atoms/useCalc';
-import MobileCard from '@/pages/components/MobileCard';
-import DesktopCard from '@/pages/components/DesktopCard';
-import MenuBar from '@/pages/components/molecules/MenuBar';
+import useCalc from 'src/pages/components/atoms/useCalc';
+import MobileCard from 'src/pages/components/MobileCard';
+import DesktopCard from 'src/pages/components/DesktopCard';
+import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 
 export default function Detail(props) {

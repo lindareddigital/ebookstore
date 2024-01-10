@@ -1,12 +1,12 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import MobileCard from '@/pages/components/MobileCard';
-import DesktopCard from '@/pages/components/DesktopCard';
-import MediaBlock from '@/pages/components/MediaBlock';
-import apiManager from '@/pages/api/api';
-import useCalc from '@/pages/components/atoms/useCalc';
+import MobileCard from 'src/pages/components/MobileCard';
+import DesktopCard from 'src/pages/components/DesktopCard';
+import MediaBlock from 'src/pages/components/MediaBlock';
+import apiManager from 'src/pages/api/api';
+import useCalc from 'src/pages/components/atoms/useCalc';
 import Link from 'next/link';
-import ListAside from '@/pages/components/molecules/ListAside';
+import ListAside from 'src/pages/components/molecules/ListAside';
 
 
 

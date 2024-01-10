@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import apiManager from '@/pages/api/api';
-import useSwiperFunc from '@/hooks/useSwiperFunc';
+import apiManager from 'src/pages/api/api';
+import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
 
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import apiManager from '@/pages/api/api';
+import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 
 export default function CategoryList({props}) {
