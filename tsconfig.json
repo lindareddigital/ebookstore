@@ -15,12 +15,20 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "paths": {
+      "@/store": ["./src/store"],
+      "@/*": ["./*"],
+      "@/public/*": ["./public/*"],
+      "@/styles/*": ["./styles/*"],
+      // "@/components": ["./src/components/*"]
+    },
     "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "**/*.js",
+    "**/*.jsx",
+    "**/*",
   ],
   "exclude": [
     "node_modules"
