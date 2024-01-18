@@ -5,7 +5,7 @@ import MediaBlock from 'src/pages/components/MediaBlock';
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import ListAside from 'src/pages/components/molecules/ListAside';
-
+import NextAuth from "next-auth";
 
 
 export default function Member() {
