@@ -14,6 +14,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
+import useSWR from "swr";
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
@@ -35,6 +36,17 @@ export default function Home() {
       console.log("error", e);
     }
   };
+  // `${url}/api/v1/sales?_start=${
+  //   (pageNo - 1) * limitCount
+  // }&_limit=${limitCount}`;
+
+  //SWR 第一次抓取資料先將資料存至 cache (stale)，直到下一次 fetch 資料(revalidate)，才會再拿到最新的資料
+  // SWR 決定要不要 refetch 取決於第一個參數 key 有沒有改變
+  const fetcher = (url, params) => fetch(url + params.id).then((r) => r.json());
+
+
+  const { data, error } = useSWR(categories, fetcher);
+  console.log(data, error, "swr");
 
   const getAllBooks = async () => {
     try {
@@ -294,7 +306,7 @@ export default function Home() {
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/406824790_838219834972827_5214024864756147392_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=783fdb&_nc_ohc=-KntCcPuDcIAX9Bi9IJ&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfDGJzNsiab2EHCjXgp8J3xHA5LXx0QGEvYtLzQGH6qx0w&oe=65A0B35E"
+                src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/395502513_812978427496968_623681544860527899_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9534ce&_nc_ohc=vhh_nnD9gwkAX_SiF_r&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfDCCkCXUKGGA1SnYMZ17N2ZANbh-uCMlOun1PnGKvUI5A&oe=65B2D539"
                 class=""
                 alt="..."
               ></img>

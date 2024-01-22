@@ -17,6 +17,7 @@
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18",
     "swiper": "^11.0.5",
+    "swr": "^2.2.4",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
