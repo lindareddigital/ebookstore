@@ -55,6 +55,20 @@ a:hover{
   color: unset;
 }
 
+:root {
+    --White: #FFF;
+    --menu-bar-bg: #FFFFFF;
+    --input-bg: #FFFFFF;
+    --menu-bg: #FAFAFA;
+    --menu-tab-bg: #FFFFFF;
+    --tools-bg: #FFFFFF;
+    --section-bg: #F2F2F2;
+    --footer-bg: #F2F2F2;
+    --hr-color: #EDEDED;
+    --border-color: #D9D9D9;
+    --title-color: #333333; 
+}
+
 .btn-outline-secondary {
     color: #EBC700 !important;
     border-color: #EBC700 !important;
@@ -176,6 +190,8 @@ a:hover{
   width: 311px;
   height: 494px;
   margin: 0;
+  position: relative;
+
 }
 
 .booklist-carousel .title{
@@ -223,6 +239,12 @@ a:hover{
   color: #EBC700;
   text-align: center;
   padding: 12px;
+ }
+
+ .leftbox svg{
+    position: absolute;
+    top: 0;
+    right: 0;
  }
 
 .leftbox .desc{
@@ -329,8 +351,13 @@ a:hover{
 .book-item{
   height: 225px;
   width: 144px;
-  margin: 6px 12px;
+  margin: 6px 10px;
   position: relative;
+
+  width: 248px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--White, #FFF);
 }
 
 .view_type{
@@ -453,15 +480,6 @@ a:hover{
 
 .home-recommend-tabs .nav-item.active{
   background: linear-gradient(to bottom,#ff7a00,#ff5c00);
-}
-
-.home-recommend-tabs{
-  /* width: 840px;
-  height: 642px; */
-}
-
-.home-recommend-tabs2{
-
 }
 
 .swiper-slide-tabs2 .book-item{
@@ -614,6 +632,9 @@ a:hover{
   justify-content: space-between;
   padding: 16px 0px;
   width: 100%;
+  height: 572px;
+opacity: 0.07;
+background: #000;
 }
 
 .carousel-inner{
@@ -628,11 +649,6 @@ a:hover{
 
 .detail-page .tab-content{
   height: 250px;
-}
-
-.main-body .right-side{
-  margin-left: 30px;
-  width: 80%;
 }
 
 .title{
@@ -745,7 +761,7 @@ footer{
   justify-content: center;
   color: #fff;
   font-size: 15px;
-  background-color: #EBC700;
+  background-color: #28251C;
   padding: 50px 0px;
 }
 
@@ -775,7 +791,6 @@ hr{
 }
 
 .social-links img{
-  margin-right: 8px;
   /* width: 48px; */
   height: 48px;
 }
@@ -816,16 +831,10 @@ hr{
   margin: 0 20px;
   justify-content: center;
   text-align: center;
- }
-
- .social-links li img{
-   margin-bottom: 8px;
+  padding: 53px 62px;
+  border-radius: 20px;
+  background: var(--White);
 }
-
-.social-links li a{
-  color: #8b8a8a;
-}
-
 
 .breadcrumb{
   display: flex;
@@ -1277,12 +1286,6 @@ footer .container-fluid{
   height: 410px;
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-.main-body .right-side{
-  margin-left: 0;
-  width: 100%;
-  margin: auto;
 }
 
 .header-toolbar{

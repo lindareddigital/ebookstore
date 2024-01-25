@@ -77,30 +77,22 @@ export default function MediaBlock(props) {
       <ul class="social-links">
         <li>
           <Link href="">
-            <img src="https://www.eslite.com/assets/logo_r-9e86acc5.webp"></img>
-            <br />
-            誠品
+            <img src="/icons/eslite.png"></img>
           </Link>
         </li>
         <li>
           <Link href="">
             <img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img>
-            <br />
-            博客來
           </Link>
         </li>
         <li>
           <Link href="">
-            <img src="https://cdn1.kingstone.com.tw/images/kingstone.svg"></img>
-            <br />
-            金石堂
+            <img src="/icons/stone.svg"></img>
           </Link>
         </li>
         <li>
           <Link href="">
             <img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img>
-            <br />
-            PChome
           </Link>
         </li>
       </ul>

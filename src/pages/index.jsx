@@ -268,7 +268,7 @@ export default function Home() {
 
       <div class="home-banner">
         <div className="leftbox">
-          <img src='src/public/icons/columnIcon.svg'></img>
+          <img src='/icons/columnIcon.svg'></img>
           <div class="">
             <div class="title">最新消息</div>
             <div class="e-banner-product">
@@ -335,12 +335,10 @@ export default function Home() {
       <div class="container-fluid">
         <div class="main-body">
           {/* <ListAside categories={categories} /> */}
-          <div class="right-side">
-            <div class="dvSlider">
               <HomeTab />
-              <HomeTabTwo />
+              {/* <HomeTabTwo /> */}
 
-              <div class="swiper all-swiper booklist-carousel">
+              {/* <div class="swiper all-swiper booklist-carousel">
                 <div class="title">All</div>
                 <hr></hr>
                 <Swiper
@@ -381,8 +379,7 @@ export default function Home() {
                   <div onClick={previous} class="swiper-button-prev"></div>
                   <div onClick={next} class="swiper-button-next"></div>
                 </Swiper>
-              </div>
-            </div>
+              </div> */}
 
             {categories.map((item) => {
               return (
@@ -391,7 +388,6 @@ export default function Home() {
                 </>
               );
             })}
-          </div>
         </div>
       </div>
 
