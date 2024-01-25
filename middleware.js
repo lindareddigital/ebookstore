@@ -1,5 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
+const cookieOpts = {
+  httpOnly: false,
+  signed: false,
+};
 
 export function middleware(request) {
   console.log("middleware: start");
@@ -32,12 +36,15 @@ export function middleware(request) {
     );
 
     if (!siteLocaleInCookie) {
-      response.cookies.set({
-        name: SiteLocaleKey,
-        value: locale,
-        maxAge: 1000 * 5 * 60 * 60 * 24 * 365,
-        path: "/",
-      });
+      response.cookies.set(
+        {
+          name: SiteLocaleKey,
+          value: locale,
+          maxAge: 1000 * 5 * 60 * 60 * 24 * 365,
+          path: "/",
+        },
+        cookieOpts
+      );
     }
     return response;
   }

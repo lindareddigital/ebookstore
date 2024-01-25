@@ -30,34 +30,81 @@ export default function MediaBlock(props) {
   // }, [props]);
 
 
-  return(
+  return (
     <>
-    <div class="container-fluid media-block">
-      <div class="yt-block">
-        <iframe width="560" height="334" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-        <div class="more">
-          <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-          <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-        </div> 
-      </div>
-      <div class="share-block">
-        <div class="title">分享專欄</div>
-        <div class="desc">
-          由獨角獸計畫與500輯共同舉辦的「閱讀與思考派對」第四場由李惠貞主講「人生的解答」，以自身經驗與觀點，交融《在深夜遇見薩古魯》與《一個瑜伽士的內在喜悅工程》中薩古魯的超脫見解分享給所有讀者。
-          ◎ 講座報導紀錄 → https://reurl.cc/zbrDVk​
-          ◎ 場地協力 → Daily by Draft Land
-          ◎ 𝗙𝗢𝗟𝗟𝗢𝗪 🅘🅖 → www.instagram.com/500times_tw
+      <div class="container-fluid media-block">
+        <div class="yt-block">
+          <iframe
+            width="871"
+            height="490"
+            src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          <div className="title">X萬獸探險隊益智桌遊：算數王之戰</div>
+          <div className="desc">
+            在使用帥氣的絕招卡時，可以吸收牌中的動物常識，利用數字加總及學到的知識，讓這場對戰贏得勝利。現在就來一場與朋友之間的精采對戰，看看哪個牌組才是真正的王者吧！
+          </div>
+          <div class="more">
+            <iframe
+              width="260"
+              height="165"
+              src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+            <iframe
+              width="260"
+              height="165"
+              src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
-        <img class="" src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg" alt=""></img>
+        <div class="share-block">
+          <div class="title">分享專欄</div>
+          <div class="desc"></div>
+          <img class="" src="" alt=""></img>
+        </div>
       </div>
-    </div>
-    <ul class="social-links">
-      <li><Link href=""><img src="https://www.eslite.com/assets/logo_r-9e86acc5.webp"></img><br/>誠品</Link></li>
-      <li><Link href=""><img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img><br/>博客來</Link></li>
-      <li><Link href=""><img src="https://cdn1.kingstone.com.tw/images/kingstone.svg"></img><br/>金石堂</Link></li>
-      <li><Link href=""><img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img><br/>PChome</Link></li>
-    </ul>
+      <ul class="social-links">
+        <li>
+          <Link href="">
+            <img src="https://www.eslite.com/assets/logo_r-9e86acc5.webp"></img>
+            <br />
+            誠品
+          </Link>
+        </li>
+        <li>
+          <Link href="">
+            <img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img>
+            <br />
+            博客來
+          </Link>
+        </li>
+        <li>
+          <Link href="">
+            <img src="https://cdn1.kingstone.com.tw/images/kingstone.svg"></img>
+            <br />
+            金石堂
+          </Link>
+        </li>
+        <li>
+          <Link href="">
+            <img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img>
+            <br />
+            PChome
+          </Link>
+        </li>
+      </ul>
     </>
-  )
+  );
 
 }

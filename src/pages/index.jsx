@@ -13,7 +13,7 @@ import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
-import ListAside from 'src/pages/components/molecules/ListAside';
+// import ListAside from 'src/pages/components/molecules/ListAside';
 import useSWR from "swr";
 
 export default function Home() {
@@ -267,37 +267,22 @@ export default function Home() {
       <MenuBar />
 
       <div class="home-banner">
-        <Swiper pagination={true} modules={[Pagination]} className="leftbox">
-          <SwiperSlide class="">
+        <div className="leftbox">
+          <img src='src/public/icons/columnIcon.svg'></img>
+          <div class="">
             <div class="title">最新消息</div>
             <div class="e-banner-product">
-              <img
-                class="webp-image"
-                src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"
-              ></img>
               <div class="text">
-                <div class="desc">
-                  .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
-                  .X萬獸探險隊 算數王之戰 遊戲玩法
-                </div>
+                <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
               </div>
             </div>
             <div class="e-banner-product">
-              <img
-                class="webp-image"
-                src="https://s2.eslite.dev/unsafe/s.eslite.dev/upload/product/o/2682262815004/20220930032401652408.jpg"
-              ></img>
               <div class="text">
-                <div class="desc">
-                  .X萬獸探險隊特別篇5 11/15即將上市.入選誠品TOP100書單
-                  .X萬獸探險隊 算數王之戰 遊戲玩法
-                </div>
+                <div class="desc">入選誠品TOP100書單</div>
               </div>
             </div>
-          </SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-        </Swiper>
+          </div>
+        </div>
         <div
           id="carouselExampleControls"
           class="home-banner-carousel carousel slide"
@@ -349,7 +334,7 @@ export default function Home() {
 
       <div class="container-fluid">
         <div class="main-body">
-          <ListAside categories={categories} />
+          {/* <ListAside categories={categories} /> */}
           <div class="right-side">
             <div class="dvSlider">
               <HomeTab />
