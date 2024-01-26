@@ -49,8 +49,8 @@ export default function MediaBlock(props) {
           </div>
           <div class="more">
             <iframe
-              width="260"
-              height="165"
+              width="322"
+              height="181"
               src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
               title="YouTube video player"
               frameBorder="0"
@@ -58,14 +58,18 @@ export default function MediaBlock(props) {
               allowFullScreen
             ></iframe>
             <iframe
-              width="260"
-              height="165"
+              width="322"
+              height="181"
               src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
+            <div className="ytIcon">
+              <img src="/icons/youtubeIcon.svg" alt="" />
+              <div className="title">查看更多</div>
+            </div>
           </div>
         </div>
         <div class="share-block">

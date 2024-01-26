@@ -142,7 +142,7 @@ export default function Home() {
                   setIsSearchOn(true);
                 }, 300);
               }}
-              class="search-btn btn"
+              class="search-btn"
               type="submit"
             >
               <i class="fa fa-search " aria-hidden="true"></i>
@@ -233,7 +233,7 @@ export default function Home() {
                 class="form-control header-search-input"
                 type="text"
               ></input>
-              <button class="search-btn btn" type="submit">
+              <button class="search-btn" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
 
@@ -268,7 +268,7 @@ export default function Home() {
 
       <div class="home-banner">
         <div className="leftbox">
-          <img src='/icons/columnIcon.svg'></img>
+          <img src="/icons/columnIcon.svg"></img>
           <div class="">
             <div class="title">最新消息</div>
             <div class="e-banner-product">
@@ -290,25 +290,13 @@ export default function Home() {
         >
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/395502513_812978427496968_623681544860527899_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9534ce&_nc_ohc=vhh_nnD9gwkAX_SiF_r&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfDCCkCXUKGGA1SnYMZ17N2ZANbh-uCMlOun1PnGKvUI5A&oe=65B2D539"
-                class=""
-                alt="..."
-              ></img>
+              <img src="/images/banner.jpeg" class="" alt="..."></img>
             </div>
             <div class="carousel-item">
-              <img
-                src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/395502513_812978427496968_623681544860527899_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9534ce&_nc_ohc=Q-u5kt0V628AX-rQhOa&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfCrSoE3XN4wL6OgMj9mPvFrVjfAO7mzB2QABXg-sZUKdQ&oe=65A108F9"
-                class=""
-                alt="..."
-              ></img>
+              <img src="/images/banner.jpeg" class="" alt="..."></img>
             </div>
             <div class="carousel-item">
-              <img
-                src="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-6/381385326_794508229343988_1109377287286993521_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9534ce&_nc_ohc=-MNFjbkN90QAX_XAnVH&_nc_ht=scontent.ftpe8-1.fna&cb_e2o_trans=q&oh=00_AfBAWk-AVMBrrQ6e80utdvyVkihaFnXPrVwe1YTSVLQ8oA&oe=65A10E05"
-                class=""
-                alt="..."
-              ></img>
+              <img src="/images/banner.jpeg" class="" alt="..."></img>
             </div>
           </div>
           <button
@@ -332,63 +320,61 @@ export default function Home() {
         </div>
       </div>
 
-      <div class="container-fluid">
-        <div class="main-body">
-          {/* <ListAside categories={categories} /> */}
-              <HomeTab />
-              {/* <HomeTabTwo /> */}
+      <div class="main-body">
+        {/* <ListAside categories={categories} /> */}
+        <HomeTab />
+        {/* <HomeTabTwo /> */}
 
-              {/* <div class="swiper all-swiper booklist-carousel">
-                <div class="title">All</div>
-                <hr></hr>
-                <Swiper
-                  ref={swiperRef}
-                  rewind={false}
-                  className={`booklist-carousel`}
-                  slidesPerView={5}
-                >
-                  <div class="swiper-wrapper booklist-carousel-inner">
-                    {books.map((item) => {
-                      return (
-                        <SwiperSlide
-                          className="swiper-slide"
+        {/* <div class="swiper all-swiper booklist-carousel">
+              <div class="title">All</div>
+              <hr></hr>
+              <Swiper
+                ref={swiperRef}
+                rewind={false}
+                className={`booklist-carousel`}
+                slidesPerView={5}
+              >
+                <div class="swiper-wrapper booklist-carousel-inner">
+                  {books.map((item) => {
+                    return (
+                      <SwiperSlide
+                        className="swiper-slide"
+                        key={`${item.id}`}
+                      >
+                        <Link
                           key={`${item.id}`}
+                          href={{
+                            pathname: `/detail/${item.id}`,
+                            query: { id: item.id },
+                          }}
+                          className={``}
                         >
-                          <Link
-                            key={`${item.id}`}
-                            href={{
-                              pathname: `/detail/${item.id}`,
-                              query: { id: item.id },
-                            }}
-                            className={``}
-                          >
-                            <div class="book-item">
-                              <img
-                                src={`http://localhost:8055/assets/${item.PrimaryImage?.id}`}
-                                className=""
-                                alt={item.title}
-                              />
-                              <div className="desc mt-2">{item.Title}</div>
-                              <div className="price-num">{item.Price}</div>
-                            </div>
-                          </Link>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </div>
-                  <div onClick={previous} class="swiper-button-prev"></div>
-                  <div onClick={next} class="swiper-button-next"></div>
-                </Swiper>
-              </div> */}
+                          <div class="book-item">
+                            <img
+                              src={`http://localhost:8055/assets/${item.PrimaryImage?.id}`}
+                              className=""
+                              alt={item.title}
+                            />
+                            <div className="desc mt-2">{item.Title}</div>
+                            <div className="price-num">{item.Price}</div>
+                          </div>
+                        </Link>
+                      </SwiperSlide>
+                    );
+                  })}
+                </div>
+                <div onClick={previous} class="swiper-button-prev"></div>
+                <div onClick={next} class="swiper-button-next"></div>
+              </Swiper>
+            </div> */}
 
-            {categories.map((item) => {
-              return (
-                <>
-                  <MobileCard props={item} />
-                </>
-              );
-            })}
-        </div>
+        {categories.map((item) => {
+          return (
+            <>
+              <MobileCard props={item} />
+            </>
+          );
+        })}
       </div>
 
       <MediaBlock />
