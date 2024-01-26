@@ -30,25 +30,36 @@ export default function MenuBar(props) {
   // }, [props]);
 
 
-  return(
+  return (
     <div class="menu-bar">
-      <div class="">
-        <Link href="" class="link">全站分類</Link>
-      </div>
-      <div class="">
-        <Link href="" class="link">童書</Link>
-      </div>
-      <div class="">
-        <Link href="" class="link">成書</Link>
-      </div>
-      <div class="">
-        <Link href="" class="link">益智產品</Link>
-      </div>
-      <div class="">
-        <Link href="" class="link">買書GO</Link>
+      <div className="container-fluid">
+        <div class="">
+          <Link href="" class="link">
+            全站分類
+          </Link>
+        </div>
+        <div class="">
+          <Link href="" class="link">
+            童書
+          </Link>
+        </div>
+        <div class="">
+          <Link href="" class="link">
+            成書
+          </Link>
+        </div>
+        <div class="">
+          <Link href="" class="link">
+            益智產品
+          </Link>
+        </div>
+        <div class="">
+          <Link href="" class="link">
+            買書GO
+          </Link>
+        </div>
       </div>
     </div>
-    
-  )
+  );
 
 }

@@ -42,15 +42,22 @@ export default function HomeTab() {
   }, []);
 
 
-  return(
+  return (
     <div class="home-recommend-tabs">
-      <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
+      <Tab.Container
+        id="nav-tab"
+        defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
+      >
         <Nav variant="tabs">
+          <div className="title">新書上市</div>
+
           {categories.map((item) => (
             <>
-            <Nav.Item key={`${item.id}`}>
-              <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>{item.Title}</Nav.Link>
-            </Nav.Item>
+              <Nav.Item key={`${item.id}`}>
+                <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>
+                  {item.Title}
+                </Nav.Link>
+              </Nav.Item>
             </>
           ))}
         </Nav>
@@ -64,36 +71,36 @@ export default function HomeTab() {
             <div class="swiper-wrapper booklist-carousel-inner">
               {books.map((item) => {
                 return (
-                  <SwiperSlide
-                    className="swiper-slide"
-                    key={`${item.id}`}
-                  >
-                  <Link
-                    key={`${item.id}`}
-                    href={{
-                      pathname:`/detail/${item.id}`,
-                      query: {id: item.id},                 
-                    }}
-                    className={``}
-                  >
-                    <div class="book-item">
-                      <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
-                      <div className="desc mt-2">{item.Title}</div>
-                      <div className="price-num">{item.Price}</div>
-                    </div>
-                  </Link>
+                  <SwiperSlide className="swiper-slide" key={`${item.id}`}>
+                    <Link
+                      key={`${item.id}`}
+                      href={{
+                        pathname: `/detail/${item.id}`,
+                        query: { id: item.id },
+                      }}
+                      className={``}
+                    >
+                      <div class="book-item">
+                        <img
+                          src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                          className=""
+                          alt={item.title}
+                        />
+                        <div className="desc mt-2">{item.Title}</div>
+                        <div className="price-num">{item.Price}</div>
+                      </div>
+                    </Link>
                   </SwiperSlide>
                 );
               })}
-              </div>
-              <div onClick={previous} class="swiper-button-prev"></div>
-              <div onClick={next} class="swiper-button-next"></div>
+            </div>
+            <div onClick={previous} class="swiper-button-prev"></div>
+            <div onClick={next} class="swiper-button-next"></div>
           </Swiper>
         </Tab.Content>
       </Tab.Container>
     </div>
-
-  )
+  );
 
 }
 

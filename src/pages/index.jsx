@@ -108,7 +108,7 @@ export default function Home() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            <img src="/icons/close.svg" alt="" />
           </button>
           <Link class="navbar-brand" href="#">
             大邑文化
@@ -122,10 +122,10 @@ export default function Home() {
           ></Link>
           <div class="nav-right">
             <button class="search-btn btn" type="submit">
-              <i class="fa fa-user " aria-hidden="true"></i>
+              <img src="/icons/member.svg" alt="" />
             </button>
             <button class="search-btn btn" type="submit">
-              <i class="fa fa-shopping-cart " aria-hidden="true"></i>
+              <img src="/icons/cart.svg" alt="" />
             </button>
           </div>
 
@@ -145,24 +145,34 @@ export default function Home() {
               class="search-btn"
               type="submit"
             >
-              <i class="fa fa-search " aria-hidden="true"></i>
+              <img src="/icons/search.svg" alt="" />
             </button>
           </form>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <Link class="nav-link active" aria-current="page" href="#">
-                  Home
+                  全站分類
                 </Link>
               </li>
               <li class="nav-item">
                 <Link class="nav-link" href="#">
-                  Features
+                  童書
                 </Link>
               </li>
               <li class="nav-item">
                 <Link class="nav-link" href="#">
-                  Pricing
+                  成書
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" href="#">
+                  益智產品
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" href="#">
+                  買書GO
                 </Link>
               </li>
             </ul>
@@ -234,11 +244,11 @@ export default function Home() {
                 type="text"
               ></input>
               <button class="search-btn" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <img src="/icons/search.svg"></img>
               </button>
 
               <div class="header-toolbar">
-                <button type="button" class="btn ">
+                <button type="button" class="btn">
                   購物車
                   <img
                     src="https://api.iconify.design/fa:shopping-cart.svg"
@@ -246,7 +256,7 @@ export default function Home() {
                   ></img>
                 </button>
 
-                <button type="button" class="btn ">
+                <button type="button" class="btn">
                   登入
                 </button>
                 <button type="button" class="btn">
@@ -268,20 +278,25 @@ export default function Home() {
 
       <div class="home-banner">
         <div className="leftbox">
-          <img src="/icons/columnIcon.svg"></img>
+          <img class="topright" src="/icons/columnIcon.svg"></img>
           <div class="">
-            <div class="title">最新消息</div>
+            <div class="pin-title">最新消息</div>
             <div class="e-banner-product">
-              <div class="text">
+              <div>
                 <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
+                <hr />
               </div>
             </div>
             <div class="e-banner-product">
-              <div class="text">
+              <div>
                 <div class="desc">入選誠品TOP100書單</div>
+                <hr />
               </div>
             </div>
           </div>
+
+          <div className="read-more-btn">查看更多</div>
+          <img class="newsbg" src="/icons/newsbg.svg"></img>
         </div>
         <div
           id="carouselExampleControls"

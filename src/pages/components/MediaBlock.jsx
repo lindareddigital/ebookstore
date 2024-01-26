@@ -73,9 +73,28 @@ export default function MediaBlock(props) {
           </div>
         </div>
         <div class="share-block">
-          <div class="title">分享專欄</div>
-          <div class="desc"></div>
-          <img class="" src="" alt=""></img>
+          <div class="pin-title">分享專欄</div>
+
+          <img class="topright" src="/icons/columnIcon.svg"></img>
+          {/* <div class=""> */}
+            <div class="e-banner-product">
+              <img src="/images/bgi.svg" alt="" />
+              <div class="desc">
+                《X萬獸探險隊III 11
+                戰螯大盜》搶先看。安娜為大森特製的藥水，應該可以幫助能力恢復。
+              </div>
+              <hr />
+            </div>
+            <div class="e-banner-product">
+              <div>
+                <div class="desc">入選誠品TOP100書單</div>
+                <hr />
+              </div>
+            </div>
+          {/* </div> */}
+
+          <div className="read-more-btn">查看更多</div>
+          <img class="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>
       <ul class="social-links">
