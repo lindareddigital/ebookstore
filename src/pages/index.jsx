@@ -185,7 +185,7 @@ export default function Home() {
           <Link href="/">
             <img class="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
-          <div class="">
+          <div class="right-side">
             <div class="label-group">
               <Link
                 href={{

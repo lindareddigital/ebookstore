@@ -56,23 +56,40 @@ export default function Footer() {
                 社群
               </Link>
             </li>
-            <li class="social-sqare">
-              <img src="/icons/fb.svg"></img>
-              <Link
-                target="_blank"
-                href="https://www.facebook.com/polispresstw"
-              >
-                大邑
-              </Link>
-            </li>
-            <li>
-              <Link
-                target="_blank"
-                href="https://www.facebook.com/seashoretaiwan/"
-              >
-                海濱
-              </Link>
-            </li>
+            <div className="social-sqare-container">
+              <li class="social-sqare">
+                <img src="/icons/fb.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/polispresstw"
+                >
+                  大邑
+                </Link>
+              </li>
+              <li class="social-sqare">
+                <img src="/icons/fb.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                >
+                  海濱
+                </Link>
+              </li>
+              <li>
+                <img src="/icons/ig.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                ></Link>
+              </li>
+              <li>
+                <img src="/icons/yt.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                ></Link>
+              </li>
+            </div>
           </div>
         </div>
       </footer>

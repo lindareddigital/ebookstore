@@ -77,20 +77,22 @@ export default function MediaBlock(props) {
 
           <img class="topright" src="/icons/columnIcon.svg"></img>
           {/* <div class=""> */}
-            <div class="e-banner-product">
-              <img src="/images/bgi.svg" alt="" />
-              <div class="desc">
-                《X萬獸探險隊III 11
-                戰螯大盜》搶先看。安娜為大森特製的藥水，應該可以幫助能力恢復。
-              </div>
-              <hr />
+          <div class="e-banner-product">
+            <img src="/images/bgi.svg" alt="" />
+            <div class="desc">
+              《X萬獸探險隊III 11
+              戰螯大盜》搶先看。安娜為大森特製的藥水，應該可以幫助能力恢復。
             </div>
-            <div class="e-banner-product">
-              <div>
-                <div class="desc">入選誠品TOP100書單</div>
-                <hr />
-              </div>
+          </div>
+          <hr />
+          <div class="e-banner-product">
+            <img src="/images/bgi.svg" alt="" />
+            <div>
+              <div class="desc">入選誠品TOP100書單</div>
             </div>
+          </div>
+          <hr />
+
           {/* </div> */}
 
           <div className="read-more-btn">查看更多</div>

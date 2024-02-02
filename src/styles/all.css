@@ -122,6 +122,10 @@ a:hover{
   justify-content: space-between;
 }
 
+.header-search-bar .right-side{
+  width: 90%;
+}
+
 .single-page .header-search-bar{
   width: 100%;
   justify-content: space-between;
@@ -266,8 +270,9 @@ a:hover{
   display: flex;
   align-items: center;
   justify-content: center;
-  /* position: absolute; */
+  position: absolute;
   top: -10px;
+  left: 0px;
  }
 
  .leftbox svg{
@@ -327,6 +332,10 @@ a:hover{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.share-block .e-banner-product{
+  width: calc(100% - 32px);
 }
 
 .e-banner-product hr{
@@ -836,13 +845,14 @@ position: relative;
 }
 
 .share-block{
-  width: 25%;
+  width: 424px;
   padding: 16px;
   background: var(--Yellow, #EBC700);;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 
 }
 
@@ -896,7 +906,7 @@ footer .title a{
   text-transform: uppercase;
 }
 
-footer .title::before{
+footer .box::before{
   content: '';
   position: absolute;
   width: 5px;
@@ -915,12 +925,22 @@ footer li {
   letter-spacing: 0.5px;
 }
 
+.social-sqare-container{
+  display: flex;
+  align-items: center;
+}
+
 footer .social-sqare{
+  flex-direction: column;
+  width: 25%;
+}
+
+footer .social-sqare img{
   width: 48px;
   height: 48px;
   border-radius: 8px;
   opacity: 0.2;
-  background: var(--White, #FFF);
+  /* background: var(--White, #FFF); */
   display: flex;
   flex-direction: column;
 }
