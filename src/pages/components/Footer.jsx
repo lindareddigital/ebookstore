@@ -75,14 +75,14 @@ export default function Footer() {
                   海濱
                 </Link>
               </li>
-              <li>
+              <li class="social-sqare">
                 <img src="/icons/ig.svg"></img>
                 <Link
                   target="_blank"
                   href="https://www.facebook.com/seashoretaiwan/"
                 ></Link>
               </li>
-              <li>
+              <li class="social-sqare">
                 <img src="/icons/yt.svg"></img>
                 <Link
                   target="_blank"

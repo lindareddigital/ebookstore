@@ -279,20 +279,21 @@ export default function Home() {
       <div class="home-banner">
         <div className="leftbox">
           <img class="topright" src="/icons/columnIcon.svg"></img>
-          <div class="">
-            <div class="pin-title">最新消息</div>
-            <div class="e-banner-product">
-              <div>
-                <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
-                <hr />
+          <div class="pin-title">最新消息</div>
+
+          <div class="wrapper">
+              <div class="e-banner-product">
+                <div>
+                  <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
+                  <hr />
+                </div>
               </div>
-            </div>
-            <div class="e-banner-product">
-              <div>
-                <div class="desc">入選誠品TOP100書單</div>
-                <hr />
+              <div class="e-banner-product">
+                <div>
+                  <div class="desc">入選誠品TOP100書單</div>
+                  <hr />
+                </div>
               </div>
-            </div>
           </div>
 
           <div className="read-more-btn">查看更多</div>
