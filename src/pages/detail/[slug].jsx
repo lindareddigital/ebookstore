@@ -9,6 +9,7 @@ import MobileCard from 'src/pages/components/MobileCard';
 import DesktopCard from 'src/pages/components/DesktopCard';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
+import HomeTab from "src/pages/components/HomeTab";
 
 export default function Detail(props) {
   console.log('props', props);
@@ -68,20 +69,20 @@ export default function Detail(props) {
               {/* <li class="breadcrumb-item"><Link href="/" class="">{item}</Link></li>     */}
               <li class="breadcrumb-item">
                 <Link href="/" class="">
-                  {item.Category.Title}
+                  童書{item.Category.Title}
                 </Link>
               </li>
             </nav>
           </>
         )}
 
-        <div class="main-body">
+        <div class="detail">
           <div class="content">
             {item && (
               <>
                 <img
                   src={`http://localhost:8055/assets/${item.PrimaryImage}`}
-                  className=""
+                  className="primary-img"
                   alt={item.title}
                 />
 
@@ -94,20 +95,21 @@ export default function Detail(props) {
                     <li>
                       繪者：<Link href="/">{item.Illustrator}</Link>
                     </li>
-                    <li>
-                      出版社：
-                      <Link href="/singlepage">
-                        <span>大邑文化{item.Publisher}</span>
-                      </Link>
-                    </li>
                     <li>出版日期：{item.PublicationDate}</li>
-                    <li>語言：繁體中文</li>
                     <li>定價：{item.Price}元</li>
                   </ul>
+                  <div className="btn button-radius">
+                    <img src="/icons/heart.svg" alt="" />
+                    收藏此書
+                  </div>
+                  <div className="btn button-radius">
+                    <img src="/icons/heart.svg" alt="" />
+                    查看內頁
+                  </div>
                 </div>
 
                 <ul class="buy-book">
-                  <div class="title">買書GO</div>
+                  <div class="pin-title">買書GO</div>
                   <li>
                     <Link href="">
                       <img src="/icons/eslite.png"></img>
@@ -134,71 +136,88 @@ export default function Detail(props) {
           </div>
         </div>
       </div>
+      <div class="main-body">
+        <HomeTab />
+      </div>
 
       <div class="container-fluid fdc">
-        {item &&
+        {/* {item &&
           (mobile ? (
             <MobileCard category={item.Category} />
           ) : (
             <DesktopCard category={item.Category} />
-          ))}
+          ))} */}
 
-        <div class="dvSlider">
-                <div class="swiper swiper-js booklist-carousel">
-                  <div class="title">X萬獸探險隊</div>
-                  <hr></hr>
-                  <div class="swiper-wrapper booklist-carousel-inner">
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="book-item">
-                          <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg" class="" alt="..."></img>
-                          <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
-                          <div class="price-num"> $ 300</div>
-                        </div>
-
-                      </div>
-                      
-                      
-                  </div>
-                
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
+        {/* <div class="dvSlider">
+          <div class="swiper swiper-js booklist-carousel">
+            <div class="title">X萬獸探險隊</div>
+            <hr></hr>
+            <div class="swiper-wrapper booklist-carousel-inner">
+              <div class="swiper-slide">
+                <div class="book-item">
+                  <img
+                    src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg"
+                    class=""
+                    alt="..."
+                  ></img>
+                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
+                  <div class="price-num"> $ 300</div>
                 </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="book-item">
+                  <img
+                    src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg"
+                    class=""
+                    alt="..."
+                  ></img>
+                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
+                  <div class="price-num"> $ 300</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="book-item">
+                  <img
+                    src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg"
+                    class=""
+                    alt="..."
+                  ></img>
+                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
+                  <div class="price-num"> $ 300</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="book-item">
+                  <img
+                    src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg"
+                    class=""
+                    alt="..."
+                  ></img>
+                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
+                  <div class="price-num"> $ 300</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="book-item">
+                  <img
+                    src="https://s2.eslite.dev/unsafe/s.eslite.dev/b2b/newItem/2023/10/12/155_143447327_126_mainCoverImage1.jpg"
+                    class=""
+                    alt="..."
+                  ></img>
+                  <div class="desc mt-2">X萬獸探險隊益智桌遊/ 算數王之戰</div>
+                  <div class="price-num"> $ 300</div>
+                </div>
+              </div>
             </div>
 
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div> */}
+
         <div class="container-fluid fdc">
-          <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <nav class="container-fluid">
+            <div class="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
               <button
                 class="nav-link active"
                 id="nav-home-tab"

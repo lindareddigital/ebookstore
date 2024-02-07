@@ -66,7 +66,7 @@ export default function HomeTab() {
             ref={swiperRef}
             rewind={false}
             className={`booklist-carousel`}
-            slidesPerView={6}
+            slidesPerView={"auto"}
           >
             <div class="swiper-wrapper booklist-carousel-inner">
               {books.map((item) => {

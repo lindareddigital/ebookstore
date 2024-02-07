@@ -1,7 +1,6 @@
 'use client';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import HomeTab from 'src/pages/components/HomeTab';
-import HomeTabTwo from 'src/pages/components/HomeTabTwo';
 import MobileCard from 'src/pages/components/MobileCard';
 import MediaBlock from 'src/pages/components/MediaBlock';
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
@@ -186,7 +185,7 @@ export default function Home() {
             <img class="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
           <div class="right-side">
-            <div class="label-group">
+            {/* <div class="label-group">
               <Link
                 href={{
                   pathname: `/singlepage/`,
@@ -207,7 +206,7 @@ export default function Home() {
                   一丁
                 </button>
               </Link>
-            </div>
+            </div> */}
             <form class="input-group">
               <div class="dropdown">
                 <Link
