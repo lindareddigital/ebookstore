@@ -76,7 +76,6 @@ export default function MediaBlock(props) {
           <div class="pin-title">分享專欄</div>
 
           <img class="topright" src="/icons/columnIcon.svg"></img>
-          {/* <div class=""> */}
           <div class="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
             <div class="desc">
@@ -92,8 +91,20 @@ export default function MediaBlock(props) {
             </div>
           </div>
           <hr />
-
-          {/* </div> */}
+          <div class="e-banner-product">
+            <img src="/images/bgi.svg" alt="" />
+            <div>
+              <div class="desc">入選誠品TOP100書單</div>
+            </div>
+          </div>
+          <hr />
+          <div class="e-banner-product">
+            <img src="/images/bgi.svg" alt="" />
+            <div>
+              <div class="desc">入選誠品TOP100書單</div>
+            </div>
+            <hr />
+          </div>
 
           <div className="read-more-btn">查看更多</div>
           <img class="newsbg" src="/icons/nine.svg"></img>

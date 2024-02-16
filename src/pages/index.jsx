@@ -264,7 +264,8 @@ export default function Home() {
               </div>
             </form>
             <div class="keyword-block">
-              <Link href="">HOT:X星際探險隊</Link>
+              <div className="pill">HOT</div>
+              <Link href="">X星際探險隊</Link>
               <Link href="">成語-民間故事</Link>
               <Link href="">X極限挑戰王</Link>
               <Link href=""></Link>
@@ -281,18 +282,18 @@ export default function Home() {
           <div class="pin-title">最新消息</div>
 
           <div class="wrapper">
-              <div class="e-banner-product">
-                <div>
-                  <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
-                  <hr />
-                </div>
+            <div class="e-banner-product">
+              <div>
+                <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
+                <hr />
               </div>
-              <div class="e-banner-product">
-                <div>
-                  <div class="desc">入選誠品TOP100書單</div>
-                  <hr />
-                </div>
+            </div>
+            <div class="e-banner-product">
+              <div>
+                <div class="desc">入選誠品TOP100書單</div>
+                <hr />
               </div>
+            </div>
           </div>
 
           <div className="read-more-btn">查看更多</div>
@@ -339,49 +340,6 @@ export default function Home() {
         {/* <ListAside categories={categories} /> */}
         <HomeTab />
         {/* <HomeTabTwo /> */}
-
-        {/* <div class="swiper all-swiper booklist-carousel">
-              <div class="title">All</div>
-              <hr></hr>
-              <Swiper
-                ref={swiperRef}
-                rewind={false}
-                className={`booklist-carousel`}
-                slidesPerView={5}
-              >
-                <div class="swiper-wrapper booklist-carousel-inner">
-                  {books.map((item) => {
-                    return (
-                      <SwiperSlide
-                        className="swiper-slide"
-                        key={`${item.id}`}
-                      >
-                        <Link
-                          key={`${item.id}`}
-                          href={{
-                            pathname: `/detail/${item.id}`,
-                            query: { id: item.id },
-                          }}
-                          className={``}
-                        >
-                          <div class="book-item">
-                            <img
-                              src={`http://localhost:8055/assets/${item.PrimaryImage?.id}`}
-                              className=""
-                              alt={item.title}
-                            />
-                            <div className="desc mt-2">{item.Title}</div>
-                            <div className="price-num">{item.Price}</div>
-                          </div>
-                        </Link>
-                      </SwiperSlide>
-                    );
-                  })}
-                </div>
-                <div onClick={previous} class="swiper-button-prev"></div>
-                <div onClick={next} class="swiper-button-next"></div>
-              </Swiper>
-            </div> */}
 
         {categories.map((item) => {
           return (
