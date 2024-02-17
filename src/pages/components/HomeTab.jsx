@@ -60,13 +60,16 @@ export default function HomeTab() {
               </Nav.Item>
             </>
           ))}
+
+          <div onClick={previous} class="swiper-button-prev"></div>
+          <div onClick={next} class="swiper-button-next"></div>
         </Nav>
         <Tab.Content>
           <Swiper
             ref={swiperRef}
             rewind={false}
             className={`booklist-carousel`}
-            slidesPerView={"auto"}
+            slidesPerView={"6"}
           >
             <div class="swiper-wrapper booklist-carousel-inner">
               {books.map((item) => {
@@ -94,8 +97,6 @@ export default function HomeTab() {
                 );
               })}
             </div>
-            <div onClick={previous} class="swiper-button-prev"></div>
-            <div onClick={next} class="swiper-button-next"></div>
           </Swiper>
         </Tab.Content>
       </Tab.Container>
