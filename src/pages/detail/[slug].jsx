@@ -127,7 +127,7 @@ export default function Detail(props) {
                   </li>
                   <li>
                     <Link href="">
-                      <img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img>
+                      <img src="/icons/pchome.svg"></img>
                     </Link>
                   </li>
                 </ul>

@@ -90,20 +90,17 @@ export default function MediaBlock(props) {
               <div class="desc">入選誠品TOP100書單</div>
             </div>
           </div>
-          <hr />
           <div class="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
             <div>
               <div class="desc">入選誠品TOP100書單</div>
             </div>
           </div>
-          <hr />
           <div class="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
             <div>
               <div class="desc">入選誠品TOP100書單</div>
             </div>
-            <hr />
           </div>
 
           <div className="read-more-btn">查看更多</div>
@@ -128,7 +125,7 @@ export default function MediaBlock(props) {
         </li>
         <li>
           <Link href="">
-            <img src="https://fs-e.ecimg.tw/img/h24/new/index/v1/images/logo/logo_pchome-xmas_newyear.gif"></img>
+            <img src="/icons/pchome.svg"></img>
           </Link>
         </li>
       </ul>

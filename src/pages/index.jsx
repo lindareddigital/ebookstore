@@ -278,20 +278,18 @@ export default function Home() {
 
       <div class="home-banner">
         <div className="leftbox">
-          <img class="topright" src="/icons/columnIcon.svg"></img>
+          <img class="topright" src="/icons/leftboxicon.svg"></img>
           <div class="pin-title">最新消息</div>
 
           <div class="wrapper">
             <div class="e-banner-product">
-              <div>
+              {/* <div> */}
                 <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
-                <hr />
-              </div>
+              {/* </div> */}
             </div>
             <div class="e-banner-product">
               <div>
                 <div class="desc">入選誠品TOP100書單</div>
-                <hr />
               </div>
             </div>
           </div>
@@ -304,6 +302,28 @@ export default function Home() {
           class="home-banner-carousel carousel slide"
           data-bs-ride="carousel"
         >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img src="/images/banner.jpeg" class="" alt="..."></img>
@@ -341,13 +361,13 @@ export default function Home() {
         <HomeTab />
         {/* <HomeTabTwo /> */}
 
-        {categories.map((item) => {
+        {/* {categories.map((item) => {
           return (
             <>
               <MobileCard props={item} />
             </>
           );
-        })}
+        })} */}
       </div>
 
       <MediaBlock />
