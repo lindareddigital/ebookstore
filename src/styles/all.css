@@ -68,7 +68,8 @@ a:hover{
     --footer-bg: #F2F2F2;
     --hr-color: #EDEDED;
     --border-color: #D9D9D9;
-    --title-color: #333333; 
+    --title-color: #333333;
+    --swiper-theme-color: #000; 
 }
 
 .btn-outline-secondary {
@@ -292,6 +293,8 @@ a:hover{
   left: 0px;
   width: 22px;
   height: 22px;
+  content: '';
+  background-color: #28251C;
  }
 
  .leftbox svg{
@@ -555,6 +558,11 @@ a:hover{
   align-items: center;
 }
 
+.swiper-button-next::after, .swiper-button-prev::after {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg) brightness(103%) contrast(103%); 
+}
+
+
 .swiper-button-prev:after, .swiper-button-next:after {
   font-size: 1rem;
   color: white;
@@ -608,13 +616,25 @@ a:hover{
   text-transform: uppercase;
 }
 
-.home-recommend-tabs .title{
+.block-title{
   color: var(--Black, #28251C);
   font-size: 32px;
   font-weight: 900;
-  line-height: normal;
-  letter-spacing: 6.4px;
   text-transform: uppercase;
+  line-height: 46px;
+  letter-spacing: 0.2em;
+  text-align: left;
+  position: relative;
+}
+
+.block-title::before{
+  content: '';
+  width: 8px;
+  height: 31px;
+  background-color: var(--Black, #28251C);
+  position: absolute;
+  left: -24px;
+  top: 8px;
 }
 
 .home-recommend-tabs .nav-item.active{
@@ -715,6 +735,10 @@ a:hover{
   border-bottom: 1px solid var(--Gold, #B39B17);
 }
 
+.detail-page .nav-tabs .nav-link.active{
+  color: var(--Black, #28251C);
+}
+
 .nav-tabs{
   border-bottom: unset;
   margin-bottom: 28px;
@@ -808,7 +832,8 @@ a:hover{
 }
 
 .container-fluid{
-  width: 1320px;
+  max-width: 1320px;
+  width: calc(100vw - 32px);
   display: flex;
   margin: auto;
   padding-right: 0; 
@@ -954,11 +979,18 @@ a:hover{
   /* padding: 37.59px 25.94px 37.59px 25.94px; */
   border-radius: 10.59px;
   background: var(--White);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.detail-page .buy-book img{
-  width: 164px;
-  height: 70px;
+.detail-page .buy-book li img{
+  width: 91.59px;
+  height: 23.82px;
+}
+
+.buy-book .topright {
+  top: -16px;
 }
 
 .desc{
@@ -1047,6 +1079,8 @@ footer .social-sqare a{
   margin-top: 10px;
   position: absolute;
   bottom: -32px;
+  /* left: 50% !important; */
+  transform: translate(31%);
 }
 
 footer a{
@@ -1055,8 +1089,8 @@ footer a{
 }
 
 .social-links img{
-  /* width: 48px; */
-  height: 48px;
+  width: 130px;
+  /* height: 161px; */
 }
 
 .dropdown{
@@ -1066,7 +1100,7 @@ footer a{
 }
 
 .keyword-block a{
-  margin: 0 4px;
+  margin: 0 8px;
 }
 
 .keyword-block .pill{
@@ -1089,28 +1123,45 @@ footer a{
   line-height: normal;
   text-transform: uppercase;
   margin-top: 4px;
+  overflow: auto;
 }
 
  .social-links {
-    width: 100vw;
-    height: 419px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #EDEDED;
-    font-size: 15px;
-    color: #8b8a8a;
-    font-family: Helvetica;
+  width: 100vw;
+  height: 419px;
+  background-color: #EDEDED;
+  font-size: 15px;
+  color: #8b8a8a;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.social-links > div{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.social-links ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
  .social-links li{
   display: flex;
-  margin: 0 20px;
+  margin: 0 8px;
   justify-content: center;
-  text-align: center;
   padding: 53px 62px;
   border-radius: 20px;
   background: var(--White);
+  width: 311px;
+  height: 187px;
+  padding: 13px 73px;
+  align-items: center;
 }
 
 .breadcrumb{
@@ -1133,6 +1184,12 @@ footer a{
   background:  #EBC700;
   margin-top: 80px;
   align-items: center;
+  padding: 0 16px;
+  position: relative;
+}
+
+.detail-page .more-nav-tabs .topright{
+  top: -16px;
 }
 
 .detail-page .more-nav-tabs .nav-link.active{
@@ -1209,8 +1266,8 @@ footer .container-fluid{
 }
 
 .detail-page .primary-img{
-    width: 424px;
-    height: 424px;
+    width: 404px;
+    height: 404px;
 }
 
 
@@ -1228,6 +1285,16 @@ footer .container-fluid{
   font-size: 18px;
   font-weight: 400;
   line-height: 26px;
+}
+
+.content .view-detail-btn{
+  color: #fff;
+  background: var(--Black, #28251C);
+}
+
+.content .view-detail-btn img{
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg) brightness(103%) contrast(103%);
+  margin-right: 8px;
 }
 
 .content li{
@@ -1624,6 +1691,7 @@ footer .accordion{
 
 .home-recommend-tabs{
   /* width: 1000px; */
+  right: 32px;
 }
 
 .home-recommend-tabs .nav-tabs{
@@ -1632,6 +1700,10 @@ footer .accordion{
   /* width: 1000px; */
   flex-wrap: nowrap;
   white-space: nowrap;
+}
+
+.keyword-block{
+  margin-top: 8px;
 }
 
 .main-body{
@@ -1673,7 +1745,6 @@ footer .accordion{
 }
 
 .book-item img{
-  height: 410px;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -1750,7 +1821,19 @@ footer .box{
 
 .home-banner-carousel{
   width: unset;
-  height: unset;
+  height: 170px;
+}
+
+.carousel-indicators{
+  bottom: -4px;
+}
+
+.header-search-bar .right-side{
+  height: 38px;
+}
+
+.keyword-block .pill{
+  width: 44px;
 }
 
 .share-list{
@@ -1788,6 +1871,7 @@ footer .box{
   color: #28251C;
   margin-top: 0;
   /* margin-left: 4px; */
+  margin-bottom: 0;
 }
 
 .ytIcon img{
@@ -1835,6 +1919,7 @@ footer .box{
 .yt-block .title{
   width: calc(100vw - 32px);
   margin: auto;
+  margin-bottom: 12px;
 }
 
 .home-page .input-group{
@@ -1864,6 +1949,8 @@ footer .accordion-button{
   letter-spacing: 0em;
   text-align: left;
   color: #fff;
+  border-bottom: 1px solid #575757;
+  padding: 8px 0rem;
 }
 
 footer .accordion-item{
@@ -1891,6 +1978,28 @@ footer .accordion-button:not(.collapsed) {
 
 footer .accordion{
   width: 100%;
+  display: block;
+}
+
+.copyright{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.share-block .topright{
+  width: 64px;
+  height: 79.48px;
+  top: -24px;
+}
+
+.swiper-backface-hidden .swiper-slide{
+  width: unset !important;
+  margin-right: 5px;
+}
+
+.social-links ul{
+  flex-wrap: wrap;
 }
 
 }
@@ -1900,6 +2009,9 @@ footer .accordion{
 .social-links li{
   margin: 0px 10px;
   width: calc(40vw);
+  height: auto;
+  aspect-ratio: 16/9;
+  margin-bottom: 20px;
 }
 
 .dropdown-toggle{

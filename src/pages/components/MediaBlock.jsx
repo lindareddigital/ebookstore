@@ -107,28 +107,33 @@ export default function MediaBlock(props) {
           <img class="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>
-      <ul class="social-links">
-        <li>
-          <Link href="">
-            <img src="/icons/eslite.png"></img>
-          </Link>
-        </li>
-        <li>
-          <Link href="">
-            <img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img>
-          </Link>
-        </li>
-        <li>
-          <Link href="">
-            <img src="/icons/stone.svg"></img>
-          </Link>
-        </li>
-        <li>
-          <Link href="">
-            <img src="/icons/pchome.svg"></img>
-          </Link>
-        </li>
-      </ul>
+      <div class="social-links">
+        <div className="">
+          <div className="block-title">買書GO</div>
+          <ul className="container-fluid">
+            <li>
+              <Link href="">
+                <img src="/icons/eslite.png"></img>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <img src="/icons/bookstw.svg"></img>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <img src="/icons/stone.svg"></img>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <img src="/icons/pchome.svg"></img>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 

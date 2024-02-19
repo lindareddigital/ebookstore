@@ -102,13 +102,14 @@ export default function Detail(props) {
                     <img src="/icons/heart.svg" alt="" />
                     收藏此書
                   </div>
-                  <div className="btn button-radius">
-                    <img src="/icons/heart.svg" alt="" />
+                  <div className="btn button-radius view-detail-btn">
+                    <img src="/icons/search.svg" alt="" />
                     查看內頁
                   </div>
                 </div>
 
                 <ul class="buy-book">
+                  <img class="topright" src="/icons/leftboxicon.svg"></img>
                   <div class="pin-title">買書GO</div>
                   <li>
                     <Link href="">
@@ -117,7 +118,7 @@ export default function Detail(props) {
                   </li>
                   <li>
                     <Link href="">
-                      <img src="https://jci.book.com.tw/css/header/images/books_logo_185x52.png"></img>
+                      <img src="/icons/bookstw.svg"></img>
                     </Link>
                   </li>
                   <li>
@@ -218,6 +219,7 @@ export default function Detail(props) {
         <div class="container-fluid fdc">
           <nav class="container-fluid">
             <div class="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
+              <img class="topright" src="/icons/leftboxicon.svg"></img>
               <button
                 class="nav-link active"
                 id="nav-home-tab"
