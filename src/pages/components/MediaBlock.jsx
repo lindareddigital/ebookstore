@@ -103,7 +103,9 @@ export default function MediaBlock(props) {
             </div>
           </div>
 
-          <div className="read-more-btn">查看更多</div>
+          <div className="read-more-btn">
+            查看更多 <img class="" src="/icons/viewmore.svg"></img>
+          </div>
           <img class="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>

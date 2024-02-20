@@ -183,6 +183,43 @@ export default function Footer() {
               </li>
             </div>
           </div>
+          <div className="social-mobile">
+            <li className="">社群</li>
+            <div className="social-sqare-container">
+              <li class="social-sqare">
+                <img src="/icons/footerfb.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/polispresstw"
+                >
+                  大邑
+                </Link>
+              </li>
+              <li class="social-sqare">
+                <img src="/icons/footerfb.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                >
+                  海濱
+                </Link>
+              </li>
+              <li class="social-sqare">
+                <img src="/icons/footerig.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                ></Link>
+              </li>
+              <li class="social-sqare">
+                <img src="/icons/footeryt.svg"></img>
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/seashoretaiwan/"
+                ></Link>
+              </li>
+            </div>
+          </div>
         </div>
         <div className="copyright">
           Copyright © Polis Press All Rights Reserved.

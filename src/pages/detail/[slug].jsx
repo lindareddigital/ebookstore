@@ -10,6 +10,7 @@ import DesktopCard from 'src/pages/components/DesktopCard';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
+import Navbar from "src/pages/components/molecules/Navbar";
 
 export default function Detail(props) {
   console.log('props', props);
@@ -54,6 +55,8 @@ export default function Detail(props) {
       <Head>
         <title>detail page</title>
       </Head>
+
+      <Navbar />
 
       <MenuBar />
 

@@ -156,7 +156,7 @@ a:hover{
 }
 
 .search-btn img{
-  fill: white;
+  /* filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(16deg) brightness(100%) contrast(104%); */
 }
 
 .navbar{
@@ -259,7 +259,7 @@ a:hover{
 }
 
 .share-block .topright{
-  top: -38px;
+  top: 16px;
 }
 
 .leftbox .topright{
@@ -286,15 +286,15 @@ a:hover{
   left: 0px;
  }
 
- .pin-title:before{
+ .pin-title .trangle{
   background-image: url(/icons/pintitle.svg);
   position: absolute;
-  top: -10px;
+  bottom: 10px;
   left: 0px;
   width: 22px;
   height: 22px;
   content: '';
-  background-color: #28251C;
+  filter: invert(9%) sepia(17%) saturate(853%) hue-rotate(8deg) brightness(103%) contrast(89%);
  }
 
  .leftbox svg{
@@ -404,33 +404,9 @@ a:hover{
   margin: auto;
 }
 
-
-.list-aside{
-  width: 197px;
-  border: 1px solid #ccc;
-}
-
-
-.list-aside li{
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none;
-  color: black;
-  border-bottom: 1px solid #ccc;
-  padding: 16px;
-  margin: auto;
-}
-
 .accordion-body li{
   border-bottom: none;
   padding: 8px;
-}
-
-.list-aside li a{
-  color: black;
-  font-size: 13px;
 }
 
 .form-comments{
@@ -589,17 +565,18 @@ a:hover{
   padding: 10px 10px 10px 21px;
   border-radius: 999px;
   background: var(--White, #FFF);
-
   color: var(--Black, #28251C);
   font-size: 16px;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 7.84px;
   text-transform: uppercase;
-  width: 147px;
+  /* width: 147px; */
   right: 26px;
   bottom: 35px;
   position: absolute;
+  display: flex;
+  align-items: center;
 }
 
 .home-recommend-tabs .nav-item{
@@ -625,6 +602,7 @@ a:hover{
   letter-spacing: 0.2em;
   text-align: left;
   position: relative;
+  margin-bottom: 8px;
 }
 
 .block-title::before{
@@ -735,13 +713,10 @@ a:hover{
   border-bottom: 1px solid var(--Gold, #B39B17);
 }
 
-.detail-page .nav-tabs .nav-link.active{
-  color: var(--Black, #28251C);
-}
-
 .nav-tabs{
   border-bottom: unset;
   margin-bottom: 28px;
+  align-items: baseline;
 }
 
 .home-recommend-tabs .nav-item a{
@@ -953,7 +928,7 @@ a:hover{
 
 }
 
-.share-block img{
+.share-block .e-banner-product img{
   width: 120px;
   margin-top: 8px;
   /* height: 120px; */
@@ -1049,14 +1024,22 @@ footer li {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  font-weight: normal;
-  line-height: 1.75em;
-  letter-spacing: 0.5px;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+}
+
+.social-mobile{
+  display: none;
 }
 
 .social-sqare-container{
   display: flex;
   align-items: center;
+  width: 216px;
+  height: 77px;
 }
 
 footer .social-sqare{
@@ -1714,9 +1697,6 @@ footer .accordion{
   display: none;
 }
 
-.list-aside{
-  display: none;
-}
 
 .booklist-carousel{
   width: 100%;
@@ -1951,17 +1931,23 @@ footer .accordion-button{
   color: #fff;
   border-bottom: 1px solid #575757;
   padding: 8px 0rem;
+  margin-bottom: 8px;
 }
 
 footer .accordion-item{
   background-color: unset;
 }
 
+.accordion-button:not(.collapsed)::after{
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(16deg) brightness(100%) contrast(104%);
+
+}
+
 footer .accordion-button::after{
   width: 24px;
   height: 24px;
-  fill: #fff;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(16deg) brightness(100%) contrast(104%);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 
 }
 
@@ -1990,7 +1976,7 @@ footer .accordion{
 .share-block .topright{
   width: 64px;
   height: 79.48px;
-  top: -24px;
+  top: -16px;
 }
 
 .swiper-backface-hidden .swiper-slide{
@@ -2000,7 +1986,36 @@ footer .accordion{
 
 .social-links ul{
   flex-wrap: wrap;
+  width: 100%;
 }
+
+.block-title{
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 35px;
+  letter-spacing: 0.31em;
+  text-align: left;
+  width: calc(100vw - 112px);
+  margin: auto;
+}
+
+.block-title::before{
+  width: 5px;
+  height: 22px;
+}
+
+.content .info{
+  width: unset;
+}
+
+.detail-page .tab-content{
+  height: unset;
+}
+
+.social-mobile{
+  display: block;
+}
+
 
 }
 
