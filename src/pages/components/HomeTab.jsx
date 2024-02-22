@@ -52,18 +52,34 @@ export default function HomeTab() {
           <div className="block-title">新書上市</div>
 
           {categories.map((item) => (
-            <>
+            <div>
               <Nav.Item key={`${item.id}`}>
                 <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>
                   {item.Title}
                 </Nav.Link>
               </Nav.Item>
-            </>
+            </div>
           ))}
 
           <div onClick={previous} class="swiper-button-prev"></div>
           <div onClick={next} class="swiper-button-next"></div>
         </Nav>
+        <div className="mobile-tabs">
+          <Nav variant="tabs">
+            {categories.map((item) => (
+              <>
+                <Nav.Item key={`${item.id}`}>
+                  <Nav.Link
+                    onClick={() => tabChange(item.id)}
+                    eventKey={item.id}
+                  >
+                    {item.Title}
+                  </Nav.Link>
+                </Nav.Item>
+              </>
+            ))}
+          </Nav>
+        </div>
         <Tab.Content>
           <Swiper
             ref={swiperRef}
