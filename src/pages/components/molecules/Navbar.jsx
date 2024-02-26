@@ -11,6 +11,12 @@ export default function Navbar({categories}) {
   const [items, setItems] = useState(null);
 
   console.log(categories,'categories');
+
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
   
 
 
@@ -32,7 +38,8 @@ export default function Navbar({categories}) {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light"             
+           style={open ? { top: '0', position: 'fixed' } : {}}>
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -42,8 +49,13 @@ export default function Navbar({categories}) {
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            onClick={toggleOpen}
           >
-            <img src="/icons/close.svg" alt="" />
+            {open ? (
+              <img src="/icons/close.svg" alt="" />
+            ) : (
+              <img src="/icons/nav-menu.svg" alt="" />
+            )}
           </button>
           <Link class="navbar-brand" href="#">
             大邑文化

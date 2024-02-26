@@ -12,20 +12,20 @@ export default function useAutoScroll(swiperRef, autoScroll) {
   //   autoPlayLeftTime.current = 0;
   // }, [swiperIndex]);
 
-  // const onRealIndexChange = (swiper) => {
-  //   if (swiper.realIndex !== swiperIndex) {
-  //     setSwiperIndex(swiper.realIndex);
-  //   }
-  //   // console.log(swiper.realIndex, 'realIndex');
-  // };
+  const onRealIndexChange = (swiper) => {
+    if (swiper.realIndex !== swiperIndex) {
+      setSwiperIndex(swiper.realIndex);
+    }
+    // console.log(swiper.realIndex, 'realIndex');
+  };
 
   const next = () => {
-    swiperRef.current.swiper.slideNext();
+    swiperRef.current.slideNext();
   };
 
   const previous = () => {
-    swiperRef.current.swiper.slidePrev();
+    swiperRef.current.slidePrev();
   };
 
-  return { next, previous, swiperIndex };
+  return { next, previous, swiperIndex, onRealIndexChange };
 }

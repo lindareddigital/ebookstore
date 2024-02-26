@@ -3,7 +3,7 @@ import { useEffect, useRef,useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import apiManager from 'src/pages/api/api';
 import 'swiper/css';
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
 
@@ -15,7 +15,13 @@ export default function HomeTab() {
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const swiperRef = useRef(null);
-  const { next, previous } = useSwiperFunc(swiperRef);
+  const { next, previous, onRealIndexChange } = useSwiperFunc(swiperRef);
+
+   const getSwiper = (swiper) => {
+     if (swiperRef.current !== swiper) {
+       swiperRef.current = swiper;
+     }
+   };
 
 
   const getAllCategory= (async () => {
@@ -82,13 +88,15 @@ export default function HomeTab() {
         </div>
         <Tab.Content>
           <Swiper
+            onSwiper={getSwiper}
             ref={swiperRef}
-            rewind={false}
+            loop={true}
             className={`booklist-carousel`}
-            slidesPerView={"6"}
+            slidesPerView={"auto"}
+            onSnapIndexChange={onRealIndexChange}
           >
             <div class="swiper-wrapper booklist-carousel-inner">
-              {books.map((item) => {
+              {books.map((item, index) => {
                 return (
                   <SwiperSlide className="swiper-slide" key={`${item.id}`}>
                     <Link

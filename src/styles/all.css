@@ -340,7 +340,7 @@ a:hover{
 
 .home-banner-carousel{
   width: 984px;
-  height: 492px;
+  /* height: 492px; */
   position: relative;
 }
 
@@ -511,6 +511,8 @@ a:hover{
 .navbar-nav{
   height: 100vh;
   z-index: 66;
+  width: calc(100vw - 32px);
+  margin: auto;
 }
 
 .swiper-button-prev, .swiper-button-next{
@@ -519,6 +521,17 @@ a:hover{
     transition: .2s;
     z-index: 99;
     position: unset;
+}
+
+.navbar-collapse{
+  position: fixed;
+  z-index: 1000;
+  top: 99px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  visibility: visible;
+  background-color: white;
 }
 
 .home-recommend-tabs .swiper-button-prev, 
@@ -600,6 +613,7 @@ a:hover{
   text-align: left;
   position: relative;
   margin-bottom: 8px;
+  margin-left: 32px;
 }
 
 .block-title::before{
@@ -616,59 +630,9 @@ a:hover{
   background: linear-gradient(to bottom,#ff7a00,#ff5c00);
 }
 
-.swiper-slide-tabs2 .book-item{
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4/3;
-}
-
-.swiper-slide-tabs2 .book-item img{
-  height: auto;
-}
-
-.swiper-slide-tabs2 .nav-link{
-  padding: 2px 6px;
-}
-
-.home-recommend-tabs3 {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.home-recommend-tabs3 .left img{
-  width: 95%;
-  height: auto;
-  aspect-ratio: 2/1;
-}
-
-.home-recommend-tabs3 .right{
-  width: 40%;
-  flex-wrap: wrap;
-  display: flex;
-}
-
-.home-recommend-tabs3 .right div{
-  width: 50%;
-  height: 50%;
-}
-
-.home-recommend-tabs3 .right div:nth-child(5),
-.recipe-card:nth-child(6){
-  display: none;
-}
-
 .home-recommend-tabs3 .right img{
   width: 90px;
   height: 90px;
-}
-
-.home-recommend-tabs4{
-  height: 600px !important;
-}
-
-.home-recommend-tabs4 .booklist-carousel{
-  height: 500px;
 }
 
 .home-recommend-tabs4 .swiper-wrapper{
@@ -715,7 +679,7 @@ a:hover{
   margin-bottom: 28px;
   align-items: baseline;
   justify-content: space-between;
-  width: 1320px;
+  max-width: 1320px;
 }
 
 .home-recommend-tabs .nav-item a{
@@ -1130,7 +1094,7 @@ footer a{
 
 .social-links ul{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -1141,7 +1105,7 @@ footer a{
   padding: 53px 62px;
   border-radius: 20px;
   background: var(--White);
-  width: 311px;
+  max-width: 311px;
   height: 187px;
   padding: 13px 73px;
   align-items: center;
@@ -1284,14 +1248,13 @@ footer .container-fluid{
   margin-bottom: 8px;
 }
 
-.nav-link {
+.navbar-nav .nav-link {
     text-align: left;
     border-bottom: 1px dotted #d8d8d8;
-
     color: var(--Black, #28251C);
     font-size: 18px;
     font-weight: 900;
-    line-height: normal;
+    line-height: 26.06px;
     letter-spacing: 1.8px;
     text-transform: uppercase;
 }
@@ -1348,6 +1311,7 @@ footer .container-fluid{
   /* background: #000; */
   width: 47px;
   height: 47px;
+  transform: scale(2);
 }
 
 .carousel-control-prev-icon{
@@ -1373,6 +1337,7 @@ footer .container-fluid{
   cursor: pointer;
   width: 60px;
   height: 60px;
+  transform: scale(2);
 }
 
 .back-to-top span {
@@ -1616,7 +1581,23 @@ footer .accordion{
 @media (max-width: 1200px){
 
 .container-fluid {
-  width: calc(100vw - 32px)
+  width: calc(100vw - 32px);
+}
+
+.social-links li{
+  width: 50%;
+}
+
+.social-links ul{
+  flex-wrap: wrap;
+}
+
+.media-block{
+  flex-direction: column;
+}
+
+.nav-tabs{
+  width: unset;
 }
 
 .header-search-input{
@@ -1677,8 +1658,7 @@ footer .accordion{
 }
 
 .home-recommend-tabs{
-  /* width: 1000px; */
-  right: 32px;
+  width: calc(100vw - 32px);
 }
 
 .home-recommend-tabs .nav-tabs{
@@ -1762,6 +1742,11 @@ footer .box{
 
 .navbar{
   display: block !important;
+  z-index: 9999;
+  /* position: fixed; */
+  /* top: 0; */
+  left: 0;
+  right: 0;
 }
 
 .open{
@@ -1778,7 +1763,7 @@ footer .box{
   /* width: 500px !important; */
   width: calc(50vw - 32px)!important;
   border-radius: 4px;
-  /* height: 40px; */
+  height: 40px;
 }
 
 .home-page .home-banner{
@@ -1991,6 +1976,7 @@ footer .accordion{
 .social-links ul{
   flex-wrap: wrap;
   width: 100%;
+  justify-content: center;
 }
 
 .block-title{
@@ -2025,7 +2011,7 @@ footer .container-fluid{
   flex-wrap: wrap;
 } 
 
-.home-recommend-tabs > .nav-tabs > .nav-item{
+.home-recommend-tabs > .nav-tabs .nav-item{
   display: none;
 }
 
