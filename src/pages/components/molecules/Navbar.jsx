@@ -38,8 +38,10 @@ export default function Navbar({categories}) {
 
   return (
     <>
-      <nav class="navbar navbar-expand-lg navbar-light"             
-           style={open ? { top: '0', position: 'fixed' } : {}}>
+      <nav
+        class="navbar navbar-expand-lg navbar-light"
+        style={open ? { top: "0", position: "fixed" } : {}}
+      >
         <div class="container-fluid">
           <button
             class="navbar-toggler"
@@ -69,10 +71,11 @@ export default function Navbar({categories}) {
           ></Link>
           <div class="nav-right">
             <button class="search-btn btn" type="submit">
-              <img src="/icons/member.svg" alt="" />
-            </button>
-            <button class="search-btn btn" type="submit">
               <img src="/icons/cart.svg" alt="" />
+            </button>
+            <hr class="nav-hr" />
+            <button class="search-btn btn" type="submit">
+              <img src="/icons/member.svg" alt="" />
             </button>
           </div>
 
@@ -166,6 +169,7 @@ export default function Navbar({categories}) {
                   aria-expanded="false"
                 >
                   全站
+                  
                 </Link>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -197,15 +201,14 @@ export default function Navbar({categories}) {
               <div class="header-toolbar">
                 <button type="button" class="btn">
                   購物車
-                  <img
-                    src="https://api.iconify.design/fa:shopping-cart.svg"
-                    alt=""
-                  ></img>
+                  <img src="/icons/cart.svg" alt="" />
                 </button>
+                <hr class="nav-hr" />
 
                 <button type="button" class="btn">
                   登入
                 </button>
+                <div className="dot"></div>
                 <button type="button" class="btn">
                   註冊
                 </button>
