@@ -259,7 +259,7 @@ a:hover{
 }
 
 .share-block .topright{
-  top: 16px;
+  top: -16px;
 }
 
 .leftbox .topright{
@@ -282,21 +282,25 @@ a:hover{
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: -10px;
-  left: 0px;
-   /* position: relative; */
+  top: -27px;
+  left: 16px;
   z-index: 1;
  }
 
- .pin-title .trangle{
+ .accordion-button:focus{
+  border-color: unset;
+  outline: 0;
+  box-shadow: unset;
+ }
+
+.trangle{
   background-image: url(/icons/pintitle.svg);
   position: absolute;
-  bottom: 10px;
-  left: 0px;
+  top: 25px;
+  left: 16px;
   width: 22px;
   height: 22px;
   content: '';
-  /* filter: invert(9%) sepia(17%) saturate(853%) hue-rotate(8deg) brightness(103%) contrast(89%); */
  }
 
  .leftbox svg{
@@ -824,7 +828,6 @@ a:hover{
   align-items: start;
   justify-content: space-between;
   display: flex;
-  margin: auto;
   margin-bottom: 80px;
 }
 
@@ -1003,14 +1006,14 @@ footer .box::before{
   width: 5px;
   height: 18px;
   background-color: var(--Yellow, #EBC700);
-  left: 71px;
+  left: -12px;
   top: 6px;
 }
 
 footer li {
   margin-bottom: 6px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   font-family: Noto Sans TC;
   font-size: 16px;
@@ -1238,10 +1241,10 @@ footer .container-fluid{
 }
 
 .detail-page .primary-img{
-    width: 404px;
-    height: 404px;
+  width: 424px;
+  height: 424px;
+  border: 1px solid #E9E9E9;
 }
-
 
 .content h1 {
   font-size: 24px;
@@ -1611,6 +1614,9 @@ footer .accordion{
 
 .social-links li{
   width: 50%;
+  aspect-ratio: 16/9;
+  height: auto;
+  margin-bottom: 16px;
 }
 
 .social-links ul{
@@ -1671,6 +1677,8 @@ footer .accordion{
 
 .social-links{
   flex-wrap: wrap;
+  padding: 48px 0 ;
+  height: unset;
 }
 
 .booklist-carousel-inner{

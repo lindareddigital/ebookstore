@@ -113,7 +113,11 @@ export default function Detail(props) {
 
                 <ul class="buy-book">
                   <img class="topright" src="/icons/leftboxicon.svg"></img>
-                  <div class="pin-title">買書GO</div>
+                  <div className="">
+                    <div class="pin-title">買書GO</div>
+                    <div className="trangle"></div>
+                  </div>
+
                   <li>
                     <Link href="">
                       <img src="/icons/eslite.png"></img>

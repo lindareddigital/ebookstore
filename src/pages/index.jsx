@@ -96,20 +96,18 @@ export default function Home() {
           {/* <button onClick={topFunction()} id="topBtn">Top</button> */}
         </div>
       </div>
-   
 
-      <Navbar/>
+      <Navbar />
 
       <MenuBar />
 
       <div class="home-banner">
         <div className="leftbox">
           <img class="topright" src="/icons/leftboxicon.svg"></img>
-          <div class="pin-title">
-          最新消息
-          <div className="trangle"></div>
+          <div className="">
+            <div class="pin-title">最新消息</div>
+            <div className="trangle"></div>
           </div>
-
           <div class="wrapper">
             <div class="e-banner-product">
               {/* <div> */}

@@ -68,7 +68,7 @@ export default function SidebarWrapper() {
         <Link  aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
       </div>
       </div> */}
-      <div onClick={topFunction} class="d-none d-lg-flex back-to-top">
+      <div onClick={topFunction} class="back-to-top">
         {/* <span>返回頂端</span> */}
         <img src="/icons/backtop.svg" alt="" />
       </div>

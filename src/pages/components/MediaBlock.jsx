@@ -73,8 +73,10 @@ export default function MediaBlock(props) {
           </div>
         </div>
         <div class="share-block">
-          <div class="pin-title">分享專欄</div>
-
+          <div className="">
+            <div class="pin-title">分享專欄</div>
+            <div className="trangle"></div>
+          </div>
           <img class="topright" src="/icons/columnIcon.svg"></img>
           <div class="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
