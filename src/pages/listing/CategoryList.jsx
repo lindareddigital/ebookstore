@@ -38,16 +38,20 @@ export default function CategoryList({props}) {
               <Link
                 key={`${item.id}`}
                 href={{
-                  pathname:`/detail/${item.id}`,
-                  query: {id: item.id},                 
+                  pathname: `/detail/${item.id}`,
+                  query: { id: item.id },
                 }}
                 className={``}
               >
                 <div class="book-item">
                   <button class="wish-btn">
-                    <i class="fa fa-heart-o"></i>
+                    <img src="/icons/heart.svg" alt="" />
                   </button>
-                  <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
+                  <img
+                    src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                    className=""
+                    alt={item.title}
+                  />
                   <div className="desc">{item.Title}</div>
                   <div className="price-num">{item.Price}</div>
                 </div>

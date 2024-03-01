@@ -67,12 +67,12 @@ export default function Home() {
 
         
 
-        <Breadcrumb/>
+        {/* <Breadcrumb/> */}
 
         <div class="main-body">
 
 
-          <div class="sidebar-wrapper scroll-cling-top">
+          {/* <div class="sidebar-wrapper scroll-cling-top">
               <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
                 <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
                   <span>【益智桌遊】10/31上市</span>
@@ -97,7 +97,7 @@ export default function Home() {
             <div class="d-none d-lg-flex back-to-top">
               <span>返回頂端</span>
             </div>
-          </div>
+          </div> */}
 
           <SidebarWrapper/>
 
