@@ -28,9 +28,9 @@ export default function ListAside({ categories }) {
 
   return (
     <aside class="list-aside">
-      <ul>
+      <ul class="">
         <div className="title">依類別搜尋</div>
-        {categories.map((item) => (
+        {/* {categories.map((item) => (
           <li key={item.id}>
             <Link
               key={`${item.id}`}
@@ -42,103 +42,55 @@ export default function ListAside({ categories }) {
               {item.Title}
             </Link>
           </li>
-        ))}
+        ))} */}
+        <li>
+          <Link href="">知識漫畫</Link>
+        </li>
+        <li>
+          <Link href="">兒童文學</Link>
+        </li>
+        <li>
+          <Link href="">益智桌遊</Link>
+        </li>
       </ul>
 
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
-            >
-              依類別搜尋
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <ul>
-                <li>
-                  <Link href="">知識漫畫</Link>
-                </li>
-                <li>
-                  <Link href="">兒童文學</Link>
-                </li>
-                <li>
-                  <Link href="">益智桌遊</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="false"
-              aria-controls="collapseTwo"
-            >
-              依系列搜尋
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <ul>
-                <li>
-                  <Link href="">X星際探險隊</Link>
-                </li>
-                <li>
-                  <Link href="">X萬獸探險隊</Link>
-                </li>
-                <li>
-                  <Link href="">X恐龍探險隊</Link>
-                </li>
-                <li>
-                  <Link href="">X科幻冒險隊</Link>
-                </li>
-                <li>
-                  <Link href="">極限挑戰王</Link>
-                </li>
-                <li>
-                  <Link href="">機器人戰隊</Link>
-                </li>
-                <li>
-                  <Link href="">小公主成長學園</Link>
-                </li>
-                <li>
-                  <Link href="">世界名著</Link>
-                </li>
-                <li>
-                  <Link href="">超越極限</Link>
-                </li>
-                <li>
-                  <Link href="">魔法學園</Link>
-                </li>
-                <li>
-                  <Link href="">知識王</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ul>
+        <div className="title">依系列搜尋</div>
+
+        <li>
+          <Link href="">X星際探險隊</Link>
+        </li>
+        <li>
+          <Link href="">X萬獸探險隊</Link>
+        </li>
+        <li>
+          <Link href="">X恐龍探險隊</Link>
+        </li>
+        <li>
+          <Link href="">X科幻冒險隊</Link>
+        </li>
+        <li>
+          <Link href="">極限挑戰王</Link>
+        </li>
+        <li>
+          <Link href="">機器人戰隊</Link>
+        </li>
+        <li>
+          <Link href="">小公主成長學園</Link>
+        </li>
+        <li>
+          <Link href="">世界名著</Link>
+        </li>
+        <li>
+          <Link href="">超越極限</Link>
+        </li>
+        <li>
+          <Link href="">魔法學園</Link>
+        </li>
+        <li>
+          <Link href="">知識王</Link>
+        </li>
+      </ul>
     </aside>
   );
 }

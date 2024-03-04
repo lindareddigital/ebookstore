@@ -9,9 +9,9 @@ export default function CategoryList({props}) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await apiManager.getCategoryList(props.id);
+        const data = await apiManager.getAllBooks();
         setItem(data.data);
-        console.log('88', data.data);
+        console.log('all', data.data);
         return data.data;
       } catch (e) {
         console.log('error', e);
@@ -19,8 +19,6 @@ export default function CategoryList({props}) {
     };
     getData();
 
-    console.log('77', props);
-    console.log('item', item);
   }, [props]);
 
 
@@ -28,10 +26,10 @@ export default function CategoryList({props}) {
 
   return(       
     <>
-      <div id="Controls" class="booklist-carousel slide" data-bs-ride="carousel">
-        <div class="title">{props.Title}</div>
-        <hr></hr>
-        <div class="booklist-carousel-inner">
+      <div class="">
+        {/* <div class="title">{props.Title}</div>
+        <hr></hr> */}
+        <div class="grid-view">
 
           { item && item.map((item) => {
             return (

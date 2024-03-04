@@ -81,7 +81,7 @@ export default function Detail(props) {
 
         <div class="detail">
           <div class="content">
-            {item && (
+            {/* {item && ( */}
               <>
                 <img
                   src={`http://localhost:8055/assets/${item.PrimaryImage}`}
@@ -140,7 +140,7 @@ export default function Detail(props) {
                   </li>
                 </ul>
               </>
-            )}
+            {/* )} */}
           </div>
         </div>
       </div>

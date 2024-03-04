@@ -8,7 +8,7 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import NextAuth from "next-auth";
 
 
-export default function Member() {
+export default function Manage() {
 
   
   const [categories, setCategories] = useState([]);
@@ -21,7 +21,7 @@ export default function Member() {
 
 
   return(
-    <div class="home-page">
+    <div class="manage-page">
 
 
         <div class="container-fluid header-main">
@@ -78,83 +78,80 @@ export default function Member() {
 
 
         <div class="container-fluid" >
-          <div class="main-body">
+          <div class="content">
 
 
-          <ListAside categories={categories}/>
 
-          <aside class="list-aside">
-            <ul>
-              <li>
-                <Link href="">會員資料管理</Link>
-              </li>
-              <li>
-                <Link href="">收藏書籍</Link>
-              </li>
-              <li>
-                <Link href="">訂閱新書通知</Link>
-              </li>
-              <li>
-                <Link href="">訊息管理</Link>
-              </li>
-              <li>
-                <Link href="">我的投稿</Link>
-              </li>
-            </ul>
-
-             
-          </aside>
+            <aside class="list-aside">
+              <ul>
+                <li>
+                  <Link href="">會員資料管理</Link>
+                </li>
+                <li>
+                  <Link href="">收藏書籍</Link>
+                </li>
+                <li>
+                  <Link href="">訂閱新書通知</Link>
+                </li>
+                <li>
+                  <Link href="">訊息管理</Link>
+                </li>
+                <li>
+                  <Link href="">我的投稿</Link>
+                </li>
+              </ul>  
+            </aside>
 
 
-          <div class="right-side">
-            <form class="contact-us">
-              <div class="mb-3">
-                <label htmlFor="exampleInputEmail1" class="form-label">姓名*</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-              </div>
-              <div class="mb-3">
-                <label htmlFor="exampleInputPassword1" class="form-label">暱稱</label>
-                <input type="password" class="form-control" id="exampleInputPassword1"></input>
-              </div>
-              <div class="mb-3">
-                <label htmlFor="exampleInputEmail1" class="form-label">Email *</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-              </div>
-              <div class="mb-3">
-                <label htmlFor="exampleInputEmail1" class="form-label">電話*</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-              </div>
-              <div class="mb-3">
-                <div class="">
-                  <label class="mb-3" htmlFor="floatingSelect">Category</label>
-
-                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                    <option selected>1.書籍意見</option>
-                    <option value="2">2.異業合作</option>
-                    <option value="3">3.帳號問題</option>
-                    <option value="4">4.購書問題</option>
-                    <option value="5">5.網站問題</option>
-                    <option value="6">6.我要投稿</option>
-                    <option value="7">7.其他</option>
-                  </select>
+            <div class="right-side">
+              <form class="contact-us">
+                <div class="mb-3">
+                  <label htmlFor="exampleInputEmail1" class="form-label">姓名*</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                 </div>
-              </div>
+                <div class="mb-3">
+                  <label htmlFor="exampleInputPassword1" class="form-label">暱稱</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1"></input>
+                </div>
+                <div class="mb-3">
+                  <label htmlFor="exampleInputEmail1" class="form-label">Email *</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                </div>
+                <div class="mb-3">
+                  <label htmlFor="exampleInputEmail1" class="form-label">電話*</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                </div>
+                <div class="mb-3">
+                  <div class="">
+                    <label class="mb-3" htmlFor="floatingSelect">Category</label>
+
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                      <option selected>1.書籍意見</option>
+                      <option value="2">2.異業合作</option>
+                      <option value="3">3.帳號問題</option>
+                      <option value="4">4.購書問題</option>
+                      <option value="5">5.網站問題</option>
+                      <option value="6">6.我要投稿</option>
+                      <option value="7">7.其他</option>
+                    </select>
+                  </div>
+                </div>
 
 
-              <div class="mb-3">
-                <label class="mb-3" htmlFor="floatingTextarea2">內容*(字數150字以內)</label>
-                <textarea class="form-control form-comments" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
-              </div>
+                <div class="mb-3">
+                  <label class="mb-3" htmlFor="floatingTextarea2">內容*(字數150字以內)</label>
+                  <textarea class="form-control form-comments" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+                </div>
 
 
-              <div class="mb-3">
-                <label htmlFor="formFile" class="form-label">附件*(請上傳JPG圖檔)</label>
-                <input class="form-control" type="file" id="formFile"></input>
-              </div>
+                <div class="mb-3">
+                  <label htmlFor="formFile" class="form-label">附件*(請上傳JPG圖檔)</label>
+                  <input class="form-control" type="file" id="formFile"></input>
+                </div>
 
-              <button type="submit" class="btn btn-primary">確認傳送</button>
-            </form>
-          </div>
+                <button type="submit" class="btn btn-primary">確認傳送</button>
+              </form>
+            </div>
 
 
           </div>
@@ -162,7 +159,6 @@ export default function Member() {
 
  
 
-        <MediaBlock/>
         
 
 

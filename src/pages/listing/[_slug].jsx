@@ -1,17 +1,26 @@
 import { cache } from 'react';
-import { useEffect, useRef,useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
-import CategoriesList from './CategoryList';
+import GridList from "./GridList";
+import ListList from "./ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
 import Breadcrumb from 'src/pages/components/molecules/Breadcrumb';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
+import Navbar from "src/pages/components/molecules/Navbar";
+import Panel from "src/pages/components/atoms/Panel";
 
 export default function Home() {
 
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const [currentView, setCurrentView] = useState("grid");
+
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+  };
 
 
   const getAllCategory= (async () => {
@@ -51,27 +60,24 @@ export default function Home() {
   }, []);
 
 
-  return(
+  return (
     <div class="listing-page">
+      <Navbar />
 
+      <MenuBar />
 
-      <MenuBar/>
-        
-
-
-      <div class="listing-banner">      
-        <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/fh52vnwp5754krpirafuxlm81fgw" class="d-block w-100 h-100" alt="..."></img>
+      <div class="listing-banner">
+        <img
+          src="https://s2.eslite.dev/unsafe/s.eslite.dev/fh52vnwp5754krpirafuxlm81fgw"
+          class="d-block w-100 h-100"
+          alt="..."
+        ></img>
       </div>
 
       <div class="container-fluid">
-
-        
-
         {/* <Breadcrumb/> */}
 
         <div class="main-body">
-
-
           {/* <div class="sidebar-wrapper scroll-cling-top">
               <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
                 <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
@@ -99,51 +105,67 @@ export default function Home() {
             </div>
           </div> */}
 
-          <SidebarWrapper/>
+          <SidebarWrapper />
 
+          <ListAside categories={categories} />
 
-          
-          <ListAside categories={categories}/>
+          <Panel />
 
           <div class="right-side">
+            <div class="block-title">系列：X萬獸探險隊</div>
             <div class="listing-toolbar">
-              <ul class="view_type">
-                顯示模式 
-                <li>                               
-                  <span class="type1"><Link href=""></Link></span>
-                </li>
-                <li>                               
-                  <span class="type2 here"><Link href=""></Link></span>
-                </li>
-              </ul>
-              <div class="sortselect">
-                <p>排序依</p>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>上市日期(新→舊)</option>
-                  <option value="1">上市日期(舊→新)</option>
-                  <option value="2">暢銷度</option>
-                  <option value="3">價格(高→低)</option>
-                </select>
+              <div className="amount">
+                商品清單共有<span>190</span>本
               </div>
 
-
+              <div className="right-side">
+                <ul class="view_type">
+                  顯示模式
+                  <li>
+                    <div
+                      onClick={() => handleViewChange("grid")}
+                      class="type1"
+                    ></div>
+                  </li>
+                  <li>
+                    <div
+                      onClick={() => handleViewChange("list")}
+                      class="type2 here"
+                    ></div>
+                  </li>
+                </ul>
+                <div class="sortselect">
+                  <p>排序依</p>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>上市日期(新→舊)</option>
+                    <option value="1">上市日期(舊→新)</option>
+                    <option value="2">暢銷度</option>
+                    <option value="3">價格(高→低)</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
-            {categories.map((item) => {
-              return (
-              <>
-                <CategoriesList props={item}/>
-              </>
-              );
-            })}
+            {currentView === "grid" &&
+              categories.map((item) => {
+                return (
+                  <>
+                    <GridList props={item} />
+                  </>
+                );
+              })}
+
+            {currentView === "list" &&
+              categories.map((item) => {
+                return <ListList props={item} />;
+              })}
           </div>
-
         </div>
-
       </div>
-
     </div>
-
-  )
+  );
 
 }
