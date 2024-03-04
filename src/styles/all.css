@@ -1681,6 +1681,37 @@ footer .container-fluid{
   display: flex;
 }
 
+.manage-page .contact-us{
+  width: 648px;
+  display: flex;
+  flex-direction: column;
+}
+
+.manage-page .contact-us div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.manage-page .contact-us label{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #28251C;
+}
+
+.manage-page .contact-us .form-control{
+  display: flex;
+  align-items: center;
+  width: 498px;
+  height: 50px;
+  border: 1px solid #DEDEDE;
+}
+
+.manage-page .info{
+}
+
 .input-group{
   flex-wrap: nowrap;
   display: flex;
