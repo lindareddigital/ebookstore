@@ -59,7 +59,7 @@ export default function Footer() {
               >
                 <div class="accordion-body">
                   <li>
-                    <Link href="">會員專區</Link>
+                    <Link href="/member">會員專區</Link>
                   </li>
                   <li>
                     <Link href="">我的收藏</Link>
@@ -97,7 +97,7 @@ export default function Footer() {
                     <Link href="">常見問題</Link>
                   </li>
                   <li>
-                    <Link href="">聯絡我們</Link>
+                    <Link href="/contactus">聯絡我們</Link>
                   </li>
                 </div>
               </div>
@@ -116,13 +116,20 @@ export default function Footer() {
           </div>
           <div class="box">
             <li class="title">
-              <Link href="/member">會員中心</Link>
+              <Link href="/">會員中心</Link>
             </li>
             <li>
-              <Link href="">會員專區</Link>
+              <Link href="/member">會員專區</Link>
             </li>
             <li>
-              <Link href="">我的收藏</Link>
+              <Link
+                href={{
+                  pathname: `/member/`,
+                  query: { tab: "collection" },
+                }}
+              >
+                我的收藏
+              </Link>
             </li>
             <li>
               <Link href="">訂閱新書通知</Link>
@@ -133,13 +140,16 @@ export default function Footer() {
           </div>
           <div class="box">
             <li class="title">
-              <Link href="/share">書單下載</Link>
+              <Link href="/share">客戶服務</Link>
+            </li>
+            <li>
+              <Link href="/download">書單下載</Link>
             </li>
             <li>
               <Link href="">常見問題</Link>
             </li>
             <li>
-              <Link href="">聯絡我們</Link>
+              <Link href="/contactus">聯絡我們</Link>
             </li>
           </div>
           <div class="box">

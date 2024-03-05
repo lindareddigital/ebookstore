@@ -5,11 +5,11 @@ import apiManager from 'src/pages/api/api';
 import GridList from "./GridList";
 import ListList from "./ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
-import Breadcrumb from 'src/pages/components/molecules/Breadcrumb';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
+import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Listing() {
 
@@ -75,7 +75,7 @@ export default function Listing() {
       </div>
 
       <div class="container-fluid">
-        {/* <Breadcrumb/> */}
+        <Breadcrumb/>
 
         <div class="main-body">
           {/* <div class="sidebar-wrapper scroll-cling-top">

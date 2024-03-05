@@ -54,7 +54,7 @@ export default function Detail() {
       <MenuBar />
 
       <div class="container-fluid fdc">
-        {item && (
+        {/* {item && (
           <>
             <nav class="breadcrumb" aria-label="breadcrumb">
               <li class="breadcrumb-item">
@@ -62,77 +62,79 @@ export default function Detail() {
                   首頁
                 </Link>
               </li>
-              {/* <li class="breadcrumb-item"><Link href="/" class="">{item}</Link></li>     */}
+              <li class="breadcrumb-item"><Link href="/" class="">{item}</Link></li>    
               <li class="breadcrumb-item">
                 <Link href="/" class="">
-                  {/* 童書{item.Category.Title} */}
+                  童書{item.Category.Title}
                 </Link>
               </li>
             </nav>
           </>
-        )}
+        )} */}
+
+        <Breadcrumb />
 
         <div class="detail">
           <div class="content">
             {/* {item && ( */}
-              <>
-                <img
-                  src={`http://localhost:8055/assets/${item.PrimaryImage}`}
-                  className="primary-img"
-                  alt={item.title}
-                />
+            <>
+              <img
+                src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+                className="primary-img"
+                alt={item.title}
+              />
 
-                <div class="info">
-                  <h1>{item.Title}</h1>
-                  <ul>
-                    <li>
-                      作者：<Link href="">{item.Author}</Link>
-                    </li>
-                    <li>
-                      繪者：<Link href="/">{item.Illustrator}</Link>
-                    </li>
-                    <li>出版日期：{item.PublicationDate}</li>
-                    <li>定價：{item.Price}元</li>
-                  </ul>
-                  <div className="btn button-radius">
-                    <img src="/icons/heart.svg" alt="" />
-                    收藏此書
-                  </div>
-                  <div className="btn button-radius view-detail-btn">
-                    <img src="/icons/search.svg" alt="" />
-                    查看內頁
-                  </div>
+              <div class="info">
+                <h1>{item.Title}</h1>
+                <ul>
+                  <li>
+                    作者：<Link href="">{item.Author}</Link>
+                  </li>
+                  <li>
+                    繪者：<Link href="/">{item.Illustrator}</Link>
+                  </li>
+                  <li>出版日期：{item.PublicationDate}</li>
+                  <li>定價：{item.Price}元</li>
+                </ul>
+                <div className="btn button-radius">
+                  <img src="/icons/heart.svg" alt="" />
+                  收藏此書
+                </div>
+                <div className="btn button-radius view-detail-btn">
+                  <img src="/icons/search.svg" alt="" />
+                  查看內頁
+                </div>
+              </div>
+
+              <ul class="buy-book">
+                <img class="topright" src="/icons/leftboxicon.svg"></img>
+                <div className="">
+                  <div class="pin-title">買書GO</div>
+                  <div className="trangle"></div>
                 </div>
 
-                <ul class="buy-book">
-                  <img class="topright" src="/icons/leftboxicon.svg"></img>
-                  <div className="">
-                    <div class="pin-title">買書GO</div>
-                    <div className="trangle"></div>
-                  </div>
-
-                  <li>
-                    <Link href="">
-                      <img src="/icons/eslite.png"></img>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="">
-                      <img src="/icons/bookstw.svg"></img>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="">
-                      <img src="/icons/stone.svg"></img>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="">
-                      <img src="/icons/pchome.svg"></img>
-                    </Link>
-                  </li>
-                </ul>
-              </>
+                <li>
+                  <Link href="">
+                    <img src="/icons/eslite.png"></img>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="">
+                    <img src="/icons/bookstw.svg"></img>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="">
+                    <img src="/icons/stone.svg"></img>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="">
+                    <img src="/icons/pchome.svg"></img>
+                  </Link>
+                </li>
+              </ul>
+            </>
             {/* )} */}
           </div>
         </div>

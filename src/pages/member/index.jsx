@@ -14,6 +14,7 @@ import ListAside from "src/pages/components/molecules/ListAside";
 import NextAuth from "next-auth";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Navbar from "src/pages/components/molecules/Navbar";
+import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Manage({ params }) {
   const [tab, setTab] = useState("");
@@ -26,7 +27,7 @@ export default function Manage({ params }) {
 
   const router = useRouter();
   const id = router.query;
-  console.log(id);
+  console.log(id.tab);
   
 
 
@@ -35,7 +36,7 @@ export default function Manage({ params }) {
       return <Info />;
     }
 
-    if (tab === "collection") {
+    if (tab === "collection" || router.query.tab === "collection") {
       return <Collection />;
     }
 
@@ -47,15 +48,17 @@ export default function Manage({ params }) {
       return <Message />;
     }
 
-    return <Contribution />;
+    if (tab === "contribution") {
+      return <Contribution />;
+    }
   };
 
   return (
     <>
       <div class="manage-page">
         <Navbar />
-
         <MenuBar />
+        <Breadcrumb />
 
         <div class="container-fluid">
           <div class="content">

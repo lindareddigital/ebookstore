@@ -87,7 +87,7 @@ a:hover{
   width: 100vw;
   display: flex;
   margin: auto;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 12px 0px;
   gap: 8px;
 
@@ -117,7 +117,7 @@ a:hover{
 
 .header-search-bar{
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
   /* justify-content: space-between; */
 }
@@ -245,8 +245,8 @@ a:hover{
 }
 
 .listing-page .book-item{
-  width: 262px;
-  height: 363px;
+  max-width: 262px;
+  max-height: 363px;
   padding: 20px;
   border-radius: 20px;
   margin: 0;
@@ -409,15 +409,15 @@ a:hover{
 
 .leftbox .e-banner-product {
   width: calc(100% - 32px);
-  justify-content: start;
+  justify-content: flex-start;
   margin: auto;
   border-bottom: 1px solid #fff;
 }
 
 .share-block .e-banner-product{
   width: calc(100% - 32px);
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: relative;
   z-index: 5;
   border-bottom: 1px solid var(--White, #FFF);
@@ -530,7 +530,7 @@ a:hover{
 }
 
 .book-item{
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   position: relative;
   height: 349px;
   width: 248px;
@@ -967,7 +967,7 @@ span{
 }
 
 .detail-page .detail{
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   display: flex;
   margin-bottom: 80px;
@@ -1155,7 +1155,7 @@ footer .box::before{
 footer li {
   margin-bottom: 6px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: flex-start;
   font-family: Noto Sans TC;
   font-size: 16px;
@@ -1282,9 +1282,10 @@ footer a{
 
 .breadcrumb{
   display: flex;
+  align-items: center;
   width: 100%;
-  padding: 16px 0px;
   margin-bottom: 0;
+  height: 88px;
 }
 
 .breadcrumb-item, .breadcrumb-item a {
@@ -1359,7 +1360,7 @@ footer .container-fluid{
   justify-content: space-between;
   width: 100%;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .detail-page .fdc{
@@ -1462,7 +1463,7 @@ footer .container-fluid{
 }
 
 .carousel-control-prev{
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .dropdown-toggle::after{
@@ -1483,10 +1484,6 @@ footer .container-fluid{
 
 .carousel-control-next-icon{
   background-image: url(/icons/swiperright.svg);
-}
-
-.contact-us{
-  width: 80%;
 }
 
 .sidebar-wrapper{
@@ -1552,7 +1549,7 @@ footer .container-fluid{
 
 .news-tabs .tab-content{
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -1686,34 +1683,63 @@ footer .container-fluid{
 
 .manage-page .content{
   display: flex;
+  margin-bottom: 80px;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.manage-page .contact-us{
+.sub-word{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #28251C;
+}
+
+.contactus-page .contact-us{
   width: 648px;
   display: flex;
   flex-direction: column;
+  background: #fff;
+  margin: auto;
+  margin-bottom: 80px;
+  justify-content: center;
+  position: relative;
 }
 
-.manage-page .contact-us div{
+.contactus-page .contact-us > div{
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 40px;
 }
 
-.manage-page .contact-us label{
+.manage-page .info div{
+  width: 936px;
+}
+
+.contactus-page .contact-us label{
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
   color: #28251C;
 }
 
-.manage-page .contact-us .form-control{
+.contactus-page .contact-us .form-control,
+.contactus-page .contact-us .form-select{
   display: flex;
   align-items: center;
   width: 498px;
   height: 50px;
   border: 1px solid #DEDEDE;
+}
+
+.manage-page .info .form-control{
+  width: 786px;
+  height: 50px;
+  border: 1px solid #DEDEDE;
+  padding: 0px 12px 0px 16px;
+  border-radius: 5px;
 }
 
 .manage-page .right-side{
@@ -1727,7 +1753,32 @@ footer .container-fluid{
   line-height: 26px;
 }
 
+.info-site-btn{
+  /* width:76px;
+  height:43px; */
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0.2em;
+  color: #28251C;
+  background: #EBC700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  padding: 20px;
+  bottom: 0;
+  right: 0;
+  display: block;
+}
+
+.cancel-btn{
+  color:#E9E9E9;
+}
+
 .manage-page .info{
+  width: 936px;
 }
 
 .input-group{
@@ -2299,7 +2350,7 @@ footer .container-fluid{
 }
 
 footer li{
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 
