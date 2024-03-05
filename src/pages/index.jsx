@@ -127,11 +127,7 @@ export default function Home() {
           </div>
           <img class="newsbg" src="/icons/newsbg.svg"></img>
         </div>
-        <div
-          id="carouselExampleControls"
-          class="home-banner-carousel carousel slide"
-          data-bs-ride="carousel"
-        >
+        <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button
               type="button"

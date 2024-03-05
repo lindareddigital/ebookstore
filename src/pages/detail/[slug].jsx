@@ -12,43 +12,36 @@ import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
 import Navbar from "src/pages/components/molecules/Navbar";
 
-export default function Detail(props) {
-  console.log('props', props);
+export default function Detail() {
   
-   const { mobile } = useCalc();
+  const { mobile } = useCalc();
 
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState({});
   const [categories, setCategories] = useState([]);
 
 
   const router = useRouter()
-  const { id } = router.query;
+  const id = router.query.slug;
 
 
 
-  console.log('id', id, router.query);
-  // console.log(item.Category.ParentMenu.Title);
+  console.log('29',router.query.slug,id);
   
-
+  const getData = async () => {
+    try {
+      const data = await apiManager.getDetail(id);
+      setItem(data.data);
+      console.log("item", item);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
   useEffect(() => {
-    const getData = async () => {
-      try {
-        
-        const data = await apiManager.getDetail(id);
-        console.log('777', data.data);
-        setItem(data.data);
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
-
     if (id) {
-      getData();
+      getData(id);
     }
   }, [id]);
-  
-
-
 
   return (
     <div class="detail-page">
@@ -72,7 +65,7 @@ export default function Detail(props) {
               {/* <li class="breadcrumb-item"><Link href="/" class="">{item}</Link></li>     */}
               <li class="breadcrumb-item">
                 <Link href="/" class="">
-                  童書{item.Category.Title}
+                  {/* 童書{item.Category.Title} */}
                 </Link>
               </li>
             </nav>

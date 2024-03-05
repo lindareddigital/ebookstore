@@ -50,10 +50,7 @@ export default function HomeTab() {
 
   return (
     <div class="home-recommend-tabs">
-      <Tab.Container
-        id="nav-tab"
-        defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
-      >
+      <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
         <Nav variant="tabs">
           <div className="block-title">新書上市</div>
 
@@ -101,10 +98,7 @@ export default function HomeTab() {
                   <SwiperSlide className="swiper-slide" key={`${item.id}`}>
                     <Link
                       key={`${item.id}`}
-                      href={{
-                        pathname: `/detail/${item.id}`,
-                        query: { id: item.id },
-                      }}
+                      href={{ pathname: `/detail/${item.id}`}}
                       className={``}
                     >
                       <div class="book-item">

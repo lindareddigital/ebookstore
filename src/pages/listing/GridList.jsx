@@ -35,10 +35,7 @@ export default function CategoryList({props}) {
             return (
               <Link
                 key={`${item.id}`}
-                href={{
-                  pathname: `/detail/${item.id}`,
-                  query: { id: item.id },
-                }}
+                href={{ pathname: `/detail/${item.id}`}}
                 className={``}
               >
                 <div class="book-item">

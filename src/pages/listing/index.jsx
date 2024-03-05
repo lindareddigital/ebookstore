@@ -11,7 +11,7 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 
-export default function Home() {
+export default function Listing() {
 
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);

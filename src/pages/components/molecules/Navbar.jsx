@@ -136,7 +136,7 @@ export default function Navbar({categories}) {
             <img class="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
           <div class="right-side">
-            {/* <div class="label-group">
+            <div class="label-group">
               <Link
                 href={{
                   pathname: `/singlepage/`,
@@ -157,7 +157,7 @@ export default function Navbar({categories}) {
                   一丁
                 </button>
               </Link>
-            </div> */}
+            </div>
             <form class="input-group">
               <div class="dropdown">
                 <Link

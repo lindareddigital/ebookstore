@@ -34,7 +34,7 @@ export default function MenuBar(props) {
     <div class="menu-bar">
       <div className="container-fluid">
         <div class="">
-          <Link href="" class="link">
+          <Link href="/listing" class="link">
             全站分類
           </Link>
         </div>
