@@ -63,9 +63,7 @@ export default function Listing() {
   return (
     <div class="listing-page">
       <Navbar />
-
       <MenuBar />
-
       <div class="listing-banner">
         <img
           src="https://s2.eslite.dev/unsafe/s.eslite.dev/fh52vnwp5754krpirafuxlm81fgw"

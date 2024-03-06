@@ -215,6 +215,7 @@ a:hover{
   height: 494px;
   margin: 0;
   position: relative;
+  margin-top: 27px;
 }
 
 
@@ -257,7 +258,8 @@ a:hover{
 }
 
 .grid-view{
-  max-width: 1048px;
+  width: 1048px;
+  /* max-width: 1048px; */
   display: flex;
   flex-wrap: wrap;
 }
@@ -845,13 +847,14 @@ span{
 }
 
 .home-recommend-tabs .nav-item a,
-.detail-page .more-nav-tabs a{
+.more-nav-tabs .nav-link,
+.more-nav-tabs .nav-link.active{
   color: var(--Black, #28251C);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: 1.6px;
   text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 26px;
+  letter-spacing: 0.1em;
 }
 
 .carousel-indicators [data-bs-target]{
@@ -973,8 +976,8 @@ span{
   margin-bottom: 80px;
 }
 
-.detail-page .tab-content{
-  height: 250px;
+.detail-area{
+  margin: 80px 0;
 }
 
 .gray-cover{
@@ -989,12 +992,30 @@ span{
 
 .header-toolbar{
   display: flex;
-  align-items: center;
-  font-size: 13px;
-  height: 26px;
+  flex-direction: column;
   width: 241px;
+  height: 96px;
   justify-content: space-between;
   margin-left: 30px !important;
+}
+
+.header-toolbar .navbar-link{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.header-toolbar .label-group{
+  display: flex;
+  align-items: center;
+  height: 26px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+  justify-content: flex-end;
 }
 
 .dot {
@@ -1022,22 +1043,18 @@ span{
   padding: unset;
 }
 
-.label-group{
-  display: flex;
-  margin-bottom: 12px;
+.header-toolbar .label-group .nav-hr{
+  margin: 0 12px;
 }
 
-.label-group .btn{
-  border: 1px solid #EBC700;
-  color: #EBC700;
-  padding: 6px;
-  margin-right: 12px;
-  width: 40px;
+.header-toolbar .label-group .btn{
+  color: #28251C;
   display: flex;
-  height: 25px;
   align-items: center;
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
 }
 
 .dropdown-toggle{
@@ -1303,14 +1320,14 @@ footer a{
   align-items: center;
   padding: 0 16px;
   position: relative;
-  justify-content: unset;
+  justify-content: center;
 }
 
 .detail-page .more-nav-tabs .topright{
   top: -16px;
 }
 
-.detail-page .more-nav-tabs .nav-link.active{
+.more-nav-tabs .nav-link.active{
   width: 127px;
   height: 38px;
   background:  #fff;
@@ -1331,7 +1348,7 @@ footer a{
   align-items: center;
   display: flex;
   padding: 10px 20px 10px 20px;
-  background:  #EBC700;
+  background:  #E9E9E9;
   width: 160px;
   height:44px;
   font-size: 16px;
@@ -1405,13 +1422,8 @@ footer .container-fluid{
   line-height: 26px;
 }
 
-.content .view-detail-btn{
-  color: #fff;
-  background: var(--Black, #28251C);
-}
-
 .content .view-detail-btn img{
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg) brightness(103%) contrast(103%);
+  /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg) brightness(103%) contrast(103%); */
   margin-right: 8px;
 }
 
@@ -1696,7 +1708,7 @@ footer .container-fluid{
   color: #28251C;
 }
 
-.contactus-page .contact-us{
+.form-area{
   width: 648px;
   display: flex;
   flex-direction: column;
@@ -1707,31 +1719,50 @@ footer .container-fluid{
   position: relative;
 }
 
-.contactus-page .contact-us > div{
+.form-area > div:not(:last-child){
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.button-group{
+  display: flex;
+  flex-direction: column;
 }
 
 .manage-page .info div{
   width: 936px;
 }
 
-.contactus-page .contact-us label{
+ label{
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
   color: #28251C;
 }
 
-.contactus-page .contact-us .form-control,
-.contactus-page .contact-us .form-select{
+.contact-us .form-control,
+.contact-us .form-select{
   display: flex;
   align-items: center;
   width: 498px;
   height: 50px;
   border: 1px solid #DEDEDE;
+}
+
+.download .form-control{
+
+}
+
+.download .input-group .search-btn{
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #000;
+  padding:12px;
+  display: flex;
+  align-items: center;
 }
 
 .manage-page .info .form-control{
@@ -1767,14 +1798,15 @@ footer .container-fluid{
   align-items: center;
   justify-content: center;
   position: absolute;
-  padding: 20px;
+  padding: 10px 20px;
   bottom: 0;
   right: 0;
   display: block;
 }
 
 .cancel-btn{
-  color:#E9E9E9;
+  background:#E9E9E9;
+  right: 125px;
 }
 
 .manage-page .info{
@@ -1854,6 +1886,7 @@ footer .accordion{
 
 @media (max-width: 1200px){
 
+
 .container-fluid {
   width: calc(100vw - 32px);
 }
@@ -1873,9 +1906,9 @@ footer .accordion{
   flex-direction: column;
 }
 
-.nav-tabs{
+/* .nav-tabs{
   width: unset;
-}
+} */
 
 .header-search-input{
   width: 600px !important;
@@ -1885,16 +1918,35 @@ footer .accordion{
   width: 100vw;
 }
 
+.grid-view{
+  width: 800px;
+}
+
+.listing-banner{
+  width: 100vw;
+}
+
 
 }
 
 
 @media (max-width: 992px){
+.input-group{
+  height: 40px;
+}
+
+.button-group{
+  flex-direction: row;
+}
+
+.more-nav-tabs{
+  margin-top: 48px;
+}
 
 .listing-page .book-item > img{
-  width: 100%;
+  /* width: 100%;
   height: auto;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16/9; */
 }
 
 .pannel-container{
@@ -2299,6 +2351,16 @@ footer .accordion{
 
 .content .info{
   width: unset;
+}
+
+.detail-page .content .info,
+.detail-page .detail,
+.detail-page .buy-book{
+  width: calc(100vw - 32px);
+}
+
+.detail-page .buy-book{
+  margin-top: 27px;
 }
 
 .detail-page .tab-content{

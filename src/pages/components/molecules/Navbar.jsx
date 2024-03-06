@@ -136,28 +136,6 @@ export default function Navbar({categories}) {
             <img class="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
           <div class="right-side">
-            <div class="label-group">
-              <Link
-                href={{
-                  pathname: `/singlepage/`,
-                  query: { page: "haibin" },
-                }}
-              >
-                <button type="button" class="btn">
-                  海濱
-                </button>
-              </Link>
-              <Link
-                href={{
-                  pathname: `/singlepage`,
-                  query: { page: "yidin" },
-                }}
-              >
-                <button type="button" class="btn">
-                  一丁
-                </button>
-              </Link>
-            </div>
             <form class="input-group">
               <div class="dropdown">
                 <Link
@@ -169,7 +147,6 @@ export default function Navbar({categories}) {
                   aria-expanded="false"
                 >
                   全站
-                  
                 </Link>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -199,19 +176,45 @@ export default function Navbar({categories}) {
               </button>
 
               <div class="header-toolbar">
-                <button type="button" class="btn">
-                  購物車
-                  <img src="/icons/cart.svg" alt="" />
-                </button>
-                <hr class="nav-hr" />
+                <div className="navbar-link">
+                  <button type="button" class="btn">
+                    購物車
+                    <img src="/icons/cart.svg" alt="" />
+                  </button>
+                  <hr class="nav-hr" />
 
-                <button type="button" class="btn">
-                  登入
-                </button>
-                <div className="dot"></div>
-                <button type="button" class="btn">
-                  註冊
-                </button>
+                  <button type="button" class="btn">
+                    登入
+                  </button>
+                  <div className="dot"></div>
+                  <button type="button" class="btn">
+                    註冊
+                  </button>
+                </div>
+
+                <div class="label-group">
+                  <Link
+                    href={{
+                      pathname: `/singlepage/`,
+                      query: { page: "haibin" },
+                    }}
+                  >
+                    <button type="button" class="btn">
+                      海濱
+                    </button>
+                  </Link>
+                  <hr class="nav-hr" />
+                  <Link
+                    href={{
+                      pathname: `/singlepage`,
+                      query: { page: "yidin" },
+                    }}
+                  >
+                    <button type="button" class="btn">
+                      一丁
+                    </button>
+                  </Link>
+                </div>
               </div>
             </form>
             <div class="keyword-block">

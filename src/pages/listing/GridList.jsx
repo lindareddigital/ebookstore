@@ -34,8 +34,8 @@ export default function CategoryList({props}) {
           { item && item.map((item) => {
             return (
               <Link
-                key={`${item.id}`}
-                href={{ pathname: `/detail/${item.id}`}}
+                key={`${item.PrimaryImage.id}`}
+                href={{ pathname: `/detail/${item.PrimaryImage.id}` }}
                 className={``}
               >
                 <div class="book-item">

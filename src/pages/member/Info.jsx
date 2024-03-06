@@ -5,9 +5,11 @@ export default function Info() {
   return (
     <>
       <form class="info contact-us">
+        <div className="block-title">會員資料管理</div>
+        <div className="red-word">*必須填寫</div>
         <div class="">
           <label htmlFor="exampleInputEmail1" class="form-label">
-            姓名*
+            姓名<span className="red-word">*</span>
           </label>
           <input
             type="email"
@@ -28,7 +30,7 @@ export default function Info() {
         </div>
         <div class="">
           <label htmlFor="exampleInputEmail1" class="form-label">
-            電郵 *
+            電郵 <span className="red-word">*</span>
           </label>
           <input
             type="email"
@@ -39,7 +41,7 @@ export default function Info() {
         </div>
         <div class="">
           <label htmlFor="exampleInputEmail1" class="form-label">
-            手機 *
+            手機 <span className="red-word">*</span>
           </label>
           <input
             type="email"
@@ -59,10 +61,14 @@ export default function Info() {
             aria-describedby="emailHelp"
           ></input>
         </div>
-
-        <button type="submit" class="info-site-btn btn">
-          確認
-        </button>
+        <div class="">
+          <button type="submit" class="btn cancel-btn info-site-btn">
+            取消
+          </button>
+          <button type="submit" class="info-site-btn btn">
+            確認
+          </button>
+        </div>
       </form>
     </>
   );

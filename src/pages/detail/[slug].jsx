@@ -11,6 +11,7 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
 import Navbar from "src/pages/components/molecules/Navbar";
+import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Detail() {
   
@@ -48,11 +49,8 @@ export default function Detail() {
       <Head>
         <title>detail page</title>
       </Head>
-
       <Navbar />
-
       <MenuBar />
-
       <div class="container-fluid fdc">
         {/* {item && (
           <>
@@ -96,13 +94,15 @@ export default function Detail() {
                   <li>出版日期：{item.PublicationDate}</li>
                   <li>定價：{item.Price}元</li>
                 </ul>
-                <div className="btn button-radius">
-                  <img src="/icons/heart.svg" alt="" />
-                  收藏此書
-                </div>
-                <div className="btn button-radius view-detail-btn">
-                  <img src="/icons/search.svg" alt="" />
-                  查看內頁
+                <div className="button-group">
+                  <div className="btn button-radius">
+                    <img src="/icons/heart.svg" alt="" />
+                    收藏此書
+                  </div>
+                  <div className="btn button-radius view-detail-btn">
+                    <img src="/icons/search.svg" alt="" />
+                    查看內頁
+                  </div>
                 </div>
               </div>
 
@@ -284,7 +284,7 @@ export default function Detail() {
               </button>
             </div>
           </nav>
-          <div class="tab-content" id="nav-tabContent">
+          <div class="detail-area" id="nav-tabContent">
             <div
               class="tab-pane fade show active"
               id="nav-home"
