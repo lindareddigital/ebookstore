@@ -126,9 +126,16 @@ a:hover{
   width: 90%;
 }
 
+.single-page .banner img{
+  width: 1320px;
+  height: 320px;
+}
+
 .single-page .header-search-bar{
   width: 100%;
   justify-content: space-between;
+  height: 66px;
+  align-items: center;
 }
 
 .logo{
@@ -264,9 +271,28 @@ a:hover{
   flex-wrap: wrap;
 }
 
-.listing-page .main-body{
+.listing-page .main-body,
+.single-page .main-body{
  height: unset;
  background: unset;
+}
+
+.top-area .banner-title{
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 36px;
+  letter-spacing: 0.1em;
+  color: #28251C;
+}
+
+.single-page .top-area{
+  height: 204px;
+  padding: 48px 140px;
+}
+
+.single-page .top-area img{
+  width: 200px;
+  height: 87px;
 }
 
 .list-aside{
@@ -1305,6 +1331,13 @@ footer a{
   height: 88px;
 }
 
+.breadcrumb-item+.breadcrumb-item::before{
+  background-image: url(/icons/viewmore.svg);
+  width: 24px;
+  height: 24px;
+  content: '';
+}
+
 .breadcrumb-item, .breadcrumb-item a {
   color: #28251C;
   font-size: 16px;
@@ -1931,6 +1964,26 @@ footer .accordion{
 
 
 @media (max-width: 992px){
+
+.detail-area{
+  margin: 48px 0;
+}
+
+.detail-page .content .info{
+  margin-bottom: 48px;
+}
+
+.button-radius{
+  margin-right: 8px;
+}
+
+.detail-page .primary-img{
+  margin: auto;
+  margin-bottom: 20px;
+  width: unset;
+  height: unset;
+}
+
 .input-group{
   height: 40px;
 }
@@ -2074,7 +2127,7 @@ footer .accordion{
 }
 
 .header-search-bar{
-  width: calc(100vw - 32px);
+  width: calc(100vw - 0px);
   justify-content: center;
   
 }
@@ -2227,9 +2280,15 @@ footer .box{
   height: auto;
 }
 
+.breadcrumb{
+  height: 84px;
+}
+
 .header-main{
   margin: 0 auto !important;
   background: #E9E9E9;
+  box-shadow: 0 0 0 100vmax #E9E9E9;
+  clip-path: inset(0 -100vmax);
 }
 
 .yt-block .title{

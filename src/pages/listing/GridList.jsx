@@ -9,7 +9,11 @@ export default function CategoryList({props}) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await apiManager.getAllBooks();
+        if(props === 'habin'){
+          const data = await apiManager.getHaibin();
+        }else{
+          const data = await apiManager.getAllBooks();
+        }
         setItem(data.data);
         console.log('all', data.data);
         return data.data;

@@ -7,10 +7,7 @@ import apiManager from 'src/pages/api/api';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import Link from 'next/link';
 import ListAside from 'src/pages/components/molecules/ListAside';
-
-
-
-
+import GridList from "src/pages/listing/GridList";
 
 
 export default function Singlepage() {
@@ -69,166 +66,116 @@ export default function Singlepage() {
   }, []);
 
 
-  return(
+  return (
     <div class="single-page">
-
-
       <div class="sidebtn-container">
         <div class="message-btn">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt=""></img>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg"
+            alt=""
+          ></img>
         </div>
         <div class="">
-          <button onclick="topFunction()" id="topBtn">Top</button>
+          <button onclick="topFunction()" id="topBtn">
+            Top
+          </button>
         </div>
       </div>
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <Link class="navbar-brand" href="#">Navbar</Link>
-          <Link href="/member" class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white" title="" target="_self" aria-label="會員中心"></Link>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" href="#">Home</Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">Features</Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">Pricing</Link>
-              </li>
-            </ul>
+
+      <div class="container-fluid header-main">
+        <div class="header-search-bar">
+          <Link href="/">海濱圖書</Link>
+          <div class="">
+            <form class="input-group">
+              <div class="header-toolbar">
+                <Link href={{ pathname: `/` }} type="button" class="btn ">
+                  <i class="fa fa-home mr-2" aria-hidden="true"></i>
+                  回首頁(大邑)
+                </Link>
+              </div>
+            </form>
           </div>
         </div>
-      </nav>
+      </div>
 
-        <div class="container-fluid header-main">
+      <div class="home-banner">
+        <img src="/images/haibin.svg" class="" alt="..."></img>
+      </div>
 
+      <div className="top-area">
+        <img src="/images/haibinlogo.svg" class="" alt="..."></img>
 
-          <div class="header-search-bar">
-            <Link href="/">
-              <img class="logo" src="./images/logo.jpeg" alt="logo"></img>
-            </Link>
-            <div class="">
-             
-              <form class="input-group">
-                
-              
-
-                <div class="header-toolbar">
-                  <Link href={{pathname:`/`}} type="button" class="btn ">
-                    <i class="fa fa-home mr-2" aria-hidden="true"></i>
-                    回首頁(大邑)
-                  </Link>
-
-                  <div class="">XXX,您好</div>  
-                </div>
-              </form>
-              
-            </div>
-          </div>   
-         
-
+        <div className="banner-title">
+          《海濱圖書》為新加坡大眾書局旗下出版品牌，2017年進軍台灣致力推廣多元化食譜，藉由食譜的簡單操作方法，告訴讀者即使沒有經驗，也能製作出一道道精緻美味的美食及飲品！
         </div>
+      </div>
 
-        
-
-
-        <div class="home-banner">
-
-          <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://scontent.ftpe8-2.fna.fbcdn.net/v/t39.30808-6/408088533_893035896159263_5464682771439926541_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=783fdb&_nc_ohc=LF0Uj8ybI5QAX9Yixir&_nc_ht=scontent.ftpe8-2.fna&oh=00_AfAWog5j-8N-u-l9Hk6H9Ho-K_c_LOdyEwBYCFbiBMUEfA&oe=65A0D9E8" class="" alt="..."></img>
-              </div>
-              {/* <div class="carousel-item">
-                <img src="https://s2.eslite.dev/unsafe/s.eslite.dev/2uoe0qjpbv2fhogg4qtn09ramz1e" class="d-block w-100 h-100" alt="..."></img>
-              </div> */}
-              <div class="carousel-item">
-                <img src="https://scontent.ftpe8-3.fna.fbcdn.net/v/t39.30808-6/327772799_1301640517048071_8576766442753076590_n.png?stp=dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=9534ce&_nc_ohc=lB02XhRLAlIAX91aCc1&_nc_ht=scontent.ftpe8-3.fna&oh=00_AfCKhmPmL846JQOJYXNuhW-ZcWpcWCv791zi9KmO7l6-3w&oe=65A07772" class="" alt="..."></img>
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-
-        </div>
-
-        <div class="container-fluid" >
-          <div class="main-body">
-
-
-          <ListAside categories={categories}/>
-
+      <div class="container-fluid">
+        <div class="main-body">
+          <ListAside categories={categories} />
 
           <div class="right-side">
+            <div class="block-title">系列：X萬獸探險隊</div>
+            <div class="listing-toolbar">
+              <div className="amount">
+                商品清單共有<span>190</span>本
+              </div>
 
-            {categories.map((item) => {
-              console.log(item,'item');
-              if(mobile)
-              return (<MobileCard category={item.Category}/>);
-              return (<DesktopCard category={item.Category} />);
-            })}
+              <div className="right-side">
+                <ul class="view_type">
+                  顯示模式
+                  <li>
+                    <div
+                      onClick={() => handleViewChange("grid")}
+                      class="type1"
+                    ></div>
+                  </li>
+                  <li>
+                    <div
+                      onClick={() => handleViewChange("list")}
+                      class="type2 here"
+                    ></div>
+                  </li>
+                </ul>
+                <div class="sortselect">
+                  <p>排序依</p>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>上市日期(新→舊)</option>
+                    <option value="1">上市日期(舊→新)</option>
+                    <option value="2">暢銷度</option>
+                    <option value="3">價格(高→低)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
-
-
-
-          </div>
-
-
+            <GridList props={"habin"} />
           </div>
         </div>
+      </div>
 
- 
-
-        <MediaBlock/>
-
-        <div class="container-fluid media-block">
-
-
-          <div class="yt-block">
-
-
-            <iframe width="560" height="334" src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <div class="more">
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              <iframe width="260" height="165" src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-         
-          </div>
-        
+      <div class="recipe-title">美味食譜</div>
+      <div class="recipe-block">
+        <div class="container-fluid recipe-wrapper">
+          {recipe.map((item) => {
+            return (
+              <div class="recipe-card">
+                <img
+                  src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+                  alt={item.title}
+                ></img>
+                <div class="recipe-desc">{item.Title}</div>
+              </div>
+            );
+          })}
         </div>
+      </div>
 
-
-          <div class="recipe-title">美味食譜</div>
-          <div class="recipe-block">
-            <div class="container-fluid recipe-wrapper">
-                  {recipe.map((item) => {
-                    return (
-                      <div class="recipe-card">
-
-                        <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} alt={item.title}></img>
-                        <div class="recipe-desc">{item.Title}</div>
-                      </div>
-                      );
-                  })}
-                
-            </div>
-          </div>
-
-
-      
-
+      <MediaBlock />
     </div>
-
-  )
+  );
 
 }
