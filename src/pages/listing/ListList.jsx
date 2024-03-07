@@ -3,15 +3,18 @@ import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 
 export default function CategoryList({props}) {
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState({});
+  const [books, setBooks] = useState([]);
 
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await apiManager.getCategoryList(props.id);
-        setItem(data.data);
-        console.log('88', data.data);
+        const data =
+          props === "haibin"
+            ? await apiManager.getHaibin()
+            : await apiManager.getAllBooks();
+        setBooks(data.data);
         return data.data;
       } catch (e) {
         console.log('error', e);
@@ -19,8 +22,6 @@ export default function CategoryList({props}) {
     };
     getData();
 
-    console.log('77', props);
-    console.log('item', item);
   }, [props]);
 
 
@@ -30,7 +31,7 @@ export default function CategoryList({props}) {
     <>
       <div class="list-view">
         <ul class="">
-          { item && item.map((item) => {
+          { books.map((item) => {
             return (
               <Link
                 key={`${item.id}`}
@@ -39,7 +40,8 @@ export default function CategoryList({props}) {
               >
                 <li class="list-view-item">
                   <img
-                    src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                    // src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                    src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
                     className=""
                     alt={item.title}
                   />

@@ -3,18 +3,16 @@ import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 
 export default function CategoryList({props}) {
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState({});
+  const [books, setBooks] = useState([]);
 
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        if(props === 'habin'){
-          const data = await apiManager.getHaibin();
-        }else{
-          const data = await apiManager.getAllBooks();
-        }
-        setItem(data.data);
+      try {  
+        const data = props === "haibin" ? 
+        await apiManager.getHaibin() : await apiManager.getAllBooks();
+        setBooks(data.data);
         console.log('all', data.data);
         return data.data;
       } catch (e) {
@@ -35,11 +33,11 @@ export default function CategoryList({props}) {
         <hr></hr> */}
         <div class="grid-view">
 
-          { item && item.map((item) => {
+          { books.map((item) => {
             return (
               <Link
-                key={`${item.PrimaryImage.id}`}
-                href={{ pathname: `/detail/${item.PrimaryImage.id}` }}
+                key={`${item.id}`}
+                href={{ pathname: `/detail/${item.id}` }}
                 className={``}
               >
                 <div class="book-item">
@@ -47,7 +45,8 @@ export default function CategoryList({props}) {
                     <img src="/icons/heart.svg" alt="" />
                   </button>
                   <img
-                    src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                    // src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                    src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
                     className=""
                     alt={item.title}
                   />

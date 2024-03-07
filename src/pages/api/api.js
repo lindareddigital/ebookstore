@@ -107,15 +107,15 @@ class ApiManager {
   // }
 
   getAllBooks = () =>{
-    return this.get({path:`/items/Dayi?fields=*.*`}); 
+    return this.get({path:`/items/dayi?fields=*.*`}); 
   }
 
   getHaibinCategory = () =>{
-    return this.get({path:`/items/Haibin?fields=Category`}); 
+    return this.get({path:`/items/haibin?fields=Category`}); 
   }
 
   getHaibin = () =>{
-    return this.get({path:`/items/Haibin?fields=*.*`}); 
+    return this.get({path:`/items/haibin?fields=*.*`}); 
   }
 
   getHaibinParams = (params) =>{
@@ -123,12 +123,13 @@ class ApiManager {
   }
 
   getRecipe = () =>{
-    return this.get({path:`/items/Haibin?filter[Category][_eq]=飲食`}); 
+    return this.get({path:`/items/haibin?filter[Category][_eq]=飲食`}); 
   }
 
   getDetail = (id) =>{
-    return this.get({path:`/items/Book/${id}`}); 
+    return this.get({path: `items/dayi?&filter[id]=${id}`,}); 
   }
+
 
   // getDetail = (id) =>{
   //   return this.get({path:`/items/Book/?fields=*.*,Category.ParentMenu.*&filter[id]=${id}`}); 

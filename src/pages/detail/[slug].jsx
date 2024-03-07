@@ -12,10 +12,24 @@ import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+
 
 export default function Detail() {
-  
+
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { mobile } = useCalc();
+
+  const [lgShow, setLgShow] = useState(false);
 
   const [item, setItem] = useState({});
   const [categories, setCategories] = useState([]);
@@ -77,9 +91,11 @@ export default function Detail() {
             {/* {item && ( */}
             <>
               <img
-                src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+                onClick={() => setLgShow(true)}
+                // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+                src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
                 className="primary-img"
-                alt={item.title}
+                // alt={item.title}
               />
 
               <div class="info">
@@ -136,6 +152,95 @@ export default function Detail() {
               </ul>
             </>
             {/* )} */}
+
+            <Modal
+              size="lg"
+              show={lgShow}
+              onHide={() => setLgShow(false)}
+              aria-labelledby="example-modal-sizes-title-lg"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                  Large Modal
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <img
+                  // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+                  src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
+                  className="primary-img"
+                />
+
+                <div className="gallery"></div>
+
+                <Swiper
+                  style={{
+                    "--swiper-navigation-color": "#fff",
+                    "--swiper-pagination-color": "#fff",
+                  }}
+                  loop={true}
+                  spaceBetween={10}
+                  navigation={true}
+                  thumbs={{ swiper: thumbsSwiper }}
+                  modules={[FreeMode, Navigation, Thumbs]}
+                  className="mySwiper2"
+                >
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                  </SwiperSlide>
+                </Swiper>
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  loop={true}
+                  spaceBetween={10}
+                  slidesPerView={4}
+                  freeMode={true}
+                  watchSlidesProgress={true}
+                  modules={[FreeMode, Navigation, Thumbs]}
+                  className="mySwiper"
+                >
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                  </SwiperSlide>
+                </Swiper>
+              </Modal.Body>
+            </Modal>
           </div>
         </div>
       </div>

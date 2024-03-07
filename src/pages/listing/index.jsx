@@ -147,17 +147,12 @@ export default function Listing() {
               </div>
             </div>
 
-            {currentView === "grid" &&
-              categories.map((item) => {
-                return (
-                  <>
-                    <GridList props={item} />
-                  </>
-                );
-              })}
+            {currentView === "grid" &&     
+                <GridList />      
+              }
 
             {currentView === "list" &&
-              categories.map((item) => {
+              books.map((item) => {
                 return <ListList props={item} />;
               })}
           </div>

@@ -10,62 +10,49 @@ import Link from 'next/link';
 
 
 
-export default function HomeTab() {
-
+export default function Modal () {
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const swiperRef = useRef(null);
   const { next, previous, onRealIndexChange } = useSwiperFunc(swiperRef);
 
-   const getSwiper = (swiper) => {
-     if (swiperRef.current !== swiper) {
-       swiperRef.current = swiper;
-     }
-   };
+  const getSwiper = (swiper) => {
+    if (swiperRef.current !== swiper) {
+      swiperRef.current = swiper;
+    }
+  };
 
-
-  // const getAllCategory= (async () => {
-  //   try {
-  //     const data = await apiManager.getAllCategory();
-  //     setCategories(data.data)
-  //     const firstRender = await apiManager.getCategoryList(data.data[0].id);
-  //     setBooks(firstRender.data)
-  //   } catch (e) {
-  //     console.log('error', e);
-  //   }
-  // });
-
-  const tabChange = (async(id) => {
-
-    const data = await apiManager.getCategoryList(id);
-    setBooks(data.data)
-    console.log('CategoryList',data);
-      
-  });
-
-  const getData = async () => {
+  const getAllCategory = async () => {
     try {
-      const data = await apiManager.getAllBooks();
-      console.log("data.data", data.data);
-      setBooks(data.data);
+      const data = await apiManager.getAllCategory();
+      setCategories(data.data);
+      const firstRender = await apiManager.getCategoryList(data.data[0].id);
+      setBooks(firstRender.data);
     } catch (e) {
       console.log("error", e);
     }
   };
 
-  useEffect( () => {
-    // getAllCategory()
-    getData();
-  }, []);
+  const tabChange = async (id) => {
+    const data = await apiManager.getCategoryList(id);
+    setBooks(data.data);
+    console.log("CategoryList", data);
+  };
 
+  useEffect(() => {
+    getAllCategory();
+  }, []);
 
   return (
     <div class="home-recommend-tabs">
-      <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
+      <Tab.Container
+        id="nav-tab"
+        defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
+      >
         <Nav variant="tabs">
           <div className="block-title">新書上市</div>
 
-          {/* {categories.map((item) => (
+          {categories.map((item) => (
             <div>
               <Nav.Item key={`${item.id}`}>
                 <Nav.Link onClick={() => tabChange(item.id)} eventKey={item.id}>
@@ -73,14 +60,14 @@ export default function HomeTab() {
                 </Nav.Link>
               </Nav.Item>
             </div>
-          ))} */}
+          ))}
 
           <div onClick={previous} class="swiper-button-prev"></div>
           <div onClick={next} class="swiper-button-next"></div>
         </Nav>
         <div className="mobile-tabs">
           <Nav variant="tabs">
-            {/* {categories.map((item) => (
+            {categories.map((item) => (
               <>
                 <Nav.Item key={`${item.id}`}>
                   <Nav.Link
@@ -91,7 +78,7 @@ export default function HomeTab() {
                   </Nav.Link>
                 </Nav.Item>
               </>
-            ))} */}
+            ))}
           </Nav>
         </div>
         <Tab.Content>
@@ -114,8 +101,7 @@ export default function HomeTab() {
                     >
                       <div class="book-item">
                         <img
-                          // src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
-                          src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
+                          src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
                           className=""
                           alt={item.title}
                         />
@@ -132,7 +118,6 @@ export default function HomeTab() {
       </Tab.Container>
     </div>
   );
-
 }
 
 

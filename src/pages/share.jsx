@@ -4,6 +4,7 @@ import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
+import Pagination from "react-bootstrap/Pagination";
 
 
 // const getData = cache(async () => {
@@ -44,6 +45,7 @@ export default function Home() {
                 id="nav-tab"
                 role="tablist"
               >
+                <img class="topright" src="/icons/leftboxicon.svg"></img>
                 <button
                   class="nav-link active"
                   id="nav-home-tab"
@@ -232,28 +234,19 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="">
-          {/* <aside class="share-list">
-            
-              <div class="share-list-item overflow-hidden">
-                <Link href="/" class="post-thumb">
-                  <img class="q-img__image" src="https://www.froghome.org/imgs/post-cover-1363.jpg" alt=""></img>
-                </Link>
-                  <div class="post-info">
-                    <h4 class="post-title">
-                      <Link href="/" class="">2023 年度志工大會報名開跑！</Link>
-                    </h4>
-                    <p class="post-excerpt">2023 年度台灣兩棲類保育志工大會於 2023/11/25(六) 在宜蘭頭城休閒農場舉辦，敬邀各地臺灣兩棲類保育志工夥伴們，一起回娘家！</p>
-                    <div class="post-meta">
-                      <Link href="/posts/events" class="post-meta-tag category">活動訊息</Link>
-                      <div class="post-meta-date">2023/09/22</div>
-                    </div>
-                  </div>
-              </div>
-            </aside> */}
+            <div class="">
+              <Pagination>
+                <Pagination.Prev />
+                <Pagination.Item>{1}</Pagination.Item>
+                {/* <Pagination.Ellipsis /> */}
+
+                {/* <Pagination.Ellipsis /> */}
+                <Pagination.Item>{20}</Pagination.Item>
+                <Pagination.Next />
+              </Pagination>
+            </div>
+          </div>
         </div>
       </div>
     </div>
