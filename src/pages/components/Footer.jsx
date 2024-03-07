@@ -143,7 +143,7 @@ export default function Footer() {
               <Link href="/share">客戶服務</Link>
             </li>
             <li>
-              <Link href="/download">書單下載</Link>
+              <Link href="/Download">書單下載</Link>
             </li>
             <li>
               <Link href="">常見問題</Link>

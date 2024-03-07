@@ -178,12 +178,13 @@ export default function Navbar({categories}) {
               <div class="header-toolbar">
                 <div className="navbar-link">
                   <button type="button" class="btn">
-                    購物車
                     <img src="/icons/cart.svg" alt="" />
+                    購物車
                   </button>
                   <hr class="nav-hr" />
 
                   <button type="button" class="btn">
+                    <img src="/icons/member.svg" alt="" />
                     登入
                   </button>
                   <div className="dot"></div>

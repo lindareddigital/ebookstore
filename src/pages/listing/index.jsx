@@ -72,8 +72,8 @@ export default function Listing() {
         ></img>
       </div>
 
+      <Breadcrumb/>
       <div class="container-fluid">
-        <Breadcrumb/>
 
         <div class="main-body">
           {/* <div class="sidebar-wrapper scroll-cling-top">

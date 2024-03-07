@@ -8,12 +8,17 @@ import useCalc from 'src/pages/components/atoms/useCalc';
 import Link from 'next/link';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import GridList from "src/pages/listing/GridList";
+import { useRouter } from "next/router";
 
 
 export default function Singlepage() {
   const { mobile } = useCalc();
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState([]);
+
+   const router = useRouter();
+   const page = router.query.page;
+
 
   const getCategory = (async () => {
     try {
@@ -84,30 +89,47 @@ export default function Singlepage() {
 
       <div class="container-fluid header-main">
         <div class="header-search-bar">
-          <Link href="/">海濱圖書</Link>
-          <div class="">
-            <form class="input-group">
-              <div class="header-toolbar">
-                <Link href={{ pathname: `/` }} type="button" class="btn ">
-                  <i class="fa fa-home mr-2" aria-hidden="true"></i>
-                  回首頁(大邑)
-                </Link>
-              </div>
-            </form>
+          <h3>{page === "haibin" ? "海濱圖書" : "一丁文化"}</h3>
+          <div class="header-toolbar">
+            <div className="navbar-link">
+              <Link href={{ pathname: `/` }} type="button" class="btn ">
+                <img src="/icons/home.svg" alt="" />
+                大邑文化
+              </Link>
+              <hr class="nav-hr" />
+              <Link href={{ pathname: `/login` }} type="button" class="btn ">
+                <img src="/icons/member.svg" alt="" />
+                登入
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="home-banner">
-        <img src="/images/haibin.svg" class="" alt="..."></img>
+        {page === "haibin" ? (
+          <img src="/images/haibin.svg" class="" alt="..."></img>
+        ) : (
+          <img src="/images/yidin.svg" class="" alt="..."></img>
+        )}
       </div>
 
       <div className="top-area">
-        <img src="/images/haibinlogo.svg" class="" alt="..."></img>
-
+        {page === "haibin" ? (
+          <img src="/images/habinlogo.svg" class="" alt="..."></img>
+        ) : (
+          <img src="/images/yidinlogo.svg" class="" alt="..."></img>
+        )}
         <div className="banner-title">
           《海濱圖書》為新加坡大眾書局旗下出版品牌，2017年進軍台灣致力推廣多元化食譜，藉由食譜的簡單操作方法，告訴讀者即使沒有經驗，也能製作出一道道精緻美味的美食及飲品！
         </div>
+      </div>
+      <div className="single-separator">
+        <img
+          src="/images/single-separator.svg"
+          class=""
+          alt="single-separator"
+        ></img>
       </div>
 
       <div class="container-fluid">
@@ -157,20 +179,42 @@ export default function Singlepage() {
         </div>
       </div>
 
-      <div class="recipe-title">美味食譜</div>
+      <div class="block-title">美味食譜</div>
       <div class="recipe-block">
-        <div class="container-fluid recipe-wrapper">
-          {recipe.map((item) => {
-            return (
-              <div class="recipe-card">
-                <img
-                  src={`http://localhost:8055/assets/${item.PrimaryImage}`}
-                  alt={item.title}
-                ></img>
-                <div class="recipe-desc">{item.Title}</div>
-              </div>
-            );
-          })}
+        <div class="recipe-wrapper">
+          {/* {recipe.map((item) => {
+            return ( */}
+          <div class="recipe-card">
+            <img
+              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
+              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+              // alt={item.title}
+            ></img>
+            <div class="recipe-desc">item.Title</div>
+          </div>
+          <div class="recipe-card">
+            <img
+              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
+              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+            ></img>
+            <div class="recipe-desc">item.Title</div>
+          </div>
+          <div class="recipe-card">
+            <img
+              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
+              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+            ></img>
+            <div class="recipe-desc">item.Title</div>
+          </div>
+          <div class="recipe-card">
+            <img
+              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
+              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+            ></img>
+            <div class="recipe-desc">item.Title</div>
+          </div>
+          {/* );
+          })} */}
         </div>
       </div>
 

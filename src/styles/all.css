@@ -283,16 +283,52 @@ a:hover{
   line-height: 36px;
   letter-spacing: 0.1em;
   color: #28251C;
+  width: 648px;
 }
 
 .single-page .top-area{
   height: 204px;
   padding: 48px 140px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .single-page .top-area img{
   width: 200px;
   height: 87px;
+  margin-right: 20px;
+}
+
+.single-page .home-banner{
+  padding: 0;
+}
+
+.single-page .header-main{
+  height: 66px;
+  margin: 0px auto !important;
+}
+
+.header-search-bar h3{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #28251C;
+}
+
+.header-search-bar .navbar-link img{
+  margin-right: 4px;
+}
+
+.single-page .header-toolbar{
+  height: unset;
+  width: 200px;
+}
+
+.single-page .single-separator{
+  display: flex;
+  justify-content: center;
 }
 
 .list-aside{
@@ -1853,52 +1889,43 @@ footer .container-fluid{
   justify-content: space-between;
 }
 
-.recipe-title{
-  font-size: 40px;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
 .recipe-block{
   width: 100vw;
-  background: #f4f4f4;
   margin-bottom: 40px;
+  position: relative;
 }
 
 .recipe-card{
-  position: relative;
-  width: 23%;
-  height: auto;
-  aspect-ratio: 4/3;
-  margin-bottom: 40px;
+  box-shadow: 0px 4px 30px 0px #00000029;
+  width: 314px;
+  height: 378px;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .recipe-card img{
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: 50% 50%;
+  width: 274px;
+  height: 274px;
+  /* object-fit: cover;
+  object-position: 50% 50%; */
 }
 
 .recipe-wrapper{
   display: flex;
-  flex-wrap: wrap;
   height: 100%;
   padding: 50px 0px;
   justify-content: space-between;
+  width: calc(100vw - 15%);
+  position: relative;
+  z-index: 999;
+  right: 0;
 }
 
 .recipe-desc{
-  width: 100%;
-  height: 90px;
-  background: #fff;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
 }
 
 .listing-page .form-select{
@@ -1964,6 +1991,8 @@ footer .accordion{
 
 
 @media (max-width: 992px){
+
+
 
 .detail-area{
   margin: 48px 0;
@@ -2268,8 +2297,7 @@ footer .box{
 
 
 .recipe-card{
-  width: 48%;
-  height: auto;
+
 }
 
 .recipe-desc{
@@ -2289,6 +2317,15 @@ footer .box{
   background: #E9E9E9;
   box-shadow: 0 0 0 100vmax #E9E9E9;
   clip-path: inset(0 -100vmax);
+}
+
+.single-page .header-main{
+  background: unset;
+  box-shadow: unset;
+}
+
+.single-page .top-area{
+  flex-direction: column;
 }
 
 .yt-block .title{
