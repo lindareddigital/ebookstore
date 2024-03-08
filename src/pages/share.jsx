@@ -5,6 +5,7 @@ import { useEffect, useRef,useState } from 'react';
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
+import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 
 // const getData = cache(async () => {
@@ -20,7 +21,7 @@ import Pagination from "react-bootstrap/Pagination";
 
 
 
-export default function Home() {
+export default function Share() {
 
   
   const [categories, setCategories] = useState([]);
@@ -35,16 +36,13 @@ export default function Home() {
       <Navbar />
 
       <MenuBar />
+      <Breadcrumb />
 
       <div class="container-fluid">
         <div class="">
           <div class="news-tabs">
             <nav class="container-fluid">
-              <div
-                class="nav nav-tabs more-nav-tabs"
-                id="nav-tab"
-                role="tablist"
-              >
+              <div class="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
                 <img class="topright" src="/icons/leftboxicon.svg"></img>
                 <button
                   class="nav-link active"
@@ -79,6 +77,15 @@ export default function Home() {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
+                <div class="select-bar">
+                  <label class="">篩選類別</label>
+                  <select class="form-select" id="floatingSelect">
+                    <option selected>請選擇</option>
+                    <option value="2">2.異業合作</option>
+                    <option value="3">3.帳號問題</option>
+                    <option value="4">4.購書問題</option>
+                  </select>
+                </div>
                 <div class="share-list-item overflow-hidden">
                   <Link href="/" class="post-thumb">
                     <img
@@ -105,7 +112,11 @@ export default function Home() {
                       <Link href="/posts/events" class="post-meta-tag category">
                         活動訊息
                       </Link>
-                      <div class="post-meta-date">2023/09/22</div>
+                      <div class="post-meta-date">
+                        2023/09/22
+                        <div className="dot"></div>
+                        小編
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -135,7 +146,11 @@ export default function Home() {
                       <Link href="/posts/events" class="post-meta-tag category">
                         活動訊息
                       </Link>
-                      <div class="post-meta-date">2023/09/22</div>
+                      <div class="post-meta-date">
+                        2023/09/22
+                        <div className="dot"></div>
+                        小編
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -198,7 +213,10 @@ export default function Home() {
                       <Link href="/posts/events" class="post-meta-tag category">
                         活動訊息
                       </Link>
-                      <div class="post-meta-date">2023/09/22</div>
+                      <div class="post-meta-date">
+                        2023/09/22 <div className="dot"></div>
+                        小編
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -228,7 +246,10 @@ export default function Home() {
                       <Link href="/posts/events" class="post-meta-tag category">
                         活動訊息
                       </Link>
-                      <div class="post-meta-date">2023/09/22</div>
+                      <div class="post-meta-date">
+                        2023/09/22 <div className="dot"></div>
+                        小編
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -242,7 +263,7 @@ export default function Home() {
                 {/* <Pagination.Ellipsis /> */}
 
                 {/* <Pagination.Ellipsis /> */}
-                <Pagination.Item>{20}</Pagination.Item>
+                <Pagination.Item>{2}</Pagination.Item>
                 <Pagination.Next />
               </Pagination>
             </div>

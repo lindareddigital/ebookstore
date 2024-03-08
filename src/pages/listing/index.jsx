@@ -15,6 +15,8 @@ export default function Listing() {
 
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [panel, setPanel] = useState(false);
+ 
 
   const [currentView, setCurrentView] = useState("grid");
 
@@ -23,41 +25,28 @@ export default function Listing() {
   };
 
 
-  const getAllCategory= (async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      setCategories(data.data)
-      return data.data;
+  const getData = async () => {
+    try {  
+      const data = await apiManager.getAllBooks();
+      console.log('data.data', data.data);
+      setBooks(data.data)
     } catch (e) {
       console.log('error', e);
     }
-  });
-
-   const getCategoryList = (async (id) => {
-    try {
-      const data = await apiManager.getCategoryList(id);
-      return data.data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {  
-        const data = await apiManager.getAllBooks();
-        console.log('data.data', data.data);
-        setBooks(data.data)
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
     getData();
-
-    getAllCategory()
-
-    
   }, []);
+
+
+  const closePanel = () => {
+    setPanel(false);
+  };
+
+  const openPanel = () => {
+    setPanel(true);
+  };
 
 
   return (
@@ -72,9 +61,8 @@ export default function Listing() {
         ></img>
       </div>
 
-      <Breadcrumb/>
+      <Breadcrumb />
       <div class="container-fluid">
-
         <div class="main-body">
           {/* <div class="sidebar-wrapper scroll-cling-top">
               <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
@@ -106,8 +94,6 @@ export default function Listing() {
           <SidebarWrapper />
 
           <ListAside categories={categories} />
-
-          <Panel />
 
           <div class="right-side">
             <div class="block-title">系列：X萬獸探險隊</div>
@@ -147,15 +133,102 @@ export default function Listing() {
               </div>
             </div>
 
-            {currentView === "grid" &&     
-                <GridList />      
-              }
+            {currentView === "grid" && <GridList />}
 
             {currentView === "list" &&
               books.map((item) => {
                 return <ListList props={item} />;
               })}
           </div>
+
+          <div className={`pannel-container ${panel ? "back-filter" : ""}`}>
+            {panel && (
+              <div className="filter-area list-aside">
+                <button className="btn" onClick={closePanel}>
+                  <img src="/icons/close.svg" alt="" />
+                </button>
+                <ul class="">
+                  <div className="title">依類別搜尋</div>
+                  <li>
+                    <Link href="">知識漫畫</Link>
+                  </li>
+                  <li>
+                    <Link href="">兒童文學</Link>
+                  </li>
+                  <li>
+                    <Link href="">益智桌遊</Link>
+                  </li>
+                </ul>
+
+                <ul>
+                  <div className="title">依系列搜尋</div>
+
+                  <li>
+                    <Link href="">X星際探險隊</Link>
+                  </li>
+                  <li>
+                    <Link href="">X萬獸探險隊</Link>
+                  </li>
+                  <li>
+                    <Link href="">X恐龍探險隊</Link>
+                  </li>
+                  <li>
+                    <Link href="">X科幻冒險隊</Link>
+                  </li>
+                  <li>
+                    <Link href="">極限挑戰王</Link>
+                  </li>
+                  <li>
+                    <Link href="">機器人戰隊</Link>
+                  </li>
+                  <li>
+                    <Link href="">小公主成長學園</Link>
+                  </li>
+                  <li>
+                    <Link href="">世界名著</Link>
+                  </li>
+                  <li>
+                    <Link href="">超越極限</Link>
+                  </li>
+                  <li>
+                    <Link href="">魔法學園</Link>
+                  </li>
+                  <li>
+                    <Link href="">知識王</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            <ul className="panel-btn">
+              <li onClick={openPanel}>
+                <img src="/icons/filter.svg" alt="" />
+                篩選
+              </li>
+              <li>
+                <img src="/icons/sort.svg" alt="" />
+                排序
+              </li>
+              <li onClick={() => handleViewChange("grid")}>
+                <img src="/icons/gridview.svg" alt="" />
+                小圖
+              </li>
+              <li onClick={() => handleViewChange("list")}>
+                <img src="/icons/listview.svg" alt="" />
+                列表
+              </li>
+            </ul>
+
+            <div className={`panel-content`}>
+              {/* <div className="pannel-content">
+          <div className="font-black h4">{title}</div>
+          <button onClick={closePanel} className="closePanel-btn">
+            <img src="/icons/close.svg" alt="" />
+          </button>
+        </div> */}
+            </div>
+          </div>
+          <Panel />
         </div>
       </div>
     </div>

@@ -101,7 +101,11 @@ export default function Navbar({categories}) {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" href="#">
+                <Link
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/listing"
+                >
                   全站分類
                 </Link>
               </li>
@@ -123,6 +127,28 @@ export default function Navbar({categories}) {
               <li class="nav-item">
                 <Link class="nav-link" href="#">
                   買書GO
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link
+                  class="nav-link"
+                  href={{
+                    pathname: `/singlepage/`,
+                    query: { page: "haibin" },
+                  }}
+                >
+                  海濱
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link
+                  class="nav-link"
+                  href={{
+                    pathname: `/singlepage`,
+                    query: { page: "yidin" },
+                  }}
+                >
+                  一丁
                 </Link>
               </li>
             </ul>
