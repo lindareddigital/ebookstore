@@ -10,7 +10,7 @@ export default function Navbar({categories}) {
 
   const [items, setItems] = useState(null);
 
-  console.log(categories,'categories');
+  // console.log(categories,'categories');
 
   const [open, setOpen] = useState(false);
   const toggleOpen = () => {

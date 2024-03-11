@@ -1,79 +1,43 @@
-'use client';
-import useSwiperFunc from 'src/hooks/useSwiperFunc';
+// 'use client';
+import apiManager from 'src/pages/api/api';
 import HomeTab from 'src/pages/components/HomeTab';
-import MobileCard from 'src/pages/components/MobileCard';
 import MediaBlock from 'src/pages/components/MediaBlock';
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
-import apiManager from 'src/pages/api/api';
-import { cache } from 'react';
-import { useEffect, useRef,useState } from 'react';
-import Link from 'next/link';
-import 'swiper/css';
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
-import useSWR from "swr";
+import 'swiper/css';
 
-export default function Home() {
-  const [categories, setCategories] = useState([]);
-  const [books, setBooks] = useState([]);
-  const swiperRef = useRef(null);
+export default function Home({data}) {
+  // const swiperRef = useRef(null);
 
-  const { next, previous } = useSwiperFunc(swiperRef);
-  const containerRef = useRef(null);
-  const [isSearchOn, setIsSearchOn] = useState(false);
-  const [searchKeywords, setSearchKeywords] = useState("");
+  // const { next, previous } = useSwiperFunc(swiperRef);
+  // const containerRef = useRef(null);
 
-  const getAllCategory = async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      console.log(data);
-      setCategories(data.data);
-      return data;
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
+
   // `${url}/api/v1/sales?_start=${
   //   (pageNo - 1) * limitCount
   // }&_limit=${limitCount}`;
 
   //SWR 第一次抓取資料先將資料存至 cache (stale)，直到下一次 fetch 資料(revalidate)，才會再拿到最新的資料
   // SWR 決定要不要 refetch 取決於第一個參數 key 有沒有改變
-  const fetcher = (url, params) => fetch(url + params.id).then((r) => r.json());
+  // const fetcher = (url, params) => fetch(url + params.id).then((r) => r.json());
 
-
-  const { data, error } = useSWR(categories, fetcher);
-  console.log(data, error, "swr");
-
-  const getAllBooks = async () => {
-    try {
-      const data = await apiManager.getAllBooks();
-      setBooks(data.data);
-
-      console.log(data, "books");
-      return data;
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
-
-  const tabChange = async (id) => {
-    const data = await apiManager.getCategoryList(id);
-    console.log("CategoryList", data);
-  };
+  // const { data, error } = useSWR(categories, fetcher);
+  // console.log(data, error, "swr");
 
   // to={`/?q=${keyWords}`}
 
-  useEffect(() => {
-    getAllCategory();
-    getAllBooks();
-    // getCategoryList()
-  }, []);
+  console.log('data',data);
+  
+
+  const block_hero = data.data.pages[1].blocks;
+  console.log("block_hero", block_hero);
+
+
+
 
   return (
-    <div class="home-page" ref={containerRef}>
+    <div class="home-page">
       <SidebarWrapper />
 
       <div class="sidebtn-container">
@@ -109,10 +73,13 @@ export default function Home() {
             <div className="trangle"></div>
           </div>
           <div class="wrapper">
+            {/* {block_hero?.map((item) => ( */}
             <div class="e-banner-product">
-              {/* <div> */}
+              {/* <div class="desc">{block_hero.item.content}</div> */}
+            </div>
+            {/* ))} */}
+            <div class="e-banner-product">
               <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
-              {/* </div> */}
             </div>
             <div class="e-banner-product">
               <div>
@@ -127,7 +94,11 @@ export default function Home() {
           </div>
           <img class="newsbg" src="/icons/newsbg.svg"></img>
         </div>
-        <div id="carouselExampleControls" class="home-banner-carousel carousel slide" data-bs-ride="carousel">
+        <div
+          id="carouselExampleControls"
+          class="home-banner-carousel carousel slide"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-indicators">
             <button
               type="button"
@@ -184,7 +155,7 @@ export default function Home() {
 
       <div class="main-body">
         {/* <ListAside categories={categories} /> */}
-        <HomeTab />
+        <HomeTab data={data} />
         {/* <HomeTabTwo /> */}
 
         {/* {categories.map((item) => {
@@ -200,3 +171,24 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+const tabChange = async (id) => {
+  const data = await apiManager.getCategoryList(id);
+  console.log("CategoryList", data);
+};
+
+
+export const getServerSideProps = async () => {
+  const result = await apiManager.getNew();
+  // const books = await apiManager.getAllBooks();
+  // const books = null;
+
+  console.log("datadatadatadata", result);
+
+
+  return { props: { data: result} };
+};
+

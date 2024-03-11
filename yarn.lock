@@ -9,6 +9,18 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@directus/sdk@^15.0.2":
+  version "15.0.2"
+  resolved "https://registry.yarnpkg.com/@directus/sdk/-/sdk-15.0.2.tgz#216997ae6d6f961f19e2b3444a55d41f41b855a2"
+  integrity sha512-OGgj7twVa8rIGONXwTWKUru8t6amyd+rsq/7OukOTR1z199p1O8hsLJz7buKualGyqJvoX21CeTNEg9jcQHPPg==
+  dependencies:
+    "@directus/system-data" "1.0.1"
+
+"@directus/system-data@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@directus/system-data/-/system-data-1.0.1.tgz#41254a59c56e0eab5ec4bb907c70f457639fec2a"
+  integrity sha512-sm2gO9SUcRle5rCsmS4qby2K8OfvewnU9/Iao7brGyexLjXDrvfxBB2danNWVLw1qE+UrLX/R+caVrxQ4ZaMkw==
+
 "@next/env@14.0.1":
   version "14.0.1"
   resolved "https://registry.npmjs.org/@next/env/-/env-14.0.1.tgz"

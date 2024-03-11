@@ -16,19 +16,34 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/store": ["./src/store"],
-      "@/*": ["./*"],
-      "@/public/*": ["./public/*"],
-      "@/styles/*": ["./styles/*"],
+      "@/store": [
+        "./src/store"
+      ],
+      "@/*": [
+        "./*"
+      ],
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/styles/*": [
+        "./styles/*"
+      ]
       // "@/components": ["./src/components/*"]
     },
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.js",
     "**/*.jsx",
     "**/*",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

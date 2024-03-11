@@ -59,7 +59,14 @@ export default function Footer() {
               >
                 <div class="accordion-body">
                   <li>
-                    <Link href="/member">會員專區</Link>
+                    <Link
+                      href={{
+                        pathname: `/member/`,
+                        query: { tab: "info" },
+                      }}
+                    >
+                      會員專區
+                    </Link>
                   </li>
                   <li>
                     <Link href="">我的收藏</Link>
@@ -119,7 +126,14 @@ export default function Footer() {
               <Link href="/">會員中心</Link>
             </li>
             <li>
-              <Link href="/member">會員專區</Link>
+              <Link
+                href={{
+                  pathname: `/member/`,
+                  query: { tab: "info" },
+                }}
+              >
+                會員專區
+              </Link>
             </li>
             <li>
               <Link

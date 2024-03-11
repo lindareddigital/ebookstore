@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const Endpoint = 'http://localhost:8055';
+// const Endpoint = 'http://localhost:8055';
+const Endpoint = "https://directus-cms.vicosys.com.hk/items/pages";
 
+const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 
 class ApiManager {
   static instance;
@@ -102,9 +104,29 @@ class ApiManager {
     return this.get({path:`/items/Category`}); 
   }
 
-  // getAllBooks = () =>{
-  //   return this.get({path:`/items/Book`}); 
-  // }
+
+  getNew = async() =>{
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${TOKEN} `);
+      // ${TOKEN}
+
+      // replaceLineBreak(query);
+      // const graphql = JSON.stringify({ query });
+
+      const response = await fetch("https://directus-cms.vicosys.com.hk/graphql", {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify({
+          query:
+            "query {\n  pages {\n    id\n    status\n    sort\n    user_created {\n    id\n    }\n    user_updated {\n    id\n    }\n    date_created\n    date_updated\n    title\n    slug\n    blocks {\n     id\n     collection\n     item {\n          ... on block_cardgroup {\n            id\n            content\n            group_type\n            posts {\n                posts_id {\n                    id\n                    title\n                    tags\n                    key_image {\n                        id\n                        location\n                    }\n                }\n            }\n            cards {\n                title\n                description\n                image {\n                    id\n                    \n                }\n            }\n          }\n          ... on block_hero {\n            id\n            content\n          }\n          ... on block_richtext {\n            id\n            content\n          }\n     }\n    }\n  }\n}",
+          variables: {},
+        }),
+        redirect: "follow",
+      })
+      const result = await response.json()
+      return result
+  }
 
   getAllBooks = () =>{
     return this.get({path:`/items/dayi?fields=*.*`}); 
@@ -144,35 +166,8 @@ export default ApiManager.getSharedInstance();
 
 
 
-
-export async function getAllCategory() {
-  return fetch('http://localhost:8055/items/Category', {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        console.log("Fetch error occurred.", response);
-
-        throw new Error('Network response was not ok');
-
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-
-      return data.data
-    })
-    .catch(function(err) {
-      console.log("Fetch error occurred.", err);
-    });
+const replaceLineBreak = (str) => {
+  return str.replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
 
-
-
-
-
+const query = "query {\n  pages {\n    id\n    status\n    sort\n    user_created {\n    id\n    }\n    user_updated {\n    id\n    }\n    date_created\n    date_updated\n    title\n    slug\n    blocks {\n     id\n     item {\n          ... on block_cardgroup {\n            id\n            content\n            group_type\n            posts {\n                posts_id {\n                    id\n                    title\n                }\n            }\n            cards {\n                title\n                description\n                image {\n                    id\n                    storage\n                    filename_disk\n                    location\n                }\n            }\n          }\n          ... on block_hero {\n            id\n            content\n          }\n          ... on block_richtext {\n            id\n            content\n          }\n     }\n    }\n  }\n}"

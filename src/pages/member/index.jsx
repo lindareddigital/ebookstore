@@ -20,14 +20,13 @@ export default function Manage({ params }) {
   const [tab, setTab] = useState("");
 
   useEffect(() => {
-    console.log('tab',tab);
-    
+    console.log("tab", id.tab);
     
   }, [tab]);
 
   const router = useRouter();
   const id = router.query;
-  console.log(id.tab);
+  // console.log(id.tab);
   
 
 
@@ -65,7 +64,7 @@ export default function Manage({ params }) {
             <div className="leftbox">
               <img class="topright" src="/icons/leftboxicon.svg"></img>
               <div className="">
-                <div class="pin-title">最新消息</div>
+                <div class="pin-title">會員中心</div>
                 <div className="trangle"></div>
               </div>
               <div class="wrapper">
