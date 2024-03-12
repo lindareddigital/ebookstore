@@ -62,7 +62,7 @@ export default function Detail({ data }) {
             <>
               <img
                 onClick={() => setLgShow(true)}
-                src={`https://directus-cms.vicosys.com.hk/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 className="primary-img"
                 alt={item.image.id}
               />
@@ -98,22 +98,22 @@ export default function Detail({ data }) {
                   <div className="trangle"></div>
                 </div>
 
-                <li>
+                <li className="eslite">
                   <Link href="">
                     <img src="/icons/eslite.png"></img>
                   </Link>
                 </li>
-                <li>
+                <li className="bookstw">
                   <Link href="">
                     <img src="/icons/bookstw.svg"></img>
                   </Link>
                 </li>
-                <li>
+                <li className="stone">
                   <Link href="">
                     <img src="/icons/stone.svg"></img>
                   </Link>
                 </li>
-                <li>
+                <li className="pchome">
                   <Link href="">
                     <img src="/icons/pchome.svg"></img>
                   </Link>

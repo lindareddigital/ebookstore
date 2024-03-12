@@ -1193,9 +1193,24 @@ span{
   justify-content: center;
 }
 
-.detail-page .buy-book li img{
-  width: 91.59px;
-  height: 23.82px;
+.detail-page .buy-book .eslite img{
+  width: 132px;
+  height: 34px;
+}
+
+.detail-page .buy-book .bookstw img{
+  width: 118px;
+  height: 33px;
+}
+
+.detail-page .buy-book .stone img{
+  width: 127px;
+  height: 61px;
+}
+
+.detail-page .buy-book .pchome img{
+  width: 112px;
+  height: 53px;
 }
 
 .buy-book .topright {
