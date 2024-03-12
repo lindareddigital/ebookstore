@@ -1,6 +1,4 @@
-// 'use client'
 import apiManager from 'src/pages/api/api';
-// import { cache } from 'next';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -46,11 +44,6 @@ export default function Detail({ data }) {
   });
 
   const item = Object.assign({}, ...filteredBooks);
-
-
-  // console.log("33", item);
-
-
 
   console.log("29", router.query.slug,books);
 
@@ -243,7 +236,7 @@ export default function Detail({ data }) {
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
 
-  console.log("datadatadatadata", result);
+  // console.log("datadatadatadata", result);
 
   return { props: { data: result } };
 };

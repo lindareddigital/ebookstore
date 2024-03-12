@@ -109,17 +109,84 @@ class ApiManager {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", `Bearer ${TOKEN} `);
-      // ${TOKEN}
+      myHeaders.append("mode", "no-cors");
 
-      // replaceLineBreak(query);
-      // const graphql = JSON.stringify({ query });
+      const query = `query {
+        pages {
+          id
+          status
+          sort
+          user_created {
+          id
+          }
+          user_updated {
+          id
+          }
+          date_created
+          date_updated
+          title
+          slug
+          blocks {
+          id
+          collection
+          item {
+                ... on block_cardgroup {
+                  id
+                  content
+                  group_type
+                  posts {
+                      posts_id {
+                          id
+                          title
+                          tags
+                          key_image {
+                              id
+                              location
+                          }
+                      }
+                  }
+                  cards {
+                      title
+                      description
+                      image {
+                          id
+                      }
+                  }
+                }
+                ... on block_hero_group {
+                  id
+                  headline
+                  hero_cards {
+                      block_hero_id {
+                          headline
+                          image {
+                              id
+                          }
+                          url
+                      }
+                  }
+                }
+                ... on block_hero {
+                  id
+                  content
+                }
+                ... on block_richtext {
+                  id
+                  content
+                }
+          }
+          }
+        }
+      }`
+
+
+     query.replace(/(?:\r\n|\r|\n)/g, "\\n");
 
       const response = await fetch("https://directus-cms.vicosys.com.hk/graphql", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({
-          query:
-            "query {\n  pages {\n    id\n    status\n    sort\n    user_created {\n    id\n    }\n    user_updated {\n    id\n    }\n    date_created\n    date_updated\n    title\n    slug\n    blocks {\n     id\n     collection\n     item {\n          ... on block_cardgroup {\n            id\n            content\n            group_type\n            posts {\n                posts_id {\n                    id\n                    title\n                    tags\n                    key_image {\n                        id\n                        location\n                    }\n                }\n            }\n            cards {\n                title\n                description\n                image {\n                    id\n                    \n                }\n            }\n          }\n          ... on block_hero {\n            id\n            content\n          }\n          ... on block_richtext {\n            id\n            content\n          }\n     }\n    }\n  }\n}",
+          query,          
           variables: {},
         }),
         redirect: "follow",
@@ -163,11 +230,3 @@ class ApiManager {
 
 export default ApiManager.getSharedInstance();
 
-
-
-
-const replaceLineBreak = (str) => {
-  return str.replace(/(?:\r\n|\r|\n)/g, '\\n');
-}
-
-const query = "query {\n  pages {\n    id\n    status\n    sort\n    user_created {\n    id\n    }\n    user_updated {\n    id\n    }\n    date_created\n    date_updated\n    title\n    slug\n    blocks {\n     id\n     item {\n          ... on block_cardgroup {\n            id\n            content\n            group_type\n            posts {\n                posts_id {\n                    id\n                    title\n                }\n            }\n            cards {\n                title\n                description\n                image {\n                    id\n                    storage\n                    filename_disk\n                    location\n                }\n            }\n          }\n          ... on block_hero {\n            id\n            content\n          }\n          ... on block_richtext {\n            id\n            content\n          }\n     }\n    }\n  }\n}"

@@ -11,34 +11,16 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
-export default function Listing() {
-
-  const [books, setBooks] = useState([]);
-  const [categories, setCategories] = useState([]);
+export default function Listing({ data }) {
   const [panel, setPanel] = useState(false);
- 
 
   const [currentView, setCurrentView] = useState("grid");
+
+  const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
 
   const handleViewChange = (view) => {
     setCurrentView(view);
   };
-
-
-  const getData = async () => {
-    try {  
-      const data = await apiManager.getAllBooks();
-      console.log('data.data', data.data);
-      setBooks(data.data)
-    } catch (e) {
-      console.log('error', e);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
 
   const closePanel = () => {
     setPanel(false);
@@ -47,7 +29,6 @@ export default function Listing() {
   const openPanel = () => {
     setPanel(true);
   };
-
 
   return (
     <div class="listing-page">
@@ -93,8 +74,8 @@ export default function Listing() {
 
           <SidebarWrapper />
 
-          <ListAside categories={categories} />
-
+          <ListAside />
+          {/* categories={categories} */}
           <div class="right-side">
             <div class="block-title">系列：X萬獸探險隊</div>
             <div class="listing-toolbar">
@@ -133,7 +114,7 @@ export default function Listing() {
               </div>
             </div>
 
-            {currentView === "grid" && <GridList />}
+            {currentView === "grid" && <GridList books={books} />}
 
             {currentView === "list" &&
               books.map((item) => {
@@ -218,20 +199,17 @@ export default function Listing() {
                 列表
               </li>
             </ul>
-
-            <div className={`panel-content`}>
-              {/* <div className="pannel-content">
-          <div className="font-black h4">{title}</div>
-          <button onClick={closePanel} className="closePanel-btn">
-            <img src="/icons/close.svg" alt="" />
-          </button>
-        </div> */}
-            </div>
           </div>
           <Panel />
         </div>
       </div>
     </div>
   );
-
 }
+
+export const getServerSideProps = async () => {
+  const result = await apiManager.getNew();
+
+
+  return { props: { data: result } };
+};

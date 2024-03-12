@@ -11,20 +11,7 @@ export default function ListAside({ categories }) {
 
   console.log(categories, "categories");
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const data = await apiManager.getHaibinParams(`Haibin?filter[Category][_eq]=${props.category}`);
 
-  //       setItems(data.data);
-  //       // console.log('88', props,data.data);
-  //       // return data.data;
-  //     } catch (e) {
-  //       console.log('error', e);
-  //     }
-  //   };
-  //   getData();
-  // }, [props]);
 
   return (
     <aside class="list-aside">

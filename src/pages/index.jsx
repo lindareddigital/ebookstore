@@ -1,4 +1,3 @@
-// 'use client';
 import apiManager from 'src/pages/api/api';
 import HomeTab from 'src/pages/components/HomeTab';
 import MediaBlock from 'src/pages/components/MediaBlock';
@@ -6,6 +5,7 @@ import SidebarWrapper from 'src/pages/components/SidebarWrapper';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
+import Link from "next/link";
 
 export default function Home({data}) {
   // const swiperRef = useRef(null);
@@ -27,14 +27,21 @@ export default function Home({data}) {
 
   // to={`/?q=${keyWords}`}
 
-  console.log('data',data);
+  // console.log('data',data);
 
   const posts = data.data.pages[0].blocks[0].item.posts;
   console.log("now", data.data.pages[0].blocks[0].item.posts);
   
 
-  const block_hero = data.data.pages;
-  console.log("block_hero", block_hero);
+  const blocks = data.data.pages[0];
+  console.log("block_hero", blocks);
+
+
+  const heroBanner = blocks.blocks.find((item) => {
+    return item.collection === "block_hero_group";
+  });
+
+  console.log("heroBanner", heroBanner.item.hero_cards);
 
 
 
@@ -65,7 +72,6 @@ export default function Home({data}) {
 
       <MenuBar />
 
-
       <div class="home-banner">
         <div className="leftbox">
           <img class="topright" src="/icons/leftboxicon.svg"></img>
@@ -74,9 +80,7 @@ export default function Home({data}) {
             <div className="trangle"></div>
           </div>
           <div class="wrapper">
-            
             {posts?.map((item) => {
-
               return (
                 <>
                   <div class="e-banner-product">
@@ -127,6 +131,22 @@ export default function Home({data}) {
             ></button>
           </div>
           <div class="carousel-inner">
+            {/* {heroBanner.item.hero_cards?.map((item) => {
+              return (
+                <>
+                  <Link
+                    href={item.block_hero_id?.url || ""}
+                    class="carousel-item"
+                  >
+                    <img
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}`}
+                      class=""
+                      alt={item.block_hero_id.headline}
+                    ></img>
+                  </Link>
+                </>
+              );
+            })} */}
             <div class="carousel-item active">
               <img src="/images/banner.jpeg" class="" alt="..."></img>
             </div>

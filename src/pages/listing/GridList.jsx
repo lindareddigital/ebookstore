@@ -2,27 +2,8 @@ import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 
-export default function CategoryList({props}) {
+export default function CategoryList({books}) {
   const [item, setItem] = useState({});
-  const [books, setBooks] = useState([]);
-
-
-  useEffect(() => {
-    const getData = async () => {
-      try {  
-        const data = props === "haibin" ? 
-        await apiManager.getHaibin() : await apiManager.getAllBooks();
-        setBooks(data.data);
-        console.log('all', data.data);
-        return data.data;
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
-    getData();
-
-  }, [props]);
-
 
 
 
@@ -45,8 +26,7 @@ export default function CategoryList({props}) {
                     <img src="/icons/heart.svg" alt="" />
                   </button>
                   <img
-                    // src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
-                    src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
+                    src={`http://localhost:8055/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className=""
                     alt={item.title}
                   />
