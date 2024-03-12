@@ -22,16 +22,6 @@ export default function SidebarWrapper() {
   }
 
 
-  const getAllCategory= (async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      setCategories(data.data)
-      return data.data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
-
   const tabChange = (async(id) => {
 
     const data = await apiManager.getCategoryList(id);
@@ -39,11 +29,6 @@ export default function SidebarWrapper() {
     console.log('CategoryList',data);
       
   });
-
-  useEffect( () => {
-    getAllCategory()
-  }, []);
-
 
   return(
     <div class="sidebar-wrapper scroll-cling-top">

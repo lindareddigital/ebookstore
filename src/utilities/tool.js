@@ -1,5 +1,24 @@
 import { Metadata } from 'next';
 
+export default async function imgBlob(url){
+
+  const token = process.env.NEXT_PUBLIC_TOKEN;
+
+  const imageUrl = `${url}?access_token=${token}`;
+
+  const response = await fetch(imageUrl);
+  const blob = await response.blob();
+  const imageDataUrl = URL.createObjectURL(blob);
+
+
+ 
+  res.setHeader("Content-Type", response.headers.get("Content-Type"));
+  res.send(blob);
+
+
+  
+  return imageDataUrl;
+};
 
 
 export const getDetailLink = (id) => {

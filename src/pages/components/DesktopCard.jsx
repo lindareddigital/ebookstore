@@ -19,22 +19,6 @@ export default function DesktopCard(props) {
   const [items, setItems] = useState(null);
 
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await apiManager.getHaibinParams(`Haibin?filter[Category][_eq]=${props.category}`);
-
-        setItems(data.data);
-        // console.log('88', props,data.data);
-        // return data.data;
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
-    getData();
-  }, [props]);
-
-
   return(
     <>
     {!mobile && (
@@ -50,23 +34,24 @@ export default function DesktopCard(props) {
           <div class="swiper-wrapper booklist-carousel-inner">
             {items?.map((item) => {
               return (
-                <SwiperSlide
-                  className="swiper-slide"
-                  key={`${item.id}`}
-                >
-                <Link
-                  key={`${item.id}`}
-                  href={{
-                    pathname:`/detail/${item.id}`,
-                    query: {id: item.id},                 
-                  }}
-                  className={``}
-                > 
-                  <div class="book-item">
-                    <img src={`http://localhost:8055/assets/${item.PrimaryImage}`} className="" alt={item.Title} />
-                    <div className="desc mt-2">{item.Title}</div>
-                    <div className="price-num">{item.Price}</div>
-                  </div>
+                <SwiperSlide className="swiper-slide" key={`${item.id}`}>
+                  <Link
+                    key={`${item.id}`}
+                    href={{
+                      pathname: `/detail/${item.id}`,
+                      query: { id: item.id },
+                    }}
+                    className={``}
+                  >
+                    <div class="book-item">
+                      <img
+                        src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage}`}
+                        className=""
+                        alt={item.Title}
+                      />
+                      <div className="desc mt-2">{item.Title}</div>
+                      <div className="price-num">{item.Price}</div>
+                    </div>
                   </Link>
                 </SwiperSlide>
               );

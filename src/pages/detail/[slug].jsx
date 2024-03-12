@@ -62,7 +62,7 @@ export default function Detail({ data }) {
             <>
               <img
                 onClick={() => setLgShow(true)}
-                src={`http://localhost:8055/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                src={`https://directus-cms.vicosys.com.hk/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 className="primary-img"
                 alt={item.image.id}
               />
@@ -135,7 +135,7 @@ export default function Detail({ data }) {
               </Modal.Header>
               <Modal.Body>
                 <img
-                  src={`http://localhost:8055/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                   className="primary-img"
                 />
 
@@ -224,9 +224,7 @@ export default function Detail({ data }) {
             <DesktopCard category={item.Category} />
           ))} */}
 
-          <Desc/>
-
-        
+        <Desc />
       </div>
     </div>
   );

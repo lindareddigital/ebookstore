@@ -12,36 +12,11 @@ import Link from 'next/link';
 
 export default function HomeTabTwo() {
 
-  const [books, setBooks] = useState([]);
-  const [allBooks, setAllBooks] = useState([]);
 
   const [categories, setCategories] = useState([]);
   const swiperRef = useRef(null);
   const { next, previous } = useSwiperFunc(swiperRef);
 
-  const getAllBooks = (async () => {
-    try {
-      const data = await apiManager.getAllBooks();
-      setAllBooks(data.data)
-
-      console.log(data, 'AllBooks');
-      return data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
-
-
-  const getAllCategory= (async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      setCategories(data.data)
-      const firstRender = await apiManager.getCategoryList(data.data[0].id);
-      setBooks(firstRender.data)
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
 
   const tabChange = (async(id) => {
 
@@ -52,8 +27,6 @@ export default function HomeTabTwo() {
   });
 
   useEffect( () => {
-    getAllCategory()
-    getAllBooks()
   }, []);
 
 
@@ -86,20 +59,24 @@ export default function HomeTabTwo() {
                     className="swiper-slide swiper-slide-tabs2"
                     key={`${item.id}`}
                   >
-                  <Link
-                    key={`${item.id}`}
-                    href={{
-                      pathname:`/detail/${item.id}`,
-                      query: {id: item.id},                 
-                    }}
-                    className={``}
-                  >
-                    <div class="book-item">
-                      <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
-                      <div className="desc mt-2">{item.Title}</div>
-                      <div className="price-num">{item.Price}</div>
-                    </div>
-                  </Link>
+                    <Link
+                      key={`${item.id}`}
+                      href={{
+                        pathname: `/detail/${item.id}`,
+                        query: { id: item.id },
+                      }}
+                      className={``}
+                    >
+                      <div class="book-item">
+                        <img
+                          src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
+                          className=""
+                          alt={item.title}
+                        />
+                        <div className="desc mt-2">{item.Title}</div>
+                        <div className="price-num">{item.Price}</div>
+                      </div>
+                    </Link>
                   </SwiperSlide>
                 );
               })}
@@ -128,11 +105,15 @@ export default function HomeTabTwo() {
       <div className="right">
         {books.map((item) => {
           return (
-          <div class="">
-            <img src={`http://localhost:8055/assets/${item.PrimaryImage?.id}`} className="" alt={item.title} />
-            <div className="desc mt-2">{item.Title}</div>
-            <div className="price-num">{item.Price}</div>
-          </div>
+            <div class="">
+              <img
+                src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage?.id}`}
+                className=""
+                alt={item.title}
+              />
+              <div className="desc mt-2">{item.Title}</div>
+              <div className="price-num">{item.Price}</div>
+            </div>
           );
         })}
       </div>
@@ -163,20 +144,24 @@ export default function HomeTabTwo() {
                     className="swiper-slide swiper-slide-tabs4"
                     key={`${item.id}`}
                   >
-                  <Link
-                    key={`${item.id}`}
-                    href={{
-                      pathname:`/detail/${item.id}`,
-                      query: {id: item.id},                 
-                    }}
-                    className={``}
-                  >
-                    <div class="book-item">
-                      <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
-                      <div className="desc mt-2">{item.Title}</div>
-                      <div className="price-num">{item.Price}</div>
-                    </div>
-                  </Link>
+                    <Link
+                      key={`${item.id}`}
+                      href={{
+                        pathname: `/detail/${item.id}`,
+                        query: { id: item.id },
+                      }}
+                      className={``}
+                    >
+                      <div class="book-item">
+                        <img
+                          src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
+                          className=""
+                          alt={item.title}
+                        />
+                        <div className="desc mt-2">{item.Title}</div>
+                        <div className="price-num">{item.Price}</div>
+                      </div>
+                    </Link>
                   </SwiperSlide>
                 );
               })}

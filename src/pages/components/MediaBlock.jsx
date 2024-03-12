@@ -10,8 +10,8 @@ import useCalc from 'src/pages/components/atoms/useCalc';
 export default function MediaBlock({ data }) {
   const { width, mobile } = useCalc();
 
-  const posts = data.data.pages[0]?.blocks[3].item.posts;
-  console.log("post", data.data.pages[0]?.blocks[3].item.posts);
+  const posts = data?.data?.pages[0]?.blocks[3]?.item?.posts;
+  // console.log("post", data.data.pages[0]?.blocks[3].item.posts);
 
   return (
     <>

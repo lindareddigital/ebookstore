@@ -9,9 +9,6 @@ export default function ListAside({ categories }) {
 
   const [items, setItems] = useState(null);
 
-  console.log(categories, "categories");
-
-
 
   return (
     <aside class="list-aside">

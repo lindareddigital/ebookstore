@@ -101,7 +101,7 @@ export default function Modal () {
                     >
                       <div class="book-item">
                         <img
-                          src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
+                          src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
                           className=""
                           alt={item.title}
                         />

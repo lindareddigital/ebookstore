@@ -100,10 +100,6 @@ class ApiManager {
     }); 
   }
 
-  getAllCategory = () =>{
-    return this.get({path:`/items/Category`}); 
-  }
-
 
   getNew = async() =>{
       const myHeaders = new Headers();
@@ -177,7 +173,12 @@ class ApiManager {
           }
           }
         }
-      }`
+
+      product {
+          title
+          series
+        }
+      }`;
 
 
      query.replace(/(?:\r\n|\r|\n)/g, "\\n");
@@ -199,17 +200,12 @@ class ApiManager {
     return this.get({path:`/items/dayi?fields=*.*`}); 
   }
 
-  getHaibinCategory = () =>{
-    return this.get({path:`/items/haibin?fields=Category`}); 
-  }
 
   getHaibin = () =>{
     return this.get({path:`/items/haibin?fields=*.*`}); 
   }
 
-  getHaibinParams = (params) =>{
-    return this.get({path:`/items/${params}`}); 
-  }
+ 
 
   getRecipe = () =>{
     return this.get({path:`/items/haibin?filter[Category][_eq]=飲食`}); 
@@ -218,13 +214,6 @@ class ApiManager {
   getDetail = (id) =>{
     return this.get({path: `items/dayi?&filter[id]=${id}`,}); 
   }
-
-
-  // getDetail = (id) =>{
-  //   return this.get({path:`/items/Book/?fields=*.*,Category.ParentMenu.*&filter[id]=${id}`}); 
-  // }
-  
-
 
 }
 

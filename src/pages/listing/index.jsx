@@ -45,32 +45,6 @@ export default function Listing({ data }) {
       <Breadcrumb />
       <div class="container-fluid">
         <div class="main-body">
-          {/* <div class="sidebar-wrapper scroll-cling-top">
-              <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
-                <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
-                  <span>【益智桌遊】10/31上市</span>
-                </Link>
-              </div>
-              <div class="d-none d-lg-flex tab active">
-                <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
-              </div>
-              <div id="sidebar-menu-4-1" class="d-none d-lg-flex tab">
-                <Link href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
-              </div>
-              <div class="d-none d-lg-flex tab">
-                <Link href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
-              </div>
-              <div id="sidebar-menu-4-3" class="d-none d-lg-flex tab">
-                <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
-              </div>
-              <div class="d-none d-lg-flex tab">
-                <Link aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
-              </div>
-            </div>
-            <div class="d-none d-lg-flex back-to-top">
-              <span>返回頂端</span>
-            </div>
-          </div> */}
 
           <SidebarWrapper />
 
@@ -80,7 +54,7 @@ export default function Listing({ data }) {
             <div class="block-title">系列：X萬獸探險隊</div>
             <div class="listing-toolbar">
               <div className="amount">
-                商品清單共有<span>190</span>本
+                商品清單共有<span>{books.length}</span>本
               </div>
 
               <div className="right-side">
@@ -117,9 +91,8 @@ export default function Listing({ data }) {
             {currentView === "grid" && <GridList books={books} />}
 
             {currentView === "list" &&
-              books.map((item) => {
-                return <ListList props={item} />;
-              })}
+                <ListList books={books} />}
+          
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>

@@ -30,7 +30,7 @@ export default function Home({data}) {
   // console.log('data',data);
 
   const posts = data.data.pages[0].blocks[0].item.posts;
-  console.log("now", data.data.pages[0].blocks[0].item.posts);
+  console.log("now", data.data);
   
 
   const blocks = data.data.pages[0];
@@ -42,6 +42,7 @@ export default function Home({data}) {
   });
 
   console.log("heroBanner", heroBanner.item.hero_cards);
+
 
 
 
@@ -80,7 +81,7 @@ export default function Home({data}) {
             <div className="trangle"></div>
           </div>
           <div class="wrapper">
-            {posts?.map((item) => {
+            {posts?.map((item,index) => {
               return (
                 <>
                   <div class="e-banner-product">
@@ -109,7 +110,22 @@ export default function Home({data}) {
           data-bs-ride="carousel"
         >
           <div class="carousel-indicators">
-            <button
+            {heroBanner.item.hero_cards?.map((item, index) => {
+              return (
+                <>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to={index}
+                    class="active"
+                    aria-current={index === 0 ? "true" : ""}
+                    aria-label="Slide 1"
+                    className={`${index === 0 ? "active" : ""}`}
+                  ></button>
+                </>
+              );
+            })}
+            {/* <button
               type="button"
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide-to="0"
@@ -128,34 +144,25 @@ export default function Home({data}) {
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide-to="2"
               aria-label="Slide 3"
-            ></button>
+            ></button> */}
           </div>
           <div class="carousel-inner">
-            {/* {heroBanner.item.hero_cards?.map((item) => {
+            {heroBanner.item.hero_cards?.map((item, index) => {
               return (
                 <>
                   <Link
                     href={item.block_hero_id?.url || ""}
-                    class="carousel-item"
+                    className={`carousel-item ${index === 1 ? "active" : ""}`}
                   >
                     <img
-                      src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}`}
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                       class=""
                       alt={item.block_hero_id.headline}
                     ></img>
                   </Link>
                 </>
               );
-            })} */}
-            <div class="carousel-item active">
-              <img src="/images/banner.jpeg" class="" alt="..."></img>
-            </div>
-            <div class="carousel-item">
-              <img src="/images/banner.jpeg" class="" alt="..."></img>
-            </div>
-            <div class="carousel-item">
-              <img src="/images/banner.jpeg" class="" alt="..."></img>
-            </div>
+            })}
           </div>
           <button
             class="carousel-control-prev"
@@ -213,6 +220,7 @@ export const getServerSideProps = async () => {
 
   console.log("datadatadatadata", result);
 
+ 
 
   return { props: { data: result} };
 };

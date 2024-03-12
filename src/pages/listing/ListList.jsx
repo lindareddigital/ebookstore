@@ -2,51 +2,28 @@ import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 
-export default function CategoryList({props}) {
+export default function ListList({ books }) {
   const [item, setItem] = useState({});
-  const [books, setBooks] = useState([]);
 
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data =
-          props === "haibin"
-            ? await apiManager.getHaibin()
-            : await apiManager.getAllBooks();
-        setBooks(data.data);
-        return data.data;
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
-    getData();
-
-  }, [props]);
-
-
-
-
-  return(       
+  return (
     <>
       <div class="list-view">
         <ul class="">
-          { books.map((item) => {
+          {books?.map((item) => {
             return (
               <Link
-                key={`${item.id}`}
-                href={{ pathname: `/detail/${item.id}` }}
+                key={`${item.image.id}`}
+                href={{ pathname: `/detail/${item.image.id}` }}
                 className={``}
               >
                 <li class="list-view-item">
                   <img
-                    // src={`http://localhost:8055/assets/${item.PrimaryImage.id}`}
-                    src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className=""
                     alt={item.title}
                   />
                   <div className="textarea">
-                    <div className="title">{item.Title}</div>
+                    <div className="title">{item.title}</div>
                     <div className="desc">
                       眾所期待的X萬獸探險隊回來囉!
                       還記得勇敢的大勇、可靠的阿寶、聰明的豆丁，
@@ -71,9 +48,8 @@ export default function CategoryList({props}) {
               </Link>
             );
           })}
-            
-          </ul>
+        </ul>
       </div>
-    </>      
-  )
+    </>
+  );
 }

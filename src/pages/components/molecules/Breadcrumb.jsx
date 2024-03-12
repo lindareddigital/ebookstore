@@ -7,21 +7,11 @@ import Link from 'next/link';
 
 
 
-export default function Breadcrumb() {
+export default function Breadcrumb({}) {
 
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
 
-
-  const getAllCategory= (async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      setCategories(data.data)
-      return data.data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
 
   const tabChange = (async(id) => {
 
@@ -31,9 +21,7 @@ export default function Breadcrumb() {
       
   });
 
-  useEffect( () => {
-    getAllCategory()
-  }, []);
+
 
 
   return(

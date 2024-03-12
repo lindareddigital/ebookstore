@@ -20,56 +20,6 @@ export default function Singlepage() {
    const page = router.query.page;
 
 
-  const getCategory = (async () => {
-    try {
-      const data = await apiManager.getHaibinCategory();
-     
-      const uniqueCategories = data.data.reduce((acc, current) => {
-      const x = acc.find(item => item.Category === current.Category);
-      if (!x) {
-        return acc.concat([current]);
-      } else {
-        return acc;
-      }
-    }, []);
-      console.log(uniqueCategories,'7788');
-      setCategories(uniqueCategories)
-      return data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
-
-  // const getAllCategory = (async () => {
-  //   try {
-  //     const data = await apiManager.getAllCategory();
-  //     console.log(data);
-  //     setCategories(data.data)
-  //     return data;
-  //   } catch (e) {
-  //     console.log('error', e);
-  //   }
-  // });
-
-  const getRecipe = (async () => {
-    try {
-      const data = await apiManager.getRecipe();
-      console.log(data.data,'66');
-      setRecipe(data.data)
-      // return data;
-    } catch (e) {
-      console.log('error', e);
-    }
-  });
-
-  
-
-  useEffect(() => {
-    // getAllCategory()
-    getCategory()
-    getRecipe()
-  }, []);
-
 
   return (
     <div class="single-page">
