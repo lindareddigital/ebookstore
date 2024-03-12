@@ -11,12 +11,13 @@ import InnerHTML from "src/pages/components/atoms/InnerHTML";
 
 
 
-export default function HomeTab({  data }) {
-  // console.log("books", books);
-  const blocks = data.data.pages[1].blocks;
-  console.log("data", data.data.pages[1].blocks);
-  // console.log("books", data.data.pages[1].blocks[1].item.cards);
-  const books = data.data.pages[1].blocks[1].item.cards;
+export default function HomeTab({ data }) {
+  // console.log("data", data.data);
+ 
+  const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
+  console.log("books", books);
+
+  
   const swiperRef = useRef(null);
 
   const { next, previous } = useSwiperFunc(swiperRef);
@@ -34,6 +35,10 @@ export default function HomeTab({  data }) {
     }
   };
 
+  if (!data || !books) {
+    return null;
+  }
+
 
   return (
     <>
@@ -45,11 +50,11 @@ export default function HomeTab({  data }) {
           <Nav variant="tabs">
             <div className="block-title">新書上市</div>
 
-            {blocks.map((item) => (
+            {/* {blocks.map((item) => (
               <div>
                 <InnerHTML className={""} text={item.bannerTitle?.processed} />
               </div>
-            ))}
+            ))} */}
 
             {/* {categories.map((item) => (
             <div>
@@ -91,24 +96,31 @@ export default function HomeTab({  data }) {
             onSnapIndexChange={onRealIndexChange}
           >
             <div class="swiper-wrapper booklist-carousel-inner">
-              {books?.map((item, index) => {
-                {/* console.log(`item: ${item}`); */}
+              {books?.map((item) => {
+                  {/* console.log(
+                    "131",
+                    item,
+                    item.image.id
+                  ); */}
+
                 return (
-                  <SwiperSlide className="swiper-slide" key={`${item.id}`}>
+                  <SwiperSlide
+                    className="swiper-slide"
+                    key={`${item.image.id}`}
+                  >
                     <Link
-                      key={`${item.id}`}
-                      href={{ pathname: `/detail/${item.id}` }}
+                      key={`${item.image.id}`}
+                      href={{ pathname: `/detail/${item.image.id}` }}
                       className={``}
                     >
                       <div class="book-item">
                         <img
-                          // src={`https://directus-cms.vicosys.com.hk/${item.image.id}`}
-                          src={`https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/065/01/0010650149.jpg&v=54229da8k&w=348&h=348`}
+                          src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                           className=""
                           alt={item.title}
                         />
                         <div className="desc mt-2">{item.title}</div>
-                        <div className="price-num">{item.Price}</div>
+                        <div className="price-num">$ {item.Price}</div>
                       </div>
                     </Link>
                   </SwiperSlide>

@@ -7,28 +7,11 @@ import useCalc from 'src/pages/components/atoms/useCalc';
 
 
 
-export default function MediaBlock(props) {
-
+export default function MediaBlock({ data }) {
   const { width, mobile } = useCalc();
 
-  const [items, setItems] = useState(null);
-
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const data = await apiManager.getHaibinParams(`Haibin?filter[Category][_eq]=${props.category}`);
-
-  //       setItems(data.data);
-  //       // console.log('88', props,data.data);
-  //       // return data.data;
-  //     } catch (e) {
-  //       console.log('error', e);
-  //     }
-  //   };
-  //   getData();
-  // }, [props]);
-
+  const posts = data.data.pages[0]?.blocks[3].item.posts;
+  console.log("post", data.data.pages[0]?.blocks[3].item.posts);
 
   return (
     <>
@@ -78,6 +61,23 @@ export default function MediaBlock(props) {
             <div className="trangle"></div>
           </div>
           <img class="topright" src="/icons/columnIcon.svg"></img>
+
+          {posts?.map((item) =>{
+
+            return (
+              <>
+                <div class="e-banner-product">
+                  <img
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    alt=""
+                  />
+
+                  <div class="desc">{item.posts_id.title}</div>
+                  <div class="desc">{item.posts_id.tags}</div>
+                </div>
+              </>
+            );
+          })}
           <div class="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
             <div class="desc">
@@ -86,24 +86,6 @@ export default function MediaBlock(props) {
             </div>
           </div>
           <hr />
-          <div class="e-banner-product">
-            <img src="/images/bgi.svg" alt="" />
-            <div>
-              <div class="desc">入選誠品TOP100書單</div>
-            </div>
-          </div>
-          <div class="e-banner-product">
-            <img src="/images/bgi.svg" alt="" />
-            <div>
-              <div class="desc">入選誠品TOP100書單</div>
-            </div>
-          </div>
-          <div class="e-banner-product">
-            <img src="/images/bgi.svg" alt="" />
-            <div>
-              <div class="desc">入選誠品TOP100書單</div>
-            </div>
-          </div>
 
           <div className="read-more-btn">
             查看更多 <img class="" src="/icons/viewmore.svg"></img>
@@ -140,5 +122,4 @@ export default function MediaBlock(props) {
       </div>
     </>
   );
-
 }

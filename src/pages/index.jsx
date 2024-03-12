@@ -28,9 +28,12 @@ export default function Home({data}) {
   // to={`/?q=${keyWords}`}
 
   console.log('data',data);
+
+  const posts = data.data.pages[0].blocks[0].item.posts;
+  console.log("now", data.data.pages[0].blocks[0].item.posts);
   
 
-  const block_hero = data.data.pages[1].blocks;
+  const block_hero = data.data.pages;
   console.log("block_hero", block_hero);
 
 
@@ -56,14 +59,12 @@ export default function Home({data}) {
             alt=""
           ></img>
         </div>
-        <div class="">
-          {/* <button onClick={topFunction()} id="topBtn">Top</button> */}
-        </div>
       </div>
 
       <Navbar />
 
       <MenuBar />
+
 
       <div class="home-banner">
         <div className="leftbox">
@@ -73,19 +74,23 @@ export default function Home({data}) {
             <div className="trangle"></div>
           </div>
           <div class="wrapper">
-            {/* {block_hero?.map((item) => ( */}
-            <div class="e-banner-product">
-              {/* <div class="desc">{block_hero.item.content}</div> */}
-            </div>
-            {/* ))} */}
-            <div class="e-banner-product">
-              <div class="desc">X萬獸探險隊特別篇5 11/15即將上市</div>
-            </div>
-            <div class="e-banner-product">
-              <div>
-                <div class="desc">入選誠品TOP100書單</div>
-              </div>
-            </div>
+            
+            {posts?.map((item) => {
+
+              return (
+                <>
+                  <div class="e-banner-product">
+                    <img
+                      // src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image}`}
+                      alt=""
+                    />
+
+                    <div class="desc">{item.posts_id.title}</div>
+                    <div class="desc">{item.posts_id.tags}</div>
+                  </div>
+                </>
+              );
+            })}
           </div>
 
           <div className="read-more-btn">
@@ -167,7 +172,7 @@ export default function Home({data}) {
         })} */}
       </div>
 
-      <MediaBlock />
+      <MediaBlock data={data} />
     </div>
   );
 }
