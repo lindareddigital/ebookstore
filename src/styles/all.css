@@ -739,11 +739,35 @@ span{
 }
 
 .swiper-button-prev, .swiper-button-next{
-    height: 32px;
-    width: 32px;
-    transition: .2s;
-    z-index: 99;
-    position: unset;
+  height: 32px;
+  width: 32px;
+  transition: .2s;
+  z-index: 99;
+  position: unset;
+}
+
+.modal-body .swiper-button-prev, .swiper-button-next{
+  position: absolute;
+}
+
+.sub-swiper .swiper-button-prev, .swiper-button-next{
+  bottom: 0;
+}
+
+.sub-swiper .index-area{
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  border-radius: 5px 5px 5px 0px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #EBC700;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  /* line-height: 20px;
+  letter-spacing: 0.2em; */
 }
 
 .navbar-collapse{
@@ -1540,11 +1564,6 @@ footer .container-fluid{
   position: relative;
 }
 
-.content a{
-  color: #666;
-  font-size: 13px;
-}
-
 .detail-page .primary-img{
   width: 424px;
   height: 424px;
@@ -1556,26 +1575,63 @@ footer .container-fluid{
     height: 721px;
  }
 
- .modal-dialog{
-    width: 1027px;
+ .modal-dialog {
+    width: 1027px !important;
     height: 811px;
     padding: 24px;
+    max-width: unset !important;
  }
 
  .modal-body{
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
  }
 
  .modal-content{
   border-radius: 20px;
  }
 
- .gallery{
+ .primary-swiper{
+    width: 721px;
+    height: 721px;
+ }
+
+ .primary-swiper .swiper-wrapper{
+
+ }
+
+ .sub-swiper{
   width: 166px;
   height: 721px;
   padding: 8px 24px;
  }
+
+ .sub-swiper .swiper-wrapper{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #E9E9E9;
+ }
+
+ .sub-swiper .swiper-wrapper .swiper-slide{
+  width: 118px;
+  height: 118px;
+  margin: 8px;
+ }
+
+ .sub-swiper .swiper-wrapper .swiper-slide img{
+  width: 100%;
+  height: 100%;
+ }
+
+ .swiper-button-next::after, .swiper-button-prev::after ,
+ .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+    content: "" !important;
+}
 
 .content h1 {
   font-size: 24px;
@@ -1590,7 +1646,7 @@ footer .container-fluid{
   color: #28251C;
   font-size: 18px;
   font-weight: 400;
-  line-height: 26px;
+  line-height: 23.17px;
 }
 
 .content .view-detail-btn img{

@@ -22,16 +22,7 @@ export default function Modal () {
     }
   };
 
-  const getAllCategory = async () => {
-    try {
-      const data = await apiManager.getAllCategory();
-      setCategories(data.data);
-      const firstRender = await apiManager.getCategoryList(data.data[0].id);
-      setBooks(firstRender.data);
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
+
 
   const tabChange = async (id) => {
     const data = await apiManager.getCategoryList(id);
@@ -39,9 +30,6 @@ export default function Modal () {
     console.log("CategoryList", data);
   };
 
-  useEffect(() => {
-    getAllCategory();
-  }, []);
 
   return (
     <div class="home-recommend-tabs">

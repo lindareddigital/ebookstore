@@ -6,6 +6,8 @@ import useCalc from 'src/pages/components/atoms/useCalc';
 import MobileCard from 'src/pages/components/MobileCard';
 import DesktopCard from 'src/pages/components/DesktopCard';
 import Desc from "./Desc";
+import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
@@ -14,23 +16,19 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import Modal from "react-bootstrap/Modal";
 import { Swiper, SwiperSlide } from "swiper/react";
+import useSwiperFunc from "src/hooks/useSwiperFunc";
+
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 
-export default function Detail({ data }) {
+export default function Detail({ data, detail }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { mobile } = useCalc();
 
   const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
-
-
-
 
   const [lgShow, setLgShow] = useState(false);
 
@@ -42,10 +40,26 @@ export default function Detail({ data }) {
   const filteredBooks = books.filter((book) => {
     return book.image.id === id;
   });
-
+  // console.log("678", detail);
   const item = Object.assign({}, ...filteredBooks);
+  // console.log("29", router.query.slug, books);
 
-  console.log("29", router.query.slug,books);
+    const swiperRef = useRef(null);
+
+  const { next, previous } = useSwiperFunc(swiperRef);
+  const [swiperIndex, setSwiperIndex] = useState(0);
+
+  const getSwiper = (swiper) => {
+    if (swiperRef.current !== swiper) {
+      swiperRef.current = swiper;
+    }
+  };
+
+  const onRealIndexChange = (swiper) => {
+    if (swiper.realIndex !== swiperIndex) {
+      setSwiperIndex(swiper.realIndex);
+    }
+  };
 
   return (
     <div class="detail-page">
@@ -68,16 +82,16 @@ export default function Detail({ data }) {
               />
 
               <div class="info">
-                <h1>{item.title}</h1>
+                <h1>{detail.title}</h1>
                 <ul>
                   <li>
-                    作者：<Link href="">{item.Author}</Link>
+                    作者：<Link href="">{detail.Author}</Link>
                   </li>
                   <li>
-                    繪者：<Link href="/">{item.Illustrator}</Link>
+                    繪者：<Link href="/">{detail.illustrator}</Link>
                   </li>
-                  <li>出版日期：{item.PublicationDate}</li>
-                  <li>定價：{item.Price}元</li>
+                  <li>出版日期：{detail.publicationDate}</li>
+                  <li>定價：{detail.price}元</li>
                 </ul>
                 <div className="button-group">
                   <div className="btn button-radius">
@@ -130,74 +144,52 @@ export default function Detail({ data }) {
             >
               <Modal.Header closeButton>
                 <Modal.Title id="example-modal-sizes-title-lg">
-                  Large Modal
+                  {detail.title}
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <img
-                  src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                  className="primary-img"
-                />
-
-                <div className="gallery"></div>
-
                 <Swiper
-                  style={{
-                    "--swiper-navigation-color": "#fff",
-                    "--swiper-pagination-color": "#fff",
-                  }}
+                  onSwiper={getSwiper}
+                  ref={swiperRef}
                   loop={true}
-                  spaceBetween={10}
-                  navigation={true}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  modules={[FreeMode, Navigation, Thumbs]}
-                  className="mySwiper2"
+                  slidesPerView={"auto"}
+                  className="primary-swiper"
+                  onSnapIndexChange={onRealIndexChange}
                 >
                   <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                    <img
+                      className="primary-img"
+                      src="https://swiperjs.com/demos/images/nature-1.jpg"
+                    />
                   </SwiperSlide>
                   <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    <img
+                      className="primary-img"
+                      src="https://swiperjs.com/demos/images/nature-2.jpg"
+                    />
                   </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                  </SwiperSlide>
+                  <div onClick={next} class="swiper-button-next">
+                    <NextIcon />
+                  </div>
+                  <div onClick={previous} class="swiper-button-prev">
+                    <PrevIcon />
+                  </div>
                 </Swiper>
                 <Swiper
-                  onSwiper={setThumbsSwiper}
+                  onSwiper={getSwiper}
+                  ref={swiperRef}
                   loop={true}
-                  spaceBetween={10}
-                  slidesPerView={4}
-                  freeMode={true}
-                  watchSlidesProgress={true}
-                  modules={[FreeMode, Navigation, Thumbs]}
-                  className="mySwiper"
+                  slidesPerView={"auto"}
+                  direction={'vertical'}
+                  className="sub-swiper"
+                  onSnapIndexChange={onRealIndexChange}
                 >
-                  <SwiperSlide>
+                  <SwiperSlide key={`1`}>
+                    <div className="index-area">1</div>
                     <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
                   </SwiperSlide>
-                  <SwiperSlide>
+                  <SwiperSlide key={`2`}>
+                    <div className="index-area">2</div>
                     <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
                   </SwiperSlide>
                   <SwiperSlide>
@@ -206,6 +198,13 @@ export default function Detail({ data }) {
                   <SwiperSlide>
                     <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
                   </SwiperSlide>
+
+                  <div onClick={next} class="swiper-button-next">
+                    <NextIcon />
+                  </div>
+                  <div onClick={previous} class="swiper-button-prev">
+                    <PrevIcon />
+                  </div>
                 </Swiper>
               </Modal.Body>
             </Modal>
@@ -224,7 +223,7 @@ export default function Detail({ data }) {
             <DesktopCard category={item.Category} />
           ))} */}
 
-        <Desc />
+        <Desc detail={detail} />
       </div>
     </div>
   );
@@ -234,7 +233,10 @@ export default function Detail({ data }) {
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
 
-  // console.log("datadatadatadata", result);
+  const detail = await apiManager.getDetail();
 
-  return { props: { data: result } };
+
+  console.log("detaildetail", detail);
+
+  return { props: { data: result, detail: detail.data[0] } };
 };

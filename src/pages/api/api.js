@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-// const Endpoint = 'http://localhost:8055';
-const Endpoint = "https://directus-cms.vicosys.com.hk/items/pages";
+// const Endpoint = "https://directus-cms.vicosys.com.hk/items/pages";
+const Endpoint = "https://directus-cms.vicosys.com.hk";
 
 const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 
@@ -29,13 +29,13 @@ class ApiManager {
     console.log('fetchEndpoint', fetchEndpoint);
     // await this.getToken();
     const response = await fetch(fetchEndpoint, {
-      method: 'GET',
-      mode: 'cors',
+      method: "GET",
+      mode: "cors",
       headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${ApiManager.token}`,
-        ...customHeader
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+        ...customHeader,
+      },
     });
 
     const result = await response.json();
@@ -71,13 +71,13 @@ class ApiManager {
     // await this.getToken();
     const response = await fetch(fetchEndpoint, {
       method,
-      mode: 'cors',
+      mode: "cors",
       headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${ApiManager.token}`,
-        ...customHeader
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+        ...customHeader,
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     const result = await response.json();
@@ -211,8 +211,10 @@ class ApiManager {
     return this.get({path:`/items/haibin?filter[Category][_eq]=飲食`}); 
   }
 
-  getDetail = (id) =>{
-    return this.get({path: `items/dayi?&filter[id]=${id}`,}); 
+  getDetail = () =>{
+    return this.get({
+      path: `/items/product`,
+    }); 
   }
 
 }

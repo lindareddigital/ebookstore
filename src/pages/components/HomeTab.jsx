@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
 
@@ -66,8 +68,12 @@ export default function HomeTab({ data }) {
             </div>
           ))} */}
             <div className="swiper-button-group">
-              <div onClick={previous} class="swiper-button-prev"></div>
-              <div onClick={next} class="swiper-button-next"></div>
+              <div onClick={previous} class="swiper-button-prev">
+                <PrevIcon />
+              </div>
+              <div onClick={next} class="swiper-button-next">
+                <NextIcon />
+              </div>
             </div>
           </Nav>
           <div className="mobile-tabs">
@@ -88,46 +94,48 @@ export default function HomeTab({ data }) {
           </div>
           <Tab.Content>
             <Swiper
-            onSwiper={getSwiper}
-            ref={swiperRef}
-            loop={true}
-            className={`booklist-carousel`}
-            slidesPerView={"auto"}
-            onSnapIndexChange={onRealIndexChange}
-          >
-            <div class="swiper-wrapper booklist-carousel-inner">
-              {books?.map((item) => {
-                  {/* console.log(
+              onSwiper={getSwiper}
+              ref={swiperRef}
+              loop={true}
+              className={`booklist-carousel`}
+              slidesPerView={"auto"}
+              onSnapIndexChange={onRealIndexChange}
+            >
+              <div class="swiper-wrapper booklist-carousel-inner">
+                {books?.map((item) => {
+                  {
+                    /* console.log(
                     "131",
                     item,
                     item.image.id
-                  ); */}
+                  ); */
+                  }
 
-                return (
-                  <SwiperSlide
-                    className="swiper-slide"
-                    key={`${item.image.id}`}
-                  >
-                    <Link
+                  return (
+                    <SwiperSlide
+                      className="swiper-slide"
                       key={`${item.image.id}`}
-                      href={{ pathname: `/detail/${item.image.id}` }}
-                      className={``}
                     >
-                      <div class="book-item">
-                        <img
-                          src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                          className=""
-                          alt={item.title}
-                        />
-                        <div className="desc mt-2">{item.title}</div>
-                        <div className="price-num">$ {item.Price}</div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                );
-              })}
-            </div>
-          </Swiper>
+                      <Link
+                        key={`${item.image.id}`}
+                        href={{ pathname: `/detail/${item.image.id}` }}
+                        className={``}
+                      >
+                        <div class="book-item">
+                          <img
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            className=""
+                            alt={item.title}
+                          />
+                          <div className="desc mt-2">{item.title}</div>
+                          <div className="price-num">$ {item.Price}</div>
+                        </div>
+                      </Link>
+                    </SwiperSlide>
+                  );
+                })}
+              </div>
+            </Swiper>
           </Tab.Content>
         </Tab.Container>
       </div>
