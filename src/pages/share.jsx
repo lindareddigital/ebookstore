@@ -6,30 +6,25 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import apiManager from "src/pages/api/api";
 
 
-// const getData = cache(async () => {
-//   try {
-//     const result = await getCategory();
-//     return result;
-//   } catch (e) {
-//     console.log('error', e);
-//   }
-// });
+export default function Share({ data }) {
 
+  console.log(
+    "Share",
+    data.data.pages[0].blocks,
+    data.data.pages[0].blocks[3].item.posts
+  );
 
+  const column = data.data.pages[0].blocks[3].item.posts;
+  const news = data.data.pages[0].blocks[3].item.posts;
 
-
-
-export default function Share() {
-
-  
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    
+  const allTags = column.reduce((acc, post) => {
+    return acc.concat(post.posts_id.tags);
   }, []);
 
+  console.log(allTags);
 
   return (
     <div class="share-page">
@@ -42,7 +37,11 @@ export default function Share() {
         <div class="">
           <div class="news-tabs">
             <nav class="container-fluid">
-              <div class="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
+              <div
+                class="nav nav-tabs more-nav-tabs"
+                id="nav-tab"
+                role="tablist"
+              >
                 <img class="topright" src="/icons/leftboxicon.svg"></img>
                 <button
                   class="nav-link active"
@@ -86,74 +85,47 @@ export default function Share() {
                     <option value="4">4.購書問題</option>
                   </select>
                 </div>
-                <div class="share-list-item overflow-hidden">
-                  <Link href="/" class="post-thumb">
-                    <img
-                      class="q-img__image"
-                      src="https://www.froghome.org/imgs/post-cover-1363.jpg"
-                      alt=""
-                    ></img>
-                  </Link>
-                  <div class="post-info">
-                    <h4 class="post-title">
-                      <Link href="/" class="">
-                        2023 年度志工大會報名開跑！
-                      </Link>
-                    </h4>
-                    <p class="post-excerpt">
-                      專欄主題: 1.
-                      新知分享:專業文章撰文或邀稿(如自然環境、學校教師合作文章)
-                      2.文學分享:語文文學類撰文或邀稿 3.趣聞分享:
-                      (1)當時有趣新聞分享(如與我們書籍相關的諾貝爾得獎、宇宙星球知識)
-                      (2)所見所聞分享(例如世界地球日、甲蟲季、老鷹季、書店分享等)
-                      4.開放自由投稿:加強與老師、學生連結
-                    </p>
-                    <div class="post-meta">
-                      <Link href="/posts/events" class="post-meta-tag category">
-                        活動訊息
-                      </Link>
-                      <div class="post-meta-date">
-                        2023/09/22
-                        <div className="dot"></div>
-                        小編
+
+                {column?.map((item) => {
+                  return (
+                    <>
+                      <div class="share-list-item overflow-hidden">
+                        <Link href="/" class="post-thumb">
+                          <img
+                            class="q-img__image"
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            alt=""
+                          ></img>
+                        </Link>
+                        <div class="post-info">
+                          <h4 class="post-title">
+                            <Link href="/" class="">
+                              {item.posts_id.title}
+                            </Link>
+                          </h4>
+                          <p class="post-excerpt">專欄主題:</p>
+                          <div class="post-meta">
+                            {item.posts_id.tags?.map((item) => {
+                              return (
+                                <Link
+                                  href="/posts/events"
+                                  class="post-meta-tag category"
+                                >
+                                  {item}
+                                </Link>
+                              );
+                            })}
+                            <div class="post-meta-date">
+                              2023/09/22
+                              <div className="dot"></div>
+                              小編
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="share-list-item overflow-hidden">
-                  <Link href="/" class="post-thumb">
-                    <img
-                      class="q-img__image"
-                      src="https://www.froghome.org/imgs/post-cover-1363.jpg"
-                      alt=""
-                    ></img>
-                  </Link>
-                  <div class="post-info">
-                    <h4 class="post-title">
-                      <Link href="/" class="">
-                        2023 年度志工大會報名開跑！
-                      </Link>
-                    </h4>
-                    <p class="post-excerpt">
-                      專欄主題: 1.
-                      新知分享:專業文章撰文或邀稿(如自然環境、學校教師合作文章)
-                      2.文學分享:語文文學類撰文或邀稿 3.趣聞分享:
-                      (1)當時有趣新聞分享(如與我們書籍相關的諾貝爾得獎、宇宙星球知識)
-                      (2)所見所聞分享(例如世界地球日、甲蟲季、老鷹季、書店分享等)
-                      4.開放自由投稿:加強與老師、學生連結
-                    </p>
-                    <div class="post-meta">
-                      <Link href="/posts/events" class="post-meta-tag category">
-                        活動訊息
-                      </Link>
-                      <div class="post-meta-date">
-                        2023/09/22
-                        <div className="dot"></div>
-                        小編
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    </>
+                  );
+                })}
               </div>
 
               <div class="posts-categories">
@@ -180,80 +152,95 @@ export default function Share() {
                 id="nav-profile"
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
-              ></div>
-              <div
+              >
+                {news?.map((item) => {
+                  return (
+                    <>
+                      <div class="share-list-item overflow-hidden">
+                        <Link href="/" class="post-thumb">
+                          <img
+                            class="q-img__image"
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            alt=""
+                          ></img>
+                        </Link>
+                        <div class="post-info">
+                          <h4 class="post-title">
+                            <Link href="/" class="">
+                              {item.posts_id.title}
+                            </Link>
+                          </h4>
+                          <p class="post-excerpt">專欄主題:</p>
+                          <div class="post-meta">
+                            {item.posts_id.tags?.map((item) => {
+                              return (
+                                <Link
+                                  href="/posts/events"
+                                  class="post-meta-tag category"
+                                >
+                                  {item}
+                                </Link>
+                              );
+                            })}
+                            <div class="post-meta-date">
+                              2023/09/22
+                              <div className="dot"></div>
+                              小編
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
+              </div>
+              {/* <div
                 class="tab-pane fade"
                 id="nav-contact"
                 role="tabpanel"
                 aria-labelledby="nav-contact-tab"
               >
-                <div class="share-list-item overflow-hidden">
-                  <Link href="/" class="post-thumb">
-                    <img
-                      class="q-img__image"
-                      src="https://www.froghome.org/imgs/post-cover-1363.jpg"
-                      alt=""
-                    ></img>
-                  </Link>
-                  <div class="post-info">
-                    <h4 class="post-title">
-                      <Link href="/" class="">
-                        2023 年度志工大會報名開跑！
-                      </Link>
-                    </h4>
-                    <p class="post-excerpt">
-                      專欄主題: 1.
-                      新知分享:專業文章撰文或邀稿(如自然環境、學校教師合作文章)
-                      2.文學分享:語文文學類撰文或邀稿 3.趣聞分享:
-                      (1)當時有趣新聞分享(如與我們書籍相關的諾貝爾得獎、宇宙星球知識)
-                      (2)所見所聞分享(例如世界地球日、甲蟲季、老鷹季、書店分享等)
-                      4.開放自由投稿:加強與老師、學生連結
-                    </p>
-                    <div class="post-meta">
-                      <Link href="/posts/events" class="post-meta-tag category">
-                        活動訊息
-                      </Link>
-                      <div class="post-meta-date">
-                        2023/09/22 <div className="dot"></div>
-                        小編
+                {news?.map((item) => {
+                  return (
+                    <>
+                      <div class="share-list-item overflow-hidden">
+                        <Link href="/" class="post-thumb">
+                          <img
+                            class="q-img__image"
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            alt=""
+                          ></img>
+                        </Link>
+                        <div class="post-info">
+                          <h4 class="post-title">
+                            <Link href="/" class="">
+                              {item.posts_id.title}
+                            </Link>
+                          </h4>
+                          <p class="post-excerpt">專欄主題:</p>
+                          <div class="post-meta">
+                            {item.posts_id.tags?.map((item) => {
+                              return (
+                                <Link
+                                  href="/posts/events"
+                                  class="post-meta-tag category"
+                                >
+                                  {item}
+                                </Link>
+                              );
+                            })}
+                            <div class="post-meta-date">
+                              2023/09/22
+                              <div className="dot"></div>
+                              小編
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="share-list-item overflow-hidden">
-                  <Link href="/" class="post-thumb">
-                    <img
-                      class="q-img__image"
-                      src="https://www.froghome.org/imgs/post-cover-1363.jpg"
-                      alt=""
-                    ></img>
-                  </Link>
-                  <div class="post-info">
-                    <h4 class="post-title">
-                      <Link href="/" class="">
-                        2023 年度志工大會報名開跑！
-                      </Link>
-                    </h4>
-                    <p class="post-excerpt">
-                      專欄主題: 1.
-                      新知分享:專業文章撰文或邀稿(如自然環境、學校教師合作文章)
-                      2.文學分享:語文文學類撰文或邀稿 3.趣聞分享:
-                      (1)當時有趣新聞分享(如與我們書籍相關的諾貝爾得獎、宇宙星球知識)
-                      (2)所見所聞分享(例如世界地球日、甲蟲季、老鷹季、書店分享等)
-                      4.開放自由投稿:加強與老師、學生連結
-                    </p>
-                    <div class="post-meta">
-                      <Link href="/posts/events" class="post-meta-tag category">
-                        活動訊息
-                      </Link>
-                      <div class="post-meta-date">
-                        2023/09/22 <div className="dot"></div>
-                        小編
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </>
+                  );
+                })}
+              </div> */}
             </div>
 
             <div class="">
@@ -272,5 +259,12 @@ export default function Share() {
       </div>
     </div>
   );
-
 }
+
+export const getServerSideProps = async () => {
+  const result = await apiManager.getNew();
+
+  console.log("datadatadatadata111", result);
+
+  return { props: { data: result } };
+};

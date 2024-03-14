@@ -81,7 +81,7 @@ export default function Home({data}) {
             <div className="trangle"></div>
           </div>
           <div class="wrapper">
-            {posts?.map((item,index) => {
+            {posts?.map((item, index) => {
               return (
                 <>
                   <div class="e-banner-product">
@@ -97,11 +97,15 @@ export default function Home({data}) {
               );
             })}
           </div>
-
-          <div className="read-more-btn">
-            查看更多
-            <img class="" src="/icons/viewmore.svg"></img>
-          </div>
+          <Link
+            href='/share'
+            className={``}
+          >
+            <div className="read-more-btn">
+              查看更多
+              <img class="" src="/icons/viewmore.svg"></img>
+            </div>
+          </Link>
           <img class="newsbg" src="/icons/newsbg.svg"></img>
         </div>
         <div
