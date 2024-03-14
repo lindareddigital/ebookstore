@@ -11,15 +11,13 @@ import GridList from "src/pages/listing/GridList";
 import { useRouter } from "next/router";
 
 
-export default function Singlepage() {
+export default function Singlepage({ data, detail }) {
   const { mobile } = useCalc();
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState([]);
 
-   const router = useRouter();
-   const page = router.query.page;
-
-
+  const router = useRouter();
+  const page = router.query.page;
 
   return (
     <div class="single-page">
@@ -84,7 +82,7 @@ export default function Singlepage() {
 
       <div class="container-fluid">
         <div class="main-body">
-          <ListAside categories={categories} />
+          <ListAside data={data} />
 
           <div class="right-side">
             <div class="block-title">系列：X萬獸探險隊</div>
@@ -137,7 +135,6 @@ export default function Singlepage() {
           <div class="recipe-card">
             <img
               src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
               // alt={item.title}
             ></img>
             <div class="recipe-desc">item.Title</div>
@@ -145,21 +142,19 @@ export default function Singlepage() {
           <div class="recipe-card">
             <img
               src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
+              // src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
             ></img>
             <div class="recipe-desc">item.Title</div>
           </div>
           <div class="recipe-card">
             <img
               src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
             ></img>
             <div class="recipe-desc">item.Title</div>
           </div>
           <div class="recipe-card">
             <img
               src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // src={`http://localhost:8055/assets/${item.PrimaryImage}`}
             ></img>
             <div class="recipe-desc">item.Title</div>
           </div>
@@ -171,5 +166,14 @@ export default function Singlepage() {
       <MediaBlock />
     </div>
   );
-
 }
+
+
+export const getServerSideProps = async () => {
+  const data = await apiManager.getNew();
+  const detail = await apiManager.getDetail();
+
+  console.log("datadatadatadata", data);
+
+  return { props: { data, detail } };
+};

@@ -97,10 +97,7 @@ export default function Home({data}) {
               );
             })}
           </div>
-          <Link
-            href='/share'
-            className={``}
-          >
+          <Link href="/share" className={``}>
             <div className="read-more-btn">
               查看更多
               <img class="" src="/icons/viewmore.svg"></img>
@@ -190,7 +187,7 @@ export default function Home({data}) {
       </div>
 
       <div class="main-body">
-        {/* <ListAside categories={categories} /> */}
+        <ListAside data={data} />
         <HomeTab data={data} />
         {/* <HomeTabTwo /> */}
 
@@ -219,13 +216,13 @@ const tabChange = async (id) => {
 
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
-  // const books = await apiManager.getAllBooks();
+  const detail = await apiManager.getDetail();
   // const books = null;
 
   console.log("datadatadatadata", result);
 
  
 
-  return { props: { data: result} };
+  return { props: { data: result, detail } };
 };
 

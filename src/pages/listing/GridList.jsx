@@ -5,7 +5,7 @@ import { useEffect, useRef,useState } from 'react';
 export default function GridList({ books }) {
   const [item, setItem] = useState({});
 
-  console.log("bbb", books);
+  // console.log("gridlist", books);
 
   return (
     <>
@@ -25,12 +25,12 @@ export default function GridList({ books }) {
                     <img src="/icons/heart.svg" alt="" />
                   </button>
                   <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className=""
                     alt={item.title}
                   />
                   <div className="desc">{item.title}</div>
-                  <div className="price-num">{item.Price}</div>
+                  <div className="price-num">＄{item.price}</div>
                 </div>
               </Link>
             );

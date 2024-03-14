@@ -213,7 +213,7 @@ class ApiManager {
 
   getDetail = () =>{
     return this.get({
-      path: `/items/product`,
+      path: `/items/product/?fields[]=*&fields[]=images.*`,
     }); 
   }
 

@@ -11,12 +11,13 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
-export default function Listing({ data }) {
+export default function Listing({ data, detail }) {
   const [panel, setPanel] = useState(false);
 
   const [currentView, setCurrentView] = useState("grid");
 
-  const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
+  // const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
+  const books = detail.data;
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -45,11 +46,9 @@ export default function Listing({ data }) {
       <Breadcrumb />
       <div class="container-fluid">
         <div class="main-body">
-
           <SidebarWrapper />
 
-          <ListAside />
-          {/* categories={categories} */}
+          <ListAside data={data} detail={detail} />
           <div class="right-side">
             <div class="block-title">系列：X萬獸探險隊</div>
             <div class="listing-toolbar">
@@ -90,9 +89,7 @@ export default function Listing({ data }) {
 
             {currentView === "grid" && <GridList books={books} />}
 
-            {currentView === "list" &&
-                <ListList books={books} />}
-          
+            {currentView === "list" && <ListList books={books} />}
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>
@@ -182,7 +179,8 @@ export default function Listing({ data }) {
 
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
+  const detail = await apiManager.getDetail();
 
 
-  return { props: { data: result } };
+  return { props: { data: result, detail } };
 };

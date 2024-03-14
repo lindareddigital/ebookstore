@@ -12,28 +12,25 @@ export default function ListList({ books }) {
           {books?.map((item) => {
             return (
               <Link
-                key={`${item.image.id}`}
-                href={{ pathname: `/detail/${item.image.id}` }}
+                key={`${item.id}`}
+                href={{ pathname: `/detail/${item.id}` }}
                 className={``}
               >
                 <li class="list-view-item">
+                  <button class="wish-btn">
+                    <img src="/icons/heart.svg" alt="" />
+                  </button>
                   <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className=""
                     alt={item.title}
                   />
                   <div className="textarea">
                     <div className="title">{item.title}</div>
-                    <div className="desc">
-                      眾所期待的X萬獸探險隊回來囉!
-                      還記得勇敢的大勇、可靠的阿寶、聰明的豆丁，
-                      以及好學的柔柔、具洞察力的土土、可以與動物溝通的大森嗎?
-                      讓大家一起展開全新的旅程， 一探人體的奧祕!
-                      活力運動學校的菁
-                    </div>
+                    <div className="desc">{item.description}</div>
                   </div>
                   <div className="">
-                    <div className="price-num">{item.Price}</div>
+                    <div className="price-num">＄{item.price}</div>
 
                     <div className="btn button-radius">
                       <img src="/icons/heart.svg" alt="" />

@@ -194,53 +194,6 @@ export default function Share({ data }) {
                   );
                 })}
               </div>
-              {/* <div
-                class="tab-pane fade"
-                id="nav-contact"
-                role="tabpanel"
-                aria-labelledby="nav-contact-tab"
-              >
-                {news?.map((item) => {
-                  return (
-                    <>
-                      <div class="share-list-item overflow-hidden">
-                        <Link href="/" class="post-thumb">
-                          <img
-                            class="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                            alt=""
-                          ></img>
-                        </Link>
-                        <div class="post-info">
-                          <h4 class="post-title">
-                            <Link href="/" class="">
-                              {item.posts_id.title}
-                            </Link>
-                          </h4>
-                          <p class="post-excerpt">專欄主題:</p>
-                          <div class="post-meta">
-                            {item.posts_id.tags?.map((item) => {
-                              return (
-                                <Link
-                                  href="/posts/events"
-                                  class="post-meta-tag category"
-                                >
-                                  {item}
-                                </Link>
-                              );
-                            })}
-                            <div class="post-meta-date">
-                              2023/09/22
-                              <div className="dot"></div>
-                              小編
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
-              </div> */}
             </div>
 
             <div class="">

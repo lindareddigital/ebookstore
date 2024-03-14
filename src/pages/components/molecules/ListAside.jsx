@@ -4,30 +4,35 @@ import apiManager from "src/pages/api/api";
 import Link from "next/link";
 import useCalc from "src/pages/components/atoms/useCalc";
 
-export default function ListAside({ categories }) {
+export default function ListAside({ data, detail }) {
   const { width, mobile } = useCalc();
 
-  const [items, setItems] = useState(null);
+  console.log("data={data}data={data}", data.data.product, detail.data);
 
+  const series = detail.data.reduce((acc, item) => {
+    return acc.concat(item.series);
+  }, []);
+
+  // console.log(series);
 
   return (
     <aside class="list-aside">
       <ul class="">
         <div className="title">依類別搜尋</div>
-        {/* {categories.map((item) => (
-          <li key={item.id}>
+        {series.map((item, index) => (
+          <li key={index}>
             <Link
-              key={`${item.id}`}
+              key={`${index}`}
               href={{
-                pathname: `/listing/${item.id}`,
-                query: { id: item.id },
+                pathname: `/listing/${item}`,
+                query: { id: item },
               }}
             >
-              {item.Title}
+              {item}
             </Link>
           </li>
-        ))} */}
-        <li>
+        ))}
+        {/* <li>
           <Link href="">知識漫畫</Link>
         </li>
         <li>
@@ -35,13 +40,13 @@ export default function ListAside({ categories }) {
         </li>
         <li>
           <Link href="">益智桌遊</Link>
-        </li>
+        </li> */}
       </ul>
 
       <ul>
         <div className="title">依系列搜尋</div>
 
-        <li>
+        {/* <li>
           <Link href="">X星際探險隊</Link>
         </li>
         <li>
@@ -73,7 +78,7 @@ export default function ListAside({ categories }) {
         </li>
         <li>
           <Link href="">知識王</Link>
-        </li>
+        </li> */}
       </ul>
     </aside>
   );

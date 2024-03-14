@@ -15,24 +15,6 @@ export default function MobileCard({props}) {
   const [item, setItem] = useState(null);
 
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await apiManager.getCategoryList(props.id);
-        setItem(data.data);
-        // console.log('88', data.data);
-        return data.data;
-      } catch (e) {
-        console.log('error', e);
-      }
-    };
-    getData();
-
-    // console.log('77', props);
-    // console.log('item', item);
-  }, [props]);
-
-
   return(
     <>
     {/* {mobile && (
@@ -51,7 +33,7 @@ export default function MobileCard({props}) {
                   className={``}
                 >
                   <div class="book-item">
-                    <img src={`http://localhost:8055/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
+                    <img src={`/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
                     <div className="desc">{item.Title}</div>
                     <div className="price-num">{item.Price}</div>
                   </div>

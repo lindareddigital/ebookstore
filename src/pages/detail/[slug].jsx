@@ -35,19 +35,17 @@ export default function Detail({ data, detail }) {
 
   const [lgShow, setLgShow] = useState(false);
 
-  const [categories, setCategories] = useState([]);
-
   const router = useRouter();
   const id = router.query.slug;
 
-  const filteredBooks = books.filter((book) => {
-    return book.image.id === id;
+  const item = detail.find((item) => {
+    return item.id === id;
   });
-  // console.log("678", detail);
-  const item = Object.assign({}, ...filteredBooks);
-  // console.log("29", router.query.slug, books);
 
-    const swiperRef = useRef(null);
+   console.log("detaildetail", detail, item);
+
+
+  const swiperRef = useRef(null);
 
   const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
@@ -67,7 +65,7 @@ export default function Detail({ data, detail }) {
   return (
     <div class="detail-page">
       <Head>
-        <title>detail page</title>
+        <title>{item.title}</title>
       </Head>
       <Navbar />
       <MenuBar />
@@ -79,22 +77,22 @@ export default function Detail({ data, detail }) {
             <>
               <img
                 onClick={() => setLgShow(true)}
-                src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 className="primary-img"
-                alt={item.image.id}
+                alt={item.cover_image}
               />
 
               <div class="info">
-                <h1>{detail.title}</h1>
+                <h1>{item.title}</h1>
                 <ul>
                   <li>
-                    作者：<Link href="">{detail.Author}</Link>
+                    作者：<Link href="">{item.Author}</Link>
                   </li>
                   <li>
-                    繪者：<Link href="/">{detail.illustrator}</Link>
+                    繪者：<Link href="/">{item.illustrator}</Link>
                   </li>
-                  <li>出版日期：{detail.publicationDate}</li>
-                  <li>定價：{detail.price}元</li>
+                  <li>出版日期：{item.publicationDate}</li>
+                  <li>定價：{item.price}元</li>
                 </ul>
                 <div className="button-group">
                   <div className="btn button-radius">
@@ -137,7 +135,6 @@ export default function Detail({ data, detail }) {
                 </li>
               </ul>
             </>
-            {/* )} */}
 
             <Modal
               size="lg"
@@ -147,7 +144,7 @@ export default function Detail({ data, detail }) {
             >
               <Modal.Header closeButton>
                 <Modal.Title id="example-modal-sizes-title-lg">
-                  {detail.title}
+                  {item.title}
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -159,18 +156,17 @@ export default function Detail({ data, detail }) {
                   className="primary-swiper"
                   onSnapIndexChange={onRealIndexChange}
                 >
-                  <SwiperSlide>
-                    <img
-                      className="primary-img"
-                      src="https://swiperjs.com/demos/images/nature-1.jpg"
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      className="primary-img"
-                      src="https://swiperjs.com/demos/images/nature-2.jpg"
-                    />
-                  </SwiperSlide>
+                  {item.images.map((item) => {
+                    console.log(item);
+                    return (
+                      <SwiperSlide key={item.product_id}>
+                        <img
+                          className="primary-img"
+                          src={`https://directus-cms.vicosys.com.hk/assets/${item.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
                   <div onClick={next} class="swiper-button-next">
                     <NextIcon />
                   </div>
@@ -183,24 +179,21 @@ export default function Detail({ data, detail }) {
                   ref={swiperRef}
                   loop={true}
                   slidesPerView={"auto"}
-                  direction={'vertical'}
+                  direction={"vertical"}
                   className="sub-swiper"
                   onSnapIndexChange={onRealIndexChange}
                 >
-                  <SwiperSlide key={`1`}>
-                    <div className="index-area">1</div>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide key={`2`}>
-                    <div className="index-area">2</div>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                  </SwiperSlide>
+                  {item.images.map((i) => {
+                    console.log(i);
+                    return (
+                      <SwiperSlide key={i.product_id}>
+                        <div className="index-area">{i.id}</div>
+                        <img
+                          src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
 
                   <div onClick={next} class="swiper-button-next">
                     <NextIcon />
@@ -235,11 +228,10 @@ export default function Detail({ data, detail }) {
 
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
-
   const detail = await apiManager.getDetail();
 
 
   console.log("detaildetail", detail);
 
-  return { props: { data: result, detail: detail.data[0] } };
+  return { props: { data: result, detail: detail.data } };
 };
