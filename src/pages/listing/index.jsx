@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import GridList from "./GridList";
@@ -19,6 +19,18 @@ export default function Listing({ data, detail }) {
   // const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
   const books = detail.data;
 
+
+  // const filterData = useMemo(() => {
+  //   if (!books) {
+  //     return [];
+  //   }
+  //   const newData = filter.find((item) => {
+  //     return item.series === query;
+  //   });
+
+  //   return newData;
+  // }, [query]);
+
   const handleViewChange = (view) => {
     setCurrentView(view);
   };
@@ -30,6 +42,8 @@ export default function Listing({ data, detail }) {
   const openPanel = () => {
     setPanel(true);
   };
+
+  
 
   return (
     <div class="listing-page">
@@ -47,7 +61,7 @@ export default function Listing({ data, detail }) {
       <div class="container-fluid">
         <div class="main-body">
           <SidebarWrapper />
-
+          {/* query={query} */}
           <ListAside data={data} detail={detail} />
           <div class="right-side">
             <div class="block-title">系列：X萬獸探險隊</div>

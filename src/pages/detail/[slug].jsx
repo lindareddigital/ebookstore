@@ -1,5 +1,5 @@
 import apiManager from 'src/pages/api/api';
-import { useEffect, useRef,useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useCalc from 'src/pages/components/atoms/useCalc';
@@ -8,32 +8,22 @@ import DesktopCard from 'src/pages/components/DesktopCard';
 import Desc from "./Desc";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
+import GalleryModal from "src/pages/components/GalleryModal";
+
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-import Modal from "react-bootstrap/Modal";
-import { Swiper, SwiperSlide } from "swiper/react";
-import useSwiperFunc from "src/hooks/useSwiperFunc";
 
-// Import Swiper styles
-import 'swiper/css';
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 
 export default function Detail({ data, detail }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { mobile } = useCalc();
+  const [show, setShow] = useState(false);
 
   const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
 
-  const [lgShow, setLgShow] = useState(false);
 
   const router = useRouter();
   const id = router.query.slug;
@@ -45,22 +35,10 @@ export default function Detail({ data, detail }) {
    console.log("detaildetail", detail, item);
 
 
-  const swiperRef = useRef(null);
+  
 
-  const { next, previous } = useSwiperFunc(swiperRef);
-  const [swiperIndex, setSwiperIndex] = useState(0);
 
-  const getSwiper = (swiper) => {
-    if (swiperRef.current !== swiper) {
-      swiperRef.current = swiper;
-    }
-  };
-
-  const onRealIndexChange = (swiper) => {
-    if (swiper.realIndex !== swiperIndex) {
-      setSwiperIndex(swiper.realIndex);
-    }
-  };
+ 
 
   return (
     <div class="detail-page">
@@ -76,7 +54,7 @@ export default function Detail({ data, detail }) {
           <div class="content">
             <>
               <img
-                onClick={() => setLgShow(true)}
+                onClick={() => setShow(true)}
                 src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 className="primary-img"
                 alt={item.cover_image}
@@ -136,74 +114,11 @@ export default function Detail({ data, detail }) {
               </ul>
             </>
 
-            <Modal
-              size="lg"
-              show={lgShow}
-              onHide={() => setLgShow(false)}
-              aria-labelledby="example-modal-sizes-title-lg"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title id="example-modal-sizes-title-lg">
-                  {item.title}
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Swiper
-                  onSwiper={getSwiper}
-                  ref={swiperRef}
-                  loop={true}
-                  slidesPerView={"auto"}
-                  className="primary-swiper"
-                  onSnapIndexChange={onRealIndexChange}
-                >
-                  {item.images.map((item) => {
-                    console.log(item);
-                    return (
-                      <SwiperSlide key={item.product_id}>
-                        <img
-                          className="primary-img"
-                          src={`https://directus-cms.vicosys.com.hk/assets/${item.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                        />
-                      </SwiperSlide>
-                    );
-                  })}
-                  <div onClick={next} class="swiper-button-next">
-                    <NextIcon />
-                  </div>
-                  <div onClick={previous} class="swiper-button-prev">
-                    <PrevIcon />
-                  </div>
-                </Swiper>
-                <Swiper
-                  onSwiper={getSwiper}
-                  ref={swiperRef}
-                  loop={true}
-                  slidesPerView={"auto"}
-                  direction={"vertical"}
-                  className="sub-swiper"
-                  onSnapIndexChange={onRealIndexChange}
-                >
-                  {item.images.map((i) => {
-                    console.log(i);
-                    return (
-                      <SwiperSlide key={i.product_id}>
-                        <div className="index-area">{i.id}</div>
-                        <img
-                          src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                        />
-                      </SwiperSlide>
-                    );
-                  })}
-
-                  <div onClick={next} class="swiper-button-next">
-                    <NextIcon />
-                  </div>
-                  <div onClick={previous} class="swiper-button-prev">
-                    <PrevIcon />
-                  </div>
-                </Swiper>
-              </Modal.Body>
-            </Modal>
+            <GalleryModal
+              show={show}
+              item={item}
+              onHide={() => setShow(false)}
+            />
           </div>
         </div>
       </div>

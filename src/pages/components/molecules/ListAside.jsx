@@ -4,7 +4,7 @@ import apiManager from "src/pages/api/api";
 import Link from "next/link";
 import useCalc from "src/pages/components/atoms/useCalc";
 
-export default function ListAside({ data, detail }) {
+export default function ListAside({ data, detail, query }) {
   const { width, mobile } = useCalc();
 
   console.log("data={data}data={data}", data.data.product, detail.data);
@@ -14,6 +14,8 @@ export default function ListAside({ data, detail }) {
   }, []);
 
   // console.log(series);
+
+
 
   return (
     <aside class="list-aside">
