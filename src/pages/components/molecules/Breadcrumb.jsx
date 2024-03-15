@@ -7,10 +7,11 @@ import Link from 'next/link';
 
 
 
-export default function Breadcrumb({}) {
+export default function Breadcrumb({data}) {
 
   const [books, setBooks] = useState([]);
-  const [categories, setCategories] = useState([]);
+
+  const url = '';
 
 
   const tabChange = (async(id) => {
@@ -28,7 +29,7 @@ export default function Breadcrumb({}) {
     <div className="container-fluid">
       <nav className="breadcrumb" aria-label="breadcrumb">
         <li className="breadcrumb-item"><Link href="/" className="">首頁</Link></li>
-        <li className="breadcrumb-item"><Link aria-current="page" href="/category/1/3" className="router-link-active router-link-exact-active" >中文出版</Link></li>
+        <li className="breadcrumb-item"><Link aria-current="page" href={url} className="router-link-active router-link-exact-active" >{data}</Link></li>
       </nav>
     </div>
 

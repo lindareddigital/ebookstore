@@ -6,6 +6,7 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
+import ListAside from "src/pages/components/molecules/ListAside";
 
 export default function Home({data}) {
   // const swiperRef = useRef(null);
@@ -118,7 +119,7 @@ export default function Home({data}) {
                     type="button"
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide-to={index}
-                    className="active"
+                    // className="active"
                     aria-current={index === 0 ? "true" : ""}
                     aria-label="Slide 1"
                     className={`${index === 0 ? "active" : ""}`}
@@ -219,7 +220,7 @@ export const getServerSideProps = async () => {
   const detail = await apiManager.getDetail();
   // const books = null;
 
-  console.log("datadatadatadata", result);
+  console.log("datadatadatadata", detail);
 
  
 

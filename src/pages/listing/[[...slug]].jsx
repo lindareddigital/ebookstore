@@ -9,30 +9,32 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Listing({ data, detail }) {
   const [panel, setPanel] = useState(false);
+  const [dataFromChild, setDataFromChild] = useState("");
 
   const [currentView, setCurrentView] = useState("grid");
 
   // const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
   const books = detail.data;
 
-  const currentValue = "DEFAULT";
+  const sendDataToParent = (data) => {
+    console.log("Data from ListAside:", data);
+    setDataFromChild(data);
+  };
 
+  const filterData = useMemo(() => {
+    if (!books || dataFromChild === "") {
+      return books || [];
+    }
+    const newData = books.filter((item) => item.series === dataFromChild);
+    return newData;
+  }, [dataFromChild]);
 
-
-  // const filterData = useMemo(() => {
-  //   if (!books) {
-  //     return [];
-  //   }
-  //   const newData = filter.find((item) => {
-  //     return item.series === query;
-  //   });
-
-  //   return newData;
-  // }, [query]);
+  const series = data.data.product.reduce((acc, item) => {
+    return acc.concat(item.series);
+  }, []);
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -46,8 +48,6 @@ export default function Listing({ data, detail }) {
     setPanel(true);
   };
 
-  
-
   return (
     <div className="listing-page">
       <Navbar />
@@ -60,17 +60,19 @@ export default function Listing({ data, detail }) {
         ></img> */}
       </div>
 
-      <Breadcrumb />
       <div className="container-fluid">
         <div className="main-body">
           <SidebarWrapper />
-          {/* query={query} */}
-          <ListAside data={data} detail={detail} />
+          <ListAside
+            data={data}
+            detail={detail}
+            sendDataToParent={sendDataToParent}
+          />
           <div className="right-side">
-            <div className="block-title">系列：X萬獸探險隊</div>
+            <div className="block-title">系列： {dataFromChild}</div>
             <div className="listing-toolbar">
               <div className="amount">
-                商品清單共有<span>{books.length}</span>本
+                商品清單共有<span>{filterData.length}</span>本
               </div>
 
               <div className="right-side">
@@ -105,9 +107,9 @@ export default function Listing({ data, detail }) {
               </div>
             </div>
 
-            {currentView === "grid" && <GridList books={books} />}
+            {currentView === "grid" && <GridList books={filterData} />}
 
-            {currentView === "list" && <ListList books={books} />}
+            {currentView === "list" && <ListList books={filterData} />}
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>
@@ -118,15 +120,16 @@ export default function Listing({ data, detail }) {
                 </button>
                 <ul className="">
                   <div className="title">依類別搜尋</div>
-                  <li>
-                    <Link href="">知識漫畫</Link>
-                  </li>
-                  <li>
-                    <Link href="">兒童文學</Link>
-                  </li>
-                  <li>
-                    <Link href="">益智桌遊</Link>
-                  </li>
+                  {series.map((item, index) => (
+                    <li key={index}>
+                      <div
+                        onClick={() => sendDataToParent(item)}
+                        key={`${index}`}
+                      >
+                        {item}
+                      </div>
+                    </li>
+                  ))}
                 </ul>
 
                 <ul>
@@ -140,30 +143,6 @@ export default function Listing({ data, detail }) {
                   </li>
                   <li>
                     <Link href="">X恐龍探險隊</Link>
-                  </li>
-                  <li>
-                    <Link href="">X科幻冒險隊</Link>
-                  </li>
-                  <li>
-                    <Link href="">極限挑戰王</Link>
-                  </li>
-                  <li>
-                    <Link href="">機器人戰隊</Link>
-                  </li>
-                  <li>
-                    <Link href="">小公主成長學園</Link>
-                  </li>
-                  <li>
-                    <Link href="">世界名著</Link>
-                  </li>
-                  <li>
-                    <Link href="">超越極限</Link>
-                  </li>
-                  <li>
-                    <Link href="">魔法學園</Link>
-                  </li>
-                  <li>
-                    <Link href="">知識王</Link>
                   </li>
                 </ul>
               </div>

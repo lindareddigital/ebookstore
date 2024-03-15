@@ -7,7 +7,7 @@ export default function ContactUs() {
     <div className="contactus-page">
       <Navbar />
       <MenuBar />
-      <Breadcrumb />
+      <Breadcrumb data={"聯絡我們"} />
       <form className="form-area contact-us">
         <div className="block-title">聯絡我們</div>
         <div className="red-word">*必須填寫</div>

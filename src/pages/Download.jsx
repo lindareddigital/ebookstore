@@ -7,7 +7,7 @@ export default function Download() {
     <div className="contactus-page">
       <Navbar />
       <MenuBar />
-      <Breadcrumb />
+      <Breadcrumb data={"書單下載"} />
       <form className="download form-area">
         <div className="block-title">書單下載</div>
 

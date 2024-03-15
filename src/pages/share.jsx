@@ -31,7 +31,7 @@ export default function Share({ data }) {
       <Navbar />
 
       <MenuBar />
-      <Breadcrumb />
+      <Breadcrumb data={"分享專欄"} />
 
       <div className="container-fluid">
         <div className="">

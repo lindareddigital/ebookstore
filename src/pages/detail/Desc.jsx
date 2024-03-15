@@ -1,35 +1,39 @@
 import Link from 'next/link';
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
 
-export default function Desc({ detail }) {
-  // console.log("678", detail.description);
+export default function Desc({ item }) {
+  // console.log("678", item);
   
   return (
     <>
       <div className="container-fluid fdc">
         <nav className="container-fluid">
-          <div className="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
+          <div
+            className="nav nav-tabs more-nav-tabs"
+            id="nav-tab"
+            role="tablist"
+          >
             <img className="topright" src="/icons/leftboxicon.svg"></img>
             <button
               className="nav-link active"
-              id="nav-home-tab"
+              id="nav-description-tab"
               data-bs-toggle="tab"
-              data-bs-target="#nav-home"
+              data-bs-target="#nav-description"
               type="button"
               role="tab"
-              aria-controls="nav-home"
+              aria-controls="nav-description"
               aria-selected="true"
             >
               內容簡介
             </button>
             <button
               className="nav-link"
-              id="nav-profile-tab"
+              id="nav-Author-tab"
               data-bs-toggle="tab"
-              data-bs-target="#nav-profile"
+              data-bs-target="#nav-Author"
               type="button"
               role="tab"
-              aria-controls="nav-profile"
+              aria-controls="nav-Author"
               aria-selected="false"
             >
               作者介紹
@@ -48,24 +52,24 @@ export default function Desc({ detail }) {
             </button>
             <button
               className="nav-link"
-              id="nav-contact-tab"
+              id="nav-format-tab"
               data-bs-toggle="tab"
-              data-bs-target="#nav-contact"
+              data-bs-target="#nav-format"
               type="button"
               role="tab"
-              aria-controls="nav-contact"
+              aria-controls="nav-format"
               aria-selected="false"
             >
               規格
             </button>
             <button
               className="nav-link"
-              id="nav-contact-tab"
+              id="nav-more-tab"
               data-bs-toggle="tab"
-              data-bs-target="#nav-contact"
+              data-bs-target="#nav-more"
               type="button"
               role="tab"
-              aria-controls="nav-contact"
+              aria-controls="nav-more"
               aria-selected="false"
             >
               延伸內容
@@ -75,30 +79,40 @@ export default function Desc({ detail }) {
         <div className="detail-area" id="nav-tabContent">
           <div
             className="tab-pane fade show active"
-            id="nav-home"
+            id="nav-description"
             role="tabpanel"
-            aria-labelledby="nav-home-tab"
+            aria-labelledby="nav-description-tab"
           >
-            <InnerHTML
-              text={detail.description}
-              className=""
-            />
+            <InnerHTML text={item.description} className="" />
           </div>
           <div
             className="tab-pane fade"
-            id="nav-profile"
+            id="nav-Author"
             role="tabpanel"
-            aria-labelledby="nav-profile-tab"
+            aria-labelledby="nav-Author-tab"
           >
-            2
+            {item.Author}
+            <InnerHTML text={item.description} className="" />
+
+            {/* <InnerHTML text={item.Author} className="" /> */}
           </div>
           <div
             className="tab-pane fade"
-            id="nav-contact"
+            id="nav-format"
             role="tabpanel"
-            aria-labelledby="nav-contact-tab"
+            aria-labelledby="nav-format-tab"
           >
-            3
+            {item.format}
+            {/* <InnerHTML text={item.format} className="" /> */}
+          </div>
+          <div
+            className="tab-pane fade"
+            id="nav-more"
+            role="tabpanel"
+            aria-labelledby="nav-more-tab"
+          >
+            {item.Author}
+            {/* <InnerHTML text={item.Author} className="" /> */}
           </div>
         </div>
       </div>

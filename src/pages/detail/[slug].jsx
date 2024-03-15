@@ -48,7 +48,7 @@ export default function Detail({ data, detail }) {
       <Navbar />
       <MenuBar />
       <div className="container-fluid fdc">
-        <Breadcrumb />
+        <Breadcrumb data={item.series}/>
 
         <div className="detail">
           <div className="content">
@@ -134,7 +134,7 @@ export default function Detail({ data, detail }) {
             <DesktopCard category={item.Category} />
           ))} */}
 
-        <Desc detail={detail} />
+        <Desc item={item} />
       </div>
     </div>
   );
