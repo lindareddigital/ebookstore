@@ -34,7 +34,7 @@ export default function HomeTabTwo() {
 
   return(
     <>
-    <div class="home-recommend-tabs2">
+    <div className="home-recommend-tabs2">
       <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
         <Nav variant="tabs">
           {categories.map((item) => (
@@ -52,7 +52,7 @@ export default function HomeTabTwo() {
             className={`booklist-carousel`}
             slidesPerView={4}
           >
-            <div class="swiper-wrapper booklist-carousel-inner">
+            <div className="swiper-wrapper booklist-carousel-inner">
               {books.map((item) => {
                 return (
                   <SwiperSlide
@@ -67,7 +67,7 @@ export default function HomeTabTwo() {
                       }}
                       className={``}
                     >
-                      <div class="book-item">
+                      <div className="book-item">
                         <img
                           src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
                           className=""
@@ -81,18 +81,18 @@ export default function HomeTabTwo() {
                 );
               })}
               </div>
-              <div onClick={previous} class="swiper-button-prev"></div>
-              <div onClick={next} class="swiper-button-next"></div>
+              <div onClick={previous} className="swiper-button-prev"></div>
+              <div onClick={next} className="swiper-button-next"></div>
           </Swiper>
         </Tab.Content>
       </Tab.Container>
     </div>
 
-    <div class="home-recommend-toolbar" variant="tabs">
+    <div className="home-recommend-toolbar" variant="tabs">
         <div>
-          <div class="home-recommend-title">Title</div>
+          <div className="home-recommend-title">Title</div>
         </div> 
-        <Link href="/" class="home-recommend-more">看更多</Link>
+        <Link href="/" className="home-recommend-more">看更多</Link>
  
     </div>
 
@@ -105,7 +105,7 @@ export default function HomeTabTwo() {
       <div className="right">
         {books.map((item) => {
           return (
-            <div class="">
+            <div className="">
               <img
                 src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage?.id}`}
                 className=""
@@ -119,7 +119,7 @@ export default function HomeTabTwo() {
       </div>
     </div>
 
-    <div class="home-recommend-tabs4">
+    <div className="home-recommend-tabs4">
       <Tab.Container id="nav-tab" defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263">
         <Nav variant="tabs">
           {categories.map((item) => (
@@ -137,7 +137,7 @@ export default function HomeTabTwo() {
             className={`booklist-carousel`}
             slidesPerView={4}
           >
-            <div class="swiper-wrapper booklist-carousel-inner">
+            <div className="swiper-wrapper booklist-carousel-inner">
               {allBooks.map((item) => {
                 return (
                   <SwiperSlide
@@ -152,7 +152,7 @@ export default function HomeTabTwo() {
                       }}
                       className={``}
                     >
-                      <div class="book-item">
+                      <div className="book-item">
                         <img
                           src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
                           className=""
@@ -166,8 +166,8 @@ export default function HomeTabTwo() {
                 );
               })}
               </div>
-              <div onClick={previous} class="swiper-button-prev"></div>
-              <div onClick={next} class="swiper-button-next"></div>
+              <div onClick={previous} className="swiper-button-prev"></div>
+              <div onClick={next} className="swiper-button-next"></div>
           </Swiper>
         </Tab.Content>
       </Tab.Container>

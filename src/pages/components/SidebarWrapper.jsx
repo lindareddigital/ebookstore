@@ -31,29 +31,29 @@ export default function SidebarWrapper() {
   });
 
   return(
-    <div class="sidebar-wrapper scroll-cling-top">
-      {/* <div class="scroll-active"><div id="sidebar-menu-3-0" class="d-none d-lg-flex tab">
-        <Link aria-current="page" href="" class="router-link-active router-link-exact-active">
+    <div className="sidebar-wrapper scroll-cling-top">
+      {/* <div className="scroll-active"><div id="sidebar-menu-3-0" className="d-none d-lg-flex tab">
+        <Link aria-current="page" href="" className="router-link-active router-link-exact-active">
           <span>【益智桌遊】10/31上市</span>
         </Link>
       </div>
-      <div class="d-none d-lg-flex tab active">
-        <Link  aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
+      <div className="d-none d-lg-flex tab active">
+        <Link  aria-current="page" href="" className="router-link-active router-link-exact-active"><span>X萬獸探險隊</span></Link>
       </div>
-      <div id="sidebar-menu-4-1" class="d-none d-lg-flex tab">
-        <Link  href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
+      <div id="sidebar-menu-4-1" className="d-none d-lg-flex tab">
+        <Link  href="" className="router-link-active router-link-exact-active"><span>X萬獸探險隊 II</span></Link>
       </div>
-      <div class="d-none d-lg-flex tab">
-        <Link href="/" class="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
+      <div className="d-none d-lg-flex tab">
+        <Link href="/" className="router-link-active router-link-exact-active"><span>X萬獸探險隊 III</span></Link>
       </div>
-      <div id="sidebar-menu-4-3" class="d-none d-lg-flex tab">
-        <Link aria-current="page" href="" class="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
+      <div id="sidebar-menu-4-3" className="d-none d-lg-flex tab">
+        <Link aria-current="page" href="" className="router-link-active router-link-exact-active"><span>X萬獸探險隊-4冊合輯</span></Link>
       </div>
-      <div class="d-none d-lg-flex tab">
-        <Link  aria-current="page" href="/" class="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
+      <div className="d-none d-lg-flex tab">
+        <Link  aria-current="page" href="/" className="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
       </div>
       </div> */}
-      <div onClick={topFunction} class="back-to-top">
+      <div onClick={topFunction} className="back-to-top">
         {/* <span>返回頂端</span> */}
         <img src="/icons/backtop.svg" alt="" />
       </div>

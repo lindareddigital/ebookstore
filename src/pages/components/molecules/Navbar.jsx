@@ -25,12 +25,12 @@ export default function Navbar({categories}) {
   return (
     <>
       <nav
-        class="navbar navbar-expand-lg navbar-light"
+        className="navbar navbar-expand-lg navbar-light"
         style={open ? { top: "0", position: "fixed" } : {}}
       >
-        <div class="container-fluid">
+        <div className="container-fluid">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -45,30 +45,30 @@ export default function Navbar({categories}) {
               <img src="/icons/nav-menu.svg" alt="" />
             )}
           </button>
-          <Link class="navbar-brand" href="#">
+          <Link className="navbar-brand" href="#">
             大邑文化
           </Link>
           <Link
             href="/member"
-            class="span align-items-center icon-fa-user-circle icon face-icon face-icon-white"
+            className="span align-items-center icon-fa-user-circle icon face-icon face-icon-white"
             title=""
             target="_self"
             aria-label="會員中心"
           ></Link>
-          <div class="nav-right">
-            <button class="search-btn btn" type="submit">
+          <div className="nav-right">
+            <button className="search-btn btn" type="submit">
               <img src="/icons/cart.svg" alt="" />
             </button>
-            <hr class="nav-hr" />
-            <button class="search-btn btn" type="submit">
+            <hr className="nav-hr" />
+            <button className="search-btn btn" type="submit">
               <img src="/icons/member.svg" alt="" />
             </button>
           </div>
 
-          <form class="input-group">
+          <form className="input-group">
             <input
               onChange={(e) => setSearchKeywords(e.target.value)}
-              class="form-control header-search-input"
+              className="form-control header-search-input"
               type="text"
             ></input>
             <button
@@ -78,46 +78,46 @@ export default function Navbar({categories}) {
                   setIsSearchOn(true);
                 }, 300);
               }}
-              class="search-btn"
+              className="search-btn"
               type="submit"
             >
               <img src="/icons/search.svg" alt="" />
             </button>
           </form>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
                 <Link
-                  class="nav-link active"
+                  className="nav-link active"
                   aria-current="page"
                   href="/listing"
                 >
                   全站分類
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" href="#">
                   童書
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" href="#">
                   成書
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" href="#">
                   益智產品
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" href="#">
+              <li className="nav-item">
+                <Link className="nav-link" href="#">
                   買書GO
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link
-                  class="nav-link"
+                  className="nav-link"
                   href={{
                     pathname: `/singlepage/`,
                     query: { page: "haibin" },
@@ -126,9 +126,9 @@ export default function Navbar({categories}) {
                   海濱
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link
-                  class="nav-link"
+                  className="nav-link"
                   href={{
                     pathname: `/singlepage`,
                     query: { page: "yidin" },
@@ -142,16 +142,16 @@ export default function Navbar({categories}) {
         </div>
       </nav>
 
-      <div class="container-fluid header-main">
-        <div class="header-search-bar">
+      <div className="container-fluid header-main">
+        <div className="header-search-bar">
           <Link href="/">
-            <img class="logo" src="/images/logo.jpeg" alt=""></img>
+            <img className="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
-          <div class="right-side">
-            <form class="input-group">
-              <div class="dropdown">
+          <div className="right-side">
+            <form className="input-group">
+              <div className="dropdown">
                 <Link
-                  class="btn dropdown-toggle"
+                  className="btn dropdown-toggle"
                   href="#"
                   role="button"
                   id="dropdownMenuLink"
@@ -161,76 +161,76 @@ export default function Navbar({categories}) {
                   全站
                 </Link>
 
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li>
-                    <Link class="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Action
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Another action
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Something else here
                     </Link>
                   </li>
                 </ul>
               </div>
               <input
-                class="form-control header-search-input"
+                className="form-control header-search-input"
                 type="text"
               ></input>
-              <button class="search-btn" type="submit">
+              <button className="search-btn" type="submit">
                 <img src="/icons/search.svg"></img>
               </button>
 
-              <div class="header-toolbar">
+              <div className="header-toolbar">
                 <div className="navbar-link">
-                  <button type="button" class="btn">
+                  <button type="button" className="btn">
                     <img src="/icons/cart.svg" alt="" />
                     購物車
                   </button>
-                  <hr class="nav-hr" />
+                  <hr className="nav-hr" />
 
-                  <button type="button" class="btn">
+                  <button type="button" className="btn">
                     <img src="/icons/member.svg" alt="" />
                     登入
                   </button>
                   <div className="dot"></div>
-                  <button type="button" class="btn">
+                  <button type="button" className="btn">
                     註冊
                   </button>
                 </div>
 
-                <div class="label-group">
+                <div className="label-group">
                   <Link
                     href={{
                       pathname: `/singlepage/`,
                       query: { page: "haibin" },
                     }}
                   >
-                    <button type="button" class="btn">
+                    <button type="button" className="btn">
                       海濱
                     </button>
                   </Link>
-                  <hr class="nav-hr" />
+                  <hr className="nav-hr" />
                   <Link
                     href={{
                       pathname: `/singlepage`,
                       query: { page: "yidin" },
                     }}
                   >
-                    <button type="button" class="btn">
+                    <button type="button" className="btn">
                       一丁
                     </button>
                   </Link>
                 </div>
               </div>
             </form>
-            <div class="keyword-block">
+            <div className="keyword-block">
               <div className="pill">HOT</div>
               <Link href="">X星際探險隊</Link>
               <Link href="">成語-民間故事</Link>

@@ -15,30 +15,30 @@ export default function MenuBar(props) {
 
 
   return (
-    <div class="menu-bar">
+    <div className="menu-bar">
       <div className="container-fluid">
-        <div class="">
-          <Link href="/listing" class="link">
+        <div className="">
+          <Link href="/listing" className="link">
             全站分類
           </Link>
         </div>
-        <div class="">
-          <Link href="" class="link">
+        <div className="">
+          <Link href="" className="link">
             童書
           </Link>
         </div>
-        <div class="">
-          <Link href="" class="link">
+        <div className="">
+          <Link href="" className="link">
             成書
           </Link>
         </div>
-        <div class="">
-          <Link href="" class="link">
+        <div className="">
+          <Link href="" className="link">
             益智產品
           </Link>
         </div>
-        <div class="">
-          <Link href="" class="link">
+        <div className="">
+          <Link href="" className="link">
             買書GO
           </Link>
         </div>

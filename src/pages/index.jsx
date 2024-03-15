@@ -48,20 +48,20 @@ export default function Home({data}) {
 
 
   return (
-    <div class="home-page">
+    <div className="home-page">
       <SidebarWrapper />
 
-      <div class="sidebtn-container">
+      <div className="sidebtn-container">
         <div id="fb-root"></div>
         <div
-          class="fb-customerchat"
+          className="fb-customerchat"
           attribution="setup_tool"
           page_id="101vision"
           theme_color="#6699cc"
           logged_in_greeting="Hi! How can we help you?"
           logged_out_greeting="Hi! How can we help you?"
         ></div>
-        <div class="message-btn">
+        <div className="message-btn">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg"
             alt=""
@@ -73,25 +73,25 @@ export default function Home({data}) {
 
       <MenuBar />
 
-      <div class="home-banner">
+      <div className="home-banner">
         <div className="leftbox">
-          <img class="topright" src="/icons/leftboxicon.svg"></img>
+          <img className="topright" src="/icons/leftboxicon.svg"></img>
           <div className="">
-            <div class="pin-title">最新消息</div>
+            <div className="pin-title">最新消息</div>
             <div className="trangle"></div>
           </div>
-          <div class="wrapper">
+          <div className="wrapper">
             {posts?.map((item, index) => {
               return (
                 <>
-                  <div class="e-banner-product">
+                  <div className="e-banner-product">
                     <img
                       // src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image}`}
                       alt=""
                     />
 
-                    <div class="desc">{item.posts_id.title}</div>
-                    <div class="desc">{item.posts_id.tags}</div>
+                    <div className="desc">{item.posts_id.title}</div>
+                    <div className="desc">{item.posts_id.tags}</div>
                   </div>
                 </>
               );
@@ -100,17 +100,17 @@ export default function Home({data}) {
           <Link href="/share" className={``}>
             <div className="read-more-btn">
               查看更多
-              <img class="" src="/icons/viewmore.svg"></img>
+              <img className="" src="/icons/viewmore.svg"></img>
             </div>
           </Link>
-          <img class="newsbg" src="/icons/newsbg.svg"></img>
+          <img className="newsbg" src="/icons/newsbg.svg"></img>
         </div>
         <div
           id="carouselExampleControls"
-          class="home-banner-carousel carousel slide"
+          className="home-banner-carousel carousel slide"
           data-bs-ride="carousel"
         >
-          <div class="carousel-indicators">
+          <div className="carousel-indicators">
             {heroBanner.item.hero_cards?.map((item, index) => {
               return (
                 <>
@@ -118,7 +118,7 @@ export default function Home({data}) {
                     type="button"
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide-to={index}
-                    class="active"
+                    className="active"
                     aria-current={index === 0 ? "true" : ""}
                     aria-label="Slide 1"
                     className={`${index === 0 ? "active" : ""}`}
@@ -130,7 +130,7 @@ export default function Home({data}) {
               type="button"
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide-to="0"
-              class="active"
+              className="active"
               aria-current="true"
               aria-label="Slide 1"
             ></button>
@@ -147,7 +147,7 @@ export default function Home({data}) {
               aria-label="Slide 3"
             ></button> */}
           </div>
-          <div class="carousel-inner">
+          <div className="carousel-inner">
             {heroBanner.item.hero_cards?.map((item, index) => {
               return (
                 <>
@@ -157,7 +157,7 @@ export default function Home({data}) {
                   >
                     <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                      class=""
+                      className=""
                       alt={item.block_hero_id.headline}
                     ></img>
                   </Link>
@@ -166,27 +166,27 @@ export default function Home({data}) {
             })}
           </div>
           <button
-            class="carousel-control-prev"
+            className="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
           >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next"
+            className="carousel-control-next"
             type="button"
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
           >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
           </button>
         </div>
       </div>
 
-      <div class="main-body">
+      <div className="main-body">
         <ListAside data={data} />
         <HomeTab data={data} />
         {/* <HomeTabTwo /> */}

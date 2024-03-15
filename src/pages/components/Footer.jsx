@@ -7,12 +7,12 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div class="container-fluid">
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
+        <div className="container-fluid">
+          <div className="accordion" id="accordionExample">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingOne">
                 <button
-                  class="accordion-button"
+                  className="accordion-button"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
@@ -24,11 +24,11 @@ export default function Footer() {
               </h2>
               <div
                 id="collapseOne"
-                class="accordion-collapse collapse show"
+                className="accordion-collapse collapse show"
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >
-                <div class="accordion-body">
+                <div className="accordion-body">
                   <li>
                     <Link href="">關於大邑</Link>
                   </li>
@@ -38,10 +38,10 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingTwo">
                 <button
-                  class="accordion-button collapsed"
+                  className="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo"
@@ -53,11 +53,11 @@ export default function Footer() {
               </h2>
               <div
                 id="collapseTwo"
-                class="accordion-collapse collapse"
+                className="accordion-collapse collapse"
                 aria-labelledby="headingTwo"
                 data-bs-parent="#accordionExample"
               >
-                <div class="accordion-body">
+                <div className="accordion-body">
                   <li>
                     <Link
                       href={{
@@ -80,10 +80,10 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingThree">
                 <button
-                  class="accordion-button collapsed"
+                  className="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseThree"
@@ -95,11 +95,11 @@ export default function Footer() {
               </h2>
               <div
                 id="collapseThree"
-                class="accordion-collapse collapse"
+                className="accordion-collapse collapse"
                 aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample"
               >
-                <div class="accordion-body">
+                <div className="accordion-body">
                   <li>
                     <Link href="">常見問題</Link>
                   </li>
@@ -110,8 +110,8 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <div class="box">
-            <li class="title">
+          <div className="box">
+            <li className="title">
               <Link href="">關於我們</Link>
             </li>
             <li>
@@ -121,8 +121,8 @@ export default function Footer() {
               <Link href="">隱私/服務條款</Link>
             </li>
           </div>
-          <div class="box">
-            <li class="title">
+          <div className="box">
+            <li className="title">
               <Link href="/">會員中心</Link>
             </li>
             <li>
@@ -152,8 +152,8 @@ export default function Footer() {
               <Link href="">查詢帳密</Link>
             </li>
           </div>
-          <div class="box">
-            <li class="title">
+          <div className="box">
+            <li className="title">
               <Link href="/share">客戶服務</Link>
             </li>
             <li>
@@ -166,14 +166,14 @@ export default function Footer() {
               <Link href="/contactus">聯絡我們</Link>
             </li>
           </div>
-          <div class="box">
-            <li class="title">
+          <div className="box">
+            <li className="title">
               <Link target="_blank" href="">
                 社群
               </Link>
             </li>
             <div className="social-sqare-container">
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerfb.svg"></img>
                 <Link
                   target="_blank"
@@ -182,7 +182,7 @@ export default function Footer() {
                   大邑
                 </Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerfb.svg"></img>
                 <Link
                   target="_blank"
@@ -191,14 +191,14 @@ export default function Footer() {
                   海濱
                 </Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerig.svg"></img>
                 <Link
                   target="_blank"
                   href="https://www.facebook.com/seashoretaiwan/"
                 ></Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footeryt.svg"></img>
                 <Link
                   target="_blank"
@@ -210,7 +210,7 @@ export default function Footer() {
           <div className="social-mobile">
             <li className="">社群</li>
             <div className="social-sqare-container">
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerfb.svg"></img>
                 <Link
                   target="_blank"
@@ -219,7 +219,7 @@ export default function Footer() {
                   大邑
                 </Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerfb.svg"></img>
                 <Link
                   target="_blank"
@@ -228,14 +228,14 @@ export default function Footer() {
                   海濱
                 </Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footerig.svg"></img>
                 <Link
                   target="_blank"
                   href="https://www.facebook.com/seashoretaiwan/"
                 ></Link>
               </li>
-              <li class="social-sqare">
+              <li className="social-sqare">
                 <img src="/icons/footeryt.svg"></img>
                 <Link
                   target="_blank"

@@ -25,7 +25,7 @@ export default function Panel() {
       )} */}
 
       <div className="filter-area">
-        <ul class="">
+        <ul className="">
           <div className="title">依類別搜尋</div>
           <li>
             <Link href="">知識漫畫</Link>

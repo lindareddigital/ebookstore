@@ -4,63 +4,63 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function ContactUs() {
   return (
-    <div class="contactus-page">
+    <div className="contactus-page">
       <Navbar />
       <MenuBar />
       <Breadcrumb />
-      <form class="form-area contact-us">
+      <form className="form-area contact-us">
         <div className="block-title">聯絡我們</div>
         <div className="red-word">*必須填寫</div>
-        <div class="">
-          <label htmlFor="exampleInputEmail1" class="form-label">
+        <div className="">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             姓名<span className="red-word">*</span>
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           ></input>
         </div>
-        <div class="">
-          <label htmlFor="exampleInputPassword1" class="form-label">
+        <div className="">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             暱稱
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
           ></input>
         </div>
-        <div class="">
-          <label htmlFor="exampleInputEmail1" class="form-label">
+        <div className="">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             電郵 <span className="red-word">*</span>
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           ></input>
         </div>
-        <div class="">
-          <label htmlFor="exampleInputEmail1" class="form-label">
+        <div className="">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             類型 <span className="red-word">*</span>
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           ></input>
         </div>
-        <div class="">
-          <label class="" htmlFor="floatingSelect">
+        <div className="">
+          <label className="" htmlFor="floatingSelect">
             主旨
           </label>
 
           <select
-            class="form-select"
+            className="form-select"
             id="floatingSelect"
             aria-label="Floating label select example"
           >
@@ -74,31 +74,31 @@ export default function ContactUs() {
           </select>
         </div>
 
-        <div class="">
-          <label class="" htmlFor="floatingTextarea2">
+        <div className="">
+          <label className="" htmlFor="floatingTextarea2">
             內容<span className="red-word">*</span>
             <div className="sub-word">(字數150字以內)</div>
           </label>
           <textarea
-            class="form-control form-comments"
+            className="form-control form-comments"
             placeholder="Leave a comment here"
             id="floatingTextarea2"
           ></textarea>
         </div>
 
-        <div class="">
-          <label htmlFor="formFile" class="form-label">
+        <div className="">
+          <label htmlFor="formFile" className="form-label">
             附件
             <span className="red-word">*</span>
             <div className="sub-word">(請上傳JPG圖檔)</div>
           </label>
-          <input class="form-control" type="file" id="formFile"></input>
+          <input className="form-control" type="file" id="formFile"></input>
         </div>
-        <div class="button-group">
-          <button type="submit" class="btn cancel-btn info-site-btn">
+        <div className="button-group">
+          <button type="submit" className="btn cancel-btn info-site-btn">
             取消
           </button>
-          <button type="submit" class="btn info-site-btn">
+          <button type="submit" className="btn info-site-btn">
             確認傳送
           </button>
         </div>

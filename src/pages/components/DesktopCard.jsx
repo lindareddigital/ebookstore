@@ -22,8 +22,8 @@ export default function DesktopCard(props) {
   return(
     <>
     {!mobile && (
-      <div class="swiper all-swiper booklist-carousel">
-        <div class="title">{props.category}</div>
+      <div className="swiper all-swiper booklist-carousel">
+        <div className="title">{props.category}</div>
         <hr></hr>
         <Swiper
           ref={swiperRef}
@@ -31,7 +31,7 @@ export default function DesktopCard(props) {
           className={`booklist-carousel`}
           slidesPerView={5}
         >
-          <div class="swiper-wrapper booklist-carousel-inner">
+          <div className="swiper-wrapper booklist-carousel-inner">
             {items?.map((item) => {
               return (
                 <SwiperSlide className="swiper-slide" key={`${item.id}`}>
@@ -43,7 +43,7 @@ export default function DesktopCard(props) {
                     }}
                     className={``}
                   >
-                    <div class="book-item">
+                    <div className="book-item">
                       <img
                         src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage}`}
                         className=""
@@ -57,8 +57,8 @@ export default function DesktopCard(props) {
               );
             })}
             </div>
-            <div onClick={previous} class="swiper-button-prev"></div>
-            <div onClick={next} class="swiper-button-next"></div>
+            <div onClick={previous} className="swiper-button-prev"></div>
+            <div onClick={next} className="swiper-button-next"></div>
         </Swiper>
       </div>
     )}

@@ -27,24 +27,24 @@ export default function Share({ data }) {
   console.log(allTags);
 
   return (
-    <div class="share-page">
+    <div className="share-page">
       <Navbar />
 
       <MenuBar />
       <Breadcrumb />
 
-      <div class="container-fluid">
-        <div class="">
-          <div class="news-tabs">
-            <nav class="container-fluid">
+      <div className="container-fluid">
+        <div className="">
+          <div className="news-tabs">
+            <nav className="container-fluid">
               <div
-                class="nav nav-tabs more-nav-tabs"
+                className="nav nav-tabs more-nav-tabs"
                 id="nav-tab"
                 role="tablist"
               >
-                <img class="topright" src="/icons/leftboxicon.svg"></img>
+                <img className="topright" src="/icons/leftboxicon.svg"></img>
                 <button
-                  class="nav-link active"
+                  className="nav-link active"
                   id="nav-home-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#nav-home"
@@ -56,7 +56,7 @@ export default function Share({ data }) {
                   焦點新訊
                 </button>
                 <button
-                  class="nav-link"
+                  className="nav-link"
                   id="nav-profile-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#nav-profile"
@@ -69,16 +69,16 @@ export default function Share({ data }) {
                 </button>
               </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
+            <div className="tab-content" id="nav-tabContent">
               <div
-                class="tab-pane fade show active"
+                className="tab-pane fade show active"
                 id="nav-home"
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                <div class="select-bar">
-                  <label class="">篩選類別</label>
-                  <select class="form-select" id="floatingSelect">
+                <div className="select-bar">
+                  <label className="">篩選類別</label>
+                  <select className="form-select" id="floatingSelect">
                     <option selected>請選擇</option>
                     <option value="2">2.異業合作</option>
                     <option value="3">3.帳號問題</option>
@@ -89,33 +89,33 @@ export default function Share({ data }) {
                 {column?.map((item) => {
                   return (
                     <>
-                      <div class="share-list-item overflow-hidden">
-                        <Link href="/" class="post-thumb">
+                      <div className="share-list-item overflow-hidden">
+                        <Link href="/" className="post-thumb">
                           <img
-                            class="q-img__image"
+                            className="q-img__image"
                             src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             alt=""
                           ></img>
                         </Link>
-                        <div class="post-info">
-                          <h4 class="post-title">
-                            <Link href="/" class="">
+                        <div className="post-info">
+                          <h4 className="post-title">
+                            <Link href="/" className="">
                               {item.posts_id.title}
                             </Link>
                           </h4>
-                          <p class="post-excerpt">專欄主題:</p>
-                          <div class="post-meta">
+                          <p className="post-excerpt">專欄主題:</p>
+                          <div className="post-meta">
                             {item.posts_id.tags?.map((item) => {
                               return (
                                 <Link
                                   href="/posts/events"
-                                  class="post-meta-tag category"
+                                  className="post-meta-tag category"
                                 >
                                   {item}
                                 </Link>
                               );
                             })}
-                            <div class="post-meta-date">
+                            <div className="post-meta-date">
                               2023/09/22
                               <div className="dot"></div>
                               小編
@@ -128,27 +128,27 @@ export default function Share({ data }) {
                 })}
               </div>
 
-              <div class="posts-categories">
-                <div class="posts-category">
-                  <div class="">新知分享</div>
-                  <div class="">0</div>
+              <div className="posts-categories">
+                <div className="posts-category">
+                  <div className="">新知分享</div>
+                  <div className="">0</div>
                 </div>
-                <Link href="" class="posts-category">
-                  <div class="">文學分享</div>
-                  <div class="">17</div>
+                <Link href="" className="posts-category">
+                  <div className="">文學分享</div>
+                  <div className="">17</div>
                 </Link>
-                <Link href="" class="posts-category">
-                  <div class="">趣聞分享</div>
-                  <div class="">9</div>
+                <Link href="" className="posts-category">
+                  <div className="">趣聞分享</div>
+                  <div className="">9</div>
                 </Link>
-                <Link href="/" class="posts-category">
-                  <div class="">開放自由投稿</div>
-                  <div class="">3</div>
+                <Link href="/" className="posts-category">
+                  <div className="">開放自由投稿</div>
+                  <div className="">3</div>
                 </Link>
               </div>
 
               <div
-                class="tab-pane fade"
+                className="tab-pane fade"
                 id="nav-profile"
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
@@ -156,33 +156,33 @@ export default function Share({ data }) {
                 {news?.map((item) => {
                   return (
                     <>
-                      <div class="share-list-item overflow-hidden">
-                        <Link href="/" class="post-thumb">
+                      <div className="share-list-item overflow-hidden">
+                        <Link href="/" className="post-thumb">
                           <img
-                            class="q-img__image"
+                            className="q-img__image"
                             src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             alt=""
                           ></img>
                         </Link>
-                        <div class="post-info">
-                          <h4 class="post-title">
-                            <Link href="/" class="">
+                        <div className="post-info">
+                          <h4 className="post-title">
+                            <Link href="/" className="">
                               {item.posts_id.title}
                             </Link>
                           </h4>
-                          <p class="post-excerpt">專欄主題:</p>
-                          <div class="post-meta">
+                          <p className="post-excerpt">專欄主題:</p>
+                          <div className="post-meta">
                             {item.posts_id.tags?.map((item) => {
                               return (
                                 <Link
                                   href="/posts/events"
-                                  class="post-meta-tag category"
+                                  className="post-meta-tag category"
                                 >
                                   {item}
                                 </Link>
                               );
                             })}
-                            <div class="post-meta-date">
+                            <div className="post-meta-date">
                               2023/09/22
                               <div className="dot"></div>
                               小編
@@ -196,7 +196,7 @@ export default function Share({ data }) {
               </div>
             </div>
 
-            <div class="">
+            <div className="">
               <Pagination>
                 <Pagination.Prev />
                 <Pagination.Item>{1}</Pagination.Item>

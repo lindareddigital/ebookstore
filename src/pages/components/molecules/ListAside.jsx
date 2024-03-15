@@ -18,8 +18,8 @@ export default function ListAside({ data, detail, query }) {
 
 
   return (
-    <aside class="list-aside">
-      <ul class="">
+    <aside className="list-aside">
+      <ul className="">
         <div className="title">依類別搜尋</div>
         {series.map((item, index) => (
           <li key={index}>

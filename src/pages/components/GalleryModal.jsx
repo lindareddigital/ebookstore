@@ -69,10 +69,10 @@ export default function GalleryModal({ item,show, onHide }) {
               </SwiperSlide>
             );
           })}
-          <div onClick={next} class="swiper-button-next">
+          <div onClick={next} className="swiper-button-next">
             <NextIcon />
           </div>
-          <div onClick={previous} class="swiper-button-prev">
+          <div onClick={previous} className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>
@@ -100,10 +100,10 @@ export default function GalleryModal({ item,show, onHide }) {
             );
           })}
 
-          <div onClick={next} class="swiper-button-next">
+          <div onClick={next} className="swiper-button-next">
             <NextIcon />
           </div>
-          <div onClick={previous} class="swiper-button-prev">
+          <div onClick={previous} className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>

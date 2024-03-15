@@ -44,7 +44,7 @@ export default function HomeTab({ data }) {
 
   return (
     <>
-      <div class="home-recommend-tabs">
+      <div className="home-recommend-tabs">
         <Tab.Container
           id="nav-tab"
           defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
@@ -68,10 +68,10 @@ export default function HomeTab({ data }) {
             </div>
           ))} */}
             <div className="swiper-button-group">
-              <div onClick={previous} class="swiper-button-prev">
+              <div onClick={previous} className="swiper-button-prev">
                 <PrevIcon />
               </div>
-              <div onClick={next} class="swiper-button-next">
+              <div onClick={next} className="swiper-button-next">
                 <NextIcon />
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function HomeTab({ data }) {
               slidesPerView={"auto"}
               onSnapIndexChange={onRealIndexChange}
             >
-              <div class="swiper-wrapper booklist-carousel-inner">
+              <div className="swiper-wrapper booklist-carousel-inner">
                 {books?.map((item) => {
                   {
                     /* console.log(
@@ -121,7 +121,7 @@ export default function HomeTab({ data }) {
                         href={{ pathname: `/detail/${item.image.id}` }}
                         className={``}
                       >
-                        <div class="book-item">
+                        <div className="book-item">
                           <img
                             src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             className=""

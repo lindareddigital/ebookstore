@@ -54,76 +54,76 @@ export default function Manage({ params }) {
 
   return (
     <>
-      <div class="manage-page">
+      <div className="manage-page">
         <Navbar />
         <MenuBar />
         <Breadcrumb />
 
-        <div class="container-fluid">
-          <div class="content">
+        <div className="container-fluid">
+          <div className="content">
             <div className="leftbox">
-              <img class="topright" src="/icons/leftboxicon.svg"></img>
+              <img className="topright" src="/icons/leftboxicon.svg"></img>
               <div className="">
-                <div class="pin-title">會員中心</div>
+                <div className="pin-title">會員中心</div>
                 <div className="trangle"></div>
               </div>
-              <div class="wrapper">
-                <div class="e-banner-product">
+              <div className="wrapper">
+                <div className="e-banner-product">
                   <div
                     onClick={() => {
                       setTab("info");
                     }}
-                    class="desc"
+                    className="desc"
                   >
                     會員資料管理
                   </div>
                 </div>
-                <div class="e-banner-product">
+                <div className="e-banner-product">
                   <div
                     onClick={() => {
                       setTab("collection");
                     }}
                   >
-                    <div class="desc">收藏書籍</div>
+                    <div className="desc">收藏書籍</div>
                   </div>
                 </div>
-                <div class="e-banner-product">
+                <div className="e-banner-product">
                   <div
                     onClick={() => {
                       setTab("notification");
                     }}
                   >
-                    <div class="desc">訂閱新書通知</div>
+                    <div className="desc">訂閱新書通知</div>
                   </div>
                 </div>
-                <div class="e-banner-product">
+                <div className="e-banner-product">
                   <div
                     onClick={() => {
                       setTab("message");
                     }}
                   >
-                    <div class="desc">訊息管理</div>
+                    <div className="desc">訊息管理</div>
                   </div>
                 </div>
-                <div class="e-banner-product">
+                <div className="e-banner-product">
                   <div
                     onClick={() => {
                       setTab("contribution");
                     }}
                   >
-                    <div class="desc">我的投稿</div>
+                    <div className="desc">我的投稿</div>
                   </div>
                 </div>
               </div>
 
               <div className="read-more-btn">
                 登出
-                <img class="" src="/icons/viewmore.svg"></img>
+                <img className="" src="/icons/viewmore.svg"></img>
               </div>
-              <img class="newsbg" src="/icons/newsbg.svg"></img>
+              <img className="newsbg" src="/icons/newsbg.svg"></img>
             </div>
 
-            <div class="right-side">{renderContent()}</div>
+            <div className="right-side">{renderContent()}</div>
           </div>
         </div>
       </div>

@@ -19,6 +19,9 @@ export default function Listing({ data, detail }) {
   // const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
   const books = detail.data;
 
+  const currentValue = "DEFAULT";
+
+
 
   // const filterData = useMemo(() => {
   //   if (!books) {
@@ -46,53 +49,54 @@ export default function Listing({ data, detail }) {
   
 
   return (
-    <div class="listing-page">
+    <div className="listing-page">
       <Navbar />
       <MenuBar />
-      <div class="listing-banner">
-        <img
-          src="https://s2.eslite.dev/unsafe/s.eslite.dev/fh52vnwp5754krpirafuxlm81fgw"
-          class="d-block w-100 h-100"
+      <div className="listing-banner">
+        {/* <img
+          src=""
+          className="d-block w-100 h-100"
           alt="..."
-        ></img>
+        ></img> */}
       </div>
 
       <Breadcrumb />
-      <div class="container-fluid">
-        <div class="main-body">
+      <div className="container-fluid">
+        <div className="main-body">
           <SidebarWrapper />
           {/* query={query} */}
           <ListAside data={data} detail={detail} />
-          <div class="right-side">
-            <div class="block-title">系列：X萬獸探險隊</div>
-            <div class="listing-toolbar">
+          <div className="right-side">
+            <div className="block-title">系列：X萬獸探險隊</div>
+            <div className="listing-toolbar">
               <div className="amount">
                 商品清單共有<span>{books.length}</span>本
               </div>
 
               <div className="right-side">
-                <ul class="view_type">
+                <ul className="view_type">
                   顯示模式
                   <li>
                     <div
                       onClick={() => handleViewChange("grid")}
-                      class="type1"
+                      className="type1"
                     ></div>
                   </li>
                   <li>
                     <div
                       onClick={() => handleViewChange("list")}
-                      class="type2 here"
+                      className="type2 here"
                     ></div>
                   </li>
                 </ul>
-                <div class="sortselect">
+                <div className="sortselect">
                   <p>排序依</p>
                   <select
-                    class="form-select"
+                    className="form-select"
                     aria-label="Default select example"
+                    defaultValue={"DEFAULT"}
                   >
-                    <option selected>上市日期(新→舊)</option>
+                    <option value="DEFAULT">上市日期(新→舊)</option>
                     <option value="1">上市日期(舊→新)</option>
                     <option value="2">暢銷度</option>
                     <option value="3">價格(高→低)</option>
@@ -112,7 +116,7 @@ export default function Listing({ data, detail }) {
                 <button className="btn" onClick={closePanel}>
                   <img src="/icons/close.svg" alt="" />
                 </button>
-                <ul class="">
+                <ul className="">
                   <div className="title">依類別搜尋</div>
                   <li>
                     <Link href="">知識漫畫</Link>

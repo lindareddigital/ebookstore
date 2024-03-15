@@ -9,10 +9,10 @@ export default function GridList({ books }) {
 
   return (
     <>
-      <div class="">
-        {/* <div class="title">{props.Title}</div>
+      <div className="">
+        {/* <div className="title">{props.Title}</div>
         <hr></hr> */}
-        <div class="grid-view">
+        <div className="grid-view">
           {books?.map((item) => {
             return (
               <Link
@@ -20,8 +20,8 @@ export default function GridList({ books }) {
                 href={{ pathname: `/detail/${item.id}` }}
                 className={``}
               >
-                <div class="book-item">
-                  <button class="wish-btn">
+                <div className="book-item">
+                  <button className="wish-btn">
                     <img src="/icons/heart.svg" alt="" />
                   </button>
                   <img

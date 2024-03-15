@@ -41,17 +41,17 @@ export default function Detail({ data, detail }) {
  
 
   return (
-    <div class="detail-page">
+    <div className="detail-page">
       <Head>
         <title>{item.title}</title>
       </Head>
       <Navbar />
       <MenuBar />
-      <div class="container-fluid fdc">
+      <div className="container-fluid fdc">
         <Breadcrumb />
 
-        <div class="detail">
-          <div class="content">
+        <div className="detail">
+          <div className="content">
             <>
               <img
                 onClick={() => setShow(true)}
@@ -60,7 +60,7 @@ export default function Detail({ data, detail }) {
                 alt={item.cover_image}
               />
 
-              <div class="info">
+              <div className="info">
                 <h1>{item.title}</h1>
                 <ul>
                   <li>
@@ -84,10 +84,10 @@ export default function Detail({ data, detail }) {
                 </div>
               </div>
 
-              <ul class="buy-book">
-                <img class="topright" src="/icons/leftboxicon.svg"></img>
+              <ul className="buy-book">
+                <img className="topright" src="/icons/leftboxicon.svg"></img>
                 <div className="">
-                  <div class="pin-title">買書GO</div>
+                  <div className="pin-title">買書GO</div>
                   <div className="trangle"></div>
                 </div>
 
@@ -122,11 +122,11 @@ export default function Detail({ data, detail }) {
           </div>
         </div>
       </div>
-      <div class="main-body">
+      <div className="main-body">
         <HomeTab data={data} />
       </div>
 
-      <div class="container-fluid fdc">
+      <div className="container-fluid fdc">
         {/* {item &&
           (mobile ? (
             <MobileCard category={item.Category} />

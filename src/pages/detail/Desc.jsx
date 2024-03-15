@@ -6,12 +6,12 @@ export default function Desc({ detail }) {
   
   return (
     <>
-      <div class="container-fluid fdc">
-        <nav class="container-fluid">
-          <div class="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
-            <img class="topright" src="/icons/leftboxicon.svg"></img>
+      <div className="container-fluid fdc">
+        <nav className="container-fluid">
+          <div className="nav nav-tabs more-nav-tabs" id="nav-tab" role="tablist">
+            <img className="topright" src="/icons/leftboxicon.svg"></img>
             <button
-              class="nav-link active"
+              className="nav-link active"
               id="nav-home-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-home"
@@ -23,7 +23,7 @@ export default function Desc({ detail }) {
               內容簡介
             </button>
             <button
-              class="nav-link"
+              className="nav-link"
               id="nav-profile-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-profile"
@@ -35,7 +35,7 @@ export default function Desc({ detail }) {
               作者介紹
             </button>
             <button
-              class="nav-link"
+              className="nav-link"
               id="nav-contact-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-contact"
@@ -47,7 +47,7 @@ export default function Desc({ detail }) {
               目錄
             </button>
             <button
-              class="nav-link"
+              className="nav-link"
               id="nav-contact-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-contact"
@@ -59,7 +59,7 @@ export default function Desc({ detail }) {
               規格
             </button>
             <button
-              class="nav-link"
+              className="nav-link"
               id="nav-contact-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-contact"
@@ -72,9 +72,9 @@ export default function Desc({ detail }) {
             </button>
           </div>
         </nav>
-        <div class="detail-area" id="nav-tabContent">
+        <div className="detail-area" id="nav-tabContent">
           <div
-            class="tab-pane fade show active"
+            className="tab-pane fade show active"
             id="nav-home"
             role="tabpanel"
             aria-labelledby="nav-home-tab"
@@ -85,7 +85,7 @@ export default function Desc({ detail }) {
             />
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="nav-profile"
             role="tabpanel"
             aria-labelledby="nav-profile-tab"
@@ -93,7 +93,7 @@ export default function Desc({ detail }) {
             2
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="nav-contact"
             role="tabpanel"
             aria-labelledby="nav-contact-tab"

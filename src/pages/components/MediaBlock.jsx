@@ -15,8 +15,8 @@ export default function MediaBlock({ data }) {
 
   return (
     <>
-      <div class="container-fluid media-block">
-        <div class="yt-block">
+      <div className="container-fluid media-block">
+        <div className="yt-block">
           <iframe
             width="871"
             height="490"
@@ -30,7 +30,7 @@ export default function MediaBlock({ data }) {
           <div className="desc">
             在使用帥氣的絕招卡時，可以吸收牌中的動物常識，利用數字加總及學到的知識，讓這場對戰贏得勝利。現在就來一場與朋友之間的精采對戰，看看哪個牌組才是真正的王者吧！
           </div>
-          <div class="more">
+          <div className="more">
             <iframe
               width="322"
               height="181"
@@ -55,32 +55,32 @@ export default function MediaBlock({ data }) {
             </div>
           </div>
         </div>
-        <div class="share-block">
+        <div className="share-block">
           <div className="">
-            <div class="pin-title">分享專欄</div>
+            <div className="pin-title">分享專欄</div>
             <div className="trangle"></div>
           </div>
-          <img class="topright" src="/icons/columnIcon.svg"></img>
+          <img className="topright" src="/icons/columnIcon.svg"></img>
 
           {posts?.map((item) =>{
 
             return (
               <>
-                <div class="e-banner-product">
+                <div className="e-banner-product">
                   <img
                     src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     alt=""
                   />
 
-                  <div class="desc">{item.posts_id.title}</div>
-                  <div class="desc">{item.posts_id.tags}</div>
+                  <div className="desc">{item.posts_id.title}</div>
+                  <div className="desc">{item.posts_id.tags}</div>
                 </div>
               </>
             );
           })}
-          <div class="e-banner-product">
+          <div className="e-banner-product">
             <img src="/images/bgi.svg" alt="" />
-            <div class="desc">
+            <div className="desc">
               《X萬獸探險隊III 11
               戰螯大盜》搶先看。安娜為大森特製的藥水，應該可以幫助能力恢復。
             </div>
@@ -88,12 +88,12 @@ export default function MediaBlock({ data }) {
           <hr />
 
           <div className="read-more-btn">
-            查看更多 <img class="" src="/icons/viewmore.svg"></img>
+            查看更多 <img className="" src="/icons/viewmore.svg"></img>
           </div>
-          <img class="newsbg" src="/icons/nine.svg"></img>
+          <img className="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>
-      <div class="social-links">
+      <div className="social-links">
         <div className="">
           <div className="block-title">買書GO</div>
           <ul className="container-fluid">

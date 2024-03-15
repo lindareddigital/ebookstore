@@ -570,7 +570,7 @@ a:hover{
 
 .list-view-item .wrapper{
   display: flex;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .list-view-item .textarea{

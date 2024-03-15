@@ -18,9 +18,9 @@ export default function MobileCard({props}) {
   return(
     <>
     {/* {mobile && (
-      <div id="Controls" class="booklist-carousel carousel slide" data-bs-ride="carousel">
+      <div id="Controls" className="booklist-carousel carousel slide" data-bs-ride="carousel">
           <hr></hr>
-          <div class="booklist-carousel-inner">
+          <div className="booklist-carousel-inner">
 
             { item && item.map((item) => {
               return (
@@ -32,7 +32,7 @@ export default function MobileCard({props}) {
                   }}
                   className={``}
                 >
-                  <div class="book-item">
+                  <div className="book-item">
                     <img src={`/assets/${item.PrimaryImage.id}`} className="" alt={item.title} />
                     <div className="desc">{item.Title}</div>
                     <div className="price-num">{item.Price}</div>
