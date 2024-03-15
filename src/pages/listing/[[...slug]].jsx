@@ -69,7 +69,9 @@ export default function Listing({ data, detail }) {
             sendDataToParent={sendDataToParent}
           />
           <div className="right-side">
-            <div className="block-title">系列： {dataFromChild}</div>
+            {dataFromChild != "" && (
+              <div className="block-title">系列： {dataFromChild}</div>
+            )}
             <div className="listing-toolbar">
               <div className="amount">
                 商品清單共有<span>{filterData.length}</span>本

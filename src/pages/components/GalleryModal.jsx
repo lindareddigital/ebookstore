@@ -75,10 +75,7 @@ export default function GalleryModal({ item,show, onHide }) {
           slidesPerView={"auto"}
           className="primary-swiper"
           // onSnapIndexChange={onRealIndexChange}
-          thumbs={{
-            swiper:
-              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-          }}
+          thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
           modules={[Thumbs, FreeMode, Navigation]}
         >
           {item.images.map((item) => {
@@ -143,8 +140,6 @@ export default function GalleryModal({ item,show, onHide }) {
             <PrevIcon />
           </div>
         </Swiper>
-
-        
       </Modal.Body>
     </Modal>
   );
