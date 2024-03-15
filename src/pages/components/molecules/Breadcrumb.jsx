@@ -23,8 +23,6 @@ export default function Breadcrumb({data}) {
   });
 
 
-
-
   return(
     <div className="container-fluid">
       <nav className="breadcrumb" aria-label="breadcrumb">

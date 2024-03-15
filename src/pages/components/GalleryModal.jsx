@@ -21,17 +21,36 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 export default function GalleryModal({ item,show, onHide }) {
   const swiperRef = useRef(null);
+  const subswiperRef = useRef(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { next, previous, onRealIndexChange } = useSwiperFunc(swiperRef);
+
+  // const { next, previous, onRealIndexChange } = useSwiperFunc(swiperRef);
 
   const getSwiper = (swiper) => {
     if (swiperRef.current !== swiper) {
       swiperRef.current = swiper;
-      swiperRef.current.slideNext();
-
     }
-
   };
+
+// const subnext = () => {
+//   subswiperRef.current.slideNext();
+// };
+
+// const subprevious = () => {
+//   subswiperRef.current.slidePrev();
+// };
+
+// const next = () => {
+//   swiperRef.current.slideNext();
+// };
+
+// const previous = () => {
+//   swiperRef.current.slidePrev();
+// };
+
+
+  console.log("5566", item);
+
 
   const [swiperIndex, setSwiperIndex] = useState(0);
 
@@ -49,16 +68,22 @@ export default function GalleryModal({ item,show, onHide }) {
       </Modal.Header>
       <Modal.Body>
         <Swiper
-          onSwiper={getSwiper}
-          ref={swiperRef}
-          rewind={false}
+          // onSwiper={getSwiper}
+          // ref={swiperRef}
+          navigation={true}
+          loop={true}
           slidesPerView={"auto"}
           className="primary-swiper"
-          onSnapIndexChange={onRealIndexChange}
+          // onSnapIndexChange={onRealIndexChange}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
+          modules={[Thumbs, FreeMode, Navigation]}
         >
           {item.images.map((item) => {
             {
-              /* console.log(item); */
+              console.log("5566", item);
             }
             return (
               <SwiperSlide key={item.product_id}>
@@ -69,22 +94,32 @@ export default function GalleryModal({ item,show, onHide }) {
               </SwiperSlide>
             );
           })}
-          <div onClick={next} className="swiper-button-next">
+          {/* onClick={next} */}
+          <div className="swiper-button-next">
             <NextIcon />
           </div>
-          <div onClick={previous} className="swiper-button-prev">
+          {/* onClick={previous} */}
+          <div className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>
         <Swiper
-          onSwiper={getSwiper}
-          ref={swiperRef}
-          // loop={true}
-          rewind={false}
-          slidesPerView={"auto"}
+          // onSwiper={getSwiper}
+          // ref={subswiperRef}
+          onSwiper={setThumbsSwiper}
+          // rewind={true}
+          loop={true}
+          // navigation={true}
+          slidesPerView={"5"}
           direction={"vertical"}
           className="sub-swiper"
-          onSnapIndexChange={onRealIndexChange}
+          freeMode={true}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
+          // onSnapIndexChange={onRealIndexChange}
+          modules={[FreeMode, Navigation, Thumbs]}
         >
           {item.images.map((i) => {
             {
@@ -99,14 +134,17 @@ export default function GalleryModal({ item,show, onHide }) {
               </SwiperSlide>
             );
           })}
-
-          <div onClick={next} className="swiper-button-next">
+          {/* onClick={subnext} */}
+          <div className="swiper-button-next">
             <NextIcon />
           </div>
-          <div onClick={previous} className="swiper-button-prev">
+          {/* onClick={subprevious} */}
+          <div className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>
+
+        
       </Modal.Body>
     </Modal>
   );

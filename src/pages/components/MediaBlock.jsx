@@ -73,18 +73,12 @@ export default function MediaBlock({ data }) {
                   />
 
                   <div className="desc">{item.posts_id.title}</div>
-                  <div className="desc">{item.posts_id.tags}</div>
+                  {/* <div className="desc">{item.posts_id.tags}</div> */}
                 </div>
               </>
             );
           })}
-          <div className="e-banner-product">
-            <img src="/images/bgi.svg" alt="" />
-            <div className="desc">
-              《X萬獸探險隊III 11
-              戰螯大盜》搶先看。安娜為大森特製的藥水，應該可以幫助能力恢復。
-            </div>
-          </div>
+          
           <hr />
 
           <div className="read-more-btn">

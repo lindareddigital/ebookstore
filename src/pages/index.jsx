@@ -6,7 +6,6 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
-import ListAside from "src/pages/components/molecules/ListAside";
 
 export default function Home({data}) {
   // const swiperRef = useRef(null);
@@ -188,7 +187,6 @@ export default function Home({data}) {
       </div>
 
       <div className="main-body">
-        <ListAside data={data} />
         <HomeTab data={data} />
         {/* <HomeTabTwo /> */}
 

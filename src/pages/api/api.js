@@ -200,12 +200,9 @@ class ApiManager {
     return this.get({path:`/items/dayi?fields=*.*`}); 
   }
 
-
   getHaibin = () =>{
     return this.get({path:`/items/haibin?fields=*.*`}); 
   }
-
- 
 
   getRecipe = () =>{
     return this.get({path:`/items/haibin?filter[Category][_eq]=飲食`}); 
