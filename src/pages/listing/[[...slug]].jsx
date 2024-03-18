@@ -9,14 +9,14 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
+import { useRouter } from "next/router";
 
 export default function Listing({ data, detail, siteMenu }) {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
 
   const [currentView, setCurrentView] = useState("grid");
-
-  // const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
+  const router = useRouter();
   const books = detail.data;
 
   const sendDataToParent = (data) => {
@@ -25,12 +25,17 @@ export default function Listing({ data, detail, siteMenu }) {
   };
 
   const filterData = useMemo(() => {
-    if (!books || dataFromChild === "") {
-      return books || [];
+    console.log("memo");
+
+    if (!books) {
+      return [];
+    } else if (router.query.slug[0] === "all") {
+      setDataFromChild("");
+      return books;
+    } else {
+      return books.filter((item) => item.series === dataFromChild);
     }
-    const newData = books.filter((item) => item.series === dataFromChild);
-    return newData;
-  }, [dataFromChild]);
+  }, [dataFromChild, books]);
 
   const series = data.data.product.reduce((acc, item) => {
     return acc.concat(item.series);

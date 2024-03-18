@@ -16,12 +16,13 @@ export default function MenuBar({siteMenu}) {
     return item.menu_items[0].site_menu_id.publisher === "global";
   });
 
-  // console.log("7788", siteMenu,all);
+  console.log("MenuBar", all?.menu_items);
 
   return (
     <div className="menu-bar">
       <div className="container-fluid">
         {all?.menu_items.map((item) => {
+
           return (
             <>
               <div className="">

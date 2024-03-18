@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-// const Endpoint = "https://directus-cms.vicosys.com.hk/items/pages";
 const Endpoint = "https://directus-cms.vicosys.com.hk";
 
 const TOKEN = process.env.NEXT_PUBLIC_TOKEN;

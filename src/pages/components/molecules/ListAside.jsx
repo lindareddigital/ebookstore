@@ -2,11 +2,9 @@ import { cache } from "react";
 import { useEffect, useRef, useState } from "react";
 import apiManager from "src/pages/api/api";
 import Link from "next/link";
-import useCalc from "src/pages/components/atoms/useCalc";
 import { useRouter } from "next/router";
 
 export default function ListAside({ data, sendDataToParent, siteMenu }) {
-  const { width, mobile } = useCalc();
   const router = useRouter();
 
   console.log("list router", router.query);
@@ -16,11 +14,15 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
     router.push(`/listing/id=${item}`, undefined, { shallow: true });
   };
 
-  const nowpage = siteMenu.data.find((item) => {    
-    return item.menu_items[0].site_menu_id.publisher === router.query.page;
+  const nowpage = siteMenu.data.filter((item) => {
+    if (router.query.slug[0] == 'all'){
+      // console.log("prime", item.menu_items);
+      return item.menu_items[0].site_menu_id.publisher === "polis_press";
+    }
+      return item.menu_items.site_menu_id?.publisher === router.query.slug;
   });
 
-  console.log("listaside", siteMenu, nowpage);
+  console.log("nowpage", nowpage);
 
 
   const series = data.data.product.reduce((acc, item) => {
@@ -31,34 +33,40 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
 
   return (
     <aside className="list-aside">
-      {nowpage?.menu_items?.map((item) => {
+      {nowpage?.map((item) => {
         {
-         console.log(
-           "prime",
-           item.site_menu_id.title,
-           item.site_menu_items_id.title
-         );
+          console.log("prime", item.menu_items, 
+            /* item.menu_items.site_menu_id.title,
+           item.menu_items.site_menu_items_id.title */
+          );
         }
         return (
           <ul className="">
-            <div className="title">{item.site_menu_id.title}</div>
-            <li key={item.site_menu_items_id.id}>
-              <div
-                onClick={() => handleClick(item.site_menu_items_id.title)}
-                key={`${item.site_menu_items_id.id}`}
-              >
-                {item.site_menu_items_id.title}
-              </div>
-            </li>
+            <div className="title">{item.menu_items[0].site_menu_id.title}</div>
+
+            
+            {item.menu_items?.map((item) => {
+              {
+                {/* console.log("64",item); */}
+              }
+              return (
+                
+                  <li key={item.site_menu_items_id.id}>
+                    <div
+                      onClick={() =>
+                        handleClick(item.site_menu_items_id.title)
+                      }
+                      key={`${item.site_menu_items_id.id}`}
+                    >
+                      {item.site_menu_items_id.title}
+                    </div>
+                  </li>
+              );
+            })}
           </ul>
         );
       })}
 
-      
-
-      <ul>
-        <div className="title">依系列搜尋</div>
-      </ul>
     </aside>
   );
 }

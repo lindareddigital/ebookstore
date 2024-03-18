@@ -90,7 +90,7 @@ export default function Navbar({categories}) {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  href="/listing"
+                  href="/listing/all"
                 >
                   全站分類
                 </Link>
@@ -120,7 +120,7 @@ export default function Navbar({categories}) {
                   className="nav-link"
                   href={{
                     pathname: `/singlepage/`,
-                    query: { page: "haibin" },
+                    query: { slug: "haibin" },
                   }}
                 >
                   海濱
@@ -131,7 +131,7 @@ export default function Navbar({categories}) {
                   className="nav-link"
                   href={{
                     pathname: `/singlepage`,
-                    query: { page: "yidin" },
+                    query: { slug: "yidin" },
                   }}
                 >
                   一丁
@@ -212,7 +212,7 @@ export default function Navbar({categories}) {
                   <Link
                     href={{
                       pathname: `/singlepage/`,
-                      query: { page: "seashore" },
+                      query: { slug: "seashore" },
                     }}
                   >
                     <button type="button" className="btn">
@@ -223,7 +223,7 @@ export default function Navbar({categories}) {
                   <Link
                     href={{
                       pathname: `/singlepage`,
-                      query: { page: "yidin" },
+                      query: { slug: "yidin" },
                     }}
                   >
                     <button type="button" className="btn">

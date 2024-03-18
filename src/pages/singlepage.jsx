@@ -17,7 +17,7 @@ export default function Singlepage({ data, siteMenu }) {
   const [recipe, setRecipe] = useState([]);
 
   const router = useRouter();
-  const page = router.query.page;
+  const page = router.query.slug;
 
   return (
     <div className="single-page">
