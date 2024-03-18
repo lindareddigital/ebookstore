@@ -18,12 +18,11 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 
 
-export default function Detail({ data, detail }) {
+export default function Detail({ data, detail, siteMenu }) {
   const { mobile } = useCalc();
   const [show, setShow] = useState(false);
 
   const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
-
 
   const router = useRouter();
   const id = router.query.slug;
@@ -32,13 +31,7 @@ export default function Detail({ data, detail }) {
     return item.id === id;
   });
 
-   console.log("detaildetail", detail, item);
-
-
-  
-
-
- 
+  console.log("detaildetail", detail, item);
 
   return (
     <div className="detail-page">
@@ -46,9 +39,9 @@ export default function Detail({ data, detail }) {
         <title>{item.title}</title>
       </Head>
       <Navbar />
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
       <div className="container-fluid fdc">
-        <Breadcrumb data={item.series}/>
+        <Breadcrumb data={item.series} />
 
         <div className="detail">
           <div className="content">
@@ -144,9 +137,10 @@ export default function Detail({ data, detail }) {
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
   const detail = await apiManager.getDetail();
+  const siteMenu = await apiManager.getSiteMenu();
 
 
   console.log("detaildetail", detail);
 
-  return { props: { data: result, detail: detail.data } };
+  return { props: { data: result, detail: detail.data, siteMenu } };
 };

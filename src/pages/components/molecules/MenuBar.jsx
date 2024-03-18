@@ -7,43 +7,35 @@ import useCalc from 'src/pages/components/atoms/useCalc';
 
 
 
-export default function MenuBar(props) {
-
+export default function MenuBar({siteMenu}) {
   const { width, mobile } = useCalc();
 
-  const [items, setItems] = useState(null);
+  const all = siteMenu.data.find((item) => {
+    // console.log("item", item.menu_items);
+    
+    return item.menu_items[0].site_menu_id.publisher === "global";
+  });
 
+  // console.log("7788", siteMenu,all);
 
   return (
     <div className="menu-bar">
       <div className="container-fluid">
-        <div className="">
-          <Link href="/listing" className="link">
-            全站分類
-          </Link>
-        </div>
-        <div className="">
-          <Link href="" className="link">
-            童書
-          </Link>
-        </div>
-        <div className="">
-          <Link href="" className="link">
-            成書
-          </Link>
-        </div>
-        <div className="">
-          <Link href="" className="link">
-            益智產品
-          </Link>
-        </div>
-        <div className="">
-          <Link href="" className="link">
-            買書GO
-          </Link>
-        </div>
+        {all?.menu_items.map((item) => {
+          return (
+            <>
+              <div className="">
+                <Link
+                  href={`/listing/${item.site_menu_items_id.slug}`}
+                  className="link"
+                >
+                  {item.site_menu_items_id.title}
+                </Link>
+              </div>
+            </>
+          );
+        })}
       </div>
     </div>
   );
-
 }

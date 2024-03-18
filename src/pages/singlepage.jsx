@@ -11,7 +11,7 @@ import GridList from "src/pages/listing/GridList";
 import { useRouter } from "next/router";
 
 
-export default function Singlepage({ data, detail }) {
+export default function Singlepage({ data, siteMenu }) {
   const { mobile } = useCalc();
   const [categories, setCategories] = useState([]);
   const [recipe, setRecipe] = useState([]);
@@ -37,7 +37,7 @@ export default function Singlepage({ data, detail }) {
 
       <div className="container-fluid header-main">
         <div className="header-search-bar">
-          <h3>{page === "haibin" ? "海濱圖書" : "一丁文化"}</h3>
+          <h3>{page === "seashore" ? "海濱圖書" : "一丁文化"}</h3>
           <div className="header-toolbar">
             <div className="navbar-link">
               <Link href={{ pathname: `/` }} type="button" className="btn ">
@@ -45,7 +45,11 @@ export default function Singlepage({ data, detail }) {
                 大邑文化
               </Link>
               <hr className="nav-hr" />
-              <Link href={{ pathname: `/login` }} type="button" className="btn ">
+              <Link
+                href={{ pathname: `/login` }}
+                type="button"
+                className="btn "
+              >
                 <img src="/icons/member.svg" alt="" />
                 登入
               </Link>
@@ -55,7 +59,7 @@ export default function Singlepage({ data, detail }) {
       </div>
 
       <div className="home-banner">
-        {page === "haibin" ? (
+        {page === "seashore" ? (
           <img src="/images/haibin.svg" className="" alt="..."></img>
         ) : (
           <img src="/images/yidin.svg" className="" alt="..."></img>
@@ -63,8 +67,8 @@ export default function Singlepage({ data, detail }) {
       </div>
 
       <div className="top-area">
-        {page === "haibin" ? (
-          <img src="/images/habinlogo.svg" className="" alt="..."></img>
+        {page === "seashore" ? (
+          <img src="/images/logo.svg" className="" alt="..."></img>
         ) : (
           <img src="/images/yidinlogo.svg" className="" alt="..."></img>
         )}
@@ -82,7 +86,7 @@ export default function Singlepage({ data, detail }) {
 
       <div className="container-fluid">
         <div className="main-body">
-          <ListAside data={data} />
+          <ListAside data={data} siteMenu={siteMenu} />
 
           <div className="right-side">
             <div className="block-title">系列：X萬獸探險隊</div>
@@ -172,8 +176,9 @@ export default function Singlepage({ data, detail }) {
 export const getServerSideProps = async () => {
   const data = await apiManager.getNew();
   const detail = await apiManager.getDetail();
+  const siteMenu = await apiManager.getSiteMenu();
 
   console.log("datadatadatadata", data);
 
-  return { props: { data, detail } };
+  return { props: { data, detail, siteMenu } };
 };

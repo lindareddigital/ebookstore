@@ -2,11 +2,11 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
-export default function Download() {
+export default function Download({ siteMenu }) {
   return (
     <div className="contactus-page">
       <Navbar />
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
       <Breadcrumb data={"書單下載"} />
       <form className="download form-area">
         <div className="block-title">書單下載</div>
@@ -96,3 +96,10 @@ export default function Download() {
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+
+  const siteMenu = await apiManager.getSiteMenu();
+
+  return { props: { siteMenu } };
+};

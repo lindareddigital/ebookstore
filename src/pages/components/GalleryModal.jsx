@@ -75,12 +75,20 @@ export default function GalleryModal({ item,show, onHide }) {
           slidesPerView={"auto"}
           className="primary-swiper"
           // onSnapIndexChange={onRealIndexChange}
-          thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
           modules={[Thumbs, FreeMode, Navigation]}
+          // slideToClickedSlide={true}
+          // watchslidesvisibility={true}
+          // watchslidesprogress={true}
         >
           {item.images.map((item) => {
             {
-              console.log("5566", item);
+              {
+                /* console.log("5566", item); */
+              }
             }
             return (
               <SwiperSlide key={item.product_id}>

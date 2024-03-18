@@ -10,7 +10,7 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 
-export default function Listing({ data, detail }) {
+export default function Listing({ data, detail, siteMenu }) {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
 
@@ -51,7 +51,7 @@ export default function Listing({ data, detail }) {
   return (
     <div className="listing-page">
       <Navbar />
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
       <div className="listing-banner">
         {/* <img
           src=""
@@ -64,6 +64,7 @@ export default function Listing({ data, detail }) {
         <div className="main-body">
           <SidebarWrapper />
           <ListAside
+            siteMenu={siteMenu}
             data={data}
             detail={detail}
             sendDataToParent={sendDataToParent}
@@ -179,7 +180,8 @@ export default function Listing({ data, detail }) {
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
   const detail = await apiManager.getDetail();
+  const siteMenu = await apiManager.getSiteMenu();
 
 
-  return { props: { data: result, detail } };
+  return { props: { data: result, detail, siteMenu } };
 };

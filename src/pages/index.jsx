@@ -7,12 +7,11 @@ import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
 
-export default function Home({data}) {
+export default function Home({ data, siteMenu }) {
   // const swiperRef = useRef(null);
 
   // const { next, previous } = useSwiperFunc(swiperRef);
   // const containerRef = useRef(null);
-
 
   // `${url}/api/v1/sales?_start=${
   //   (pageNo - 1) * limitCount
@@ -31,21 +30,15 @@ export default function Home({data}) {
 
   const posts = data.data.pages[0].blocks[0].item.posts;
   console.log("now", data.data);
-  
 
   const blocks = data.data.pages[0];
   console.log("block_hero", blocks);
-
 
   const heroBanner = blocks.blocks.find((item) => {
     return item.collection === "block_hero_group";
   });
 
   console.log("heroBanner", heroBanner.item.hero_cards);
-
-
-
-
 
   return (
     <div className="home-page">
@@ -71,7 +64,7 @@ export default function Home({data}) {
 
       <Navbar />
 
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
 
       <div className="home-banner">
         <div className="leftbox">
@@ -171,7 +164,10 @@ export default function Home({data}) {
             data-bs-target="#carouselExampleControls"
             data-bs-slide="prev"
           >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
             <span className="visually-hidden">Previous</span>
           </button>
           <button
@@ -180,7 +176,10 @@ export default function Home({data}) {
             data-bs-target="#carouselExampleControls"
             data-bs-slide="next"
           >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
             <span className="visually-hidden">Next</span>
           </button>
         </div>
@@ -214,14 +213,11 @@ const tabChange = async (id) => {
 
 
 export const getServerSideProps = async () => {
-  const result = await apiManager.getNew();
+  const data = await apiManager.getNew();
   const detail = await apiManager.getDetail();
-  // const books = null;
-
-  console.log("datadatadatadata", detail);
-
+  const siteMenu = await apiManager.getSiteMenu();
  
 
-  return { props: { data: result, detail } };
+  return { props: { data, detail, siteMenu } };
 };
 

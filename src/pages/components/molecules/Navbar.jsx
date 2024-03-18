@@ -161,7 +161,10 @@ export default function Navbar({categories}) {
                   全站
                 </Link>
 
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuLink"
+                >
                   <li>
                     <Link className="dropdown-item" href="#">
                       Action
@@ -209,7 +212,7 @@ export default function Navbar({categories}) {
                   <Link
                     href={{
                       pathname: `/singlepage/`,
-                      query: { page: "haibin" },
+                      query: { page: "seashore" },
                     }}
                   >
                     <button type="button" className="btn">

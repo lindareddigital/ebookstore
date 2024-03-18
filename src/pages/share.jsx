@@ -9,7 +9,7 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import apiManager from "src/pages/api/api";
 
 
-export default function Share({ data }) {
+export default function Share({ data, siteMenu }) {
 
   console.log(
     "Share",
@@ -30,7 +30,7 @@ export default function Share({ data }) {
     <div className="share-page">
       <Navbar />
 
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
       <Breadcrumb data={"分享專欄"} />
 
       <div className="container-fluid">
@@ -216,8 +216,9 @@ export default function Share({ data }) {
 
 export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
+  const siteMenu = await apiManager.getSiteMenu();
 
-  console.log("datadatadatadata111", result);
+  console.log("datadata", result);
 
-  return { props: { data: result } };
+  return { props: { data: result, siteMenu } };
 };

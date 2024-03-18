@@ -56,7 +56,7 @@ export default function Manage({ params }) {
     <>
       <div className="manage-page">
         <Navbar />
-        <MenuBar />
+        <MenuBar siteMenu={siteMenu} />
         <Breadcrumb data={"會員中心"} />
 
         <div className="container-fluid">
@@ -130,3 +130,10 @@ export default function Manage({ params }) {
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+ 
+  const siteMenu = await apiManager.getSiteMenu();
+
+  return { props: { siteMenu } };
+};

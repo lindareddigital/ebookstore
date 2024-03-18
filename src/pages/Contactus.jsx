@@ -6,7 +6,7 @@ export default function ContactUs() {
   return (
     <div className="contactus-page">
       <Navbar />
-      <MenuBar />
+      <MenuBar siteMenu={siteMenu} />
       <Breadcrumb data={"聯絡我們"} />
       <form className="form-area contact-us">
         <div className="block-title">聯絡我們</div>
@@ -106,3 +106,11 @@ export default function ContactUs() {
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  const siteMenu = await apiManager.getSiteMenu();
+  return { props: { siteMenu } };
+};
+
+
+

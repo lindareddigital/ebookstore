@@ -7,10 +7,10 @@ const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 
 class ApiManager {
   static instance;
-  defaultData= {
-    timestamp: Date.now()
+  defaultData = {
+    timestamp: Date.now(),
   };
-  static token = '';
+  static token = "";
   static getSharedInstance = () => {
     if (!ApiManager.instance) {
       ApiManager.instance = new ApiManager();
@@ -26,7 +26,7 @@ class ApiManager {
     // const fetchEndpoint = `${Endpoint}${path}${encodeQueryData(path)}`;
     const fetchEndpoint = `${Endpoint}${path}`;
 
-    console.log('fetchEndpoint', fetchEndpoint);
+    console.log("fetchEndpoint", fetchEndpoint);
     // await this.getToken();
     const response = await fetch(fetchEndpoint, {
       method: "GET",
@@ -51,21 +51,16 @@ class ApiManager {
     }
   };
   post = (params) => {
-    return this.request({ ...params, method: 'POST' });
+    return this.request({ ...params, method: "POST" });
   };
   put = (params) => {
-    return this.request({ ...params, method: 'PUT' });
+    return this.request({ ...params, method: "PUT" });
   };
   delete = (params) => {
-    return this.request({ ...params, method: 'DELETE' });
+    return this.request({ ...params, method: "DELETE" });
   };
 
-  request = async ({
-    path,
-    method,
-    data,
-    customHeader
-  }) => {
+  request = async ({ path, method, data, customHeader }) => {
     const fetchEndpoint = `${path}`;
 
     // await this.getToken();
@@ -93,21 +88,19 @@ class ApiManager {
     }
   };
 
-
-  getCategoryList = (id) =>{
+  getCategoryList = (id) => {
     return this.get({
-      path:`/items/Book?fields=*.*&filter[Category][_eq]=${id}`
-    }); 
-  }
+      path: `/items/Book?fields=*.*&filter[Category][_eq]=${id}`,
+    });
+  };
 
+  getNew = async () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${TOKEN} `);
+    myHeaders.append("mode", "no-cors");
 
-  getNew = async() =>{
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("Authorization", `Bearer ${TOKEN} `);
-      myHeaders.append("mode", "no-cors");
-
-      const query = `query {
+    const query = `query {
         pages {
           id
           status
@@ -180,40 +173,45 @@ class ApiManager {
         }
       }`;
 
+    query.replace(/(?:\r\n|\r|\n)/g, "\\n");
 
-     query.replace(/(?:\r\n|\r|\n)/g, "\\n");
-
-      const response = await fetch("https://directus-cms.vicosys.com.hk/graphql", {
+    const response = await fetch(
+      "https://directus-cms.vicosys.com.hk/graphql",
+      {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({
-          query,          
+          query,
           variables: {},
         }),
         redirect: "follow",
-      })
-      const result = await response.json()
-      return result
-  }
+      }
+    );
+    const result = await response.json();
+    return result;
+  };
 
-  getAllBooks = () =>{
-    return this.get({path:`/items/dayi?fields=*.*`}); 
-  }
+  getAllBooks = () => {
+    return this.get({ path: `/items/dayi?fields=*.*` });
+  };
 
-  getHaibin = () =>{
-    return this.get({path:`/items/haibin?fields=*.*`}); 
-  }
+  getHaibin = () => {
+    return this.get({ path: `/items/haibin?fields=*.*` });
+  };
 
-  getRecipe = () =>{
-    return this.get({path:`/items/haibin?filter[Category][_eq]=飲食`}); 
-  }
+  getRecipe = () => {
+    return this.get({ path: `/items/haibin?filter[Category][_eq]=飲食` });
+  };
 
-  getDetail = () =>{
+  getSiteMenu = () => {
+    return this.get({ path: `/items/site_menu/?fields[]=menu_items.*.*` });
+  };
+
+  getDetail = () => {
     return this.get({
       path: `/items/product/?fields[]=*&fields[]=images.*`,
-    }); 
-  }
-
+    });
+  };
 }
 
 export default ApiManager.getSharedInstance();
