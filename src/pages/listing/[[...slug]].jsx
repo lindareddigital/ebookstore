@@ -10,10 +10,13 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
+import { createDirectus, rest, readItems } from "@directus/sdk";
 
-export default function Listing({ data, detail, siteMenu }) {
+
+export default function Listing({ data, detail, siteMenu, slugProduct }) {
   const [panel, setPanel] = useState(false);
-  const [dataFromChild, setDataFromChild] = useState("");
+  const [dataFromChild, setDataFromChild] = useState('');
+  const [ans, setAns] = useState({title: 'all'});
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
@@ -24,15 +27,42 @@ export default function Listing({ data, detail, siteMenu }) {
     setDataFromChild(data);
   };
 
+  const fetchSlug = async () => {
+    // dataFromChild
+    //  &filter[slug][_eq]=puzzle-board-game&
+
+    // const slugProduct = await apiManager.test(
+    //   "&filter[slug][_eq]=puzzle-board-game&"
+    // );
+
+
+      // setData(res);
+      console.log("slugProduct", slugProduct);
+
+    const ans = slugProduct.data.find((item) => {
+      // console.log("item",item)
+
+      console.log("item", item.query_tags, " dataFromChild", dataFromChild);
+      return item?.query_tags?.includes(dataFromChild);
+    });
+
+    setAns(ans);
+
+    console.log("ans", ans.title);
+  };
+
   const filterData = useMemo(() => {
-    // console.log("memo");
+    console.log("memo");
 
     if (!books) {
       return [];
     } else if (router.query.slug === "all") {
       setDataFromChild("");
       return books;
-    } else {      
+    } else {   
+      fetchSlug() 
+      console.log("books", books);
+  
       return books.filter((item) => item.series === dataFromChild);
     }
   }, [dataFromChild, books]);
@@ -186,7 +216,30 @@ export const getServerSideProps = async () => {
   const result = await apiManager.getNew();
   const detail = await apiManager.getDetail();
   const siteMenu = await apiManager.getSiteMenu();
+  const slugProduct = await apiManager.getSlugProduct();
 
 
-  return { props: { data: result, detail, siteMenu } };
+  return { props: { data: result, detail, siteMenu, slugProduct } };
 };
+
+
+export const sdk = async () => {
+
+  const client = createDirectus(
+    "/items/site_menu_items/?fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id"
+  ).with(rest());
+
+  const result = await client.request(
+    readItems("site_menu_items", {
+      fields: {
+        status: {
+          _eq: "draft",
+        },
+      },
+    })
+  );
+
+
+};
+
+

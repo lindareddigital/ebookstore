@@ -2061,12 +2061,6 @@ footer .container-fluid{
   justify-content: space-between;
 }
 
-.recipe-block{
-  width: 100vw;
-  margin-bottom: 40px;
-  position: relative;
-}
-
 .recipe-card{
   box-shadow: 0px 4px 30px 0px #00000029;
   width: 314px;
@@ -2078,15 +2072,10 @@ footer .container-fluid{
 .recipe-card img{
   width: 274px;
   height: 274px;
-  /* object-fit: cover;
-  object-position: 50% 50%; */
 }
 
-.recipe-wrapper{
-  display: flex;
-  height: 100%;
+.single-page .home-recommend-tabs{
   padding: 50px 0px;
-  justify-content: space-between;
   width: calc(100vw - 15%);
   position: relative;
   z-index: 999;
@@ -2452,13 +2441,35 @@ footer .accordion{
   width: calc(100vw - 32px);
 }
 
+.single-page .home-recommend-tabs{
+  position: unset;
+}
+
+.single-page .swiper-backface-hidden .swiper-slide{
+  margin-right: 15px;
+}
+
 .home-recommend-tabs .nav-tabs{
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   /* height: 60px; */
   width: unset;
   flex-wrap: nowrap;
   white-space: nowrap;
   align-items: end;
+}
+
+.single-page .header-toolbar{
+  display: block;
+}
+
+.single-page .home-banner img,
+.single-separator img{
+  width: 100%;
+}
+
+.single-separator{
+  width: calc(100vw - 32px);
+  margin: auto;
 }
 
 .keyword-block{
@@ -2671,18 +2682,8 @@ footer .box{
   aspect-ratio: 16/9;
 }
 
-
-.recipe-card{
-
-}
-
 .recipe-desc{
   width: 100%;
-}
-
-.recipe-block{
-  height: auto;
-  overflow-x: scroll;
 }
 
 .breadcrumb{
@@ -2857,6 +2858,8 @@ footer .container-fluid{
 .home-recommend-tabs > .mobile-tabs{
   display: block;
 }
+
+
 
 
 

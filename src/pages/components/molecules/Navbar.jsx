@@ -108,26 +108,6 @@ export default function Navbar({ siteMenu }) {
                   </>
                 );
               })}
-              {/* <li className="nav-item">
-                <Link className="nav-link" href="#">
-                  童書
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="#">
-                  成書
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="#">
-                  益智產品
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="#">
-                  買書GO
-                </Link>
-              </li> */}
               <li className="nav-item">
                 <Link
                   className="nav-link"

@@ -10,8 +10,10 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   console.log("list router", router.query);
 
   const handleClick = (item) => {
-    sendDataToParent(item);
-    router.push(`/listing/id=${item}`, undefined, { shallow: true });
+    console.log('item',item);
+    
+    sendDataToParent(item.title);
+    router.push(`/listing/id=${item.slug}`, undefined, { shallow: true });
   };
 
   const nowpage = siteMenu.data.filter((item) => {
@@ -27,6 +29,8 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   });
 
   console.log("nowpage", nowpage);
+
+
 
 
   const series = data.data.product.reduce((acc, item) => {
@@ -58,7 +62,7 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
                   <li key={item.site_menu_items_id.id}>
                     <div
                       onClick={() =>
-                        handleClick(item.site_menu_items_id.title)
+                        handleClick(item.site_menu_items_id)
                       }
                       key={`${item.site_menu_items_id.id}`}
                     >

@@ -21,15 +21,13 @@ class ApiManager {
 
   get = async (params) => {
     const { path, data, customHeader = {} } = params;
-    // const mergedDic = mergeDictionary(data, this.defaultData);
-    // const fetchEndpoint = `${Endpoint}${path}${encodeQueryData(path)}`;
     const fetchEndpoint = `${Endpoint}${path}`;
 
     console.log("fetchEndpoint", fetchEndpoint);
     // await this.getToken();
     const response = await fetch(fetchEndpoint, {
       method: "GET",
-      mode: "cors",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${TOKEN}`,
@@ -211,6 +209,18 @@ class ApiManager {
       path: `/items/product/?fields[]=*&fields[]=images.*`,
     });
   };
+
+  getSlugProduct = () => {
+    return this.get({
+      path: `/items/site_menu_items/?fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id`,
+    });
+  };
+
+  // test = (slug) => {
+  //   return this.get({
+  //     path: `/items/site_menu_items/?${slug}fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id`,
+  //   });
+  // };
 }
 
 export default ApiManager.getSharedInstance();
