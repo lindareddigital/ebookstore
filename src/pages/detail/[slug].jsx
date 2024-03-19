@@ -38,7 +38,7 @@ export default function Detail({ data, detail, siteMenu }) {
       <Head>
         <title>{item.title}</title>
       </Head>
-      <Navbar />
+      <Navbar siteMenu={siteMenu} />
       <MenuBar siteMenu={siteMenu} />
       <div className="container-fluid fdc">
         <Breadcrumb data={item.series} />

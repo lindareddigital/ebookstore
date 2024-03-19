@@ -25,14 +25,14 @@ export default function Listing({ data, detail, siteMenu }) {
   };
 
   const filterData = useMemo(() => {
-    console.log("memo");
+    // console.log("memo");
 
     if (!books) {
       return [];
-    } else if (router.query.slug[0] === "all") {
+    } else if (router.query.slug === "all") {
       setDataFromChild("");
       return books;
-    } else {
+    } else {      
       return books.filter((item) => item.series === dataFromChild);
     }
   }, [dataFromChild, books]);
@@ -55,7 +55,7 @@ export default function Listing({ data, detail, siteMenu }) {
 
   return (
     <div className="listing-page">
-      <Navbar />
+      <Navbar siteMenu={siteMenu} />
       <MenuBar siteMenu={siteMenu} />
       <div className="listing-banner">
         {/* <img

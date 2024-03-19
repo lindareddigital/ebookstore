@@ -15,11 +15,15 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   };
 
   const nowpage = siteMenu.data.filter((item) => {
-    if (router.query.slug[0] == 'all'){
-      // console.log("prime", item.menu_items);
+    if (router.query.slug == 'all'){
+      console.log("router.query.slug", router.query.slug);
+      return item.menu_items[0].site_menu_id.publisher === "polis_press";
+    }else if (router.query.slug === "seashore"){
+      console.log("router.query.slug seashore", item.menu_items);
+      return item.menu_items[0].site_menu_id?.publisher === router.query.slug;
+    }else{
       return item.menu_items[0].site_menu_id.publisher === "polis_press";
     }
-      return item.menu_items.site_menu_id?.publisher === router.query.slug;
   });
 
   console.log("nowpage", nowpage);

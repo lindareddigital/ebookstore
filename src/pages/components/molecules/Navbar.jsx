@@ -4,23 +4,18 @@ import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 
-export default function Navbar({categories}) {
-
+export default function Navbar({ siteMenu }) {
   const { width, mobile } = useCalc();
-
-  const [items, setItems] = useState(null);
-
-  // console.log(categories,'categories');
 
   const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setOpen((prev) => !prev);
   };
+  console.log("siteMenu", siteMenu);
 
-  
-
-
-
+  const all = siteMenu.data.find((item) => {
+    return item.menu_items[0].site_menu_id.publisher === "global";
+  });
 
   return (
     <>
@@ -86,7 +81,7 @@ export default function Navbar({categories}) {
           </form>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link active"
                   aria-current="page"
@@ -94,8 +89,26 @@ export default function Navbar({categories}) {
                 >
                   全站分類
                 </Link>
-              </li>
-              <li className="nav-item">
+              </li> */}
+
+              {all?.menu_items.map((item) => {
+                return (
+                  <>
+                    <li className="nav-item">
+                      <Link
+                        href={{
+                          pathname: `/listing`,
+                          query: { slug: `${item.site_menu_items_id.slug}` },
+                        }}
+                        className="nav-link"
+                      >
+                        {item.site_menu_items_id.title}
+                      </Link>
+                    </li>
+                  </>
+                );
+              })}
+              {/* <li className="nav-item">
                 <Link className="nav-link" href="#">
                   童書
                 </Link>
@@ -114,13 +127,13 @@ export default function Navbar({categories}) {
                 <Link className="nav-link" href="#">
                   買書GO
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link
                   className="nav-link"
                   href={{
                     pathname: `/singlepage/`,
-                    query: { slug: "haibin" },
+                    query: { slug: "seashore" },
                   }}
                 >
                   海濱
@@ -245,5 +258,4 @@ export default function Navbar({categories}) {
       </div>
     </>
   );
-
 }

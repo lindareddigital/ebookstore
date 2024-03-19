@@ -2682,6 +2682,7 @@ footer .box{
 
 .recipe-block{
   height: auto;
+  overflow-x: scroll;
 }
 
 .breadcrumb{

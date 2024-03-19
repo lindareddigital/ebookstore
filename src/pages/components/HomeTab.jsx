@@ -11,8 +11,6 @@ import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
-
-
 export default function HomeTab({ data }) {
   // console.log("data", data.data);
  

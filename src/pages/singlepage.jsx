@@ -9,6 +9,7 @@ import Link from 'next/link';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import GridList from "src/pages/listing/GridList";
 import { useRouter } from "next/router";
+import SinglePageTab from "src/pages/components/SinglePageTab";
 
 
 export default function Singlepage({ data, siteMenu }) {
@@ -131,41 +132,7 @@ export default function Singlepage({ data, siteMenu }) {
         </div>
       </div>
 
-      <div className="block-title">美味食譜</div>
-      <div className="recipe-block">
-        <div className="recipe-wrapper">
-          {/* {recipe.map((item) => {
-            return ( */}
-          <div className="recipe-card">
-            <img
-              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // alt={item.title}
-            ></img>
-            <div className="recipe-desc">item.Title</div>
-          </div>
-          <div className="recipe-card">
-            <img
-              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-              // src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-            ></img>
-            <div className="recipe-desc">item.Title</div>
-          </div>
-          <div className="recipe-card">
-            <img
-              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-            ></img>
-            <div className="recipe-desc">item.Title</div>
-          </div>
-          <div className="recipe-card">
-            <img
-              src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-            ></img>
-            <div className="recipe-desc">item.Title</div>
-          </div>
-          {/* );
-          })} */}
-        </div>
-      </div>
+      <SinglePageTab />
 
       <MediaBlock />
     </div>

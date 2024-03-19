@@ -62,7 +62,7 @@ export default function Home({ data, siteMenu }) {
         </div>
       </div>
 
-      <Navbar />
+      <Navbar siteMenu={siteMenu} />
 
       <MenuBar siteMenu={siteMenu} />
 

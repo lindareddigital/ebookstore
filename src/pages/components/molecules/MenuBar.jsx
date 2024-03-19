@@ -27,7 +27,10 @@ export default function MenuBar({siteMenu}) {
             <>
               <div className="">
                 <Link
-                  href={`/listing/${item.site_menu_items_id.slug}`}
+                  href={{
+                    pathname: `/listing`,
+                    query: { slug: `${item.site_menu_items_id.slug}` },
+                  }}
                   className="link"
                 >
                   {item.site_menu_items_id.title}

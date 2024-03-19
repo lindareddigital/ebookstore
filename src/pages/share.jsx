@@ -28,7 +28,7 @@ export default function Share({ data, siteMenu }) {
 
   return (
     <div className="share-page">
-      <Navbar />
+      <Navbar siteMenu={siteMenu} />
 
       <MenuBar siteMenu={siteMenu} />
       <Breadcrumb data={"分享專欄"} />
