@@ -11,7 +11,7 @@ export default function Navbar({ siteMenu }) {
   const toggleOpen = () => {
     setOpen((prev) => !prev);
   };
-  console.log("siteMenu", siteMenu);
+  // console.log("siteMenu", siteMenu);
 
   const all = siteMenu.data.find((item) => {
     return item.menu_items[0].site_menu_id.publisher === "global";
@@ -94,7 +94,7 @@ export default function Navbar({ siteMenu }) {
               {all?.menu_items.map((item) => {
                 return (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item" key={item.id}>
                       <Link
                         href={{
                           pathname: `/listing`,

@@ -11,6 +11,7 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import { createDirectus, rest, readItems } from "@directus/sdk";
+import { redirect } from "next/navigation";
 
 
 export default function Listing({ data, detail, siteMenu, slugProduct }) {
@@ -22,13 +23,14 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
   const router = useRouter();
   const books = detail.data;
 
+
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
     setDataFromChild(data);
   };
 
   const fetchSlug = () => {   
-      console.log("slugProduct", slugProduct);
+    console.log("slugProduct", slugProduct);
 
     const ans = slugProduct.data.find((item) => {
       // console.log("item",item)
@@ -44,24 +46,31 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
     console.log("ans", ans);
   };
 
+  useEffect(() => {
+    console.log("Query changed:", router.query);
+    // if (router.isReady) {
+    //   console.log(router.query);
+    // }
+    fetchSlug();
+  }, [router.query]);
+
   const filterData = useMemo(() => {
-    console.log("memo", router.query);
+    console.log("memo", router.query, router.query.slug.includes("all"));
 
     if (!books) {
       return [];
-    } else if (Object.keys(router.query).length === 0) {
+    } else if (router.query.slug.includes("all")) {
       setDataFromChild("");
       return books;
     } else {
-      fetchSlug();
       console.log(
-        "all books",
-        books,
-        books.filter((item) => item.slug === ans?.slug)
+        "change tab",
+        // books,
+        books.filter((item) => item.series === ans?.title)
       );
       return books.filter((item) => item.series === ans?.title);
     }
-  }, [dataFromChild, books]);
+  }, [router.query, books]);
 
   const series = data.data.product.reduce((acc, item) => {
     return acc.concat(item.series);
@@ -82,7 +91,7 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
   return (
     <div className="listing-page">
       <Navbar siteMenu={siteMenu} />
-      <MenuBar siteMenu={siteMenu} />
+      <MenuBar siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
       <div className="listing-banner">
         {/* <img
           src=""
@@ -228,12 +237,17 @@ export const sdk = async () => {
   const result = await client.request(
     readItems("site_menu_items", {
       fields: {
-        status: {
-          _eq: "draft",
+        slug: {
+          _eq: "puzzle-board-game",
         },
+        
       },
+      
     })
   );
+
+  console.log('sdk',result);
+  
 
 
 };

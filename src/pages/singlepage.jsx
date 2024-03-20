@@ -69,7 +69,7 @@ export default function Singlepage({ data, siteMenu }) {
 
       <div className="top-area">
         {page === "seashore" ? (
-          <img src="/images/logo.svg" className="" alt="..."></img>
+          <img src="/images/habinlogo.svg" className="" alt="..."></img>
         ) : (
           <img src="/images/yidinlogo.svg" className="" alt="..."></img>
         )}

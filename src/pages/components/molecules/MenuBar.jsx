@@ -5,9 +5,10 @@ import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import { useRouter } from "next/router";
 
-export default function MenuBar({siteMenu}) {
+export default function MenuBar({ siteMenu, sendDataToParent }) {
   const { width, mobile } = useCalc();
   const router = useRouter();
+
 
   const all = siteMenu.data.find((item) => {
     // console.log("item", item.menu_items);
@@ -15,26 +16,27 @@ export default function MenuBar({siteMenu}) {
   });
 
   const handleClick = (item) => {
+
+    if (typeof sendDataToParent === "function") {
+      sendDataToParent(item.title);
+    }
     router.push(`/listing/${item.slug}`, undefined, {
       shallow: true,
     });
+
+     
   };
 
-  console.log("MenuBar", all?.menu_items);
+  // console.log("MenuBar", all?.menu_items);
 
   return (
     <div className="menu-bar">
       <div className="container-fluid">
         {all?.menu_items.map((item) => {
-
           return (
             <>
-              <div className="">
+              <div className="" key={item.title}>
                 <div
-                  // href={{
-                  //   pathname: `/listing`,
-                  // query: { slug: `${item.site_menu_items_id.slug}` },
-                  // }}
                   onClick={() => handleClick(item.site_menu_items_id)}
                   className="link"
                 >
