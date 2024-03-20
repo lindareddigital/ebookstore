@@ -3,18 +3,22 @@ import { useEffect, useRef,useState } from 'react';
 import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
-
-
-
+import { useRouter } from "next/router";
 
 export default function MenuBar({siteMenu}) {
   const { width, mobile } = useCalc();
+  const router = useRouter();
 
   const all = siteMenu.data.find((item) => {
     // console.log("item", item.menu_items);
-    
     return item.menu_items[0].site_menu_id.publisher === "global";
   });
+
+  const handleClick = (item) => {
+    router.push(`/listing/${item.slug}`, undefined, {
+      shallow: true,
+    });
+  };
 
   console.log("MenuBar", all?.menu_items);
 
@@ -26,15 +30,19 @@ export default function MenuBar({siteMenu}) {
           return (
             <>
               <div className="">
-                <Link
-                  href={{
-                    pathname: `/listing`,
-                    query: { slug: `${item.site_menu_items_id.slug}` },
-                  }}
+                <div
+                  // href={{
+                  //   pathname: `/listing`,
+                  // query: { slug: `${item.site_menu_items_id.slug}` },
+                  // }}
+                  onClick={() => handleClick(item.site_menu_items_id)}
                   className="link"
                 >
                   {item.site_menu_items_id.title}
-                </Link>
+                </div>
+                {/* <Link href="" className="link">
+                  5566
+                </Link> */}
               </div>
             </>
           );

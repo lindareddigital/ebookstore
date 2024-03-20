@@ -27,43 +27,39 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
     setDataFromChild(data);
   };
 
-  const fetchSlug = async () => {
-    // dataFromChild
-    //  &filter[slug][_eq]=puzzle-board-game&
-
-    // const slugProduct = await apiManager.test(
-    //   "&filter[slug][_eq]=puzzle-board-game&"
-    // );
-
-
-      // setData(res);
+  const fetchSlug = () => {   
       console.log("slugProduct", slugProduct);
 
     const ans = slugProduct.data.find((item) => {
       // console.log("item",item)
 
-      console.log("item", item.query_tags, " dataFromChild", dataFromChild);
-      return item?.query_tags?.includes(dataFromChild);
+      console.log("item", item.slug, " router", router.query?.slug);
+      // console.log("", router.query.slug.includes(item.slug));
+      
+      return router.query?.slug?.includes(item.slug);
     });
 
     setAns(ans);
 
-    console.log("ans", ans.title);
+    console.log("ans", ans);
   };
 
   const filterData = useMemo(() => {
-    console.log("memo");
+    console.log("memo", router.query);
 
     if (!books) {
       return [];
-    } else if (router.query.slug === "all") {
+    } else if (Object.keys(router.query).length === 0) {
       setDataFromChild("");
       return books;
-    } else {   
-      fetchSlug() 
-      console.log("books", books);
-  
-      return books.filter((item) => item.series === dataFromChild);
+    } else {
+      fetchSlug();
+      console.log(
+        "all books",
+        books,
+        books.filter((item) => item.slug === ans?.slug)
+      );
+      return books.filter((item) => item.series === ans?.title);
     }
   }, [dataFromChild, books]);
 

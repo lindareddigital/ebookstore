@@ -93,7 +93,7 @@ a:hover{
 
 }
 
-.menu-bar a{
+.menu-bar .link{
   color: var(--Black, #28251C);
   font-size: 18px;
   font-weight: 900;
