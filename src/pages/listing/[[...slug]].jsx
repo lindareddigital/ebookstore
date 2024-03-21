@@ -10,11 +10,19 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
-import { createDirectus, rest, graphql, readItems } from "@directus/sdk";
+import {
+  createDirectus,
+  rest,
+  graphql,
+  readItems,
+  authentication,
+  login,
+  staticToken,
+} from "@directus/sdk";
 import { redirect } from "next/navigation";
 
 
-export default function Listing({ data, detail, siteMenu, slugProduct }) {
+export default function Listing({ data, detail, siteMenu, slugProduct,test }) {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState('');
   const [ans, setAns] = useState({title: 'all'});
@@ -22,103 +30,7 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const books = detail.data;
-
-  // const fetchData = async () => {
-  //   try {
-  //     const res = await apiManager.test();
-  //     console.log('resresres',res);
-  //   } catch (error) {
-  //   }
-  // };
-
-  // fetchData();
-
-
-  useEffect(() => {
-    fetchData()
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      console.log("正在獲取數據...");
-
-      const client = createDirectus(
-        "https://directus-cms.vicosys.com.hk"
-      ).with(graphql());
-
-        const query = `
-  query {
-   product(filter: {
-       tags: {
-           category_id: {
-               id: {
-                  _in: ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
-               }
-           }
-       }
-   }) {
-       id
-       title
-       keyword
-       series
-       tags {
-           id
-           category_id {
-               id
-           }
-       }
-   }
-}
-`;
-        // Make the GraphQL query using the Directus client
-        client.graphql
-          .query(query)
-          .then((response) => {
-            const result = response.data;
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-      // const result = await client.request(
-      //   readItems("product", {
-      //     filter: {
-      //       tags: {
-      //         category_id: {
-      //           id: {
-      //             _in: [
-      //               "c9b9c5dc-8513-4282-af5b-366fc912dc61",
-      //               "59e8483c-019c-482f-b2a1-f9f3b6dcbe21",
-      //             ],
-      //           },
-      //         },
-      //       },
-      //     },
-      //     fields: [
-            
-      //       'id',
-      //       'title',
-      //       'keyword',
-      //       'series',
-            
-      //       // tags:[
-      //       //   id:{
-      //       //     category_id :[
-      //       //       id
-      //       //     ]
-      //       //   }
-      //       ],
-      //   //},
-      //   })
-      // );
-
-      // console.log("結果", result);
-    } catch (error) {
-      console.error("獲取數據時出錯:", error);
-    }
-  };
-
+  console.log('test',test);
 
 
   const sendDataToParent = (data) => {
@@ -317,19 +229,37 @@ export const getServerSideProps = async () => {
   const siteMenu = await apiManager.getSiteMenu();
   const slugProduct = await apiManager.getSlugProduct();
 
+  const query = `
+    query {
+      product(filter: {
+        tags: {
+          category_id: {
+            id: {
+              _in: ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+            }
+          }
+        }
+      }) 
+      {
+        id
+        title
+        keyword
+        series
+        tags {
+          id
+          category_id {
+            id
+          }
+        }
+      }
+    }
+  `;
+  const test = await apiManager.sdk(query);
 
-  return { props: { data: result, detail, siteMenu, slugProduct } };
+  console.log("test", test);
+
+  return { props: { data: result, detail, siteMenu, slugProduct,test } };
 };
 
-
-export const sdk = async () => {
-
- 
-
-  console.log("sdksdksdksdk", result);
-  
-
-
-};
 
 
