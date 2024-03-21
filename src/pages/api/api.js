@@ -221,6 +221,59 @@ class ApiManager {
   //     path: `/items/site_menu_items/?${slug}fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id`,
   //   });
   // };
+
+  test = async () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${TOKEN} `);
+    myHeaders.append("mode", "no-cors");
+
+    const query = `
+      query {
+        product(
+          filter: {
+            tags: {
+              category_id: {
+                id: {
+                  _in: ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+                }
+              }
+            }
+          }
+        ) 
+        {
+          id
+          title
+          keyword
+          series
+          tags {
+            id
+            category_id {
+              id
+            }
+          }
+        }
+      }
+    `;
+
+    query.replace(/(?:\r\n|\r|\n)/g, "\\n");
+
+    const response = await fetch(
+      "https://directus-cms.vicosys.com.hk/graphql",
+      {
+        method: "POST",
+        headers: myHeaders,
+        mode: "no-cors",
+        body: JSON.stringify({
+          query,
+          variables: {},
+        }),
+        redirect: "follow",
+      }
+    );
+    const result = await response.json();
+    return result;
+  };
 }
 
 export default ApiManager.getSharedInstance();

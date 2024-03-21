@@ -10,7 +10,7 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
-import { createDirectus, rest, readItems } from "@directus/sdk";
+import { createDirectus, rest, graphql, readItems } from "@directus/sdk";
 import { redirect } from "next/navigation";
 
 
@@ -22,6 +22,103 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const books = detail.data;
+
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await apiManager.test();
+  //     console.log('resresres',res);
+  //   } catch (error) {
+  //   }
+  // };
+
+  // fetchData();
+
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      console.log("正在獲取數據...");
+
+      const client = createDirectus(
+        "https://directus-cms.vicosys.com.hk"
+      ).with(graphql());
+
+        const query = `
+  query {
+   product(filter: {
+       tags: {
+           category_id: {
+               id: {
+                  _in: ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+               }
+           }
+       }
+   }) {
+       id
+       title
+       keyword
+       series
+       tags {
+           id
+           category_id {
+               id
+           }
+       }
+   }
+}
+`;
+        // Make the GraphQL query using the Directus client
+        client.graphql
+          .query(query)
+          .then((response) => {
+            const result = response.data;
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+      // const result = await client.request(
+      //   readItems("product", {
+      //     filter: {
+      //       tags: {
+      //         category_id: {
+      //           id: {
+      //             _in: [
+      //               "c9b9c5dc-8513-4282-af5b-366fc912dc61",
+      //               "59e8483c-019c-482f-b2a1-f9f3b6dcbe21",
+      //             ],
+      //           },
+      //         },
+      //       },
+      //     },
+      //     fields: [
+            
+      //       'id',
+      //       'title',
+      //       'keyword',
+      //       'series',
+            
+      //       // tags:[
+      //       //   id:{
+      //       //     category_id :[
+      //       //       id
+      //       //     ]
+      //       //   }
+      //       ],
+      //   //},
+      //   })
+      // );
+
+      // console.log("結果", result);
+    } catch (error) {
+      console.error("獲取數據時出錯:", error);
+    }
+  };
+
 
 
   const sendDataToParent = (data) => {
@@ -48,18 +145,15 @@ export default function Listing({ data, detail, siteMenu, slugProduct }) {
 
   useEffect(() => {
     console.log("Query changed:", router.query);
-    // if (router.isReady) {
-    //   console.log(router.query);
-    // }
     fetchSlug();
   }, [router.query]);
 
   const filterData = useMemo(() => {
-    console.log("memo", router.query, router.query.slug.includes("all"));
+    console.log("memo", router.query, router.query?.slug?.includes("all"));
 
     if (!books) {
       return [];
-    } else if (router.query.slug.includes("all")) {
+    } else if (router.query?.slug?.includes("all")) {
       setDataFromChild("");
       return books;
     } else {
@@ -230,23 +324,9 @@ export const getServerSideProps = async () => {
 
 export const sdk = async () => {
 
-  const client = createDirectus(
-    "/items/site_menu_items/?fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id"
-  ).with(rest());
+ 
 
-  const result = await client.request(
-    readItems("site_menu_items", {
-      fields: {
-        slug: {
-          _eq: "puzzle-board-game",
-        },
-        
-      },
-      
-    })
-  );
-
-  console.log('sdk',result);
+  console.log("sdksdksdksdk", result);
   
 
 
