@@ -188,9 +188,9 @@ class ApiManager {
     return result;
   };
 
-  getAllBooks = () => {
-    return this.get({ path: `/items/dayi?fields=*.*` });
-  };
+  // getAllBooks = () => {
+  //   return this.get({ path: `/items/dayi?fields=*.*` });
+  // };
 
   getHaibin = () => {
     return this.get({ path: `/items/haibin?fields=*.*` });
@@ -269,17 +269,46 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getFilterBooks = async (query) => {
+  getFilterBooks = async (arr) => {
+    const idString = JSON.stringify(arr);
+    // console.log("idString", idString);
+
     const gql = `
       query {
         product(filter: {
           tags: {
             category_id: {
               id: {
-                _in: ["${query}", "43c9b82e-a56e-43e8-8d7f-53ccec70ef2c"]
+                _in: ${idString}
               }
             }
           }
+        }) 
+        {
+          id
+          title
+          keyword
+          series
+          tags {
+            id
+            category_id {
+              id
+            }
+          }
+        }
+      }
+    `;
+
+    console.log("getFilterBooks", gql);
+
+    return await this.sdk(gql);
+  };
+  getAllBooks = async () => {
+   
+
+    const gql = `
+      query {
+        product(filter: {
         }) 
         {
           id

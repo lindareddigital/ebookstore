@@ -34,13 +34,23 @@ export default function Listing({
     return item.menu_items[0].site_menu_id.publisher === "polis_press";
   });
 
-  // console.log("polis_press", polis_press, filterCat);
+  console.log(
+    "polis_press",
+    router.query.slug[1],
+    filterCat?.site_menu[0].menu_items
+  );
 
-   const cat = filterCat?.site_menu[0]?.menu_items?.find((item) => {
-     return item?.site_menu_items_id?.category[0]?.category_id;
-   });;
+   const cat = filterCat?.site_menu[0].menu_items
+     .filter(
+       (menuItem) =>
+         menuItem.site_menu_items_id.slug === router.query.slug[1] &&
+         menuItem.site_menu_items_id.category.length > 0
+     )
+     .map((menuItem) => menuItem.site_menu_items_id.category);
+;
 
-  // console.log("cat", cat?.site_menu_items_id?.id);
+
+  console.log("cat", cat[0]);
   
 
   const sendDataToParent = (data) => {
@@ -215,28 +225,50 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
   const slugProduct = await apiManager.getSlugProduct();
 
   console.log("refresh url", resolvedUrl);
-  const parts = resolvedUrl.split("/");
-  function extract(resolvedUrl) {
-    return resolvedUrl.split("/");
+  let filterBooks
+  let filterCat
+  if( resolvedUrl != "/listing/all"){
+    const parts = resolvedUrl.split("/");
+    function extract(resolvedUrl) {
+      return resolvedUrl.split("/");
+    }
+    const slug = extract(resolvedUrl)[parts.length - 1];
+    const channel = extract(resolvedUrl)[parts.length - 2];
+
+    console.log("channel", channel, slug);
+
+    filterCat = await apiManager.getSlug(channel, slug);
+    console.log("filterCat", filterCat);
+
+    const cat = filterCat?.site_menu[0]?.menu_items
+      .filter(
+        (menuItem) =>
+          menuItem.site_menu_items_id.slug === slug &&
+          menuItem.site_menu_items_id.category.length > 0
+      )
+      .map((menuItem) => menuItem.site_menu_items_id.category) || [];
+
+    console.log("cat", cat?.[0]);
+
+    const arr = cat?.[0];
+
+    const idsArray = arr?.map((item) => item.category_id.id);
+    console.log("idsArray", idsArray);
+
+
+    const query = cat?.site_menu_items_id?.id;
+    // console.log("catcatcat id", query);
+    filterBooks = await apiManager.getFilterBooks(idsArray);
+    // return filterBooks;
+  }else{
+    console.log("/listing/all");
+    filterBooks = await apiManager.getAllBooks();
+    
   }
-  const slug = extract(resolvedUrl)[parts.length - 1];
-  const channel = extract(resolvedUrl)[parts.length - 2];
 
-  console.log("channel", channel, slug);
+  // console.log("filterBooks", filterBooks);
 
-  const filterCat = await apiManager.getSlug(channel, slug);
-  console.log("filterCat", filterCat);
 
-  const cat = filterCat.site_menu[0]?.menu_items?.find((item) => {
-    return item?.site_menu_items_id?.category[0]?.category_id
-      ;
-  });
-
-  const query = cat?.site_menu_items_id?.id;
-  console.log("catcatcat id", query);
-  const filterBooks = await apiManager.getFilterBooks(query);
-
-  console.log("filterBooks", filterBooks);
 
   return {
     props: {
@@ -244,7 +276,7 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
       detail,
       siteMenu,
       slugProduct,
-      filterBooks: filterBooks.product,
+      filterBooks: filterBooks?.product,
       filterCat,
     },
   };
