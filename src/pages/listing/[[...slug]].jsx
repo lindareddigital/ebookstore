@@ -10,58 +10,48 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
-import {
-  createDirectus,
-  rest,
-  graphql,
-  readItems,
-  authentication,
-  login,
-  staticToken,
-} from "@directus/sdk";
-import { redirect } from "next/navigation";
+import { useGlobalStore } from "src/pages/store/global.store";
 
-
-export default function Listing({ data, detail, siteMenu, slugProduct,test }) {
+export default function Listing({
+  data,
+  detail,
+  siteMenu,
+  slugProduct,
+  filterBooks,
+  filterCat,
+}) {
   const [panel, setPanel] = useState(false);
-  const [dataFromChild, setDataFromChild] = useState('');
-  const [ans, setAns] = useState({title: 'all'});
+  const [dataFromChild, setDataFromChild] = useState("");
+  const [ans, setAns] = useState({ title: "all" });
+  // const query = useWhatsOnStore((state) => state.query);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const books = detail.data;
-  console.log('test',test);
+  console.log("filterBooks", filterBooks);
 
+  const polis_press = siteMenu.data.filter((item) => {
+    return item.menu_items[0].site_menu_id.publisher === "polis_press";
+  });
+
+  // console.log("polis_press", polis_press, filterCat);
+
+   const cat = filterCat?.site_menu[0]?.menu_items?.find((item) => {
+     return item?.site_menu_items_id?.category[0]?.category_id;
+   });;
+
+  // console.log("cat", cat?.site_menu_items_id?.id);
+  
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
     setDataFromChild(data);
+    router.replace(router.asPath);
   };
 
-  const fetchSlug = () => {   
-    console.log("slugProduct", slugProduct);
-
-    const ans = slugProduct.data.find((item) => {
-      // console.log("item",item)
-
-      console.log("item", item.slug, " router", router.query?.slug);
-      // console.log("", router.query.slug.includes(item.slug));
-      
-      return router.query?.slug?.includes(item.slug);
-    });
-
-    setAns(ans);
-
-    console.log("ans", ans);
-  };
-
-  useEffect(() => {
-    console.log("Query changed:", router.query);
-    fetchSlug();
-  }, [router.query]);
-
+  
   const filterData = useMemo(() => {
-    console.log("memo", router.query, router.query?.slug?.includes("all"));
+    // console.log("memo", router.query, router.query?.slug?.includes("all"));
 
     if (!books) {
       return [];
@@ -69,12 +59,7 @@ export default function Listing({ data, detail, siteMenu, slugProduct,test }) {
       setDataFromChild("");
       return books;
     } else {
-      console.log(
-        "change tab",
-        // books,
-        books.filter((item) => item.series === ans?.title)
-      );
-      return books.filter((item) => item.series === ans?.title);
+      return filterBooks;
     }
   }, [router.query, books]);
 
@@ -223,42 +208,46 @@ export default function Listing({ data, detail, siteMenu, slugProduct,test }) {
   );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ resolvedUrl }) => {
   const result = await apiManager.getNew();
   const detail = await apiManager.getDetail();
   const siteMenu = await apiManager.getSiteMenu();
   const slugProduct = await apiManager.getSlugProduct();
 
-  const query = `
-    query {
-      product(filter: {
-        tags: {
-          category_id: {
-            id: {
-              _in: ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
-            }
-          }
-        }
-      }) 
-      {
-        id
-        title
-        keyword
-        series
-        tags {
-          id
-          category_id {
-            id
-          }
-        }
-      }
-    }
-  `;
-  const test = await apiManager.sdk(query);
+  console.log("refresh url", resolvedUrl);
+  const parts = resolvedUrl.split("/");
+  function extract(resolvedUrl) {
+    return resolvedUrl.split("/");
+  }
+  const slug = extract(resolvedUrl)[parts.length - 1];
+  const channel = extract(resolvedUrl)[parts.length - 2];
 
-  console.log("test", test);
+  console.log("channel", channel, slug);
 
-  return { props: { data: result, detail, siteMenu, slugProduct,test } };
+  const filterCat = await apiManager.getSlug(channel, slug);
+  console.log("filterCat", filterCat);
+
+  const cat = filterCat.site_menu[0]?.menu_items?.find((item) => {
+    return item?.site_menu_items_id?.category[0]?.category_id
+      ;
+  });
+
+  const query = cat?.site_menu_items_id?.id;
+  console.log("catcatcat id", query);
+  const filterBooks = await apiManager.getFilterBooks(query);
+
+  console.log("filterBooks", filterBooks);
+
+  return {
+    props: {
+      data: result,
+      detail,
+      siteMenu,
+      slugProduct,
+      filterBooks: filterBooks.product,
+      filterCat,
+    },
+  };
 };
 
 

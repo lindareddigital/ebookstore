@@ -8,12 +8,12 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   const router = useRouter();
 
   
-
-
-  const handleClick = (item) => {
-    // console.log('item',item);
-    sendDataToParent(item.title);
-    router.push(`/listing/${item.slug}`, undefined, { shallow: true });
+  const handleClick = (channel,item) => {
+    console.log("item", item);
+    sendDataToParent(item.slug);
+    router.push(`/listing/${channel}/${item.slug}`, undefined, {
+      shallow: true,
+    });
   };
 
   const nowpage = siteMenu.data.filter((item) => {
@@ -43,18 +43,23 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
           {/* console.log("prime", item.menu_items); */}
         }
         return (
-          <ul key={item.menu_items[0].site_menu_id.id} className="">
+          <ul className="">
             <div className="title">{item.menu_items[0].site_menu_id.title}</div>
             {item.menu_items?.map((item) => {
               {
                 {
-                  /* console.log("64",item); */
+                  {/* console.log("64", item.site_menu_id.channel); */}
                 }
               }
               return (
-                <li key={item.site_menu_items_id.id}>
+                <li>
                   <div
-                    onClick={() => handleClick(item.site_menu_items_id)}
+                    onClick={() =>
+                      handleClick(
+                        item.site_menu_id.channel,
+                        item.site_menu_items_id
+                      )
+                    }
                     key={`${item.site_menu_items_id.id}`}
                   >
                     {item.site_menu_items_id.title}

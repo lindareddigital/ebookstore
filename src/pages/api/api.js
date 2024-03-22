@@ -216,38 +216,89 @@ class ApiManager {
     });
   };
 
-  test = async (query) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${TOKEN} `);
-    myHeaders.append("mode", "no-cors");
-
-    query.replace(/(?:\r\n|\r|\n)/g, "\\n");
-
-    const response = await fetch(
-      "https://directus-cms.vicosys.com.hk/graphql",
-      {
-        method: "POST",
-        headers: myHeaders,
-        body: JSON.stringify({
-          query,
-          variables: {},
-        }),
-        redirect: "follow",
-      }
-    );
-    const result = await response.json();
-    return result;
-  };
-
-  sdk = async (query) => {
+  sdk = async (gql) => {
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
       .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
-    
-    const result = await client.query(query);
+
+    const result = await client.query(gql);
 
     return result;
+  };
+
+  getSlug = async (channel, slug) => {
+    const gql = `
+      query {
+      site_menu( 
+        limit: 1
+        filter: {
+        menu_items: {
+          site_menu_items_id: {
+            slug: {
+              _eq: "${slug}"
+            }
+          }
+        }
+        channel: {
+          _eq: "${channel}"
+        }
+          
+      }) { 
+          id
+          title
+          publisher
+          menu_items {
+              site_menu_items_id {
+                  id
+                  title
+                  slug
+                  category {
+                      category_id {
+                          id
+                          name
+                      }
+                  }
+              }
+          }
+      }
+  }
+    `;
+
+    console.log("getSlug", gql);
+
+    return await this.sdk(gql);
+  };
+
+  getFilterBooks = async (query) => {
+    const gql = `
+      query {
+        product(filter: {
+          tags: {
+            category_id: {
+              id: {
+                _in: ["${query}", "43c9b82e-a56e-43e8-8d7f-53ccec70ef2c"]
+              }
+            }
+          }
+        }) 
+        {
+          id
+          title
+          keyword
+          series
+          tags {
+            id
+            category_id {
+              id
+            }
+          }
+        }
+      }
+    `;
+
+    console.log("getFilterBooks", gql);
+
+    return await this.sdk(gql);
   };
 }
 
