@@ -1483,7 +1483,7 @@ footer a{
 }
 
 .page-link:hover{
-  background: #EBC700;
+  background: transparent;
   color: unset; 
   border-color: unset;
 }
@@ -1494,7 +1494,9 @@ footer a{
 }
 
 .page-link.active{
-
+  background: #EBC700;
+  color: unset; 
+  border-color: unset;
 }
 
 .page-link a{

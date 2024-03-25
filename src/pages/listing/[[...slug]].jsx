@@ -29,7 +29,7 @@ export default function Listing({
   const books = detail.data;
   // console.log("filterBooks", filterBooks);
 
-  let active = 2;
+  let active = 0;
   let items = [];
   for (let number = 1; number <= 5; number++) {
     items.push(

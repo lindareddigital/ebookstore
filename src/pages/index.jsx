@@ -6,6 +6,7 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
+import handler from "src/pages/api/page.js";
 
 export default function Home({ data, siteMenu }) {
   // const swiperRef = useRef(null);
@@ -212,7 +213,8 @@ const tabChange = async (id) => {
 
 
 export const getServerSideProps = async () => {
-  const data = await apiManager.getPageBySlug();
+  // const data = handler();
+  const data = await fetch('/api/page');
   const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
  

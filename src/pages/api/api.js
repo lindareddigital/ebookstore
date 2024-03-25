@@ -226,15 +226,15 @@ class ApiManager {
     // let offset = Number(params.page) * pagesize - pagesize;
 
     // meta:"total_count",
-    // sort: params.sort,
     // offset: "${offset}",
     // limit: pagesize,
+    // sort : ["sort", "-title"],
+
 
     const gql = `
       query {
       site_menu( 
         limit: 1,
-        sort : ["sort", "-title"],
         filter: {
           menu_items: {
             site_menu_items_id: {
