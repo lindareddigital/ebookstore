@@ -207,14 +207,13 @@ export default function Home({ data, siteMenu }) {
 
 
 const tabChange = async (id) => {
-  const data = await apiManager.getCategoryList(id);
   console.log("CategoryList", data);
 };
 
 
 export const getServerSideProps = async () => {
-  const data = await apiManager.getNew();
-  const detail = await apiManager.getDetail();
+  const data = await apiManager.getPageBySlug();
+  const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
  
 

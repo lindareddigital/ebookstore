@@ -215,7 +215,7 @@ export default function Share({ data, siteMenu }) {
 }
 
 export const getServerSideProps = async () => {
-  const result = await apiManager.getNew();
+  const result = await apiManager.getPageBySlug();
   const siteMenu = await apiManager.getSiteMenu();
 
   console.log("datadata", result);

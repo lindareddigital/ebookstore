@@ -16,7 +16,6 @@ export default function Breadcrumb({data}) {
 
   const tabChange = (async(id) => {
 
-    const data = await apiManager.getCategoryList(id);
     setBooks(data.data)
     console.log('CategoryList',data);
       

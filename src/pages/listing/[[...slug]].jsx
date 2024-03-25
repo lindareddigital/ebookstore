@@ -11,34 +11,63 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import { useGlobalStore } from "src/pages/store/global.store";
+import Pagination from "react-bootstrap/Pagination";
 
 export default function Listing({
   data,
   detail,
   siteMenu,
-  slugProduct,
   filterBooks,
   filterCat,
 }) {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
-  const [ans, setAns] = useState({ title: "all" });
   // const query = useWhatsOnStore((state) => state.query);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const books = detail.data;
-  console.log("filterBooks", filterBooks);
+  // console.log("filterBooks", filterBooks);
 
-  const polis_press = siteMenu.data.filter((item) => {
-    return item.menu_items[0].site_menu_id.publisher === "polis_press";
-  });
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  }
 
-  console.log(
-    "polis_press",
-    router.query.slug[1],
-    filterCat?.site_menu[0].menu_items
-  );
+  const paginationBasic = () => {
+    return (
+      <div>
+        {/* <Pagination>
+          <Pagination.Prev />
+          <Pagination.Item>{1}</Pagination.Item>
+          <Pagination.Ellipsis />
+          <Pagination.Item>{2}</Pagination.Item>
+          <Pagination.Next />
+        </Pagination> */}
+        <Pagination>
+          <Pagination.Prev />
+          {items}
+          <Pagination.Next />
+        </Pagination>
+        <br />
+      </div>
+    );
+  };
+
+  // const polis_press = siteMenu.data.filter((item) => {
+  //   return item.menu_items[0].site_menu_id.publisher === "polis_press";
+  // });
+
+  // console.log(
+  //   "polis_press",
+  //   router.query.slug[1],
+  //   filterCat?.site_menu[0].menu_items
+  // );
 
    const cat = filterCat?.site_menu[0].menu_items
      .filter(
@@ -50,7 +79,7 @@ export default function Listing({
 ;
 
 
-  console.log("cat", cat[0]);
+  console.log("cat", cat?.[0]);
   
 
   const sendDataToParent = (data) => {
@@ -73,7 +102,7 @@ export default function Listing({
     }
   }, [router.query, books]);
 
-  const series = data.data.product.reduce((acc, item) => {
+  const series = data?.data?.product?.reduce((acc, item) => {
     return acc.concat(item.series);
   }, []);
 
@@ -154,6 +183,11 @@ export default function Listing({
             {currentView === "grid" && <GridList books={filterData} />}
 
             {currentView === "list" && <ListList books={filterData} />}
+
+            <div className="">
+              
+              {paginationBasic()}
+            </div>
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>
@@ -219,10 +253,9 @@ export default function Listing({
 }
 
 export const getServerSideProps = async ({ resolvedUrl }) => {
-  const result = await apiManager.getNew();
-  const detail = await apiManager.getDetail();
+  const data = await apiManager.getPageBySlug();
+  const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
-  const slugProduct = await apiManager.getSlugProduct();
 
   console.log("refresh url", resolvedUrl);
   let filterBooks
@@ -235,7 +268,7 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
     const slug = extract(resolvedUrl)[parts.length - 1];
     const channel = extract(resolvedUrl)[parts.length - 2];
 
-    console.log("channel", channel, slug);
+    console.log("channel", channel, slug, extract(resolvedUrl));
 
     filterCat = await apiManager.getSlug(channel, slug);
     console.log("filterCat", filterCat);
@@ -257,27 +290,22 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
 
 
     const query = cat?.site_menu_items_id?.id;
-    // console.log("catcatcat id", query);
+    // console.log("catcatcat id", query);  
     filterBooks = await apiManager.getFilterBooks(idsArray);
-    // return filterBooks;
   }else{
     console.log("/listing/all");
     filterBooks = await apiManager.getAllBooks();
     
   }
 
-  // console.log("filterBooks", filterBooks);
-
-
 
   return {
     props: {
-      data: result,
+      data,
       detail,
       siteMenu,
-      slugProduct,
       filterBooks: filterBooks?.product,
-      filterCat,
+      filterCat: filterCat || null,
     },
   };
 };

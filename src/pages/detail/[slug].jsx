@@ -135,8 +135,8 @@ export default function Detail({ data, detail, siteMenu }) {
 
 
 export const getServerSideProps = async () => {
-  const result = await apiManager.getNew();
-  const detail = await apiManager.getDetail();
+  const result = await apiManager.getPageBySlug();
+  const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
 
 

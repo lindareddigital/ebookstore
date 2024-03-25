@@ -85,19 +85,18 @@ class ApiManager {
     }
   };
 
-  getCategoryList = (id) => {
-    return this.get({
-      path: `/items/Book?fields=*.*&filter[Category][_eq]=${id}`,
-    });
+  sdk = async (gql) => {
+    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+      .with(graphql({ credentials: "include" }))
+      .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
+
+    const result = await client.query(gql);
+
+    return result;
   };
 
-  getNew = async () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${TOKEN} `);
-    myHeaders.append("mode", "no-cors");
-
-    const query = `query {
+  getPageBySlug = async () => {
+    const gql = `query {
         pages {
           id
           status
@@ -163,87 +162,92 @@ class ApiManager {
           }
           }
         }
-
-      product {
-          title
-          series
-        }
       }`;
-
-    query.replace(/(?:\r\n|\r|\n)/g, "\\n");
-
-    const response = await fetch(
-      "https://directus-cms.vicosys.com.hk/graphql",
-      {
-        method: "POST",
-        headers: myHeaders,
-        body: JSON.stringify({
-          query,
-          variables: {},
-        }),
-        redirect: "follow",
-      }
-    );
-    const result = await response.json();
-    return result;
+    return await this.sdk(gql);
   };
 
-  // getAllBooks = () => {
-  //   return this.get({ path: `/items/dayi?fields=*.*` });
-  // };
-
-  getHaibin = () => {
-    return this.get({ path: `/items/haibin?fields=*.*` });
+  getSearchKeywords = () => {
+    return;
   };
 
-  getRecipe = () => {
-    return this.get({ path: `/items/haibin?filter[Category][_eq]=飲食` });
+  getNaviMenu = () => {
+    return;
   };
 
+  getSideMenu = () => {
+    return;
+  };
+
+  getProduct = () => {
+    return;
+  };
+
+  //getSideMenuByPublisher
   getSiteMenu = () => {
     return this.get({ path: `/items/site_menu/?fields[]=menu_items.*.*` });
   };
 
-  getDetail = () => {
+  // getProductDetail
+  getProductDetail = () => {
     return this.get({
       path: `/items/product/?fields[]=*&fields[]=images.*`,
     });
   };
 
-  getSlugProduct = () => {
-    return this.get({
-      path: `/items/site_menu_items/?fields[]=*.category.*&fields[]=category.category_id.name&fields[]=category.category_id.slug&fields[]=category.category_id.id`,
-    });
+  getProductRelatedBooks = () => {
+    return;
   };
 
-  sdk = async (gql) => {
-    const client = createDirectus("https://directus-cms.vicosys.com.hk")
-      .with(graphql({ credentials: "include" }))
-      .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
-
-    const result = await client.query(gql);
-
-    return result;
+  getColumnsMenu = () => {
+    return;
   };
 
-  getSlug = async (channel, slug) => {
+  getColumnByCategory = () => {
+    return;
+  };
+
+  getDownload = () => {
+    return;
+  };
+
+  // getReceipes
+  getReceipes = () => {
+    return;
+  };
+
+  // getProductBy
+  getSlug = async (
+    channel,
+    slug,
+    sort
+  ) => {
+    // : ["sort", "-date_created", "author.name"]
+    // let pagesize = 10;
+    // let offset = Number(params.page) * pagesize - pagesize;
+
+    // meta:"total_count",
+    // sort: params.sort,
+    // offset: "${offset}",
+    // limit: pagesize,
+
     const gql = `
       query {
       site_menu( 
-        limit: 1
+        limit: 1,
+        sort : ["sort", "-title"],
         filter: {
-        menu_items: {
-          site_menu_items_id: {
-            slug: {
-              _eq: "${slug}"
+          menu_items: {
+            site_menu_items_id: {
+              slug: {
+                _eq: "${slug}"
+              }
             }
           }
+          channel: {
+            _eq: "${channel}"
+          }
         }
-        channel: {
-          _eq: "${channel}"
-        }
-          
-      }) { 
+      ) { 
           id
           title
           publisher
@@ -270,6 +274,8 @@ class ApiManager {
   };
 
   getFilterBooks = async (arr) => {
+    // offset: Number(params.page) * pagesize - pagesize,
+
     const idString = JSON.stringify(arr);
     // console.log("idString", idString);
 
@@ -303,9 +309,8 @@ class ApiManager {
 
     return await this.sdk(gql);
   };
-  getAllBooks = async () => {
-   
 
+  getAllBooks = async () => {
     const gql = `
       query {
         product(filter: {
