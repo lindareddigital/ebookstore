@@ -166,16 +166,50 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSearchKeywords = () => {
+  getSearchKeywords = async () => {
     return;
   };
 
-  getNaviMenu = () => {
-    return;
+  getNaviMenu = async () => {
+    const gql = `
+        query {
+          site_menu( 
+            limit: 1
+            filter: {
+            menu_items: {
+              site_menu_items_id: {
+                slug: {
+                  _eq: "${slug}"
+                }
+              }
+            }
+            channel: {
+              _eq: "navi-menu"
+            }
+              
+          }) { 
+              id
+              title
+              publisher
+              menu_items {
+                  site_menu_items_id {
+                      id
+                      title
+                      slug
+                      query_tags
+                  }
+              }
+          }
+      }
+        `;
+    return await this.sdk(gql);
   };
 
-  getSideMenu = () => {
-    return;
+  getSideMenu = async () => {
+    const gql = `query {
+        
+      }`;
+    return await this.sdk(gql);
   };
 
   getProduct = () => {
@@ -252,7 +286,7 @@ class ApiManager {
   };
 
   // getProductByCategory
-  getSlug = async (channel, slug, sort) => {
+  getProductByCategory = async (channel, slug, sort) => {
     // : ["sort", "-date_created", "author.name"]
     // let pagesize = 10;
     // let offset = Number(params.page) * pagesize - pagesize;
@@ -299,7 +333,32 @@ class ApiManager {
   }
     `;
 
-    console.log("getSlug", gql);
+    //with limit;  number of pages = total count / limit per page
+    //     query {
+    //     product (limit: 30, offset: 0) {
+    //         id
+    //         title
+    //         keyword
+    //         series
+    //         description
+    //         table_of_contents
+    //         date_created
+    //         tags {
+    //             id
+    //             category_id {
+    //                 id
+    //             }
+    //         }
+    //     }
+    //     product_aggregated {
+    //         countAll
+    // 		count {
+    // 			id
+    // 		}
+    // 	}
+    // }
+
+    console.log("getProductByCategory", gql);
 
     return await this.sdk(gql);
   };

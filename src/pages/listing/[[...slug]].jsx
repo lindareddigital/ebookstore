@@ -23,6 +23,7 @@ export default function Listing({
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
   // const query = useWhatsOnStore((state) => state.query);
+  const [ddata, setData] = useState(null);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
@@ -33,11 +34,11 @@ export default function Listing({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/product/[_id]");
+        const response = await fetch("/api/sitemenu/sidemenu");
 
         const result = await response.json();
         setData(result);
-        console.log("ddata", data);
+        console.log("ddata", ddata);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -288,7 +289,7 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
 
     console.log("channel", channel, slug, extract(resolvedUrl));
 
-    filterCat = await apiManager.getSlug(channel, slug);
+    filterCat = await apiManager.getProductByCategory(channel, slug);
     console.log("filterCat", filterCat);
 
     const cat = filterCat?.site_menu[0]?.menu_items
