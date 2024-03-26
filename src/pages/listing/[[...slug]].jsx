@@ -29,6 +29,24 @@ export default function Listing({
   const books = detail.data;
   // console.log("filterBooks", filterBooks);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/product/[_id]");
+
+        const result = await response.json();
+        setData(result);
+        console.log("ddata", data);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   let active = 0;
   let items = [];
   for (let number = 1; number <= 5; number++) {

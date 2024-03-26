@@ -6,9 +6,11 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
-import handler from "src/pages/api/page.js";
+import handler from "src/pages/api/page";
+import { useEffect, useState } from "react";
 
-export default function Home({ data, siteMenu }) {
+
+export default function Home({ siteMenu }) {
   // const swiperRef = useRef(null);
 
   // const { next, previous } = useSwiperFunc(swiperRef);
@@ -29,17 +31,35 @@ export default function Home({ data, siteMenu }) {
 
   // console.log('data',data);
 
-  const posts = data.data.pages[0].blocks[0].item.posts;
-  console.log("now", data.data);
+  const [data, setData] = useState(null);
 
-  const blocks = data.data.pages[0];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/page");
+
+        const result = await response.json();
+        setData(result);
+        console.log("ddata", data);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const posts = data?.data?.pages[0].blocks[0].item.posts;
+  console.log("now", data?.data);
+
+  const blocks = data?.data?.pages[0];
   console.log("block_hero", blocks);
 
-  const heroBanner = blocks.blocks.find((item) => {
+  const heroBanner = blocks?.blocks?.find((item) => {
     return item.collection === "block_hero_group";
   });
 
-  console.log("heroBanner", heroBanner.item.hero_cards);
+  console.log("heroBanner", heroBanner?.item.hero_cards);
 
   return (
     <div className="home-page">
@@ -105,7 +125,7 @@ export default function Home({ data, siteMenu }) {
           data-bs-ride="carousel"
         >
           <div className="carousel-indicators">
-            {heroBanner.item.hero_cards?.map((item, index) => {
+            {heroBanner?.item.hero_cards?.map((item, index) => {
               return (
                 <>
                   <button
@@ -142,7 +162,7 @@ export default function Home({ data, siteMenu }) {
             ></button> */}
           </div>
           <div className="carousel-inner">
-            {heroBanner.item.hero_cards?.map((item, index) => {
+            {heroBanner?.item.hero_cards?.map((item, index) => {
               return (
                 <>
                   <Link
@@ -213,12 +233,12 @@ const tabChange = async (id) => {
 
 
 export const getServerSideProps = async () => {
-  // const data = handler();
-  const data = await fetch('/api/page');
+
+  const data = await handler(null, null); 
   const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
  
 
-  return { props: { data, detail, siteMenu } };
+  return { props: { data: data || null, detail, siteMenu } };
 };
 

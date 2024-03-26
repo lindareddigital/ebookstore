@@ -215,12 +215,44 @@ class ApiManager {
     return;
   };
 
-  // getProductBy
-  getSlug = async (
-    channel,
-    slug,
-    sort
-  ) => {
+  getProductBySeries = (channel, slug) => {
+    const gql = `
+    query {
+      site_menu( 
+        limit: 1
+        filter: {
+        menu_items: {
+          site_menu_items_id: {
+            slug: {
+              _eq: "${slug}"
+            }
+          }
+        }
+        channel: {
+          _eq: "${channel}"
+        }
+          
+      }) { 
+          id
+          title
+          publisher
+          menu_items {
+              site_menu_items_id {
+                  id
+                  title
+                  slug
+                  query_tags
+              }
+          }
+      }
+  }
+    `;
+
+    return;
+  };
+
+  // getProductByCategory
+  getSlug = async (channel, slug, sort) => {
     // : ["sort", "-date_created", "author.name"]
     // let pagesize = 10;
     // let offset = Number(params.page) * pagesize - pagesize;
@@ -229,7 +261,6 @@ class ApiManager {
     // offset: "${offset}",
     // limit: pagesize,
     // sort : ["sort", "-title"],
-
 
     const gql = `
       query {
