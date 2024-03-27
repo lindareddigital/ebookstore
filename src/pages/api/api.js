@@ -95,9 +95,16 @@ class ApiManager {
     return result;
   };
 
-  getPageBySlug = async () => {
-    const gql = `query {
-        pages {
+  getPageBySlug = async (slug) => {
+    const gql = `
+    query {
+        pages (filter: 
+        {
+          slug: { 
+            _eq: "${slug}"
+            }
+        }
+        ){
           id
           status
           sort
@@ -162,7 +169,9 @@ class ApiManager {
           }
           }
         }
-      }`;
+      }
+    
+    `;
     return await this.sdk(gql);
   };
 
@@ -197,10 +206,30 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSideMenu = async () => {
+  getSideMenu = async (pub_slug, slug) => {
+    // "polis_press" ${pub_slug}
     const gql = `query {
-        
-      }`;
+      site_menu( 
+        filter: {
+        publisher:
+        {
+          _eq: "polis_press"
+        }
+          
+      }) { 
+          id
+          title
+          publisher
+          menu_items {
+              site_menu_items_id {
+                  id
+                  title
+                  slug
+                  query_tags
+              }
+          }
+      }
+  }`;
     return await this.sdk(gql);
   };
 
@@ -209,9 +238,9 @@ class ApiManager {
   };
 
   //getSideMenuByPublisher
-  getSiteMenu = () => {
-    return this.get({ path: `/items/site_menu/?fields[]=menu_items.*.*` });
-  };
+  // getSiteMenu = () => {
+  //   return this.get({ path: `/items/site_menu/?fields[]=menu_items.*.*` });
+  // };
 
   // getProductDetail
   getProductDetail = () => {
@@ -241,45 +270,56 @@ class ApiManager {
     return;
   };
 
-  getProductBySeries = (channel, slug) => {
-    const gql = `
-    query {
-      site_menu( 
-        limit: 1
-        filter: {
-        menu_items: {
-          site_menu_items_id: {
-            slug: {
-              _eq: "${slug}"
-            }
-          }
-        }
-        channel: {
-          _eq: "${channel}"
-        }
-          
-      }) { 
-          id
-          title
-          publisher
-          menu_items {
-              site_menu_items_id {
-                  id
-                  title
-                  slug
-                  query_tags
-              }
-          }
+  getProductBySeries = async(arr) => {
+
+    const formattedArr = arr.map((item) => `"${item}"`).join(", ");
+  
+      const gql = `
+      query {
+  product(
+    limit: 3
+    page: 1
+    filter: {
+      series: {
+        _in: [${formattedArr}]
       }
+    }
+  ) {
+    id
+    title
+    keyword
+    series
+    description
+    table_of_contents
+    date_created
+    tags {
+      id
+      category_id {
+        id
+      }
+    }
   }
+  product_aggregated(
+    filter: {
+      series: {
+        _in: [${formattedArr}]
+      }
+    }
+  ) {
+    count {
+      id
+    }
+  }
+}
     `;
 
-    return;
+    console.log("getProductBySeries", gql);
+
+
+    return await this.sdk(gql);
   };
 
-  // getProductByCategory
-  getProductByCategory = async (channel, slug, sort) => {
-    // : ["sort", "-date_created", "author.name"]
+  getProductByCategory = async (limit,page) => {
     // let pagesize = 10;
     // let offset = Number(params.page) * pagesize - pagesize;
 
@@ -288,67 +328,48 @@ class ApiManager {
     // limit: pagesize,
     // sort : ["sort", "-title"],
 
-    const gql = `
-      query {
-      site_menu( 
-        limit: 1,
-        filter: {
-          menu_items: {
-            site_menu_items_id: {
-              slug: {
-                _eq: "${slug}"
-              }
-            }
-          }
-          channel: {
-            _eq: "${channel}"
-          }
-        }
-      ) { 
-          id
-          title
-          publisher
-          menu_items {
-              site_menu_items_id {
-                  id
-                  title
-                  slug
-                  category {
-                      category_id {
-                          id
-                          name
-                      }
-                  }
-              }
-          }
-      }
-  }
-    `;
-
     //with limit;  number of pages = total count / limit per page
-    //     query {
-    //     product (limit: 30, offset: 0) {
-    //         id
-    //         title
-    //         keyword
-    //         series
-    //         description
-    //         table_of_contents
-    //         date_created
-    //         tags {
-    //             id
-    //             category_id {
-    //                 id
-    //             }
-    //         }
-    //     }
-    //     product_aggregated {
-    //         countAll
-    // 		count {
-    // 			id
-    // 		}
-    // 	}
-    // }
+
+
+    const gql = `
+        query {
+        product ( 
+            sort: ["-date_created"],
+            limit: 20, 
+            page: 1,
+            filter: {
+            tags: { 
+                category_id:{
+                  id :{
+                     _in:  ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+                  }
+                }
+            }
+           
+        }
+          ) {
+            id
+            title
+            keyword
+            series
+            description
+            table_of_contents
+            date_created
+            tags {
+                id
+                category_id {
+                    id
+                }
+            }
+        }
+        product_aggregated {
+            countAll
+    		count {
+    			id
+    		}
+    	}
+    }
+    `;
 
     console.log("getProductByCategory", gql);
 

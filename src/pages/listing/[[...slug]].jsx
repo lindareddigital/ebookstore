@@ -15,8 +15,7 @@ import Pagination from "react-bootstrap/Pagination";
 
 export default function Listing({
   data,
-  detail,
-  siteMenu,
+  // siteMenu,
   filterBooks,
   filterCat,
 }) {
@@ -24,28 +23,37 @@ export default function Listing({
   const [dataFromChild, setDataFromChild] = useState("");
   // const query = useWhatsOnStore((state) => state.query);
   const [ddata, setData] = useState(null);
+  const [books, setBooks] = useState(null);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
-  const books = detail.data;
   // console.log("filterBooks", filterBooks);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/sitemenu/sidemenu");
+  // useEffect(() => {
+    // const fetchData = async () => {
+  //     try {
+        // const response = await fetch("/api/sitemenu/sidemenu");
 
-        const result = await response.json();
-        setData(result);
-        console.log("ddata", ddata);
-      } catch (error) {
-        console.error("获取数据时出错：", error);
-      }
-    };
+        // const result = await response.json();
+        // setData(result);
+        // const res = await fetch(`/api/product/category/`);
 
-    fetchData();
-  }, []);
+        // const res = await fetch(`/api/product/series`);
+
+        //const resul = await res.json();
+        //console.log("22resul", resul);
+
+        // setBooks(resul);
+
+        //console.log("ddata", ddata);
+  //     } catch (error) {
+  //       console.error("获取数据时出错：", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
 
   let active = 0;
@@ -137,6 +145,8 @@ export default function Listing({
     setPanel(true);
   };
 
+  return null
+
   return (
     <div className="listing-page">
       <Navbar siteMenu={siteMenu} />
@@ -155,7 +165,6 @@ export default function Listing({
           <ListAside
             siteMenu={siteMenu}
             data={data}
-            detail={detail}
             sendDataToParent={sendDataToParent}
           />
           <div className="right-side">
@@ -272,59 +281,57 @@ export default function Listing({
 }
 
 export const getServerSideProps = async ({ resolvedUrl }) => {
-  const data = await apiManager.getPageBySlug();
-  const detail = await apiManager.getProductDetail();
-  const siteMenu = await apiManager.getSiteMenu();
+  // const data = await apiManager.getPageBySlug();
+  // // const siteMenu = await apiManager.getSiteMenu();
 
-  console.log("refresh url", resolvedUrl);
-  let filterBooks
-  let filterCat
-  if( resolvedUrl != "/listing/all"){
-    const parts = resolvedUrl.split("/");
-    function extract(resolvedUrl) {
-      return resolvedUrl.split("/");
-    }
-    const slug = extract(resolvedUrl)[parts.length - 1];
-    const channel = extract(resolvedUrl)[parts.length - 2];
+  // console.log("refresh url", resolvedUrl);
+  // let filterBooks
+  // let filterCat
+  // if( resolvedUrl != "/listing/all"){
+  //   const parts = resolvedUrl.split("/");
+  //   function extract(resolvedUrl) {
+  //     return resolvedUrl.split("/");
+  //   }
+  //   const slug = extract(resolvedUrl)[parts.length - 1];
+  //   const channel = extract(resolvedUrl)[parts.length - 2];
 
-    console.log("channel", channel, slug, extract(resolvedUrl));
+  //   console.log("channel", channel, slug, extract(resolvedUrl));
 
-    filterCat = await apiManager.getProductByCategory(channel, slug);
-    console.log("filterCat", filterCat);
+  //   // filterCat = await apiManager.getProductByCategory(channel, slug);
+  //   // console.log("filterCat", filterCat);
 
-    const cat = filterCat?.site_menu[0]?.menu_items
-      .filter(
-        (menuItem) =>
-          menuItem.site_menu_items_id.slug === slug &&
-          menuItem.site_menu_items_id.category.length > 0
-      )
-      .map((menuItem) => menuItem.site_menu_items_id.category) || [];
+  //   const cat = filterCat?.site_menu[0]?.menu_items
+  //     .filter(
+  //       (menuItem) =>
+  //         menuItem.site_menu_items_id.slug === slug &&
+  //         menuItem.site_menu_items_id.category.length > 0
+  //     )
+  //     .map((menuItem) => menuItem.site_menu_items_id.category) || [];
 
-    console.log("cat", cat?.[0]);
+  //   console.log("cat", cat?.[0]);
 
-    const arr = cat?.[0];
+  //   const arr = cat?.[0];
 
-    const idsArray = arr?.map((item) => item.category_id.id);
-    console.log("idsArray", idsArray);
+  //   const idsArray = arr?.map((item) => item.category_id.id);
+  //   console.log("idsArray", idsArray);
 
 
-    const query = cat?.site_menu_items_id?.id;
-    // console.log("catcatcat id", query);  
-    filterBooks = await apiManager.getFilterBooks(idsArray);
-  }else{
-    console.log("/listing/all");
-    filterBooks = await apiManager.getAllBooks();
+  //   const query = cat?.site_menu_items_id?.id;
+  //   // console.log("catcatcat id", query);  
+  //   filterBooks = await apiManager.getFilterBooks(idsArray);
+  // }else{
+  //   console.log("/listing/all");
+  //   filterBooks = await apiManager.getAllBooks();
     
-  }
+  // }
 
 
   return {
     props: {
-      data,
-      detail,
-      siteMenu,
-      filterBooks: filterBooks?.product,
-      filterCat: filterCat || null,
+      // data,
+      // siteMenu,
+      // filterBooks: filterBooks?.product,
+      // filterCat: filterCat || null,
     },
   };
 };

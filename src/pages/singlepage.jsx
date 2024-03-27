@@ -20,6 +20,26 @@ export default function Singlepage({ data, siteMenu }) {
   const router = useRouter();
   const page = router.query.slug;
 
+ useEffect(() => {
+   const fetchData = async () => {
+     try {
+       const res = await fetch(`/api/sitemenu/${publisher_id}`);
+
+       const result = await res.json();
+       console.log("res", result.data);
+
+       setItem(result.data);
+       // console.log("ddata", result.data);
+     } catch (error) {
+       console.error("获取数据时出错：", error);
+     }
+   };
+
+   fetchData();
+ }, []);
+
+
+
   return (
     <div className="single-page">
       <div className="sidebtn-container">

@@ -18,7 +18,7 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 
 
-export default function Detail({ data, detail, siteMenu }) {
+export default function Detail({ data, siteMenu }) {
   const { mobile } = useCalc();
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
@@ -26,7 +26,7 @@ export default function Detail({ data, detail, siteMenu }) {
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  // console.log("id", id);
 
   useEffect(() => {
   const fetchData = async () => {
@@ -34,12 +34,12 @@ export default function Detail({ data, detail, siteMenu }) {
       const res = await fetch(`/api/product/${id}`);
 
       const result = await res.json();
-      console.log('res',result.data);
+      // console.log('res',result.data);
       
       setItem(result.data);
       // console.log("ddata", result.data);
     } catch (error) {
-      console.error("获取数据时出错：", error);
+      console.error("", error);
     }
   };
 
@@ -155,8 +155,7 @@ export default function Detail({ data, detail, siteMenu }) {
 
 export const getServerSideProps = async () => {
   const result = await apiManager.getPageBySlug();
-  const detail = await apiManager.getProductDetail();
   const siteMenu = await apiManager.getSiteMenu();
 
-  return { props: { data: result, detail: detail.data, siteMenu } };
+  return { props: { data: result, siteMenu } };
 };

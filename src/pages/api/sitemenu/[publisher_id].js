@@ -2,7 +2,11 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
-    const result = await apiManager.getProductBySeries(req);
+    const result = await apiManager.getSideMenu();
+
+
+    console.log("resres", result);
+    
 
     res.status(200).json({ result });
   } catch (err) {

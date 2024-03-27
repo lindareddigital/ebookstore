@@ -10,11 +10,29 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   
   const handleClick = (channel,item) => {
     console.log("item", item);
-    sendDataToParent(item.slug);
+    sendDataToParent(item.id);
     router.push(`/listing/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/sitemenu/sidemenu");
+
+        const result = await response.json();
+
+        // setData(result);
+       
+        console.log("ddata", result);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const nowpage = siteMenu.data.filter((item) => {
     if (router.query.slug == "all") {
