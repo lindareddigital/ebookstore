@@ -21,133 +21,133 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 export default function Detail({ data, detail, siteMenu }) {
   const { mobile } = useCalc();
   const [show, setShow] = useState(false);
-  // const [detail, setDetail] = useState(null);
+  const [item, setItem] = useState(null);
 
   const router = useRouter();
   const id = router.query.slug;
 
   console.log("id", id);
 
-  // useEffect(() => {
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(`/api/product/${id}`);
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`/api/product/${id}`);
 
-  //     const result = await response.json();
-  //     setDetail(result);
-  //     console.log("ddata", detail?.detail?.data);
-  //   } catch (error) {
-  //     console.error("获取数据时出错：", error);
-  //   }
-  // };
+      const result = await res.json();
+      console.log('res',result.data);
+      
+      setItem(result.data);
+      // console.log("ddata", result.data);
+    } catch (error) {
+      console.error("获取数据时出错：", error);
+    }
+  };
 
-  // fetchData();
-  // }, []);
+  fetchData();
+  }, []);
 
-  const item = detail.find((item) => {
-    return item.id === id;
-  });
-
-  // return null;
-
-  console.log("detaildetail", detail, item);
+  console.log("detaildetail", item);
 
   return (
-    <div className="detail-page">
-      <Head>
-        <title>{item.title}</title>
-      </Head>
-      <Navbar siteMenu={siteMenu} />
-      <MenuBar siteMenu={siteMenu} />
-      <div className="container-fluid fdc">
-        <Breadcrumb data={item.series} />
+    <div>
+    {item && (
+      <div className="detail-page">
+        <Head>
+          <title>{item.title}</title>
+        </Head>
+        <Navbar siteMenu={siteMenu} />
+        <MenuBar siteMenu={siteMenu} />
+        <div className="container-fluid fdc">
+          <Breadcrumb data={item.series} />
 
-        <div className="detail">
-          <div className="content">
-            <>
-              <img
-                onClick={() => setShow(true)}
-                src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                className="primary-img"
-                alt={item.cover_image}
-              />
+          <div className="detail">
+            <div className="content">
+              <>
+                <img
+                  onClick={() => setShow(true)}
+                  src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  className="primary-img"
+                  alt={item.cover_image}
+                />
 
-              <div className="info">
-                <h1>{item.title}</h1>
-                <ul>
-                  <li>
-                    作者：<Link href="">{item.Author}</Link>
+                <div className="info">
+                  <h1>{item.title}</h1>
+                  <ul>
+                    <li>
+                      作者：<Link href="">{item.Author}</Link>
+                    </li>
+                    <li>
+                      繪者：<Link href="/">{item.illustrator}</Link>
+                    </li>
+                    <li>出版日期：{item.publicationDate}</li>
+                    <li>定價：{item.price}元</li>
+                  </ul>
+                  <div className="button-group">
+                    <div className="btn button-radius">
+                      <img src="/icons/heart.svg" alt="" />
+                      收藏此書
+                    </div>
+                    <div className="btn button-radius view-detail-btn">
+                      <img src="/icons/search.svg" alt="" />
+                      查看內頁
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="buy-book">
+                  <img className="topright" src="/icons/leftboxicon.svg"></img>
+                  <div className="">
+                    <div className="pin-title">買書GO</div>
+                    <div className="trangle"></div>
+                  </div>
+
+                  <li className="eslite">
+                    <Link href="">
+                      <img src="/icons/eslite.png"></img>
+                    </Link>
                   </li>
-                  <li>
-                    繪者：<Link href="/">{item.illustrator}</Link>
+                  <li className="bookstw">
+                    <Link href="">
+                      <img src="/icons/bookstw.svg"></img>
+                    </Link>
                   </li>
-                  <li>出版日期：{item.publicationDate}</li>
-                  <li>定價：{item.price}元</li>
+                  <li className="stone">
+                    <Link href="">
+                      <img src="/icons/stone.svg"></img>
+                    </Link>
+                  </li>
+                  <li className="pchome">
+                    <Link href="">
+                      <img src="/icons/pchome.svg"></img>
+                    </Link>
+                  </li>
                 </ul>
-                <div className="button-group">
-                  <div className="btn button-radius">
-                    <img src="/icons/heart.svg" alt="" />
-                    收藏此書
-                  </div>
-                  <div className="btn button-radius view-detail-btn">
-                    <img src="/icons/search.svg" alt="" />
-                    查看內頁
-                  </div>
-                </div>
-              </div>
+              </>
 
-              <ul className="buy-book">
-                <img className="topright" src="/icons/leftboxicon.svg"></img>
-                <div className="">
-                  <div className="pin-title">買書GO</div>
-                  <div className="trangle"></div>
-                </div>
-
-                <li className="eslite">
-                  <Link href="">
-                    <img src="/icons/eslite.png"></img>
-                  </Link>
-                </li>
-                <li className="bookstw">
-                  <Link href="">
-                    <img src="/icons/bookstw.svg"></img>
-                  </Link>
-                </li>
-                <li className="stone">
-                  <Link href="">
-                    <img src="/icons/stone.svg"></img>
-                  </Link>
-                </li>
-                <li className="pchome">
-                  <Link href="">
-                    <img src="/icons/pchome.svg"></img>
-                  </Link>
-                </li>
-              </ul>
-            </>
-
-            <GalleryModal
-              show={show}
-              item={item}
-              onHide={() => setShow(false)}
-            />
+              <GalleryModal
+                show={show}
+                item={item}
+                onHide={() => setShow(false)}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="main-body">
-        <HomeTab data={data} />
-      </div>
-
-      <div className="container-fluid fdc">
-        {/* {item &&
+        <div className="main-body">
+          <HomeTab data={data} />
+        </div>
+        <div className="container-fluid fdc">
+          {/* {item &&
           (mobile ? (
             <MobileCard category={item.Category} />
           ) : (
             <DesktopCard category={item.Category} />
           ))} */}
 
-        <Desc item={item} />
+          <Desc item={item} />
+        </div>
+      
       </div>
+    )}
     </div>
   );
 }

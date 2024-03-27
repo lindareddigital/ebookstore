@@ -49,7 +49,7 @@ export default function GalleryModal({ item,show, onHide }) {
 // };
 
 
-  console.log("5566", item);
+  // console.log("5566", item);
 
 
   const [swiperIndex, setSwiperIndex] = useState(0);
