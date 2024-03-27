@@ -172,35 +172,27 @@ class ApiManager {
 
   getNaviMenu = async () => {
     const gql = `
-        query {
-          site_menu( 
-            limit: 1
-            filter: {
-            menu_items: {
-              site_menu_items_id: {
-                slug: {
-                  _eq: "${slug}"
+       query {
+        site_menu( 
+        filter: {
+        channel: {
+            _eq: "navi-menu"
+        }
+            
+        }) { 
+            id
+            title
+            publisher
+            menu_items {
+                site_menu_items_id {
+                    id
+                    title
+                    slug
+                    query_tags
                 }
-              }
             }
-            channel: {
-              _eq: "navi-menu"
-            }
-              
-          }) { 
-              id
-              title
-              publisher
-              menu_items {
-                  site_menu_items_id {
-                      id
-                      title
-                      slug
-                      query_tags
-                  }
-              }
-          }
-      }
+        }
+    } 
         `;
     return await this.sdk(gql);
   };
