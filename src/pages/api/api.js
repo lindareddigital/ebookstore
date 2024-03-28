@@ -95,7 +95,6 @@ class ApiManager {
     return result;
   };
 
-
   sdk = async (gql) => {
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
@@ -217,15 +216,15 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSideMenu = async (pub_slug, slug) => {
-    // "polis_press" ${pub_slug}
+  getSideMenuByPublisher = async (publisher_slug) => {
+    //"${publisher_slug}" "${category_slug}"
     const gql = `query {
       site_menu( 
         filter: {
-        publisher:
-        {
-          _eq: "polis_press"
-        }
+          publisher:
+          {
+            _eq: "${publisher_slug}"
+          }  
           
       }) { 
           id
@@ -237,21 +236,48 @@ class ApiManager {
                   title
                   slug
                   query_tags
+                  type
+                  landing
               }
           }
       }
-  }`;
+    }`;
+    console.log(gql);
     return await this.sdk(gql);
   };
 
+  getSideMenuByChannelAndSlug = async (channel, category_slug) => {
+    //"${publisher_slug}" "${category_slug}"
+    const gql = `
+    query {
+    site_menu(
+      filter: {
+        channel: {
+          _eq: "${channel}"
+        }
+      }
+    ) {
+      id
+      title
+      publisher
+      menu_items(filter: { site_menu_items_id: { slug: { _eq: "${category_slug}" } } }) {
+        site_menu_items_id {
+          id
+          title
+          slug
+          query_tags
+        }
+      }
+    }
+  }`;
+
+    console.log("getSideMenuByChannelAndSlug", gql);
+
+    return await this.sdk(gql);
+  };
   getProduct = () => {
     return;
   };
-
-  //getSideMenuByPublisher
-  // getSiteMenu = () => {
-  //   return this.get({ path: `/items/site_menu/?fields[]=menu_items.*.*` });
-  // };
 
   // getProductDetail
   getProductDetail = () => {
@@ -281,11 +307,10 @@ class ApiManager {
     return;
   };
 
-  getProductBySeries = async(arr,obj) => {
-
+  getProductBySeries = async (arr, obj) => {
     const formattedArr = arr.map((item) => `"${item}"`).join(", ");
-  
-      const gql = `
+
+    const gql = `
       query {
         product(
           sort: ["${obj.sort}"]
@@ -327,23 +352,21 @@ class ApiManager {
 
     console.log("getProductBySeries", gql);
 
-
     return await this.sdk(gql);
   };
 
-  getProductByCategory = async (category,sort_by, page = 1, limit = 20) => {
-
+  getProductByCategory = async (category, sort_by, page = 1, limit = 20) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
-    const sort_by_json =  sort_by.map((item) => `"${item}"`).join(", ");
+    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
-    const formattedArr = arr.map((item) => `"${item}"`).join(", ");
+    // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
 
     const gql = `
       query {
         product ( 
-            sort: [${sort_by_json}],
-            limit: ${limit}, 
-            page: ${page},
+            sort: [${sort_by_json}]
+            limit: ${limit} 
+            page: ${page}
             filter: {
             tags: { 
                 category_id:{
@@ -391,39 +414,38 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getFilterBooks = async (arr) => {
+  getProductByPublisher = async (publisher_slug) => {
     // offset: Number(params.page) * pagesize - pagesize,
-
-    const idString = JSON.stringify(arr);
-    // console.log("idString", idString);
 
     const gql = `
       query {
         product(filter: {
-          tags: {
-            category_id: {
-              id: {
-                _in: ${idString}
-              }
+            Publisher:{
+                name:{
+                    _eq : "${publisher_slug}"
+                }
             }
-          }
         }) 
         {
-          id
-          title
-          keyword
-          series
-          tags {
+            id
+            title
+            keyword
+            Publisher{
+                name
+                id
+            }
+            series
+            tags {
             id
             category_id {
-              id
+                id
             }
-          }
+            }
         }
-      }
+    }
     `;
 
-    console.log("getFilterBooks", gql);
+    console.log("getProductByPublisher", gql);
 
     return await this.sdk(gql);
   };
@@ -437,6 +459,7 @@ class ApiManager {
           id
           title
           keyword
+          publisher
           series
           tags {
             id
@@ -448,7 +471,7 @@ class ApiManager {
       }
     `;
 
-    console.log("getFilterBooks", gql);
+    console.log("getallBooks", gql);
 
     return await this.sdk(gql);
   };

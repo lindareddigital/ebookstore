@@ -1,7 +1,6 @@
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
-import apiManager from 'src/pages/api/api';
 import GridList from "./GridList";
 import ListList from "./ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
@@ -10,20 +9,19 @@ import ListAside from 'src/pages/components/molecules/ListAside';
 import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
-import { useGlobalStore } from "src/pages/store/global.store";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function Listing({
-  data,
+  // data,
   // siteMenu,
-  filterBooks,
-  filterCat,
+  // filterBooks,
+  // filterCat,
 }) {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
-  // const query = useWhatsOnStore((state) => state.query);
   const [ddata, setData] = useState(null);
   const [books, setBooks] = useState(null);
+  const [navMenu, setNavMenu] = useState(null);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
@@ -33,19 +31,21 @@ export default function Listing({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/sitemenu/sidemenu");
+        // const response = await fetch("/api/sitemenu/sidemenu");
 
-        const result = await response.json();
-        setData(result);
+        // const result = await response.json();
+        // setData(result);
 
-        
+        const books = await fetch(`/api/product/publisher/大邑文化`);
+        setBooks(books);
 
-        const series = await fetch(`/api/product/series`);
+        const navMenu = await fetch(`/api/sitemenu/navimenu`);
+        setNavMenu(navMenu);
+        // const series = await fetch(`/api/product/series`);
 
-        const resul = await res.json();
-        console.log("22resul", resul);
+        // const resul = await res.json();
+        // console.log("22resul", resul);
 
-        setBooks(resul);
 
         console.log("ddata", ddata);
       } catch (error) {
@@ -104,23 +104,22 @@ export default function Listing({
   //   filterCat?.site_menu[0].menu_items
   // );
 
-   const cat = filterCat?.site_menu[0].menu_items
-     .filter(
-       (menuItem) =>
-         menuItem.site_menu_items_id.slug === router.query.slug[1] &&
-         menuItem.site_menu_items_id.category.length > 0
-     )
-     .map((menuItem) => menuItem.site_menu_items_id.category);
-;
+//    const cat = filterCat?.site_menu[0].menu_items
+//      .filter(
+//        (menuItem) =>
+//          menuItem.site_menu_items_id.slug === router.query.slug[1] &&
+//          menuItem.site_menu_items_id.category.length > 0
+//      )
+//      .map((menuItem) => menuItem.site_menu_items_id.category);
+// ;
 
 
-  console.log("cat", cat?.[0]);
+//   console.log("cat", cat?.[0]);
   
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
     setDataFromChild(data);
-    router.replace(router.asPath);
   };
 
   
@@ -137,9 +136,9 @@ export default function Listing({
     }
   }, [router.query, books]);
 
-  const series = data?.data?.product?.reduce((acc, item) => {
-    return acc.concat(item.series);
-  }, []);
+  // const series = data?.data?.product?.reduce((acc, item) => {
+  //   return acc.concat(item.series);
+  // }, []);
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -153,12 +152,12 @@ export default function Listing({
     setPanel(true);
   };
 
-  return null
+  // return null
 
   return (
     <div className="listing-page">
-      <Navbar siteMenu={siteMenu} />
-      <MenuBar siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
+      <Navbar navMenu={navMenu} />
+      <MenuBar navMenu={navMenu} sendDataToParent={sendDataToParent} />
       <div className="listing-banner">
         {/* <img
           src=""

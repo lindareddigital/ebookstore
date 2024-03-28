@@ -2,18 +2,18 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   const id = req.query.id;
-  console.log("sidid",id);
+  // console.log("sidid",id);
 
   try {
     const detail = await apiManager.getProductDetail();
 
-    console.log("itemitemitem", detail);
+    // console.log("itemitemitem", detail);
 
     const data = detail?.data.find((item) => {
       return item.id === id;
     });
 
-    console.log("itemitemitem", data);
+    // console.log("getProductDetail", data);
     
     res.status(200).json({ data });
   } catch (err) {
