@@ -30,30 +30,31 @@ export default function Listing({
   // console.log("filterBooks", filterBooks);
 
 
-  // useEffect(() => {
-    // const fetchData = async () => {
-  //     try {
-        // const response = await fetch("/api/sitemenu/sidemenu");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/sitemenu/sidemenu");
 
-        // const result = await response.json();
-        // setData(result);
-        // const res = await fetch(`/api/product/category/`);
+        const result = await response.json();
+        setData(result);
 
-        // const res = await fetch(`/api/product/series`);
+        
 
-        //const resul = await res.json();
-        //console.log("22resul", resul);
+        const series = await fetch(`/api/product/series`);
 
-        // setBooks(resul);
+        const resul = await res.json();
+        console.log("22resul", resul);
 
-        //console.log("ddata", ddata);
-  //     } catch (error) {
-  //       console.error("获取数据时出错：", error);
-  //     }
-  //   };
+        setBooks(resul);
 
-  //   fetchData();
-  // }, []);
+        console.log("ddata", ddata);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
   let active = 0;
@@ -65,6 +66,13 @@ export default function Listing({
       </Pagination.Item>
     );
   }
+
+  const getCategory = async(arr) => {
+    console.log('arr',arr);
+    
+    const category = await fetch(`/api/product/category/`,);
+
+  };
 
   const paginationBasic = () => {
     return (

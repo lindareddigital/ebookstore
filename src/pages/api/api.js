@@ -270,47 +270,48 @@ class ApiManager {
     return;
   };
 
-  getProductBySeries = async(arr) => {
+  getProductBySeries = async(arr,obj) => {
 
     const formattedArr = arr.map((item) => `"${item}"`).join(", ");
   
       const gql = `
       query {
-  product(
-    limit: 3
-    page: 1
-    filter: {
-      series: {
-        _in: [${formattedArr}]
+        product(
+          sort: ["${obj.sort}"]
+          limit: ${obj.limit}
+          page: ${obj.page}
+          filter: {
+            series: {
+              _in: [${formattedArr}]
+            }
+          }
+        ) {
+          id
+          title
+          keyword
+          series
+          description
+          table_of_contents
+          date_created
+          tags {
+            id
+            category_id {
+              id
+            }
+          }
+        }
+        product_aggregated(
+          filter: {
+            series: {
+              _in: [${formattedArr}]
+            }
+          }
+        ) {
+          count {
+            id
+          }
+        }
       }
-    }
-  ) {
-    id
-    title
-    keyword
-    series
-    description
-    table_of_contents
-    date_created
-    tags {
-      id
-      category_id {
-        id
-      }
-    }
-  }
-  product_aggregated(
-    filter: {
-      series: {
-        _in: [${formattedArr}]
-      }
-    }
-  ) {
-    count {
-      id
-    }
-  }
-}
     `;
 
     console.log("getProductBySeries", gql);
@@ -319,7 +320,7 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductByCategory = async (limit,page) => {
+  getProductByCategory = async (arr,obj) => {
     // let pagesize = 10;
     // let offset = Number(params.page) * pagesize - pagesize;
 
@@ -330,18 +331,19 @@ class ApiManager {
 
     //with limit;  number of pages = total count / limit per page
 
+    const formattedArr = arr.map((item) => `"${item}"`).join(", ");
 
     const gql = `
-        query {
+      query {
         product ( 
-            sort: ["-date_created"],
-            limit: 20, 
-            page: 1,
+            sort: ["${obj.sort}"],
+            limit: ${obj.limit}, 
+            page: ${obj.page},
             filter: {
             tags: { 
                 category_id:{
                   id :{
-                     _in:  ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+                     _in: [${formattedArr}]
                   }
                 }
             }

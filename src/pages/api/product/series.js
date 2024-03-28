@@ -4,17 +4,38 @@ export default async function handler(req, res) {
 
   try {
 
-    console.log("category", req.body.category_id);
+    console.log("getProductBySeries", req.body.series_tags);
 
-    const arr = req.body.category_id
+    const obj = req.body;
+    console.log("objobj", obj);
 
+    function handle(obj) {
+      if (!obj.hasOwnProperty("limit")) {
+        obj.limit = 20;
+      } else if (!obj.hasOwnProperty("page")) {
+        obj.page = 1;
+      } else if (!obj.hasOwnProperty("sort")) {
+        obj.sort = ["-date_created"];
+      } return obj;
+    }
 
-
-    const result = await apiManager.getProductBySeries(arr);
-
+    handle(obj)
     
+    const arr = req.body.series_tags;
 
-    res.status(200).json({ result });
+    if (
+      req.body.series_tags &&
+      Array.isArray(req.body.series_tags) &&
+      req.body.series_tags.length > 0
+    ) {
+
+      const result = await apiManager.getProductBySeries(arr,obj);
+
+      return res.status(200).json({ message: "Series data is valid", result });
+    } else {
+      return res.status(400).json({ error: "Series data is empty or invalid" });
+    }
+
   } catch (err) {
     console.log("series error ", err);
   }

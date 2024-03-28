@@ -19,7 +19,7 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/sitemenu/sidemenu");
+        const response = await fetch("/api/sitemenu/sidemenu?publisher=polis_press");
 
         const result = await response.json();
 
