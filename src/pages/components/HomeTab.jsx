@@ -11,15 +11,28 @@ import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
-export default function HomeTab({ data }) {
-  // console.log("data", data.data);
+export default function HomeTab() {
+  const [books, setBooks] = useState(null);
  
-  const books = data?.data?.pages?.[0]?.blocks?.[2]?.item?.cards;
-  console.log("books", books);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/product/publisher/大邑文化");
+        const books = await response.json();
+        setBooks(books.result.product);
+        console.log("books", books);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   
   const swiperRef = useRef(null);
-
   const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
 
@@ -35,7 +48,7 @@ export default function HomeTab({ data }) {
     }
   };
 
-  if (!data || !books) {
+  if (!books) {
     return null;
   }
 
@@ -112,16 +125,16 @@ export default function HomeTab({ data }) {
                   return (
                     <SwiperSlide
                       className="swiper-slide"
-                      key={`${item.image.id}`}
+                      key={`${item?.image?.id}`}
                     >
                       <Link
-                        key={`${item.image.id}`}
-                        href={{ pathname: `/detail/${item.image.id}` }}
+                        key={`${item?.image?.id}`}
+                        href={{ pathname: `/detail/${item?.image?.id}` }}
                         className={``}
                       >
                         <div className="book-item">
                           <img
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             className=""
                             alt={item.title}
                           />

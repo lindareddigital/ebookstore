@@ -4,13 +4,23 @@ import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 
-export default function Navbar({ navMenu }) {
+export default function Navbar({}) {
   const { width, mobile } = useCalc();
+  const [navMenu, setNavMenu] = useState(null);
 
   const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setOpen((prev) => !prev);
   };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+     const navMenu = await fetch(`/api/sitemenu/navimenu`);
+     setNavMenu(navMenu);
+    };
+    fetchData();
+  }, []);
 
 
   return (
@@ -87,7 +97,7 @@ export default function Navbar({ navMenu }) {
                 </Link>
               </li> */}
 
-              {navMenu.result.site_menu?.menu_items.map((item) => {
+              {navMenu?.result?.site_menu?.menu_items?.map((item) => {
                 return (
                   <>
                     <li className="nav-item" key={item.id}>

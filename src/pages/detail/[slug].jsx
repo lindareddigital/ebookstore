@@ -18,7 +18,7 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 
 
-export default function Detail({ data, siteMenu }) {
+export default function Detail({}) {
   const { mobile } = useCalc();
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
@@ -26,7 +26,7 @@ export default function Detail({ data, siteMenu }) {
   const router = useRouter();
   const id = router.query.slug;
 
-  // console.log("id", id);
+  console.log("id", id);
 
   useEffect(() => {
   const fetchData = async () => {
@@ -34,7 +34,7 @@ export default function Detail({ data, siteMenu }) {
       const res = await fetch(`/api/product/${id}`);
 
       const result = await res.json();
-      // console.log('res',result.data);
+      console.log('res',result.data);
       
       setItem(result.data);
       // console.log("ddata", result.data);
@@ -55,8 +55,8 @@ export default function Detail({ data, siteMenu }) {
         <Head>
           <title>{item.title}</title>
         </Head>
-        <Navbar siteMenu={siteMenu} />
-        <MenuBar siteMenu={siteMenu} />
+        <Navbar />
+        <MenuBar />
         <div className="container-fluid fdc">
           <Breadcrumb data={item.series} />
 
@@ -133,7 +133,7 @@ export default function Detail({ data, siteMenu }) {
           </div>
         </div>
         <div className="main-body">
-          <HomeTab data={data} />
+          <HomeTab />
         </div>
         <div className="container-fluid fdc">
           {/* {item &&
@@ -153,9 +153,9 @@ export default function Detail({ data, siteMenu }) {
 }
 
 
-export const getServerSideProps = async () => {
-  const result = await apiManager.getPageBySlug();
-  const siteMenu = await apiManager.getSiteMenu();
+// export const getServerSideProps = async () => {
+//   const result = await apiManager.getPageBySlug();
+//   const siteMenu = await apiManager.getSiteMenu();
 
-  return { props: { data: result, siteMenu } };
-};
+//   return { props: { data: result, siteMenu } };
+// };

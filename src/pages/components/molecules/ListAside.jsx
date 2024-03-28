@@ -4,7 +4,7 @@ import apiManager from "src/pages/api/api";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function ListAside({ data, sendDataToParent, siteMenu }) {
+export default function ListAside({ sendDataToParent, siteMenu }) {
   const router = useRouter();
 
   
@@ -18,33 +18,15 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch("/api/sitemenu/sidemenu?publisher=polis_press");
-
-        const result = await response.json();
-
-        // setData(result);
-       
-        console.log("ddata", result);
-      } catch (error) {
-        console.error("获取数据时出错：", error);
-      }
+      
     };
 
     fetchData();
   }, []);
 
-  const nowpage = siteMenu.data.filter((item) => {
-    if (router.query.slug == "all") {
-      // console.log("router.query.slug", router.query.slug);
-      return item.menu_items[0].site_menu_id.publisher === "polis_press";
-    } else if (router.query.slug === "seashore") {
-      console.log("router.query.slug seashore", item.menu_items);
-      return item.menu_items[0].site_menu_id?.publisher === router.query.slug;
-    } else {
-      return item.menu_items[0].site_menu_id.publisher === "polis_press";
-    }
-  });
+  console.log("siteMenu", siteMenu?.result?.sitemenu);
+  
+
 
   // console.log("nowpage", nowpage);
 
@@ -56,9 +38,11 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
 
   return (
     <aside className="list-aside">
-      {nowpage?.map((item) => {
+      {siteMenu?.result?.sitemenu?.map((item) => {
         {
-          {/* console.log("prime", item.menu_items); */}
+          {
+            /* console.log("prime", item.menu_items); */
+          }
         }
         return (
           <ul className="">
@@ -66,7 +50,9 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
             {item.menu_items?.map((item) => {
               {
                 {
-                  {/* console.log("64", item.site_menu_id.channel); */}
+                  {
+                    /* console.log("64", item.site_menu_id.channel); */
+                  }
                 }
               }
               return (
@@ -88,7 +74,6 @@ export default function ListAside({ data, sendDataToParent, siteMenu }) {
           </ul>
         );
       })}
-
     </aside>
   );
 }

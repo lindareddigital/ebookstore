@@ -11,43 +11,41 @@ import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import Pagination from "react-bootstrap/Pagination";
 
-export default function Listing({
-  // data,
-  // siteMenu,
-  // filterBooks,
-  // filterCat,
-}) {
+export default function Listing() {
   const [panel, setPanel] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
-  const [ddata, setData] = useState(null);
+  const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [navMenu, setNavMenu] = useState(null);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
-  // console.log("filterBooks", filterBooks);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await fetch("/api/sitemenu/sidemenu");
 
-        // const result = await response.json();
-        // setData(result);
+        const res = await fetch("/api/sitemenu/publisher/polis_press");
+        const siteMenu = await res.json();
+        setSiteMenu(siteMenu.result.site_menu);        
+        console.log("siteMenu", siteMenu);
 
-        const books = await fetch(`/api/product/publisher/大邑文化`);
-        setBooks(books);
+        const response = await fetch("/api/product/publisher/大邑文化");
+        const books = await response.json();        
+        setBooks(books.result.product);
+        console.log("books", books);
+
 
         const navMenu = await fetch(`/api/sitemenu/navimenu`);
         setNavMenu(navMenu);
+
         // const series = await fetch(`/api/product/series`);
 
         // const resul = await res.json();
         // console.log("22resul", resul);
 
-
-        console.log("ddata", ddata);
+        // console.log("ddata", ddata);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -94,27 +92,7 @@ export default function Listing({
     );
   };
 
-  // const polis_press = siteMenu.data.filter((item) => {
-  //   return item.menu_items[0].site_menu_id.publisher === "polis_press";
-  // });
 
-  // console.log(
-  //   "polis_press",
-  //   router.query.slug[1],
-  //   filterCat?.site_menu[0].menu_items
-  // );
-
-//    const cat = filterCat?.site_menu[0].menu_items
-//      .filter(
-//        (menuItem) =>
-//          menuItem.site_menu_items_id.slug === router.query.slug[1] &&
-//          menuItem.site_menu_items_id.category.length > 0
-//      )
-//      .map((menuItem) => menuItem.site_menu_items_id.category);
-// ;
-
-
-//   console.log("cat", cat?.[0]);
   
 
   const sendDataToParent = (data) => {
@@ -169,11 +147,11 @@ export default function Listing({
       <div className="container-fluid">
         <div className="main-body">
           <SidebarWrapper />
+          {siteMenu!= null &&
           <ListAside
             siteMenu={siteMenu}
-            data={data}
             sendDataToParent={sendDataToParent}
-          />
+          />}
           <div className="right-side">
             {dataFromChild != "" && (
               <div className="block-title">系列： {dataFromChild}</div>
@@ -287,61 +265,18 @@ export default function Listing({
   );
 }
 
-export const getServerSideProps = async ({ resolvedUrl }) => {
-  // const data = await apiManager.getPageBySlug();
-  // // const siteMenu = await apiManager.getSiteMenu();
+// export const getServerSideProps = async ({ resolvedUrl }) => {
+  
 
-  // console.log("refresh url", resolvedUrl);
-  // let filterBooks
-  // let filterCat
-  // if( resolvedUrl != "/listing/all"){
-  //   const parts = resolvedUrl.split("/");
-  //   function extract(resolvedUrl) {
-  //     return resolvedUrl.split("/");
-  //   }
-  //   const slug = extract(resolvedUrl)[parts.length - 1];
-  //   const channel = extract(resolvedUrl)[parts.length - 2];
-
-  //   console.log("channel", channel, slug, extract(resolvedUrl));
-
-  //   // filterCat = await apiManager.getProductByCategory(channel, slug);
-  //   // console.log("filterCat", filterCat);
-
-  //   const cat = filterCat?.site_menu[0]?.menu_items
-  //     .filter(
-  //       (menuItem) =>
-  //         menuItem.site_menu_items_id.slug === slug &&
-  //         menuItem.site_menu_items_id.category.length > 0
-  //     )
-  //     .map((menuItem) => menuItem.site_menu_items_id.category) || [];
-
-  //   console.log("cat", cat?.[0]);
-
-  //   const arr = cat?.[0];
-
-  //   const idsArray = arr?.map((item) => item.category_id.id);
-  //   console.log("idsArray", idsArray);
-
-
-  //   const query = cat?.site_menu_items_id?.id;
-  //   // console.log("catcatcat id", query);  
-  //   filterBooks = await apiManager.getFilterBooks(idsArray);
-  // }else{
-  //   console.log("/listing/all");
-  //   filterBooks = await apiManager.getAllBooks();
-    
-  // }
-
-
-  return {
-    props: {
-      // data,
-      // siteMenu,
-      // filterBooks: filterBooks?.product,
-      // filterCat: filterCat || null,
-    },
-  };
-};
+//   return {
+//     props: {
+//       // data,
+//       // siteMenu,
+//       // filterBooks: filterBooks?.product,
+//       // filterCat: filterCat || null,
+//     },
+//   };
+// };
 
 
 

@@ -8,12 +8,7 @@ import { useRouter } from "next/router";
 export default function MenuBar({ siteMenu, sendDataToParent }) {
   const { width, mobile } = useCalc();
   const router = useRouter();
-
-
-  const all = siteMenu.data.find((item) => {
-    // console.log("item", item.menu_items);
-    return item.menu_items[0].site_menu_id.publisher === "global";
-  });
+  const [navMenu, setNavMenu] = useState([]);
 
   const handleClick = (item) => {
 
@@ -24,31 +19,46 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
       shallow: true,
     });
 
-     
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`/api/sitemenu/navimenu`);
+      const navMenu = await response.json();        
+      setNavMenu(navMenu.result.site_menu[0].menu_items);
+      console.log("siteMenu", navMenu.result.site_menu[0].menu_items);
+      console.log("", navMenu.result.site_menu[0].menu_items);
+      
+      
+    };
+    fetchData();
+  }, []);
+
 
   // console.log("MenuBar", all?.menu_items);
 
   return (
     <div className="menu-bar">
       <div className="container-fluid">
-        {all?.menu_items.map((item) => {
-          return (
-            <>
-              <div className="" key={item.title}>
-                <div
-                  onClick={() => handleClick(item.site_menu_items_id)}
-                  className="link"
-                >
-                  {item.site_menu_items_id.title}
-                </div>
-                {/* <Link href="" className="link">
+        {navMenu &&
+          navMenu?.result?.site_menu[0]?.menu_items.map((item) => {
+            console.log("MenuBar", item);
+            return (
+              <>
+                <div className="" key={item.title}>
+                  <div
+                    onClick={() => handleClick(item.site_menu_items_id)}
+                    className="link"
+                  >
+                    {item.site_menu_items_id.title}
+                  </div>
+                  {/* <Link href="" className="link">
                   5566
                 </Link> */}
-              </div>
-            </>
-          );
-        })}
+                </div>
+              </>
+            );
+          })}
       </div>
     </div>
   );
