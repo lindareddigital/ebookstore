@@ -357,10 +357,7 @@ class ApiManager {
 
   getProductByCategory = async (category, sort_by, page = 1, limit = 20) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
-    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
-
-    // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
-
+    const sort_by_json =  sort_by.map((item) => `"${item}"`).join(", ");
     const gql = `
       query {
         product ( 
