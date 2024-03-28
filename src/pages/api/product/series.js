@@ -1,7 +1,6 @@
 import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
-
   try {
 
     console.log("getProductBySeries", req.body.series_tags);
@@ -37,7 +36,8 @@ export default async function handler(req, res) {
     }
 
   } catch (err) {
-    console.log("series error ", err);
+    console.error("Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
