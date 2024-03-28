@@ -85,6 +85,17 @@ class ApiManager {
     }
   };
 
+  sdk_graphql_query = async (gql, variables) => {
+    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+      .with(graphql({ credentials: "include" }))
+      .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
+
+    const result = await client.query(gql);
+
+    return result;
+  };
+
+
   sdk = async (gql) => {
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
@@ -319,29 +330,23 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductByCategory = async (limit,page) => {
-    // let pagesize = 10;
-    // let offset = Number(params.page) * pagesize - pagesize;
+  getProductByCategory = async (category,sort_by, page = 1, limit = 20) => {
 
-    // meta:"total_count",
-    // offset: "${offset}",
-    // limit: pagesize,
-    // sort : ["sort", "-title"],
-
-    //with limit;  number of pages = total count / limit per page
+    const category_id = category.map((item) => `"${item}"`).join(", ");
+    const sort_by_json =  sort_by.map((item) => `"${item}"`).join(", ");
 
 
     const gql = `
         query {
         product ( 
-            sort: ["-date_created"],
-            limit: 20, 
-            page: 1,
+            sort: [${sort_by_json}],
+            limit: ${limit}, 
+            page: ${page},
             filter: {
             tags: { 
                 category_id:{
                   id :{
-                     _in:  ["c9b9c5dc-8513-4282-af5b-366fc912dc61", "59e8483c-019c-482f-b2a1-f9f3b6dcbe21"]
+                     _in: [${category_id}]
                   }
                 }
             }
@@ -362,8 +367,16 @@ class ApiManager {
                 }
             }
         }
-        product_aggregated {
-            countAll
+        product_aggregated(filter: {
+          tags: { 
+              category_id:{
+                id :{
+                   _in: [${category_id}]
+                }
+              }
+          }
+      }) {
+            
     		count {
     			id
     		}
