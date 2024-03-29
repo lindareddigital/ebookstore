@@ -13,6 +13,9 @@ export default async function handler(req, res) {
 
     const isValidSeries = Array.isArray(series_tags) && series_tags.length > 0;
 
+    console.log("1616", series_tags,obj);
+    
+
     if (isValidSeries) {
       const result = await apiManager.getProductBySeries(series_tags, obj);
       return res.status(200).json({ result });

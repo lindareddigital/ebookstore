@@ -10,6 +10,7 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import Pagination from "react-bootstrap/Pagination";
+import { useGlobalStore } from "src/pages/store/global.store";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
@@ -17,6 +18,8 @@ export default function Listing() {
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [navMenu, setNavMenu] = useState(null);
+  const obj = useGlobalStore((state) => state.obj);
+
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
@@ -36,16 +39,6 @@ export default function Listing() {
         setBooks(books.result.product);
         console.log("books", books);
 
-
-        const navMenu = await fetch(`/api/sitemenu/navimenu`);
-        setNavMenu(navMenu);
-
-        // const series = await fetch(`/api/product/series`);
-
-        // const resul = await res.json();
-        // console.log("22resul", resul);
-
-        // console.log("ddata", ddata);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -91,32 +84,36 @@ export default function Listing() {
       </div>
     );
   };
-
-
   
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
+    filterBooks()
     setDataFromChild(data);
   };
 
-  
-  const filterData = useMemo(() => {
-    // console.log("memo", router.query, router.query?.slug?.includes("all"));
 
-    if (!books) {
-      return [];
-    } else if (router.query?.slug?.includes("all")) {
-      setDataFromChild("");
-      return books;
-    } else {
-      return filterBooks;
-    }
-  }, [router.query, books]);
+  const filterBooks = async () => {
+    
+    const response = await fetch("/api/product/series", {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sort: ["-date_created"],
+        page: 1,
+        series_tags: obj.query_tags,
+      }),
+    });
 
-  // const series = data?.data?.product?.reduce((acc, item) => {
-  //   return acc.concat(item.series);
-  // }, []);
+    console.log("filterBooks obj", obj.query_tags);
+
+    const books = await response.json();
+    setBooks(books.result.product);
+    console.log("filterbooks", books.result.product);
+  };
+
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -134,8 +131,8 @@ export default function Listing() {
 
   return (
     <div className="listing-page">
-      <Navbar navMenu={navMenu} />
-      <MenuBar navMenu={navMenu} sendDataToParent={sendDataToParent} />
+      <Navbar />
+      <MenuBar sendDataToParent={sendDataToParent} />
       <div className="listing-banner">
         {/* <img
           src=""
@@ -147,18 +144,14 @@ export default function Listing() {
       <div className="container-fluid">
         <div className="main-body">
           <SidebarWrapper />
-          {siteMenu!= null &&
-          <ListAside
-            siteMenu={siteMenu}
-            sendDataToParent={sendDataToParent}
-          />}
+          <ListAside siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
           <div className="right-side">
             {dataFromChild != "" && (
               <div className="block-title">系列： {dataFromChild}</div>
             )}
             <div className="listing-toolbar">
               <div className="amount">
-                商品清單共有<span>{filterData.length}</span>本
+                {/* 商品清單共有<span>{filterData.length}</span>本 */}
               </div>
 
               <div className="right-side">
@@ -193,14 +186,11 @@ export default function Listing() {
               </div>
             </div>
 
-            {currentView === "grid" && <GridList books={filterData} />}
+            {currentView === "grid" && <GridList books={books} />}
 
-            {currentView === "list" && <ListList books={filterData} />}
+            {currentView === "list" && <ListList books={books} />}
 
-            <div className="">
-              
-              {paginationBasic()}
-            </div>
+            <div className="">{paginationBasic()}</div>
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>

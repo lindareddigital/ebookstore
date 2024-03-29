@@ -55,8 +55,8 @@ export default function Manage({ params }) {
   return (
     <>
       <div className="manage-page">
-        <Navbar siteMenu={siteMenu} />
-        <MenuBar siteMenu={siteMenu} />
+        <Navbar />
+        <MenuBar />
         <Breadcrumb data={"會員中心"} />
 
         <div className="container-fluid">

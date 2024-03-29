@@ -5,8 +5,8 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 export default function ContactUs() {
   return (
     <div className="contactus-page">
-      <Navbar siteMenu={siteMenu} />
-      <MenuBar siteMenu={siteMenu} />
+      <Navbar />
+      <MenuBar />
       <Breadcrumb data={"聯絡我們"} />
       <form className="form-area contact-us">
         <div className="block-title">聯絡我們</div>

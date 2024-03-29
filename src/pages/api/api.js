@@ -361,48 +361,48 @@ class ApiManager {
     const gql = `
       query {
         product ( 
-            sort: [${sort_by_json}]
-            limit: ${limit} 
-            page: ${page}
-            filter: {
+          sort: [${sort_by_json}]
+          limit: ${limit} 
+          page: ${page}
+          filter: {
             tags: { 
-                category_id:{
-                  id :{
-                     _in: [${category_id}]
-                  }
+              category_id:{
+                id :{
+                  _in: [${category_id}]
                 }
+              }
             }
-           
-        }
-          ) {
+          }
+        ) 
+        {
+          id
+          title
+          keyword
+          series
+          description
+          table_of_contents
+          date_created
+          tags {
             id
-            title
-            keyword
-            series
-            description
-            table_of_contents
-            date_created
-            tags {
-                id
-                category_id {
-                    id
-                }
+            category_id {
+              id
             }
+          }
         }
         product_aggregated(filter: {
           tags: { 
-              category_id:{
-                id :{
-                   _in: [${category_id}]
-                }
+            category_id:{
+              id :{
+                _in: [${category_id}]
               }
+            }
           }
-      }) {
-            
-    		count {
-    			id
-    		}
-    	}
+        }) 
+        {     
+          count {
+            id
+          }
+        }
     }
     `;
 

@@ -83,9 +83,9 @@ export default function Home({ siteMenu }) {
         </div>
       </div>
 
-      <Navbar siteMenu={siteMenu} />
+      <Navbar />
 
-      <MenuBar siteMenu={siteMenu} />
+      <MenuBar />
 
       <div className="home-banner">
         <div className="leftbox">

@@ -5,8 +5,8 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 export default function Download({ siteMenu }) {
   return (
     <div className="contactus-page">
-      <Navbar siteMenu={siteMenu} />
-      <MenuBar siteMenu={siteMenu} />
+      <Navbar />
+      <MenuBar />
       <Breadcrumb data={"書單下載"} />
       <form className="download form-area">
         <div className="block-title">書單下載</div>

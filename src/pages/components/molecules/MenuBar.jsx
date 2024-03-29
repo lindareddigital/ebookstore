@@ -26,8 +26,7 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
       const response = await fetch(`/api/sitemenu/navimenu`);
       const navMenu = await response.json();        
       setNavMenu(navMenu.result.site_menu[0].menu_items);
-      console.log("siteMenu", navMenu.result.site_menu[0].menu_items);
-      console.log("", navMenu.result.site_menu[0].menu_items);
+      // console.log("siteMenu", navMenu.result.site_menu[0].menu_items);
       
       
     };
@@ -41,22 +40,17 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     <div className="menu-bar">
       <div className="container-fluid">
         {navMenu &&
-          navMenu?.result?.site_menu[0]?.menu_items.map((item) => {
-            console.log("MenuBar", item);
+          navMenu.map((item) => {
+            {/* console.log("MenuBar", item); */}
             return (
-              <>
-                <div className="" key={item.title}>
-                  <div
-                    onClick={() => handleClick(item.site_menu_items_id)}
-                    className="link"
-                  >
-                    {item.site_menu_items_id.title}
-                  </div>
-                  {/* <Link href="" className="link">
-                  5566
-                </Link> */}
+              <div className="menu-item" key={item.site_menu_items_id.id}>
+                <div
+                  onClick={() => handleClick(item.site_menu_items_id)}
+                  className="link"
+                >
+                  {item.site_menu_items_id.title}
                 </div>
-              </>
+              </div>
             );
           })}
       </div>
