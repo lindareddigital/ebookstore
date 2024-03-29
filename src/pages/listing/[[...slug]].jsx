@@ -17,7 +17,7 @@ export default function Listing() {
   const [dataFromChild, setDataFromChild] = useState("");
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
-  const [navMenu, setNavMenu] = useState(null);
+  const [length, setLength] = useState(30);
   const obj = useGlobalStore((state) => state.obj);
 
 
@@ -29,14 +29,12 @@ export default function Listing() {
     const fetchData = async () => {
       try {
 
-        const res = await fetch("/api/sitemenu/publisher/polis_press");
+        const res = await fetch("/api/sitemenu/publisher/polis-press");
         const siteMenu = await res.json();
         setSiteMenu(siteMenu.result.site_menu);        
         console.log("siteMenu", siteMenu);
 
         getBooks()
-
-
 
       } catch (error) {
         console.error("获取数据时出错：", error);
@@ -46,50 +44,49 @@ export default function Listing() {
     fetchData();
   }, []);
 
+  const Paginations = () => {
+    console.log('length',length);
 
-  let active = 0;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
-
-  function Paginations() {
     const pageNumbers = [];
-    console.log("books length", books?.length);
+    // const length = 99;
 
-    if (Number(books?.length)) {
-      for (let i = 1; i <= Math.ceil(books.length / 10); i++) {
-        pageNumbers.push(<Pagination.Item key={i}>{i}</Pagination.Item>);
+    if (Number(length)) {
+      let active = 1;
+
+      for (let i = 1; i <= Math.ceil(length / 10); i++) {
+        pageNumbers.push(
+          <Pagination.Item
+            onClick={() => paginate(i)}
+            key={i}
+            active={i === active}
+          >
+            {i}
+          </Pagination.Item>
+        );
       }
-
-      return <Pagination onClick={() => paginate()}>{pageNumbers}</Pagination>;
-    }
- 
-  }
-
-  const paginationBasic = () => {
-    return (
-      <div>
-        {Paginations()}
-        {/* <Pagination>
+      return (
+        <Pagination>
           <Pagination.Prev />
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{2}</Pagination.Item>
-          <Pagination.Next />
-        </Pagination> */}
-        <Pagination itemPerPage={10}>
-          <Pagination.Prev />
-          {items}
+          {pageNumbers}
           <Pagination.Next />
         </Pagination>
-        <br />
-      </div>
-    );
+      );
+    }
+  }
+
+
+
+  const paginate = async(page) => {
+    const publisher = "大邑文化";
+    const params = new URLSearchParams();
+    params.append("page", page);
+
+    const url = `/api/product/publisher/${encodeURIComponent(publisher)}?${params.toString()}`;
+    const response = await fetch(url);
+
+    const books = await response.json();
+    setBooks(books.result.product);
+    console.log("books", books);
   };
   
 
@@ -104,12 +101,12 @@ export default function Listing() {
     const books = await response.json();
     setBooks(books.result.product);
     console.log("books", books);
-    Paginations();
+    const length = books.result.product_aggregated[0].count.id;
+    setLength(length);
   };
 
   const filterByCategory = async (arr) => {
     console.log("arr", arr);
-
     const response = await fetch("/api/product/category/", {
       method: "POST",
       headers: {
@@ -121,13 +118,9 @@ export default function Listing() {
         category_id: obj.id,
       }),
     });
-
     console.log("filterBooks obj", obj.category_id);
-
     const books = await response.json();
     setBooks(books.result.product);
-
-
   };
 
   const filterBySeries = async () => {
@@ -142,13 +135,9 @@ export default function Listing() {
         series_tags: obj.query_tags,
       }),
     });
-
     console.log("filterBooks obj", obj.query_tags);
-
     const books = await response.json();
     setBooks(books.result.product);
-
-
   };
 
   const filterBooks = async () => {
@@ -237,7 +226,9 @@ export default function Listing() {
 
             {currentView === "list" && <ListList books={books} />}
 
-            <div className="">{paginationBasic()}</div>
+            <div className="">
+              <Paginations />
+            </div>
           </div>
 
           <div className={`pannel-container ${panel ? "back-filter" : ""}`}>
@@ -302,18 +293,6 @@ export default function Listing() {
   );
 }
 
-// export const getServerSideProps = async ({ resolvedUrl }) => {
-  
-
-//   return {
-//     props: {
-//       // data,
-//       // siteMenu,
-//       // filterBooks: filterBooks?.product,
-//       // filterCat: filterCat || null,
-//     },
-//   };
-// };
 
 
 

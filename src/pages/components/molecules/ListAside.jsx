@@ -30,13 +30,7 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
   console.log("ListAside siteMenu", siteMenu);
 
   //query_tags
-  // console.log("nowpage", nowpage);
 
-  // const series = data.data.product.reduce((acc, item) => {
-  //   return acc.concat(item.series);
-  // }, []);
-
-  // console.log(series);
 
   return (
     <aside className="list-aside">
