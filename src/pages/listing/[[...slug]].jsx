@@ -14,28 +14,28 @@ import { useGlobalStore } from "src/pages/store/global.store";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
-  const [dataFromChild, setDataFromChild] = useState("");
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(30);
-  const obj = useGlobalStore((state) => state.obj);
-
+  // const obj = useGlobalStore((state) => state.obj);
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
+  const { query } = router;
 
+  if (query) {
+    console.log(query.slug);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const siteMenu = await res.json();
-        setSiteMenu(siteMenu.result.site_menu);        
+        setSiteMenu(siteMenu.result.site_menu);
         console.log("siteMenu", siteMenu);
 
-        getBooks()
-
+        getBooks();
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -45,7 +45,7 @@ export default function Listing() {
   }, []);
 
   const Paginations = () => {
-    console.log('length',length);
+    // console.log('length',length);
 
     const pageNumbers = [];
     // const length = 99;
@@ -72,31 +72,31 @@ export default function Listing() {
         </Pagination>
       );
     }
-  }
+  };
 
-
-
-  const paginate = async(page) => {
+  const paginate = async (page) => {
     const publisher = "大邑文化";
     const params = new URLSearchParams();
     params.append("page", page);
 
-    const url = `/api/product/publisher/${encodeURIComponent(publisher)}?${params.toString()}`;
+    const url = `/api/product/publisher/${encodeURIComponent(
+      publisher
+    )}?${params.toString()}`;
     const response = await fetch(url);
 
     const books = await response.json();
     setBooks(books.result.product);
     console.log("books", books);
   };
-  
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
-    filterBooks()
-    setDataFromChild(data);
+    filterBooks();
   };
 
-  const getBooks = async (arr) => {
+  const getBooks = async () => {
+    // console.log(event.target.value);
+
     const response = await fetch("/api/product/publisher/大邑文化");
     const books = await response.json();
     setBooks(books.result.product);
@@ -146,10 +146,9 @@ export default function Listing() {
     // }else{
     //  filterByCategory()
     // }
-    
-    console.log("filterbooks", books.result.product);
-  };
 
+    console.log("filterbooks", books?.result?.product);
+  };
 
   const handleViewChange = (view) => {
     setCurrentView(view);
@@ -182,9 +181,8 @@ export default function Listing() {
           <SidebarWrapper />
           <ListAside siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
           <div className="right-side">
-            {dataFromChild != "" && (
-              <div className="block-title">系列： {dataFromChild}</div>
-            )}
+            <div className="block-title">系列：</div>
+
             <div className="listing-toolbar">
               <div className="amount">
                 {/* 商品清單共有<span>{filterData.length}</span>本 */}
@@ -212,9 +210,10 @@ export default function Listing() {
                     className="form-select"
                     aria-label="Default select example"
                     defaultValue={"DEFAULT"}
+                    // onChange={getBooks}
                   >
-                    <option value="DEFAULT">上市日期(新→舊)</option>
-                    <option value="1">上市日期(舊→新)</option>
+                    <option value="-date_created">上市日期(新→舊)</option>
+                    <option value="date_created">上市日期(舊→新)</option>
                     <option value="2">暢銷度</option>
                     <option value="3">價格(高→低)</option>
                   </select>

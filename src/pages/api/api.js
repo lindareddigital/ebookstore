@@ -366,7 +366,7 @@ class ApiManager {
 
   getProductByCategory = async (category, sort_by, page = 1, limit = 20) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
-    const sort_by_json =  sort_by.map((item) => `"${item}"`).join(", ");
+    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
     const gql = `
       query {
         product ( 
@@ -420,7 +420,7 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductByPublisher = async (publisher_slug,page,limit) => {
+  getProductByPublisher = async (publisher_slug, page, limit, sort_by) => {
     // offset: Number(params.page) * pagesize - pagesize,
 
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
@@ -447,6 +447,9 @@ class ApiManager {
             name
             id
           }
+          cover_image{
+            id
+          }
           series
           tags {
             id
@@ -470,7 +473,6 @@ class ApiManager {
   };
 
   getAllBooks = async () => {
-  
     const gql = `
       query {
         product(

@@ -10,6 +10,7 @@ export default async function handler(req, res) {
     const obj = {
       limit: limit || 10,
       page: page || 1,
+      sort: sort || ["-date_created"],
     };
 
     // if (
@@ -22,7 +23,8 @@ export default async function handler(req, res) {
     const result = await apiManager.getProductByPublisher(
       req.query.publisher,
       obj.page,
-      obj.limit
+      obj.limit,
+      obj.sort
     );
 
     res.status(200).json({ result });
