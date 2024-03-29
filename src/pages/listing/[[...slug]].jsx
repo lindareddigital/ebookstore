@@ -34,10 +34,9 @@ export default function Listing() {
         setSiteMenu(siteMenu.result.site_menu);        
         console.log("siteMenu", siteMenu);
 
-        const response = await fetch("/api/product/publisher/大邑文化");
-        const books = await response.json();        
-        setBooks(books.result.product);
-        console.log("books", books);
+        getBooks()
+
+
 
       } catch (error) {
         console.error("获取数据时出错：", error);
@@ -58,9 +57,24 @@ export default function Listing() {
     );
   }
 
+  function Paginations() {
+    const pageNumbers = [];
+    console.log("books length", books?.length);
+
+    if (Number(books?.length)) {
+      for (let i = 1; i <= Math.ceil(books.length / 10); i++) {
+        pageNumbers.push(<Pagination.Item key={i}>{i}</Pagination.Item>);
+      }
+
+      return <Pagination onClick={() => paginate()}>{pageNumbers}</Pagination>;
+    }
+ 
+  }
+
   const paginationBasic = () => {
     return (
       <div>
+        {Paginations()}
         {/* <Pagination>
           <Pagination.Prev />
           <Pagination.Item>{1}</Pagination.Item>
@@ -68,7 +82,7 @@ export default function Listing() {
           <Pagination.Item>{2}</Pagination.Item>
           <Pagination.Next />
         </Pagination> */}
-        <Pagination>
+        <Pagination itemPerPage={10}>
           <Pagination.Prev />
           {items}
           <Pagination.Next />
@@ -85,22 +99,40 @@ export default function Listing() {
     setDataFromChild(data);
   };
 
+  const getBooks = async (arr) => {
+    const response = await fetch("/api/product/publisher/大邑文化");
+    const books = await response.json();
+    setBooks(books.result.product);
+    console.log("books", books);
+    Paginations();
+  };
+
   const filterByCategory = async (arr) => {
     console.log("arr", arr);
 
-    const response = await fetch(`/api/product/category/`);
+    const response = await fetch("/api/product/category/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sort: ["-date_created"],
+        page: 1,
+        category_id: obj.id,
+      }),
+    });
+
+    console.log("filterBooks obj", obj.category_id);
+
+    const books = await response.json();
+    setBooks(books.result.product);
+
+
   };
 
   const filterBySeries = async () => {
-
-
-
-  };
-
-  const filterBooks = async () => {
-    
     const response = await fetch("/api/product/series", {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -115,6 +147,17 @@ export default function Listing() {
 
     const books = await response.json();
     setBooks(books.result.product);
+
+
+  };
+
+  const filterBooks = async () => {
+    // if("系列"){
+    //  filterBySeries()
+    // }else{
+    //  filterByCategory()
+    // }
+    
     console.log("filterbooks", books.result.product);
   };
 
