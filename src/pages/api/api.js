@@ -235,14 +235,23 @@ class ApiManager {
                   id
                   title
                   slug
-                  query_tags
                   type
                   landing
+                  query_tags
+                  category {
+                    category_id {
+                      id
+                      name
+                      slug
+                    }
+                  }
+                  
+                  
               }
           }
       }
     }`;
-    console.log(gql);
+
     return await this.sdk(gql);
   };
 
@@ -472,6 +481,10 @@ class ApiManager {
 
     return await this.sdk(gql);
   };
+}
+
+function getCategoryIds(categories) {
+  return categories.map(category => category.category_id.id);
 }
 
 export default ApiManager.getSharedInstance();
