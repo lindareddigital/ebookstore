@@ -58,13 +58,6 @@ export default function Listing() {
     );
   }
 
-  const getCategory = async(arr) => {
-    console.log('arr',arr);
-    
-    const category = await fetch(`/api/product/category/`,);
-
-  };
-
   const paginationBasic = () => {
     return (
       <div>
@@ -92,6 +85,17 @@ export default function Listing() {
     setDataFromChild(data);
   };
 
+  const filterByCategory = async (arr) => {
+    console.log("arr", arr);
+
+    const response = await fetch(`/api/product/category/`);
+  };
+
+  const filterBySeries = async () => {
+
+
+
+  };
 
   const filterBooks = async () => {
     
