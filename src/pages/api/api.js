@@ -176,6 +176,13 @@ class ApiManager {
                   id
                   content
                 }
+                ... on block_product_query {
+                  id
+                  label
+                  order_by
+                  limit
+                  category{ id, name }         
+                }
           }
           }
         }
