@@ -373,7 +373,7 @@ class ApiManager {
 
   getProductByCategory = async (category, sort_by, page = 1, limit = 20) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
-    const sort_by_json =  sort_by.map((item) => `"${item}"`).join(", ");
+    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
     const gql = `
       query {
         product ( 
@@ -427,33 +427,49 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductByPublisher = async (publisher_slug) => {
+  getProductByPublisher = async (publisher_slug, page, limit, sort_by) => {
     // offset: Number(params.page) * pagesize - pagesize,
+
+    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
     const gql = `
       query {
-        product(filter: {
+        product(
+          sort: [${sort_by_json}]
+          page: ${page}
+          limit: ${limit} 
+          filter: {
             Publisher:{
-                name:{
-                    _eq : "${publisher_slug}"
-                }
+              name:{
+                _eq : "${publisher_slug}"
+              }
             }
-        }) 
+          }
+        ) 
         {
+          id
+          title
+          keyword
+          Publisher{
+            name
             id
-            title
-            keyword
-            Publisher{
-                name
-                id
-            }
-            series
-            tags {
+          }
+          cover_image{
+            id
+          }
+          series
+          tags {
             id
             category_id {
                 id
             }
-            }
+          }
+        }
+        product_aggregated(filter: {}) 
+        {     
+          count {
+            id
+          }
         }
     }
     `;
@@ -466,8 +482,12 @@ class ApiManager {
   getAllBooks = async () => {
     const gql = `
       query {
-        product(filter: {
-        }) 
+        product(
+        
+          filter: {
+
+          }
+        ) 
         {
           id
           title

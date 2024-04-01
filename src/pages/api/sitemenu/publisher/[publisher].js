@@ -2,6 +2,8 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
+    // api/sitemenu/publisher/[publisher]
+
     // console.log("getSideMenuByPublisher", req.query);
     // console.log("publisher", req.query.publisher);
 
@@ -11,7 +13,7 @@ export default async function handler(req, res) {
     //  ) {
     //    return res.status(400).json({ error: "Invalid publisher provided" });
     //  }
-    
+
     const result = await apiManager.getSideMenuByPublisher(req.query.publisher);
 
     res.status(200).json({ result });
@@ -19,3 +21,4 @@ export default async function handler(req, res) {
     console.log("errerr", err);
   }
 }
+

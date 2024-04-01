@@ -7,13 +7,19 @@ import { useGlobalStore } from "src/pages/store/global.store";
 
 export default function ListAside({ sendDataToParent, siteMenu }) {
   const router = useRouter();
-  const setObj = useGlobalStore((state) => state.setObj);
+  // const setObj = useGlobalStore((state) => state.setObj);
 
 
   const handleClick = (channel, item) => {
-    // console.log("item", item);
-    sendDataToParent(item);
-    setObj(item)
+    console.log("item", item);
+    if ("category" in item) {
+        const category = item.category;
+
+      sendDataToParent(category);
+    } else {
+      // sendDataToParent(item.category);
+    }
+    // setObj(item)
     router.push(`/listing/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
@@ -30,13 +36,7 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
   console.log("ListAside siteMenu", siteMenu);
 
   //query_tags
-  // console.log("nowpage", nowpage);
 
-  // const series = data.data.product.reduce((acc, item) => {
-  //   return acc.concat(item.series);
-  // }, []);
-
-  // console.log(series);
 
   return (
     <aside className="list-aside">
