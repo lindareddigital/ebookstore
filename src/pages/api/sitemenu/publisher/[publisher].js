@@ -2,6 +2,7 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
+    console.log("handlerhandlerhandler");
     // api/sitemenu/publisher/[publisher]
 
     // console.log("getSideMenuByPublisher", req.query);
@@ -15,6 +16,7 @@ export default async function handler(req, res) {
     //  }
 
     const result = await apiManager.getSideMenuByPublisher(req.query.publisher);
+    console.log("resultresultresult", result);
 
     res.status(200).json({ result });
   } catch (err) {

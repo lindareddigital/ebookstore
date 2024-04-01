@@ -1,3 +1,4 @@
+'use client'
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
@@ -17,92 +18,102 @@ export default function Listing() {
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(30);
-  const [rendered, setRendered] = useState(false);
+  // const [rendered, setRendered] = useState(false);
   // const obj = useGlobalStore((state) => state.obj);
+  const categoryIds = useRef([])
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
     page: 1,
-    arr: []
   });
+
+  const isFirstRendering = useRef(true)
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
 
  
 
+    useEffect(() => {
+      console.log("myObject.arrmyObject.arr", myObject);
+      if (isFirstRendering.current) {
+        isFirstRendering.current = false
+        return
+      }
+      filterByCategory();
+    }, [myObject.page, myObject.limit]);
+
 
   useEffect(() => {
-    if (!rendered) {
-      const channel = router.query?.slug?.[0];
-      const slug = router.query?.slug?.[1];
+    // if (!rendered) {
+    const channel = router.query?.slug?.[0];
+    const slug = router.query?.slug?.[1];
 
-      const fetchData = async () => {
-        try {
-          const res = await fetch("/api/sitemenu/publisher/polis-press");
-          const siteMenu = await res.json();
-          setSiteMenu(siteMenu.result.site_menu);
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/sitemenu/publisher/polis-press");
+        const response = await res.json();
+        console.log("responseresponseresponse", response);
+        const tempMenu = response.result.site_menu;
+        setSiteMenu(tempMenu);
 
-          const foundItem = siteMenu.result.site_menu.find((menu) => {
-            return menu.menu_items.some(
-              (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
-            );
-          });
+        // let slugs = []
+        // console.log("tempMenutempMenu", tempMenu);
+        // for (const menu of tempMenu) {
+        //   console.log("menumenumenu", menu);
+        //   for (const menuItem of menu.menu_items) {
+        //     if (
+        //       menuItem.site_menu_items_id.slug === router.query?.slug?.[1]
+        //     ) {
+        //       slugs = [...menuItem.category];
+        //       // foundItem.menu_items.find(
+        //       //   (item) =>
+        //       //     item.site_menu_items_id.slug === router.query?.slug?.[1]
+        //       // ).site_menu_items_id;
+        //     }
+        //   }
+        // }
 
-          if (foundItem) {
-            var bb = foundItem.menu_items.find(
-              (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
-            ).site_menu_items_id;
-            console.log(" bb", bb.category);
-          } else {
-            return null;
-          }
+        
+        const foundItem = tempMenu.find((menu) => {
+          return menu.menu_items.some(
+            (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+          );
+        });
 
-          filterByCategory(bb.category);
+        console.log("foundItemfoundItemfoundItem",router, foundItem);
 
-          // getBooks();
-        } catch (error) {
-          console.error("获取数据时出错：", error);
+        if (foundItem) {
+          var bb = foundItem.menu_items.find(
+            (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+          ).site_menu_items_id;
+          console.log(" bb", bb.category);
+        } else {
+          return null;
         }
-      };
+        categoryIds.current = bb.category;
+        // console.log("slslugsslugsslugsugs", slugs);
+        filterByCategory();
 
-      setRendered(true);
-      fetchData();
-
-    }
-
-  }, [rendered]);
-
-  const Paginations = ({length}) => {
-    const pageNumbers = [];
-    console.log('length',length);
-
-    if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 5); i++) {
-        pageNumbers.push(
-          <Pagination.Item
-            onClick={() => {
-              setMyObject((prev) => ({
-                ...prev,
-                page: i,
-              }));
-              filterByCategory();
-            }}
-            key={i}
-            active={i === myObject.page}
-          >
-            {i}
-          </Pagination.Item>
-        );
+        // getBooks();
+      } catch (error) {
+        console.error("获取数据时出错：", error);
       }
-      return (
-        <Pagination>
-          <Pagination.Prev />
-          {pageNumbers}
-          <Pagination.Next />
-        </Pagination>
-      );
-    }
-  };
+    };
+
+    // setRendered(true);
+    fetchData();
+
+    // }
+  }, [router]);
+
+  const updatePage = (i) => {
+    console.log("ikpeoqwekowqpe", i);
+    setMyObject((prev) => ({
+      ...prev,
+      page: i,
+    }));
+  }
+
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
@@ -110,10 +121,10 @@ export default function Listing() {
   };
 
 
-  const filterByCategory = async (arr) => {
-    console.log("arr filterByCategory", arr);
+  const filterByCategory = async () => {
+    console.log("arr filterByCategory", categoryIds.current);
 
-    const result = arr?.map((item) => item.category_id.id);
+    const result = categoryIds.current?.map((item) => item.category_id.id);
     console.log(result);
     const response = await fetch("/api/product/category/", {
       method: "POST",
@@ -150,31 +161,35 @@ export default function Listing() {
     //     series_tags: myObject.arr,
     //   }),
     // });
-    const books = await response.json();
-    setLength(books?.result?.product?.length);
-    setBooks(books?.result?.product);
+    // const books = await response.json();
+    // setLength(books?.result?.product?.length);
+    // setBooks(books?.result?.product);
   };
 
-  const filterBooks = async (obj) => {
-    
-    if(obj?.[0] && obj?.[0].hasOwnProperty("category_id")){
-      const arr = obj.map((item) => item.category_id.id);
-      console.log("filterBooks category_id ", arr);
 
+
+  const filterBooks = async (obj) => {
+    const arr = obj.map((item) => item.category_id.id);
+    const item = obj?.[0] && obj?.[0].hasOwnProperty("category_id") ? arr : obj
       setMyObject((prev) => ({
         ...prev,
-        arr: [arr],
+        page: prev.page+1,
+        arr: [item],
       }));
-      console.log("filterByCategory", myObject);
-      filterByCategory();
-    }else{
-      setMyObject((prev) => ({
-        ...prev,
-        arr: [obj],
-      }));
-      console.log("filterBySeries", myObject);
-      filterBySeries(); 
-    }
+    // if(){
+    //   console.log("filterBooks category_id ", arr);
+
+
+    //   console.log("filterByCategory", myObject);
+      
+    // }else{
+    //   setMyObject((prev) => ({
+    //     ...prev,
+    //     arr: [obj],
+    //   }));
+    //   console.log("filterBySeries", myObject);
+    //   filterBySeries(); 
+    // }
 
   };
 
@@ -191,6 +206,37 @@ export default function Listing() {
   };
 
   // return null
+
+
+
+  const Paginations = ({ length }) => {
+    const pageNumbers = [];
+    console.log("length", length);
+
+    if (Number(length)) {
+      for (let i = 1; i <= Math.ceil(length / 5); i++) {
+        pageNumbers.push(
+          <Pagination.Item
+            onClick={() => {
+              updatePage(i);
+              // filterByCategory();
+            }}
+            key={i}
+            active={i === myObject.page}
+          >
+            {i}
+          </Pagination.Item>
+        );
+      }
+      return (
+        <Pagination>
+          <Pagination.Prev />
+          {pageNumbers}
+          <Pagination.Next />
+        </Pagination>
+      );
+    }
+  };
 
   return (
     <div className="listing-page">
