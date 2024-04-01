@@ -1499,6 +1499,11 @@ footer a{
   border-color: unset;
 }
 
+.page-item.active .page-link{
+  background: #EBC700;
+  color: #000;
+}
+
 .page-link a{
   font-size: 18px;
   font-weight: 500;

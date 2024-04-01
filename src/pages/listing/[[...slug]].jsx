@@ -18,13 +18,18 @@ export default function Listing() {
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(30);
   // const obj = useGlobalStore((state) => state.obj);
+  const [myObject, setMyObject] = useState({
+    sort: ["-date_created"],
+    page: 1,
+    arr: []
+  });
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const { query } = router;
 
   if (query) {
-    console.log(query.slug);
+    // console.log(query.slug);
   }
 
   useEffect(() => {
@@ -33,7 +38,7 @@ export default function Listing() {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const siteMenu = await res.json();
         setSiteMenu(siteMenu.result.site_menu);
-        console.log("siteMenu", siteMenu);
+        // console.log("siteMenu", siteMenu);
 
         getBooks();
       } catch (error) {
@@ -48,17 +53,21 @@ export default function Listing() {
     // console.log('length',length);
 
     const pageNumbers = [];
-    // const length = 99;
+    const length = books?.result?.product_aggregated[0]?.count?.id;
 
     if (Number(length)) {
-      let active = 1;
-
       for (let i = 1; i <= Math.ceil(length / 10); i++) {
         pageNumbers.push(
           <Pagination.Item
-            onClick={() => paginate(i)}
+            onClick={() => {
+              setMyObject((prev) => ({
+                ...prev,
+                page: i,
+              }));
+              filterBooks();
+            }}
             key={i}
-            active={i === active}
+            active={i === myObject.page}
           >
             {i}
           </Pagination.Item>
@@ -74,24 +83,25 @@ export default function Listing() {
     }
   };
 
-  const paginate = async (page) => {
-    const publisher = "大邑文化";
-    const params = new URLSearchParams();
-    params.append("page", page);
+  // const paginate = async (page) => {
+  //   const publisher = "大邑文化";
+  //   const params = new URLSearchParams();
+  //   params.append("page", page);
 
-    const url = `/api/product/publisher/${encodeURIComponent(
-      publisher
-    )}?${params.toString()}`;
-    const response = await fetch(url);
+  //   const url = `${window.location.href}?${params.toString()}`;
 
-    const books = await response.json();
-    setBooks(books.result.product);
-    console.log("books", books);
-  };
+
+
+  //   const response = await fetch(url);
+
+  //   const books = await response.json();
+  //   setBooks(books.result.product);
+  //   console.log("books", books);
+  // };
 
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
-    filterBooks();
+    filterBooks(data);
   };
 
   const getBooks = async () => {
@@ -106,48 +116,65 @@ export default function Listing() {
   };
 
   const filterByCategory = async (arr) => {
-    console.log("arr", arr);
+    console.log("arr filterByCategory", arr, myObject);
     const response = await fetch("/api/product/category/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: ["-date_created"],
-        page: 1,
-        category_id: obj.id,
+        sort: myObject.sort,
+        page: myObject.page,
+        category_id: myObject.arr,
       }),
     });
-    console.log("filterBooks obj", obj.category_id);
     const books = await response.json();
-    setBooks(books.result.product);
+    setBooks(books?.result?.product);
+    console.log("filterByCategory", books?.result?.product);
   };
 
   const filterBySeries = async () => {
+    console.log(myObject);
+    
     const response = await fetch("/api/product/series", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: ["-date_created"],
-        page: 1,
-        series_tags: obj.query_tags,
+        sort: myObject.sort,
+        page: myObject.page,
+        series_tags: myObject.arr,
       }),
     });
-    console.log("filterBooks obj", obj.query_tags);
     const books = await response.json();
-    setBooks(books.result.product);
+    setBooks(books?.result?.product);
   };
 
-  const filterBooks = async () => {
-    // if("系列"){
-    //  filterBySeries()
-    // }else{
-    //  filterByCategory()
-    // }
+  const filterBooks = async (obj) => {
 
-    console.log("filterbooks", books?.result?.product);
+    console.log('obj',obj);
+    
+    
+    if(obj?.[0] && obj?.[0].hasOwnProperty("category_id")){
+      const arr = obj.map((item) => item.category_id.id);
+      console.log("arr", arr);
+
+      setMyObject((prev) => ({
+        ...prev,
+        arr: [arr],
+      }));
+      console.log("myObject", myObject);
+      filterByCategory();
+    }else{
+      setMyObject((prev) => ({
+        ...prev,
+        arr: [obj],
+      }));
+      console.log("filterBySeries", myObject);
+      filterBySeries(); 
+    }
+
   };
 
   const handleViewChange = (view) => {
@@ -210,7 +237,13 @@ export default function Listing() {
                     className="form-select"
                     aria-label="Default select example"
                     defaultValue={"DEFAULT"}
-                    // onChange={getBooks}
+                    onChange={(event) =>{
+                      setMyObject((prev) => ({
+                        ...prev,
+                        sort: [event.target.value],
+                      }))
+                      filterBooks();
+                    }}
                   >
                     <option value="-date_created">上市日期(新→舊)</option>
                     <option value="date_created">上市日期(舊→新)</option>
