@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     // Set default values for sort_by, limit, and page if they are not provided
     const category_id = req.body.category_id;
     const sort_by = req.body.sort_by || ["-date_created"];
-    const limit = req.body.page_limit || 20;
+    const limit = req.body.page_limit || 5;
     const page = req.body.page || 1;
 
     const result = await apiManager.getProductByCategory(category_id, sort_by, page,limit );

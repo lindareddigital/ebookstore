@@ -17,6 +17,7 @@ export default function Listing() {
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(30);
+  const [rendered, setRendered] = useState(false);
   // const obj = useGlobalStore((state) => state.obj);
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
@@ -26,37 +27,57 @@ export default function Listing() {
 
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
-  const { query } = router;
 
-  if (query) {
-    // console.log(query.slug);
-  }
+ 
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/sitemenu/publisher/polis-press");
-        const siteMenu = await res.json();
-        setSiteMenu(siteMenu.result.site_menu);
-        // console.log("siteMenu", siteMenu);
+    if (!rendered) {
+      const channel = router.query?.slug?.[0];
+      const slug = router.query?.slug?.[1];
 
-        getBooks();
-      } catch (error) {
-        console.error("获取数据时出错：", error);
-      }
-    };
+      const fetchData = async () => {
+        try {
+          const res = await fetch("/api/sitemenu/publisher/polis-press");
+          const siteMenu = await res.json();
+          setSiteMenu(siteMenu.result.site_menu);
 
-    fetchData();
-  }, []);
+          const foundItem = siteMenu.result.site_menu.find((menu) => {
+            return menu.menu_items.some(
+              (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+            );
+          });
 
-  const Paginations = () => {
-    // console.log('length',length);
+          if (foundItem) {
+            var bb = foundItem.menu_items.find(
+              (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+            ).site_menu_items_id;
+            console.log(" bb", bb.category);
+          } else {
+            return null;
+          }
 
+          filterByCategory(bb.category);
+
+          // getBooks();
+        } catch (error) {
+          console.error("获取数据时出错：", error);
+        }
+      };
+
+      setRendered(true);
+      fetchData();
+
+    }
+
+  }, [rendered]);
+
+  const Paginations = ({length}) => {
     const pageNumbers = [];
-    const length = books?.result?.product_aggregated[0]?.count?.id;
+    console.log('length',length);
 
     if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 10); i++) {
+      for (let i = 1; i <= Math.ceil(length / 5); i++) {
         pageNumbers.push(
           <Pagination.Item
             onClick={() => {
@@ -64,7 +85,7 @@ export default function Listing() {
                 ...prev,
                 page: i,
               }));
-              filterBooks();
+              filterByCategory();
             }}
             key={i}
             active={i === myObject.page}
@@ -83,88 +104,68 @@ export default function Listing() {
     }
   };
 
-  // const paginate = async (page) => {
-  //   const publisher = "大邑文化";
-  //   const params = new URLSearchParams();
-  //   params.append("page", page);
-
-  //   const url = `${window.location.href}?${params.toString()}`;
-
-
-
-  //   const response = await fetch(url);
-
-  //   const books = await response.json();
-  //   setBooks(books.result.product);
-  //   console.log("books", books);
-  // };
-
   const sendDataToParent = (data) => {
     console.log("Data from ListAside:", data);
     filterBooks(data);
   };
 
-  const getBooks = async () => {
-    // console.log(event.target.value);
-
-    const response = await fetch("/api/product/publisher/大邑文化");
-    const books = await response.json();
-    setBooks(books.result.product);
-    console.log("books", books);
-    const length = books.result.product_aggregated[0].count.id;
-    setLength(length);
-  };
 
   const filterByCategory = async (arr) => {
-    console.log("arr filterByCategory", arr, myObject);
+    console.log("arr filterByCategory", arr);
+
+    const result = arr?.map((item) => item.category_id.id);
+    console.log(result);
     const response = await fetch("/api/product/category/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
+        sort_by: ["-date_created"],
+        // page_limit: 1,
+        category_id: result,
         page: myObject.page,
-        category_id: myObject.arr,
       }),
     });
     const books = await response.json();
     setBooks(books?.result?.product);
     console.log("filterByCategory", books?.result?.product);
+    const length = books?.result?.product_aggregated?.[0].count?.id;
+    console.log("length", length);
+
+    setLength(length);
   };
 
   const filterBySeries = async () => {
     console.log(myObject);
     
-    const response = await fetch("/api/product/series", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sort: myObject.sort,
-        page: myObject.page,
-        series_tags: myObject.arr,
-      }),
-    });
+    // const response = await fetch("/api/product/series", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     sort: myObject.sort,
+    //     page: myObject.page,
+    //     series_tags: myObject.arr,
+    //   }),
+    // });
     const books = await response.json();
+    setLength(books?.result?.product?.length);
     setBooks(books?.result?.product);
   };
 
   const filterBooks = async (obj) => {
-
-    console.log('obj',obj);
-    
     
     if(obj?.[0] && obj?.[0].hasOwnProperty("category_id")){
       const arr = obj.map((item) => item.category_id.id);
-      console.log("arr", arr);
+      console.log("filterBooks category_id ", arr);
 
       setMyObject((prev) => ({
         ...prev,
         arr: [arr],
       }));
-      console.log("myObject", myObject);
+      console.log("filterByCategory", myObject);
       filterByCategory();
     }else{
       setMyObject((prev) => ({
@@ -237,11 +238,11 @@ export default function Listing() {
                     className="form-select"
                     aria-label="Default select example"
                     defaultValue={"DEFAULT"}
-                    onChange={(event) =>{
+                    onChange={(event) => {
                       setMyObject((prev) => ({
                         ...prev,
                         sort: [event.target.value],
-                      }))
+                      }));
                       filterBooks();
                     }}
                   >
@@ -259,7 +260,7 @@ export default function Listing() {
             {currentView === "list" && <ListList books={books} />}
 
             <div className="">
-              <Paginations />
+              <Paginations length={length} />
             </div>
           </div>
 

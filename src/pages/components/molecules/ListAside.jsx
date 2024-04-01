@@ -18,7 +18,7 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
       sendDataToParent(item.query_tags);
     }
     // setObj(item)
-    router.push(`/listing/${channel}/${item.slug}`, undefined, {
+    router.push(`/polis-press/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
   };

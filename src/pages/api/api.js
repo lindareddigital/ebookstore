@@ -112,7 +112,7 @@ class ApiManager {
         {
           slug: { 
             _eq: "${slug}"
-            }
+          }
         }
         ){
           id
@@ -198,28 +198,28 @@ class ApiManager {
 
   getNaviMenu = async () => {
     const gql = `
-       query {
+      query {
         site_menu( 
         filter: {
         channel: {
-            _eq: "navi-menu"
-        }
-            
-        }) { 
-            id
-            title
-            publisher
-            menu_items {
-                site_menu_items_id {
-                    id
-                    title
-                    slug
-                    query_tags
-                }
+          _eq: "navi-menu"
+        }       
+        }) 
+        { 
+          id
+          title
+          publisher
+          menu_items {
+            site_menu_items_id {
+              id
+              title
+              slug
+              query_tags
             }
+          }
         }
-    } 
-        `;
+      } 
+    `;
     return await this.sdk(gql);
   };
 
@@ -233,29 +233,28 @@ class ApiManager {
             _eq: "${publisher_slug}"
           }  
           
-      }) { 
-          id
-          title
-          publisher
-          menu_items {
-              site_menu_items_id {
-                  id
-                  title
-                  slug
-                  type
-                  landing
-                  query_tags
-                  category {
-                    category_id {
-                      id
-                      name
-                      slug
-                    }
-                  }
-                  
-                  
+      }) 
+      { 
+        id
+        title
+        publisher
+        menu_items {
+          site_menu_items_id {
+            id
+            title
+            slug
+            type
+            landing
+            query_tags
+            category {
+              category_id {
+                id
+                name
+                slug
               }
+            }
           }
+        }
       }
     }`;
 
@@ -324,7 +323,8 @@ class ApiManager {
   };
 
   getProductBySeries = async (arr, obj) => {
-    const formattedArr = arr.map((item) => `"${item}"`).join(", ");
+    // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
+    const formattedArr = arr.map((item) => `"${item}"`).join('", "');
 
     const gql = `
       query {
