@@ -49,7 +49,7 @@ export default function Listing() {
        const categoryIds = matchedMenuItem.category.map(
          (category) => category.category_id.id
        );
-        filterByCategory(categoryIds, page);
+        filterByCategory("polis-press",categoryIds, page);
      }else if (
        matchedMenuItem?.type === "product_by_series" &&
        matchedMenuItem?.query_tags != null
@@ -59,7 +59,7 @@ export default function Listing() {
          ...prev,
          arr: matchedMenuItem?.query_tags,
        }));
-       filterBySeries(matchedMenuItem?.query_tags);
+       filterBySeries("polis-press", matchedMenuItem?.query_tags);
      }
    }, [matchedMenuItem]);
 
@@ -146,8 +146,10 @@ export default function Listing() {
         sort_by: myObject.sort,
         // sort_by: ["-date_created"],
         // page_limit: 1,
+        publisher_slug: "polis-press",
         category_id: result,
         page: myObject.page,
+        
       }),
     });
     const books = await response.json();
@@ -171,6 +173,7 @@ export default function Listing() {
         sort: myObject.sort,
         page: myObject.page,
         series_tags: myObject.arr,
+        publisher_slug: "polis-press",
       }),
     });
     const books = await response.json();
