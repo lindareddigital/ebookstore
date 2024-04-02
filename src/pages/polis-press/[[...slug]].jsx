@@ -17,22 +17,65 @@ export default function Listing() {
   const [panel, setPanel] = useState(false);
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
-  const [length, setLength] = useState(30);
+  const [length, setLength] = useState(0);
   // const obj = useGlobalStore((state) => state.obj);
   const categoryIds = useRef([])
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
     page: 1,
   });
-
   const isFirstRendering = useRef(true)
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
+  const [menu, setMenu] = useState(null);
+  const channel = router.query.channel;
+  const slug = router.query.slug?.[1];
+  const page = router.query.page || 1; 
 
- 
+  const [matchedMenuItem, setMatchedMenuItem] = useState(null);
+
 
   useEffect(() => {
-    console.log("myObject", myObject);
+    if (siteMenu && slug) {
+      console.log("siteMenu && slug");
+      
+      const matchedItem = findMenuItemBySlug(siteMenu, slug);
+      setMatchedMenuItem(matchedItem);
+    }
+  }, [siteMenu, slug]);
+
+   useEffect(() => {
+     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
+       const categoryIds = matchedMenuItem.category.map(
+         (category) => category.category_id.id
+       );
+        filterByCategory(categoryIds, page);
+     }else if (
+       matchedMenuItem?.type === "product_by_series" &&
+       matchedMenuItem?.query_tags != null
+     ) {
+       console.log("matchedMenuItem.query_tags", matchedMenuItem);
+       setMyObject((prev) => ({
+         ...prev,
+         arr: matchedMenuItem?.query_tags,
+       }));
+       filterBySeries(matchedMenuItem?.query_tags);
+     }
+   }, [matchedMenuItem]);
+
+  const findMenuItemBySlug = (menu, slug) => {
+    for (const menuItem of menu) {
+      for (const menuItemData of menuItem.menu_items) {
+        if (menuItemData.site_menu_items_id.slug === slug) {
+          return menuItemData.site_menu_items_id;
+        }
+      }
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    // console.log("myObject", myObject);
     if (isFirstRendering.current) {
       isFirstRendering.current = false;
       return;
@@ -42,9 +85,6 @@ export default function Listing() {
 
 
   useEffect(() => {
-    // const channel = router.query?.slug?.[0];
-    // const slug = router.query?.slug?.[1];
-
     const fetchData = async () => {
       try {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
@@ -52,33 +92,31 @@ export default function Listing() {
         // console.log("sitemenu", response);
         const tempMenu = response.result.site_menu;
         setSiteMenu(tempMenu);
-        
+
         const foundItem = tempMenu.find((menu) => {
           return menu.menu_items.some(
             (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
           );
         });
 
-        console.log("foundItem", foundItem);
+        // console.log("foundItem", foundItem);
 
         if (foundItem) {
           var bb = foundItem.menu_items.find(
             (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
           ).site_menu_items_id;
-          console.log("category arr", bb.category);
+          console.log("category arr", slug, bb.category);
         } else {
           return null;
         }
         categoryIds.current = bb.category;
-        filterByCategory();
-
-        // getBooks();
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
     fetchData();
-  }, [router]);
+    filterBooks();
+  }, [router, menu]);
 
   const updatePage = (i) => {
     console.log("updatePage", i);
@@ -115,7 +153,7 @@ export default function Listing() {
     const books = await response.json();
     setBooks(books?.result?.product);
     console.log("books", books?.result?.product);
-    const length = books?.result?.product_aggregated?.[0].count?.id;
+    const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
     // console.log("length", length);
 
     setLength(length);
@@ -124,45 +162,34 @@ export default function Listing() {
   const filterBySeries = async () => {
     console.log(myObject);
     
-    // const response = await fetch("/api/product/series", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     sort: myObject.sort,
-    //     page: myObject.page,
-    //     series_tags: myObject.arr,
-    //   }),
-    // });
-    // const books = await response.json();
-    // setLength(books?.result?.product?.length);
-    // setBooks(books?.result?.product);
+    const response = await fetch("/api/product/series", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sort: myObject.sort,
+        page: myObject.page,
+        series_tags: myObject.arr,
+      }),
+    });
+    const books = await response.json();
+    const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
+    setLength(length);
+    setBooks(books?.result?.product);
   };
 
 
 
   const filterBooks = async (obj) => {
-    const arr = obj.map((item) => item.category_id.id);
+    console.log("filterBooks");
+    const arr = obj?.map((item) => item?.category_id?.id);
     const item = obj?.[0] && obj?.[0].hasOwnProperty("category_id") ? arr : obj
       setMyObject((prev) => ({
         ...prev,
-        page: prev.page+1,
+        page: 1,
         arr: [item],
       }));
-    // if(){
-    //   console.log("filterBooks category_id ", arr);
-
-    //   console.log("filterByCategory", myObject);
-
-    // }else{
-    //   setMyObject((prev) => ({
-    //     ...prev,
-    //     arr: [obj],
-    //   }));
-    //   console.log("filterBySeries", myObject);
-    //   filterBySeries();
-    // }
   };
 
   const handleViewChange = (view) => {
@@ -177,13 +204,10 @@ export default function Listing() {
     setPanel(true);
   };
 
-  // return null
-
-
 
   const Paginations = ({ length }) => {
     const pageNumbers = [];
-    // console.log("length", length);
+    console.log("Paginations length", length);
 
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 5); i++) {
@@ -276,7 +300,7 @@ export default function Listing() {
             {currentView === "list" && <ListList books={books} />}
 
             <div className="">
-              <Paginations length={length} />
+              {Math.ceil(length / 5)>1 && <Paginations length={length} />}
             </div>
           </div>
 

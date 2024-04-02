@@ -17,7 +17,10 @@ export default async function handler(req, res) {
     
 
     if (isValidSeries) {
-      const result = await apiManager.getProductBySeries(obj.series_tags, obj);
+      const result = await apiManager.getProductBySeries(
+        req.body.series_tags,
+        obj
+      );
       return res.status(200).json({ result });
     } else {
       return res.status(400).json({ error: "Series data is empty or invalid" });

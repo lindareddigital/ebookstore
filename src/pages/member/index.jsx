@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { cache } from "react";
 import { useEffect, useRef, useState } from "react";
 import ListAside from "src/pages/components/molecules/ListAside";
-import NextAuth from "next-auth";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";

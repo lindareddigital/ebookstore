@@ -27,9 +27,6 @@ const PublisherPage = () => {
 
     if (publisher && channel && slug) {
       const menu = fetchMenu();
-    //   const category = getCategoryByMenu(menu)
-    //   const product = getProductsByCategory(category)
-    //   setProducts(product)
     }
   }, [publisher, channel, slug]);
 

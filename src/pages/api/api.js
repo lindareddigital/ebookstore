@@ -359,7 +359,7 @@ class ApiManager {
             }
           }
         ) {
-          count {
+          countDistinct {
             id
           }
         }
@@ -415,7 +415,7 @@ class ApiManager {
           }
         }) 
         {     
-          count {
+          countDistinct {
             id
           }
         }
@@ -467,7 +467,7 @@ class ApiManager {
         }
         product_aggregated(filter: {}) 
         {     
-          count {
+          countDistinct {
             id
           }
         }
