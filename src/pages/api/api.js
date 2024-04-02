@@ -322,7 +322,7 @@ class ApiManager {
     return;
   };
 
-  getProductBySeries = async (arr, obj) => {
+  getProductBySeries = async (publisher_slug,arr, obj) => {
     // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
     const formattedArr = arr.map((item) => `"${item}"`).join('", "');
 
@@ -335,6 +335,12 @@ class ApiManager {
           filter: {
             series: {
               _in: [${formattedArr}]
+            },
+            Publisher: {
+              slug: {
+                _eq: "${publisher_slug}"
+              }
+            
             }
           }
         ) {
@@ -360,6 +366,11 @@ class ApiManager {
           filter: {
             series: {
               _in: [${formattedArr}]
+            },
+            Publisher: {
+              slug: { 
+                _eq: "${publisher_slug}"
+              }
             }
           }
         ) {
@@ -375,9 +386,10 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductByCategory = async (category, sort_by, page = 1, limit = 20) => {
+  getProductByCategory = async (publisher_slug,category, sort_by, page = 1, limit = 20) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
+
     const gql = `
       query {
         product ( 
@@ -390,6 +402,11 @@ class ApiManager {
                 id :{
                   _in: [${category_id}]
                 }
+              }
+            }
+            Publisher: {
+              slug: { 
+                _eq: "${publisher_slug}"
               }
             }
           }
@@ -419,6 +436,11 @@ class ApiManager {
                 _in: [${category_id}]
               }
             }
+          },
+          Publisher: {
+            slug: { 
+              _eq: "${publisher_slug}"
+            }
           }
         }) 
         {     
@@ -447,7 +469,7 @@ class ApiManager {
           limit: ${limit} 
           filter: {
             Publisher:{
-              name:{
+              slug:{
                 _eq : "${publisher_slug}"
               }
             }

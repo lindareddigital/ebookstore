@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   try {
     console.log("getProductBySeries", req.body.series_tags);
 
-    const { series_tags, limit, page, sort } = req.body;
+    const { publisher_slug, series_tags, limit, page, sort } = req.body;
     const obj = {
       limit: limit || 5,
       page: page || 1,
@@ -18,7 +18,8 @@ export default async function handler(req, res) {
 
     if (isValidSeries) {
       const result = await apiManager.getProductBySeries(
-        req.body.series_tags,
+        publisher_slug,
+        series_tags,
         obj
       );
       return res.status(200).json({ result });
