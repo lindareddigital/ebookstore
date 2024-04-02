@@ -7,29 +7,36 @@ import apiManager from 'src/pages/api/api';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import Link from 'next/link';
 import ListAside from 'src/pages/components/molecules/ListAside';
-import GridList from "src/pages/listing/GridList";
+import GridList from "src/pages/polis-press/GridList";
 import { useRouter } from "next/router";
 import SinglePageTab from "src/pages/components/SinglePageTab";
 
 
-export default function Singlepage({ data, siteMenu }) {
-  const { mobile } = useCalc();
-  const [categories, setCategories] = useState([]);
+export default function Singlepage() {
   const [recipe, setRecipe] = useState([]);
+  const publisher = "ichiban";
 
   const router = useRouter();
-  const page = router.query.slug;
+  const channel = router.query.channel;
+  const slug = router.query.slug;
+  const page = router.query.page || 1; // Default page number is 1
+  const [menu, setMenu] = useState(null);
+  const [matchedMenuItem, setMatchedMenuItem] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [productTotalCount, setProductTotalCount] = useState(null);
+
+  console.log("", router.query);
+  
 
  useEffect(() => {
    const fetchData = async () => {
      try {
-       const res = await fetch(`/api/sitemenu/${publisher_id}`);
+       const res = await fetch(`/api/sitemenu/${publisher}`);
 
-       const result = await res.json();
-       console.log("res", result.data);
+      //  const result = await res.json();
+      //  console.log("res", result.data);
+      setMenu(res.data.result.site_menu);
 
-       setItem(result.data);
-       // console.log("ddata", result.data);
      } catch (error) {
        console.error("获取数据时出错：", error);
      }
@@ -80,7 +87,7 @@ export default function Singlepage({ data, siteMenu }) {
       </div>
 
       <div className="home-banner">
-        {page === "seashore" ? (
+        {publisher === "seashore" ? (
           <img src="/images/haibin.svg" className="" alt="..."></img>
         ) : (
           <img src="/images/yidin.svg" className="" alt="..."></img>
@@ -88,7 +95,7 @@ export default function Singlepage({ data, siteMenu }) {
       </div>
 
       <div className="top-area">
-        {page === "seashore" ? (
+        {publisher === "seashore" ? (
           <img src="/images/habinlogo.svg" className="" alt="..."></img>
         ) : (
           <img src="/images/yidinlogo.svg" className="" alt="..."></img>
@@ -107,7 +114,7 @@ export default function Singlepage({ data, siteMenu }) {
 
       <div className="container-fluid">
         <div className="main-body">
-          <ListAside data={data} siteMenu={siteMenu} />
+          <ListAside menu={menu} />
 
           <div className="right-side">
             <div className="block-title">系列：X萬獸探險隊</div>
@@ -160,12 +167,4 @@ export default function Singlepage({ data, siteMenu }) {
 }
 
 
-export const getServerSideProps = async () => {
-  const data = await apiManager.getPageBySlug();
-  const detail = await apiManager.getProductDetail();
-  const siteMenu = await apiManager.getSiteMenu();
 
-  console.log("datadatadatadata", data);
-
-  return { props: { data, detail, siteMenu } };
-};

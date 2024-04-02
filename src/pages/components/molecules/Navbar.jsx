@@ -115,24 +115,12 @@ export default function Navbar({}) {
                 );
               })}
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  href={{
-                    pathname: `/singlepage/`,
-                    query: { slug: "seashore" },
-                  }}
-                >
+                <Link className="nav-link" href={{ pathname: `/seashores/` }}>
                   海濱
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  href={{
-                    pathname: `/singlepage`,
-                    query: { slug: "yidin" },
-                  }}
-                >
+                <Link className="nav-link" href={{ pathname: `/ichiban/` }}>
                   一丁
                 </Link>
               </li>
@@ -208,23 +196,13 @@ export default function Navbar({}) {
                 </div>
 
                 <div className="label-group">
-                  <Link
-                    href={{
-                      pathname: `/singlepage/`,
-                      query: { slug: "seashore" },
-                    }}
-                  >
+                  <Link href={{ pathname: `/seashore/` }}>
                     <button type="button" className="btn">
                       海濱
                     </button>
                   </Link>
                   <hr className="nav-hr" />
-                  <Link
-                    href={{
-                      pathname: `/singlepage`,
-                      query: { slug: "yidin" },
-                    }}
-                  >
+                  <Link href={{ pathname: `/ichiban` }}>
                     <button type="button" className="btn">
                       一丁
                     </button>

@@ -2,33 +2,33 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
-    console.log("getProductBySeries", req.body.series_tags);
+    const publisher_slug = req.body.publisher_slug;
+    const series_tags = req.body.series_tags;
+    const limit = req.body.page_limit || 5;
+    const page = req.body.page || 1;
+    const sort = req.body.sort || ["-date_created"];
 
-    const { publisher_slug, series_tags, limit, page, sort } = req.body;
-    const obj = {
-      limit: limit || 5,
-      page: page || 1,
-      sort: sort || ["-date_created"]
-    };
-
-    const isValidSeries = Array.isArray(series_tags) && series_tags.length > 0;
-
-    console.log("1616", obj, req.body);
-    
-
-    if (isValidSeries) {
-      const result = await apiManager.getProductBySeries(
-        publisher_slug,
-        series_tags,
-        obj
-      );
-      return res.status(200).json({ result });
-    } else {
+    if (Array.isArray(series_tags) && series_tags.length === 0) {
       return res.status(400).json({ error: "Series data is empty or invalid" });
     }
+
+    if (!Array.isArray(series_tags) && series_tags.length > 0) {
+      return res.status(400).json({ error: "series_tags must be an array" });
+    }
+
+    console.log("getProductBySeries", req.body);
+
+    const result = await apiManager.getProductBySeries(
+      publisher_slug,
+      series_tags,
+      limit,
+      page,
+      sort
+    );
+    res.status(200).json({ result });
   } catch (err) {
     console.error("Error:", err);
-    return res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
