@@ -34,7 +34,6 @@ export default function Listing() {
 
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
-
   useEffect(() => {
     if (siteMenu && slug) {
       console.log("siteMenu && slug");
@@ -89,7 +88,7 @@ export default function Listing() {
       try {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const response = await res.json();
-        // console.log("sitemenu", response);
+        console.log("page", page);
         const tempMenu = response.result.site_menu;
         setSiteMenu(tempMenu);
 
@@ -132,9 +131,9 @@ export default function Listing() {
   };
 
   const filterByCategory = async () => {
-    console.log("arr filterByCategory", categoryIds.current);
-    console.log("myObject", myObject);
-    
+    // console.log("categoryIds arr", categoryIds.current);
+    // console.log("myObject", myObject);
+
     const result = categoryIds.current?.map((item) => item.category_id.id);
     console.log(result);
     const response = await fetch("/api/product/category/", {
@@ -155,7 +154,6 @@ export default function Listing() {
     console.log("books", books?.result?.product);
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
     // console.log("length", length);
-
     setLength(length);
   };
 

@@ -345,6 +345,10 @@ class ApiManager {
           description
           table_of_contents
           date_created
+          price
+          cover_image{
+            id
+          }
           tags {
             id
             category_id {
@@ -398,6 +402,9 @@ class ApiManager {
           description
           table_of_contents
           date_created
+          cover_image{
+            id
+          }
           tags {
             id
             category_id {
@@ -494,6 +501,9 @@ class ApiManager {
           keyword
           publisher
           series
+          cover_image{
+            id
+          }
           tags {
             id
             category_id {
