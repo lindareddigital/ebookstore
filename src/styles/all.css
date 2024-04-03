@@ -279,6 +279,10 @@ a:hover{
  background: unset;
 }
 
+.single-page .content{
+  justify-content: space-between;
+}
+
 .top-area .banner-title{
   font-size: 18px;
   font-weight: 900;

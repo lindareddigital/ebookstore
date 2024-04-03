@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useGlobalStore } from "src/pages/store/global.store";
 
-export default function ListAside({ sendDataToParent, siteMenu }) {
+export default function ListAside({ sendDataToParent, siteMenu,publisher }) {
   const router = useRouter();
   // const setObj = useGlobalStore((state) => state.setObj);
 
@@ -18,7 +18,7 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
       sendDataToParent(item.query_tags);
     }
     // setObj(item)
-    router.push(`/polis-press/${channel}/${item.slug}`, undefined, {
+    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
   };

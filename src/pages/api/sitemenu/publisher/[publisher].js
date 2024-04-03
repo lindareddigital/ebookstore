@@ -5,15 +5,15 @@ export default async function handler(req, res) {
     console.log("handlerhandlerhandler");
     // api/sitemenu/publisher/[publisher]
 
-    // console.log("getSideMenuByPublisher", req.query);
-    // console.log("publisher", req.query.publisher);
+    console.log("getSideMenuByPublisher", req.query);
 
-    //  if (
-    //    req.query.publisher != "polis_press" &&
-    //    req.query.publisher != "seashore"
-    //  ) {
-    //    return res.status(400).json({ error: "Invalid publisher provided" });
-    //  }
+     if (
+       req.query.publisher != "polis_press" &&
+       req.query.publisher != "seashore" &&
+       req.query.publisher != "ichiban"
+     ) {
+       return res.status(400).json({ error: "Invalid publisher provided" });
+     }
 
     const result = await apiManager.getSideMenuByPublisher(req.query.publisher);
     console.log("resultresultresult", result);
