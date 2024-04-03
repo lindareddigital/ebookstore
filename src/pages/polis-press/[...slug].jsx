@@ -84,7 +84,10 @@ export default function Listing() {
 
 
   useEffect(() => {
-    const fetchData = async () => {
+    if (!menu) {
+      return;
+    }
+    const fetchMenu = async () => {
       try {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const response = await res.json();
@@ -113,7 +116,7 @@ export default function Listing() {
         console.error("获取数据时出错：", error);
       }
     };
-    fetchData();
+    fetchMenu();
     filterBooks();
   }, [router, menu]);
 
@@ -147,10 +150,11 @@ export default function Listing() {
         // page_limit: 1,
         publisher_slug: "polis-press",
         category_id: result,
-        page: myObject.page,
-        
+        page: myObject.page, 
       }),
     });
+
+
     const books = await response.json();
     setBooks(books?.result?.product);
     console.log("books", books?.result?.product);
@@ -182,14 +186,14 @@ export default function Listing() {
 
 
 
-  const filterBooks = async (obj) => {
+  const filterBooks = async (arr) => {
     console.log("filterBooks");
-    const arr = obj?.map((item) => item?.category_id?.id);
-    const item = obj?.[0] && obj?.[0].hasOwnProperty("category_id") ? arr : obj
+    const categoryArr = arr?.map((item) => item?.category_id?.id);
+    const check = arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
       setMyObject((prev) => ({
         ...prev,
         page: 1,
-        arr: [item],
+        arr: [check],
       }));
   };
 

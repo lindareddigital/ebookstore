@@ -223,21 +223,26 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSideMenuByPublisher = async (publisher_slug) => {
+  getSideMenuByPublisher = async (publisher_slug,channel) => {
     //"${publisher_slug}" "${category_slug}"
+
+    //  channel: {
+    //    _eq: "${channel}";
+    //  } 
     const gql = `query {
       site_menu( 
         filter: {
           publisher:
           {
             _eq: "${publisher_slug}"
-          }  
-          
+          },
+                
       }) 
       { 
         id
         title
         publisher
+        channel
         menu_items {
           site_menu_items_id {
             id
@@ -340,18 +345,25 @@ class ApiManager {
               slug: {
                 _eq: "${publisher_slug}"
               }
-            
             }
           }
         ) {
           id
           title
+          Author
+          Publisher {
+            id
+            slug
+          }
+          illustrator
           keyword
           series
           description
           table_of_contents
           date_created
           price
+          discounted_price
+          discount 
           cover_image{
             id
           }
@@ -380,6 +392,7 @@ class ApiManager {
         }
       }
     `;
+
 
     console.log("getProductBySeries", gql);
 
@@ -425,6 +438,9 @@ class ApiManager {
           description
           table_of_contents
           date_created
+          price
+          discounted_price
+          discount 
           cover_image{
             id
           }
@@ -456,6 +472,8 @@ class ApiManager {
         }
     }
     `;
+    
+    
 
     console.log("getProductByCategory", gql);
 
@@ -468,15 +486,15 @@ class ApiManager {
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
     const gql = `
-      query {
-        product(
+    query {
+        product ( 
           sort: [${sort_by_json}]
-          page: ${page}
           limit: ${limit} 
+          page: ${page}
           filter: {
-            Publisher:{
-              slug:{
-                _eq : "${publisher_slug}"
+            Publisher: {
+              slug: { 
+                _eq: "${publisher_slug}"
               }
             }
           }
@@ -484,23 +502,37 @@ class ApiManager {
         {
           id
           title
-          keyword
-          Publisher{
-            name
+          Author
+          Publisher {
             id
+            slug
           }
+          illustrator
+          keyword
+          series
+          description
+          table_of_contents
+          date_created
+          price
+          discount
+          discounted_price
           cover_image{
             id
           }
-          series
           tags {
             id
             category_id {
-                id
+              id
             }
           }
         }
-        product_aggregated(filter: {}) 
+        product_aggregated(filter: {
+          Publisher: {
+            slug: { 
+              _eq: "${publisher_slug}"
+            }
+          }
+        }) 
         {     
           countDistinct {
             id
@@ -508,6 +540,8 @@ class ApiManager {
         }
     }
     `;
+
+    
 
     console.log("getProductByPublisher", gql);
 

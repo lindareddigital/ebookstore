@@ -5,6 +5,9 @@ import { useEffect, useRef,useState } from 'react';
 export default function ListList({ books }) {
   const [item, setItem] = useState({});
 
+  console.log('8',books);
+  
+
   return (
     <>
       <div className="list-view">
@@ -18,7 +21,7 @@ export default function ListList({ books }) {
               >
                 <li className="list-view-item">
                   <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className=""
                     alt={item.title}
                   />

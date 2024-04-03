@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useGlobalStore } from "src/pages/store/global.store";
 
-export default function ListAside({ sendDataToParent, siteMenu,publisher }) {
+export default function ListAside({ sendDataToParent, siteMenu }) {
   const router = useRouter();
   // const setObj = useGlobalStore((state) => state.setObj);
 
 
-  const handleClick = (channel, item) => {
+  const handleClick = (channel, item,publisher) => {
     console.log("item", item);
     if (item.type === "product_by_category") {
       sendDataToParent(item.category);
@@ -29,9 +29,9 @@ export default function ListAside({ sendDataToParent, siteMenu,publisher }) {
     fetchData();
   }, []);
 
-  // console.log("ListAside siteMenu", siteMenu);
+  console.log("ListAside siteMenu", siteMenu);
 
-  //query_tags
+  
 
 
   return (
@@ -45,8 +45,9 @@ export default function ListAside({ sendDataToParent, siteMenu,publisher }) {
                 <div
                   onClick={() =>
                     handleClick(
-                      menuItem.site_menu_items_id.title,
-                      menuItem.site_menu_items_id
+                      item.channel,
+                      menuItem.site_menu_items_id,
+                      item.publisher
                     )
                   }
                 >
