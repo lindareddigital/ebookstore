@@ -839,6 +839,10 @@ span{
   justify-content: space-between;
 }
 
+.seashore-media-block{
+  flex-direction: column;
+}
+
 .price-num{
   margin-top: 8px;
   color: var(--Gold, #B39B17);
@@ -990,7 +994,32 @@ span{
 }
 
 .single-page .yt-block{
-  margin: auto;
+  margin: 80px auto;
+  flex-direction: row;
+  width: 1320px;
+  justify-content: space-between;
+}
+
+.single-page .yt-block .more{
+  display: flex;
+  flex-direction: column;
+  width: 425px;
+}
+
+.single-page .yt-block .wrap{
+  width: 871px;
+}
+
+.single-page .yt-block .more > *{
+  width: 100%;
+}
+
+.single-page .yt-block .more iframe{
+  height: 216.57px;
+}
+
+.single-page .yt-block .more .ytIcon{
+  height: 90px;
 }
 
 .yt-block > .more{

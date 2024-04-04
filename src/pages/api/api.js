@@ -330,6 +330,8 @@ class ApiManager {
   getProductBySeries = async (publisher_slug, series_tags, limit, page,sort) => {
     // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
     const formattedArr = series_tags.map((item) => `"${item}"`).join('", "');
+    console.log('333');
+    
 
     const gql = `
       query {

@@ -3,12 +3,12 @@ import { useEffect, useRef,useState } from 'react';
 import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
+import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 
 
 
 
 export default function MediaBlock({ data }) {
-  const { width, mobile } = useCalc();
 
   const posts = data?.data?.pages[0]?.blocks[3]?.item?.posts;
   // console.log("post", data.data.pages[0]?.blocks);
@@ -62,8 +62,7 @@ export default function MediaBlock({ data }) {
           </div>
           <img className="topright" src="/icons/columnIcon.svg"></img>
 
-          {posts?.map((item) =>{
-
+          {posts?.map((item) => {
             return (
               <>
                 <div className="e-banner-product">
@@ -78,7 +77,7 @@ export default function MediaBlock({ data }) {
               </>
             );
           })}
-          
+
           <hr />
 
           <div className="read-more-btn">
@@ -87,33 +86,7 @@ export default function MediaBlock({ data }) {
           <img className="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>
-      <div className="social-links">
-        <div className="">
-          <div className="block-title">買書GO</div>
-          <ul className="container-fluid">
-            <li>
-              <Link href="">
-                <img src="/icons/eslite.png"></img>
-              </Link>
-            </li>
-            <li>
-              <Link href="">
-                <img src="/icons/bookstw.svg"></img>
-              </Link>
-            </li>
-            <li>
-              <Link href="">
-                <img src="/icons/stone.svg"></img>
-              </Link>
-            </li>
-            <li>
-              <Link href="">
-                <img src="/icons/pchome.svg"></img>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <SocialLinksBlock />
     </>
   );
 }

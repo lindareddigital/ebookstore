@@ -1,15 +1,15 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import MediaBlock from 'src/pages/components/MediaBlock';
+import SeashoreMediaBlock from "src/pages/components/SeashoreMediaBlock";
 import Link from 'next/link';
 import ListAside from 'src/pages/components/molecules/ListAside';
 import GridList from "src/pages/polis-press/GridList";
 import ListList from "src/pages/polis-press/ListList";
-
+import SidebarWrapper from "src/pages/components/SidebarWrapper";
 import { useRouter } from "next/router";
 import SinglePageTab from "src/pages/components/SinglePageTab";
 import Pagination from "react-bootstrap/Pagination";
-
+import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 
 export default function Singlepage() {
   const [recipe, setRecipe] = useState([]);
@@ -192,6 +192,7 @@ const Paginations = ({ length }) => {
     <div className="single-page">
       {publisher !== "" && (
         <div className="">
+          <SidebarWrapper />
           <div className="sidebtn-container">
             <div className="message-btn">
               <img
@@ -319,9 +320,11 @@ const Paginations = ({ length }) => {
             </div>
           </div>
 
+          <SeashoreMediaBlock />
           <SinglePageTab />
+          <SocialLinksBlock />
 
-          <MediaBlock />
+          
         </div>
       )}
     </div>
