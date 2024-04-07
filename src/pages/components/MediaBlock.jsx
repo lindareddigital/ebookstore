@@ -8,10 +8,9 @@ import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 
 
 
-export default function MediaBlock({ data }) {
+export default function MediaBlock({ posts }) {
 
-  const posts = data?.data?.pages[0]?.blocks[3]?.item?.posts;
-  // console.log("post", data.data.pages[0]?.blocks);
+  console.log("post", posts);
 
   return (
     <>
@@ -66,10 +65,10 @@ export default function MediaBlock({ data }) {
             return (
               <>
                 <div className="e-banner-product">
-                  <img
+                  {/* <img
                     src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     alt=""
-                  />
+                  /> */}
 
                   <div className="desc">{item.posts_id.title}</div>
                   {/* <div className="desc">{item.posts_id.tags}</div> */}

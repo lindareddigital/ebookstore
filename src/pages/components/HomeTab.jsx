@@ -11,24 +11,26 @@ import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
-export default function HomeTab() {
-  const [books, setBooks] = useState(null);
+export default function HomeTab({books}) {
+  console.log('',books);
+  
+  // const [books, setBooks] = useState(null);
  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/product/publisher/大邑文化");
-        const books = await response.json();
-        setBooks(books.result.product);
-        console.log("books", books);
-      } catch (error) {
-        console.error("获取数据时出错：", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("/api/product/publisher/大邑文化");
+  //       const books = await response.json();
+  //       setBooks(books.result.product);
+  //       console.log("books", books);
+  //     } catch (error) {
+  //       console.error("获取数据时出错：", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
 
   

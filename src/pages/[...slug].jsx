@@ -19,6 +19,7 @@ export default function Singlepage() {
   const publisher = router.query.slug?.[0];
   const slug = router.query.slug?.[2];
   const page = router.query.page || 1;
+  const limit = router.query.limit || 5; 
   const [menu, setMenu] = useState(null);
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
   const [products, setProducts] = useState(null);
@@ -27,12 +28,10 @@ export default function Singlepage() {
 
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
-    page: 1,
   });
-  console.log("", publisher, channel);
+
+  console.log("", router.query);
   
-
-
 
   useEffect(() => {
     if (!publisher) {
@@ -40,12 +39,8 @@ export default function Singlepage() {
     }
     const fetchMenu = async () => {
       try {
-        console.log("43", publisher, channel);
-        // `/api/sitemenu/publisher/${publisher}?channel=${channel}`
-
-        const res = await fetch(
-          `/api/sitemenu/publisher/${publisher}`
-        );
+        // console.log("43", publisher, channel);
+        const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
 
         const result = await res.json();
         console.log("res", result, result?.result?.site_menu);
@@ -78,7 +73,7 @@ useEffect(() => {
   } else if (matchedMenuItem && matchedMenuItem.type === "url") {
     window.open(matchedMenuItem.landing, "_blank");
   }
-}, [matchedMenuItem, myObject.page, myObject.limit, myObject.sort]);
+}, [matchedMenuItem, page, limit, myObject.sort]);
 
  const sendDataToParent = (data) => {
    console.log("Data from ListAside:", data);
@@ -97,10 +92,10 @@ const findMenuItemBySlug = (menu, slug) => {
 
 const getProductsByCategory = async (categoryIds) => {
   // console.log({
-  //   sort_by: myObject.sort,
+  //   sort_by: sort,
   //   publisher_slug: publisher,
   //   category_id: categoryIds,
-  //   page: myObject.page,
+  //   page: page,
   // });
   
   try {
@@ -113,7 +108,8 @@ const getProductsByCategory = async (categoryIds) => {
         sort_by: myObject.sort,
         publisher_slug: publisher,
         category_id: categoryIds,
-        page: myObject.page,
+        page: page,
+        limit: limit
       }),
     });
     const books = await response.json();
@@ -130,7 +126,7 @@ const getProductsByCategory = async (categoryIds) => {
 };
 
 const filterBySeries = async (query_tags) => {
-  console.log("filterBySeries", myObject.sort, myObject.page, query_tags, publisher);
+  console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
 
   const response = await fetch("/api/product/series", {
     method: "POST",
@@ -139,9 +135,10 @@ const filterBySeries = async (query_tags) => {
     },
     body: JSON.stringify({
       sort: myObject.sort,
-      page: myObject.page,
+      page: page,
       series_tags: query_tags,
       publisher_slug: publisher,
+      limit: limit,
     }),
   });
   const books = await response.json();
@@ -152,6 +149,14 @@ const filterBySeries = async (query_tags) => {
 
 const handleViewChange = (view) => {
   setCurrentView(view);
+};
+
+const updatePage = (i) => {
+  console.log("updatePage", i);
+  router.push({
+    pathname: router.pathname,
+    query: { ...router.query, page: i },
+  });
 };
 
 const Paginations = ({ length }) => {
@@ -166,7 +171,7 @@ const Paginations = ({ length }) => {
             updatePage(i);
           }}
           key={i}
-          active={i === myObject.page}
+          active={i === page}
         >
           {i}
         </Pagination.Item>
@@ -321,7 +326,7 @@ const Paginations = ({ length }) => {
           </div>
 
           <SeashoreMediaBlock />
-          <SinglePageTab />
+          <SinglePageTab  />
           <SocialLinksBlock />
 
           

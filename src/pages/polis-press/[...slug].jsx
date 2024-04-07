@@ -22,7 +22,7 @@ export default function Listing() {
   const categoryIds = useRef([])
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
-    page: 1,
+    // page: 1,
   });
   const isFirstRendering = useRef(true)
   const [currentView, setCurrentView] = useState("grid");
@@ -31,12 +31,15 @@ export default function Listing() {
   const channel = router.query.channel;
   const slug = router.query.slug?.[1];
   const page = router.query.page || 1; 
+  const limit = router.query.limit || 5; 
+
+  const [title, setTitle] = useState("");
 
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
-
+  
   useEffect(() => {
     if (siteMenu && slug) {
-      console.log("siteMenu && slug");
+      console.log("siteMenu && slug",slug);
       
       const matchedItem = findMenuItemBySlug(siteMenu, slug);
       setMatchedMenuItem(matchedItem);
@@ -74,24 +77,22 @@ export default function Listing() {
   };
 
   useEffect(() => {
-    // console.log("myObject", myObject);
+    console.log("myObject", myObject);
     if (isFirstRendering.current) {
       isFirstRendering.current = false;
       return;
     }
     filterByCategory();
-  }, [myObject.page, myObject.limit, myObject.sort]);
+  }, [router.query.page, myObject.limit, myObject.sort]);
 
 
   useEffect(() => {
-    if (!menu) {
-      return;
-    }
+
     const fetchMenu = async () => {
       try {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const response = await res.json();
-        console.log("page", page);
+        // console.log("page", page);
         const tempMenu = response.result.site_menu;
         setSiteMenu(tempMenu);
 
@@ -100,18 +101,22 @@ export default function Listing() {
             (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
           );
         });
-
-        // console.log("foundItem", foundItem);
+        setTitle(foundItem?.title);
+        console.log("foundItem", foundItem?.title);
 
         if (foundItem) {
-          var bb = foundItem.menu_items.find(
+          var arr = foundItem.menu_items.find(
             (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
           ).site_menu_items_id;
-          console.log("category arr", slug, bb.category);
+          console.log(
+            "category arr",
+            slug,
+            categoryIds?.current[0]?.category_id?.name
+          );
         } else {
           return null;
         }
-        categoryIds.current = bb.category;
+        categoryIds.current = arr.category;
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -122,10 +127,10 @@ export default function Listing() {
 
   const updatePage = (i) => {
     console.log("updatePage", i);
-    setMyObject((prev) => ({
-      ...prev,
-      page: i,
-    }));
+     router.push({
+       pathname: router.pathname,
+       query: { ...router.query, page: i }
+     });
   }
 
   const sendDataToParent = (data) => {
@@ -135,7 +140,7 @@ export default function Listing() {
 
   const filterByCategory = async () => {
     // console.log("categoryIds arr", categoryIds.current);
-    // console.log("myObject", myObject);
+    console.log("myObject", myObject);
 
     const result = categoryIds.current?.map((item) => item.category_id.id);
     console.log(result);
@@ -147,10 +152,10 @@ export default function Listing() {
       body: JSON.stringify({
         sort_by: myObject.sort,
         // sort_by: ["-date_created"],
-        // page_limit: 1,
+        page_limit: limit,
         publisher_slug: "polis-press",
         category_id: result,
-        page: myObject.page, 
+        page: page,
       }),
     });
 
@@ -159,7 +164,7 @@ export default function Listing() {
     setBooks(books?.result?.product);
     console.log("books", books?.result?.product);
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
-    // console.log("length", length);
+    console.log("length", length);
     setLength(length);
   };
 
@@ -173,7 +178,7 @@ export default function Listing() {
       },
       body: JSON.stringify({
         sort: myObject.sort,
-        page: myObject.page,
+        page: page,
         series_tags: myObject.arr,
         publisher_slug: "polis-press",
       }),
@@ -192,7 +197,7 @@ export default function Listing() {
     const check = arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
       setMyObject((prev) => ({
         ...prev,
-        page: 1,
+        page:  router.query.page || 1,
         arr: [check],
       }));
   };
@@ -222,7 +227,7 @@ export default function Listing() {
               updatePage(i);
             }}
             key={i}
-            active={i === myObject.page}
+            active={i === page}
           >
             {i}
           </Pagination.Item>
@@ -255,7 +260,9 @@ export default function Listing() {
           <SidebarWrapper />
           <ListAside siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
           <div className="right-side">
-            <div className="block-title">系列：</div>
+            <div className="block-title">
+              {title} {categoryIds?.current[0]?.category_id?.name}
+            </div>
 
             <div className="listing-toolbar">
               <div className="amount">
@@ -305,7 +312,7 @@ export default function Listing() {
             {currentView === "list" && <ListList books={books} />}
 
             <div className="">
-              {Math.ceil(length / 5)>1 && <Paginations length={length} />}
+              {Math.ceil(length / 5) > 1 && <Paginations length={length} />}
             </div>
           </div>
 

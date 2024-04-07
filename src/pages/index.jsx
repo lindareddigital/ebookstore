@@ -6,58 +6,77 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
-import handler from "src/pages/api/page";
 import { useEffect, useState } from "react";
 
 
-export default function Home({ siteMenu }) {
+export default function Home() {
   // const swiperRef = useRef(null);
 
   // const { next, previous } = useSwiperFunc(swiperRef);
   // const containerRef = useRef(null);
 
-  // `${url}/api/v1/sales?_start=${
-  //   (pageNo - 1) * limitCount
-  // }&_limit=${limitCount}`;
-
-  //SWR 第一次抓取資料先將資料存至 cache (stale)，直到下一次 fetch 資料(revalidate)，才會再拿到最新的資料
-  // SWR 決定要不要 refetch 取決於第一個參數 key 有沒有改變
-  // const fetcher = (url, params) => fetch(url + params.id).then((r) => r.json());
-
-  // const { data, error } = useSWR(categories, fetcher);
-  // console.log(data, error, "swr");
-
-  // to={`/?q=${keyWords}`}
 
   // console.log('data',data);
 
   const [data, setData] = useState(null);
+  const [siteMenu, setSiteMenu] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/page");
+        const response = await fetch("/api/page/home");
 
         const result = await response.json();
-        setData(result);
+        setData(result?.result?.pages[0].blocks);
         console.log("ddata", data);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
 
+    const fetchMenu = async () => {
+      try {
+        const res = await fetch("/api/sitemenu/publisher/polis-press");
+        const response = await res.json();
+        const tempMenu = response?.result?.site_menu;
+        setSiteMenu(tempMenu);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMenu();
     fetchData();
   }, []);
 
-  const posts = data?.data?.pages[0].blocks[0].item.posts;
-  console.log("now", data?.data);
+  const blocks = data;
 
-  const blocks = data?.data?.pages[0];
-  console.log("block_hero", blocks);
+  const posts = blocks?.find((item) => {
+    return item.collection === "block_cardgroup";
+  });
 
-  const heroBanner = blocks?.blocks?.find((item) => {
+  console.log("posts", posts?.item?.posts);
+
+  console.log("block", blocks);
+
+  const heroBanner = blocks?.find((item) => {
     return item.collection === "block_hero_group";
   });
+
+  const homeTab = blocks?.find((item) => {
+    return item.id === '2';
+  });
+
+  const media = blocks?.find((item) => {
+    return item?.item?.group_type === "posts";
+  });
+
+  console.log("media", media?.item?.posts);
+  
+
+  console.log("homeTab", homeTab?.item?.cards);
+  
 
   console.log("heroBanner", heroBanner?.item.hero_cards);
 
@@ -84,9 +103,7 @@ export default function Home({ siteMenu }) {
       </div>
 
       <Navbar />
-
       <MenuBar />
-
       <div className="home-banner">
         <div className="leftbox">
           <img className="topright" src="/icons/leftboxicon.svg"></img>
@@ -95,7 +112,7 @@ export default function Home({ siteMenu }) {
             <div className="trangle"></div>
           </div>
           <div className="wrapper">
-            {posts?.map((item, index) => {
+            {posts?.item?.posts?.map((item) => {
               return (
                 <>
                   <div className="e-banner-product">
@@ -207,38 +224,12 @@ export default function Home({ siteMenu }) {
       </div>
 
       <div className="main-body">
-        <HomeTab data={data} />
+        {homeTab && <HomeTab books={homeTab?.item?.cards} />}
         {/* <HomeTabTwo /> */}
-
-        {/* {categories.map((item) => {
-          return (
-            <>
-              <MobileCard props={item} />
-            </>
-          );
-        })} */}
       </div>
 
-      <MediaBlock data={data} />
+      <MediaBlock posts={media?.item?.posts} />
     </div>
   );
 }
-
-
-
-
-const tabChange = async (id) => {
-  console.log("CategoryList", data);
-};
-
-
-export const getServerSideProps = async () => {
-
-  const data = await handler(null, null); 
-  const detail = await apiManager.getProductDetail();
-  const siteMenu = await apiManager.getSiteMenu();
- 
-
-  return { props: { data: data || null, detail, siteMenu } };
-};
 

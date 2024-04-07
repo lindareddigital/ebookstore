@@ -187,8 +187,9 @@ class ApiManager {
           }
         }
       }
-    
     `;
+
+    
     return await this.sdk(gql);
   };
 
@@ -411,12 +412,14 @@ class ApiManager {
     const category_id = category.map((item) => `"${item}"`).join(", ");
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
+    //           
+
     const gql = `
       query {
         product ( 
           sort: [${sort_by_json}]
-          limit: ${limit} 
           page: ${page}
+          limit: ${limit}
           filter: {
             tags: { 
               category_id:{
@@ -474,8 +477,6 @@ class ApiManager {
         }
     }
     `;
-    
-    
 
     console.log("getProductByCategory", gql);
 

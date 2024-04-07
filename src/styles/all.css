@@ -762,6 +762,7 @@ span{
 }
 
 .sub-swiper .swiper-button-prev, .swiper-button-next{
+  position: relative;
   bottom: 0;
 }
 
@@ -2103,12 +2104,19 @@ footer .container-fluid{
 }
 
 .recipe-card{
-  box-shadow: 0px 4px 30px 0px #00000029;
   width: 314px;
   height: 378px;
   padding: 20px;
   border-radius: 20px;
   margin:10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26.06px;
+
+}
+
+.recipe-card:focus{
+  box-shadow: 0px 4px 30px 0px #00000029;
 }
 
 .recipe-card img{
@@ -2117,7 +2125,6 @@ footer .container-fluid{
 }
 
 .single-page .home-recommend-tabs{
-  padding: 50px 0px;
   width: calc(100vw - 15%);
   position: relative;
   z-index: 999;
