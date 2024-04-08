@@ -13,37 +13,33 @@ import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 import Error from "next/error";
 
 export default function Singlepage() {
-
   const router = useRouter();
   const channel = router.query.slug?.[1];
   const publisher = router.query.slug?.[0];
   const slug = router.query.slug?.[2];
   const page = router.query.page || 1;
-  const limit = router.query.limit || 5; 
+  const limit = router.query.limit || 5;
   const [menu, setMenu] = useState(null);
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
   const [products, setProducts] = useState(null);
   const [productTotalCount, setProductTotalCount] = useState(null);
   const [currentView, setCurrentView] = useState("grid");
-
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
   });
 
-  console.log("", router.query);
-  
+  console.log("router", publisher, channel,limit);
 
   useEffect(() => {
     if (!publisher) {
-      return
+      return;
     }
     const fetchMenu = async () => {
       try {
-        // console.log("43", publisher, channel);
         const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
 
         const result = await res.json();
-        console.log("res", result, result?.result?.site_menu);
+        // console.log("res", result, result?.result?.site_menu);
         const tempMenu = result?.result?.site_menu;
         setMenu(tempMenu);
       } catch (error) {
@@ -54,143 +50,183 @@ export default function Singlepage() {
     fetchMenu();
   }, [publisher, channel, slug]);
 
-useEffect(() => {
-  if (menu && slug) {
-    const matchedItem = findMenuItemBySlug(menu, slug);
-    console.log("54", matchedItem, menu, slug);
-    setMatchedMenuItem(matchedItem);
-  }
-}, [menu, slug]);
-
-useEffect(() => {
-  if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
-    const categoryIds = matchedMenuItem.category.map(
-      (category) => category.category_id.id
-    );
-    getProductsByCategory(categoryIds);
-  } else if (matchedMenuItem && matchedMenuItem.type === "product_by_series") {
-    filterBySeries(matchedMenuItem?.query_tags);
-  } else if (matchedMenuItem && matchedMenuItem.type === "url") {
-    window.open(matchedMenuItem.landing, "_blank");
-  }
-}, [matchedMenuItem, page, limit, myObject.sort]);
-
- const sendDataToParent = (data) => {
-   console.log("Data from ListAside:", data);
- };
-
-const findMenuItemBySlug = (menu, slug) => {
-  for (const menuItem of menu) {
-    for (const menuItemData of menuItem.menu_items) {
-      if (menuItemData.site_menu_items_id.slug === slug) {
-        return menuItemData.site_menu_items_id;
-      }
-    }
-  }
-  return null;
-};
-
-const getProductsByCategory = async (categoryIds) => {
-  // console.log({
-  //   sort_by: sort,
-  //   publisher_slug: publisher,
-  //   category_id: categoryIds,
-  //   page: page,
-  // });
-  
-  try {
-    const response = await fetch(`/api/product/category`, {
+  //預設首頁資料
+  const filterByPublisher = async () => {
+    const response = await fetch(`api/product/publisher/${publisher}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort_by: myObject.sort,
-        publisher_slug: publisher,
-        category_id: categoryIds,
+        sort: myObject.sort,
         page: page,
-        limit: limit
+        publisher: publisher,
+        limit: limit,
       }),
     });
     const books = await response.json();
-    setProducts(books?.result?.product); 
-    setProductTotalCount(
-      books?.result?.product_aggregated[0]?.countDistinct?.id
-    );
-    console.log("productTotalCount", productTotalCount);
-    
-  } catch (error) {
-    console.error("Error fetching products by category:", error);
-  }
-};
+    const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
+    setProductTotalCount(length);
+    setProducts(books?.result?.product);
+  };
 
-const filterBySeries = async (query_tags) => {
-  console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
+  useEffect(() => {
+    if (router?.query?.slug?.length < 3) {
+      console.log(
+        "router?.query?.slug?.length < 3",
+        router?.query?.slug?.length < 3
+      );
+      filterByPublisher();
+    }
+  }, [router]);
 
-  const response = await fetch("/api/product/series", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      sort: myObject.sort,
-      page: page,
-      series_tags: query_tags,
-      publisher_slug: publisher,
-      limit: limit,
-    }),
-  });
-  const books = await response.json();
-  const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
-  setProductTotalCount(length);
-  setProducts(books?.result?.product);
-};
+  useEffect(() => {
+    if (menu && slug) {
+      const matchedItem = findMenuItemBySlug(menu, slug);
+      console.log("matchedItem", matchedItem, menu, slug);
+      setMatchedMenuItem(matchedItem);
+    }
+  }, [menu, slug]);
 
-const handleViewChange = (view) => {
-  setCurrentView(view);
-};
+  useEffect(() => {
+    if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
+      const categoryIds = matchedMenuItem.category.map(
+        (category) => category.category_id.id
+      );
+      getProductsByCategory(categoryIds);
+    } else if (
+      matchedMenuItem &&
+      matchedMenuItem.type === "product_by_series"
+    ) {
+      filterBySeries(matchedMenuItem?.query_tags);
+    } else if (matchedMenuItem && matchedMenuItem.type === "url") {
+      window.open(matchedMenuItem.landing, "_blank");
+    } else {
+      filterByPublisher();
+    }
+  }, [matchedMenuItem, page, limit, myObject.sort]);
 
-const updatePage = (i) => {
-  console.log("updatePage", i);
-  router.push({
-    pathname: router.pathname,
-    query: { ...router.query, page: i },
-  });
-};
+  //  const sendDataToParent = (data) => {
+  //    console.log("Data from ListAside:", data);
+  //  };
 
-const Paginations = ({ length }) => {
-  const pageNumbers = [];
-  console.log("Paginations length", length);
+  const findMenuItemBySlug = (menu, slug) => {
+    for (const menuItem of menu) {
+      for (const menuItemData of menuItem.menu_items) {
+        if (menuItemData.site_menu_items_id.slug === slug) {
+          return menuItemData.site_menu_items_id;
+        }
+      }
+    }
+    return null;
+  };
 
-  if (Number(length)) {
-    for (let i = 1; i <= Math.ceil(length / 5); i++) {
-      pageNumbers.push(
-        <Pagination.Item
-          onClick={() => {
-            updatePage(i);
-          }}
-          key={i}
-          active={i === page}
-        >
-          {i}
-        </Pagination.Item>
+  const getProductsByCategory = async (categoryIds) => {
+    console.log("", categoryIds);
+    try {
+      const response = await fetch(`/api/product/category`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sort_by: myObject.sort,
+          publisher_slug: publisher,
+          category_id: categoryIds,
+          page: page,
+          limit: limit,
+        }),
+      });
+      const books = await response.json();
+      setProducts(books?.result?.product);
+      setProductTotalCount(
+        books?.result?.product_aggregated[0]?.countDistinct?.id
+      );
+      console.log("productTotalCount", productTotalCount);
+      console.log("page", page);
+    } catch (error) {
+      console.error("Error fetching products by category:", error);
+    }
+  };
+
+  const filterBySeries = async (query_tags) => {
+    console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
+
+    const response = await fetch("/api/product/series", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sort: myObject.sort,
+        page: page,
+        series_tags: query_tags,
+        publisher_slug: publisher,
+        limit: limit,
+      }),
+    });
+    const books = await response.json();
+    const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
+    setProductTotalCount(length);
+    setProducts(books?.result?.product);
+  };
+
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+  };
+
+  const updatePage = (i) => {
+    console.log("updatePage", i);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: i },
+    });
+  };
+
+  const Paginations = ({ length }) => {
+    const pageNumbers = [];
+    console.log("Paginations length", length);
+
+    if (Number(length)) {
+      for (let i = 1; i <= Math.ceil(length / 5); i++) {
+        pageNumbers.push(
+          <Pagination.Item
+            onClick={() => {
+              updatePage(i);
+            }}
+            key={i}
+            active={i == page}
+          >
+            {i}
+          </Pagination.Item>
+        );
+      }
+      return (
+        <Pagination>
+          <Pagination.Prev
+            onClick={() => {
+              const prevPage = Math.max(1, Number(page) - 1);
+              updatePage(prevPage);
+            }}
+          />
+          {pageNumbers}
+          <Pagination.Next
+            onClick={() => {
+              const nextPage = Math.min(
+                Math.ceil(length / 5),
+                Number(page) + 1
+              );
+              updatePage(nextPage);
+            }}
+          />
+        </Pagination>
       );
     }
-    return (
-      <Pagination>
-        <Pagination.Prev />
-        {pageNumbers}
-        <Pagination.Next />
-      </Pagination>
-    );
+  };
+
+  if (publisher != "seashore" && publisher != "ichiban") {
+    return <Error statusCode={404} />;
   }
-};
-
-if (publisher != "seashore" && publisher != "ichiban") {
-  return <Error statusCode={404} />;
-
-}
-
 
   return (
     <div className="single-page">
@@ -264,7 +300,7 @@ if (publisher != "seashore" && publisher != "ichiban") {
             <div className="main-body content">
               <ListAside
                 siteMenu={menu}
-                sendDataToParent={sendDataToParent}
+                // sendDataToParent={sendDataToParent}
                 publisher={publisher}
               />
 
@@ -303,9 +339,7 @@ if (publisher != "seashore" && publisher != "ichiban") {
                           }));
                         }}
                       >
-                        <option value="-date_created" selected>
-                          上市日期(新→舊)
-                        </option>
+                        <option value="-date_created">上市日期(新→舊)</option>
                         <option value="date_created">上市日期(舊→新)</option>
                         <option value="2">暢銷度</option>
                         <option value="3">價格(高→低)</option>
@@ -327,8 +361,6 @@ if (publisher != "seashore" && publisher != "ichiban") {
           <SeashoreMediaBlock />
           <SinglePageTab />
           <SocialLinksBlock />
-
-          
         </div>
       )}
     </div>

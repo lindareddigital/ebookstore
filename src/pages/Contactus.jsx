@@ -64,7 +64,7 @@ export default function ContactUs() {
             id="floatingSelect"
             aria-label="Floating label select example"
           >
-            <option selected>1.書籍意見</option>
+            <option>1.書籍意見</option>
             <option value="2">2.異業合作</option>
             <option value="3">3.帳號問題</option>
             <option value="4">4.購書問題</option>

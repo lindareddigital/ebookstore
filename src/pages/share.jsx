@@ -79,7 +79,7 @@ export default function Share({ data, siteMenu }) {
                 <div className="select-bar">
                   <label className="">篩選類別</label>
                   <select className="form-select" id="floatingSelect">
-                    <option selected>請選擇</option>
+                    <option value="1">請選擇</option>
                     <option value="2">2.異業合作</option>
                     <option value="3">3.帳號問題</option>
                     <option value="4">4.購書問題</option>

@@ -11,13 +11,12 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
 
 
   const handleClick = (channel, item,publisher) => {
-    console.log("item", item);
-    if (item.type === "product_by_category") {
-      sendDataToParent(item.category);
-    } else if (item.type === "product_by_series") {
-      sendDataToParent(item.query_tags);
-    }
-    // setObj(item)
+    // console.log("item", item);
+    // if (item.type === "product_by_category") {
+    //   sendDataToParent(item.category);
+    // } else if (item.type === "product_by_series") {
+    //   sendDataToParent(item.query_tags);
+    // }
     router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
@@ -29,7 +28,7 @@ export default function ListAside({ sendDataToParent, siteMenu }) {
     fetchData();
   }, []);
 
-  console.log("ListAside siteMenu", siteMenu);
+  // console.log("ListAside siteMenu", siteMenu);
 
   
 

@@ -139,8 +139,6 @@ export default function Listing() {
   };
 
   const filterByCategory = async () => {
-    // console.log("categoryIds arr", categoryIds.current);
-    console.log("myObject", myObject);
 
     const result = categoryIds.current?.map((item) => item.category_id.id);
     console.log(result);
@@ -212,6 +210,18 @@ export default function Listing() {
 
   const openPanel = () => {
     setPanel(true);
+  };
+
+  const handleClick = (channel, item, publisher) => {
+    console.log("item", item);
+    if (item.type === "product_by_category") {
+      filterByCategory(item.category);
+    } else if (item.type === "product_by_series") {
+      filterBySeries(item.query_tags);
+    }
+    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+      shallow: true,
+    });
   };
 
 
@@ -322,33 +332,31 @@ export default function Listing() {
                 <button className="btn" onClick={closePanel}>
                   <img src="/icons/close.svg" alt="" />
                 </button>
-                <ul className="">
-                  <div className="title">依類別搜尋</div>
-                  {series.map((item, index) => (
-                    <li key={index}>
-                      <div
-                        onClick={() => sendDataToParent(item)}
-                        key={`${index}`}
-                      >
-                        {item}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                
 
-                <ul>
-                  <div className="title">依系列搜尋</div>
+                {siteMenu?.map((item) => {
+                  return (
+                    <ul className="">
+                      <div className="title">{item.title}</div>
+                      {item.menu_items?.map((menuItem) => (
+                        <li key={menuItem.site_menu_items_id.id}>
+                          <div
+                            onClick={() =>
+                              handleClick(
+                                item.channel,
+                                menuItem.site_menu_items_id,
+                                item.publisher
+                              )
+                            }
+                          >
+                            {menuItem.site_menu_items_id.title}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                })}
 
-                  <li>
-                    <Link href="">X星際探險隊</Link>
-                  </li>
-                  <li>
-                    <Link href="">X萬獸探險隊</Link>
-                  </li>
-                  <li>
-                    <Link href="">X恐龍探險隊</Link>
-                  </li>
-                </ul>
               </div>
             )}
 

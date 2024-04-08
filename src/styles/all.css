@@ -588,6 +588,10 @@ a:hover{
 }
 
 .list-view-item .title{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -1785,6 +1789,8 @@ footer .container-fluid{
   width: 60px;
   height: 60px;
   transform: scale(2);
+  position: relative;
+  z-index: 111;
 }
 
 .back-to-top span {
@@ -2217,6 +2223,36 @@ footer .accordion{
 
 
 @media (max-width: 992px){
+
+.single-page .yt-block .wrap,
+.single-page .yt-block{
+  width: calc(100vw - 32px);
+}
+
+.single-page .yt-block{
+  flex-direction: column;
+}
+
+.single-page .yt-block .more{
+  width: unset;
+}
+
+.single-page .yt-block .more .ytIcon{
+  height: unset;
+}
+
+.single-page .yt-block .ytIcon .title{
+  width: unset;
+  color: var(--Gold);
+}
+
+.message-btn img{
+  bottom: 130px;
+}
+
+.top-area .banner-title{
+  width: calc(100vw - 32px);
+}
 
 .list-view-item .wrapper{
   flex-direction: column;
@@ -2754,6 +2790,7 @@ footer .box{
 
 .single-page .top-area{
   flex-direction: column;
+  height: unset;
 }
 
 .yt-block .title{

@@ -5,13 +5,13 @@ export default async function handler(req, res) {
     console.log("getProductByPublisher", req.query);
     console.log("publisher", req.query.publisher);
 
-    const { limit, page, sort, publisher } = req.query;
 
-    const obj = {
-      limit: limit || 10,
-      page: page || 1,
-      sort: sort || ["-date_created"],
-    };
+    const limit = req.query.limit || 10;
+    const page = req.query.page || 1;
+    const sort = req.query.sort || ["-date_created"];
+    const publisher = req.query.publisher;
+
+
 
     // if (
     //   req.query.publisher != "polis_press" &&
@@ -20,12 +20,7 @@ export default async function handler(req, res) {
     //   return res.status(400).json({ error: "Invalid publisher provided" });
     // }
 
-    const result = await apiManager.getProductByPublisher(
-      req.query.publisher,
-      obj.page,
-      obj.limit,
-      obj.sort
-    );
+    const result = await apiManager.getProductByPublisher(publisher,page,limit,sort);
 
     res.status(200).json({ result });
   } catch (err) {
