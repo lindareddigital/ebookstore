@@ -15,7 +15,7 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    router.push(`/listing/${item.slug}`, undefined, {
+    router.push(`/polis-press/${item.slug}`, undefined, {
       shallow: true,
     });
 
@@ -27,8 +27,7 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
       const navMenu = await response.json();        
       setNavMenu(navMenu.result.site_menu[0].menu_items);
       // console.log("siteMenu", navMenu.result.site_menu[0].menu_items);
-      
-      
+  
     };
     fetchData();
   }, []);

@@ -10,9 +10,9 @@ import { useRouter } from "next/router";
 import SinglePageTab from "src/pages/components/SinglePageTab";
 import Pagination from "react-bootstrap/Pagination";
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
+import Error from "next/error";
 
 export default function Singlepage() {
-  const [recipe, setRecipe] = useState([]);
 
   const router = useRouter();
   const channel = router.query.slug?.[1];
@@ -113,7 +113,6 @@ const getProductsByCategory = async (categoryIds) => {
       }),
     });
     const books = await response.json();
-
     setProducts(books?.result?.product); 
     setProductTotalCount(
       books?.result?.product_aggregated[0]?.countDistinct?.id
@@ -187,10 +186,10 @@ const Paginations = ({ length }) => {
   }
 };
 
-// if (publisher != "seashore" && publisher != "ichiban") {
-//   console.log("publisher invalid");
-//   return <h1>404 - Page Not Found</h1>;
-// }
+if (publisher != "seashore" && publisher != "ichiban") {
+  return <Error statusCode={404} />;
+
+}
 
 
   return (
@@ -326,7 +325,7 @@ const Paginations = ({ length }) => {
           </div>
 
           <SeashoreMediaBlock />
-          <SinglePageTab  />
+          <SinglePageTab />
           <SocialLinksBlock />
 
           

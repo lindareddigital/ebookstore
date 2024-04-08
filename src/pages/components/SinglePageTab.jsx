@@ -11,13 +11,11 @@ import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
-export default function SinglePageTab({  }) {
-  // console.log("data", data.data);
+export default function SinglePageTab() {
 
-
+  const [recipe, setRecipe] = useState([]);
   const swiperRef = useRef(null);
-
-  const { next, previous } = useSwiperFunc(swiperRef);
+  // const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   const getSwiper = (swiper) => {
@@ -31,6 +29,40 @@ export default function SinglePageTab({  }) {
       setSwiperIndex(swiper.realIndex);
     }
   };
+
+   const next = () => {
+     swiperRef.current.slideNext();
+   };
+
+   const previous = () => {
+     swiperRef.current.slidePrev();
+   };
+
+
+  useEffect(() => {
+    const getProductsByCategory = async () => {
+      try {
+        const response = await fetch(`/api/product/category`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sort_by: ["-date_created"],
+            publisher_slug: "seashore",
+            category_id: ["f8050a2e-bebd-4b79-ad81-d3bafada63da"],
+            page: 1,
+          }),
+        });
+        const books = await response.json();
+        setRecipe(books?.result?.product);
+      } catch (error) {
+        console.error("Error fetching products by category:", error);
+      }
+    };
+    getProductsByCategory();
+  }, []);
+
 
  
 
@@ -63,54 +95,28 @@ export default function SinglePageTab({  }) {
                 onSnapIndexChange={onRealIndexChange}
               >
                 <div className="swiper-wrapper booklist-carousel-inner">
-                  <SwiperSlide className="swiper-slide">
-                    <Link href={""} className={``}>
-                      <div className="recipe-card">
-                        <img
-                          src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-                          className=""
-                          alt="mcd"
-                        />
-                        <div className="desc mt-2">item.title</div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide className="swiper-slide">
-                    <Link href={""} className={``}>
-                      <div className="recipe-card">
-                        <img
-                          src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-                          className=""
-                          alt="mcd"
-                        />
-                        <div className="desc mt-2">item.title</div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide className="swiper-slide">
-                    <Link href={""} className={``}>
-                      <div className="recipe-card">
-                        <img
-                          src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-                          className=""
-                          alt="mcd"
-                        />
-                        <div className="desc mt-2">item.title</div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                  <SwiperSlide className="swiper-slide">
-                    <Link href={""} className={``}>
-                      <div className="recipe-card">
-                        <img
-                          src={`https://s7d1.scene7.com/is/image/mcdonalds/sausage-mcmuffin-with-egg_832x822:nutrition-calculator-tile`}
-                          className=""
-                          alt="mcd"
-                        />
-                        <div className="desc mt-2">item.title</div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
+                  {recipe?.map((item) => {
+                    {/* {console.log("recipe", item, item?.id);} */}
+
+                    return (
+                      <SwiperSlide className="swiper-slide" key={`${item?.id}`}>
+                        <Link
+                          key={`${item?.id}`}
+                          href={{ pathname: `/detail/${item?.id}` }}
+                          className={``}
+                        >
+                          <div className="recipe-card">
+                            <img
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              className=""
+                              alt={item.title}
+                            />
+                            <div className="desc mt-2">{item.title}</div>
+                          </div>
+                        </Link>
+                      </SwiperSlide>
+                    );
+                  })}
                 </div>
               </Swiper>
             </Tab.Content>

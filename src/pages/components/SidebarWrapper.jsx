@@ -16,11 +16,8 @@ export default function SidebarWrapper() {
   const { next, previous } = useSwiperFunc(swiperRef);
 
   const topFunction = () =>{
- 
     window.scrollTo(0, 0);
-
   }
-
 
   const tabChange = (async(id) => {
 
