@@ -29,7 +29,7 @@ export default function Singlepage() {
     sort: ["-date_created"],
   });
 
-  console.log("router", publisher, channel,limit);
+  // console.log("router", publisher, channel,limit);
 
   useEffect(() => {
     if (!publisher) {
@@ -113,10 +113,6 @@ export default function Singlepage() {
       filterBySeries(matchedMenuItem?.query_tags);
     } else if (matchedMenuItem && matchedMenuItem.type === "url") {
       window.open(matchedMenuItem.landing, "_blank");
-    } else {
-      console.log('117');
-      
-      filterByPublisher();
     }
   }, [matchedMenuItem, page, limit, myObject.sort]);
 
@@ -198,7 +194,7 @@ export default function Singlepage() {
     console.log("Paginations length", length);
 
     if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 5); i++) {
+      for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
           <Pagination.Item
             onClick={() => {
@@ -251,7 +247,7 @@ export default function Singlepage() {
               ></img>
             </div>
             <div className="">
-              <button onclick="topFunction()" id="topBtn">
+              <button onClick="topFunction()" id="topBtn">
                 Top
               </button>
             </div>

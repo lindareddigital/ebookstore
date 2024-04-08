@@ -1,4 +1,4 @@
-import GridList from "src/pages/listing/GridList.jsx";
+// import GridList from "src/pages/listing/GridList.jsx";
 
 export default function Collection() {
   return (

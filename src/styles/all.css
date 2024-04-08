@@ -89,8 +89,6 @@ a:hover{
   margin: auto;
   justify-content: flex-start;
   padding: 12px 0px;
-  gap: 8px;
-
 }
 
 .menu-bar .link{
@@ -584,6 +582,7 @@ a:hover{
 .list-view-item .wrapper{
   display: flex;
   align-items: flex-start;
+  width: 80%;
 }
 
 .list-view-item .textarea{
@@ -2122,7 +2121,6 @@ footer .container-fluid{
   height: 378px;
   padding: 20px;
   border-radius: 20px;
-  margin:10px;
   font-size: 18px;
   font-weight: 500;
   line-height: 26.06px;

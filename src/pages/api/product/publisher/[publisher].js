@@ -2,14 +2,14 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
-    console.log("getProductByPublisher", req.query);
-    console.log("publisher", req.query.publisher);
+    console.log("getProductByPublisher", req.body);
+    console.log("publisher", req.body.publisher);
 
 
-    const limit = req.query.limit || 15;
-    const page = req.query.page || 1;
-    const sort = req.query.sort || ["-date_created"];
-    const publisher = req.query.publisher;
+    const limit = req.body.limit || 15;
+    const page = req.body.page || 1;
+    const sort = req.body.sort || ["-date_created"];
+    const publisher = req.body.publisher;
 
 
 

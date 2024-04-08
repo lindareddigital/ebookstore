@@ -19,51 +19,55 @@ export default function Listing() {
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(0);
   // const obj = useGlobalStore((state) => state.obj);
-  const categoryIds = useRef([])
+  const categoryIds = useRef([]);
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
     // page: 1,
   });
-  const isFirstRendering = useRef(true)
+  const isFirstRendering = useRef(true);
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const [menu, setMenu] = useState(null);
   const channel = router.query.channel;
   const slug = router.query.slug?.[1];
-  const page = router.query.page || 1; 
-  const limit = router.query.limit || 5; 
-
+  const page = router.query.page || 1;
+  const limit = router.query.limit || 15;
   const [title, setTitle] = useState("");
-
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
-  
+
+  // useEffect(() => {
+  //   if (router?.query?.slug?.length < 3) {
+  //     console.log("length < 3", router?.query?.slug?.length < 3);
+  //     filterByPublisher();
+  //   }
+  // }, [router]);
+
   useEffect(() => {
     if (siteMenu && slug) {
-      console.log("siteMenu && slug",slug);
-      
+      console.log("siteMenu && slug", slug);
       const matchedItem = findMenuItemBySlug(siteMenu, slug);
       setMatchedMenuItem(matchedItem);
     }
   }, [siteMenu, slug]);
 
-   useEffect(() => {
-     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
-       const categoryIds = matchedMenuItem.category.map(
-         (category) => category.category_id.id
-       );
-        filterByCategory("polis-press",categoryIds, page);
-     }else if (
-       matchedMenuItem?.type === "product_by_series" &&
-       matchedMenuItem?.query_tags != null
-     ) {
-       console.log("matchedMenuItem.query_tags", matchedMenuItem);
-       setMyObject((prev) => ({
-         ...prev,
-         arr: matchedMenuItem?.query_tags,
-       }));
-       filterBySeries("polis-press", matchedMenuItem?.query_tags);
-     }
-   }, [matchedMenuItem]);
+  useEffect(() => {
+    if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
+      const categoryIds = matchedMenuItem.category.map(
+        (category) => category.category_id.id
+      );
+      filterByCategory("polis-press", categoryIds, page);
+    } else if (
+      matchedMenuItem?.type === "product_by_series" &&
+      matchedMenuItem?.query_tags != null
+    ) {
+      console.log("matchedMenuItem.query_tags", matchedMenuItem);
+      setMyObject((prev) => ({
+        ...prev,
+        arr: matchedMenuItem?.query_tags,
+      }));
+      filterBySeries("polis-press", matchedMenuItem?.query_tags);
+    }
+  }, [matchedMenuItem]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
@@ -82,17 +86,17 @@ export default function Listing() {
       isFirstRendering.current = false;
       return;
     }
-    filterByCategory();
-  }, [router.query.page, myObject.limit, myObject.sort]);
 
+    filterBooks();
+
+    // filterByCategory();
+  }, [page, myObject.limit, myObject.sort]);
 
   useEffect(() => {
-
     const fetchMenu = async () => {
       try {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const response = await res.json();
-        // console.log("page", page);
         const tempMenu = response.result.site_menu;
         setSiteMenu(tempMenu);
 
@@ -103,6 +107,11 @@ export default function Listing() {
         });
         setTitle(foundItem?.title);
         console.log("foundItem", foundItem?.title);
+
+        if (router?.query?.slug?.length < 3) {
+          console.log("length < 3", router?.query?.slug?.length < 3);
+          filterByPublisher();
+        }
 
         if (foundItem) {
           var arr = foundItem.menu_items.find(
@@ -122,24 +131,39 @@ export default function Listing() {
       }
     };
     fetchMenu();
-    filterBooks();
   }, [router, menu]);
+
+  //預設首頁資料
+  const filterByPublisher = async () => {
+    const response = await fetch(`api/product/publisher/polis-press`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sort: myObject.sort,
+        page: page,
+        publisher: "polis-press",
+        limit: limit,
+      }),
+    });
+    const books = await response.json();
+    const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
+    console.log("146books", books?.result?.product);
+
+    setLength(length);
+    setBooks(books?.result?.product);
+  };
 
   const updatePage = (i) => {
     console.log("updatePage", i);
-     router.push({
-       pathname: router.pathname,
-       query: { ...router.query, page: i }
-     });
-  }
-
-  const sendDataToParent = (data) => {
-    console.log("Data from ListAside:", data);
-    filterBooks(data);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: i },
+    });
   };
 
   const filterByCategory = async () => {
-
     const result = categoryIds.current?.map((item) => item.category_id.id);
     console.log(result);
     const response = await fetch("/api/product/category/", {
@@ -149,14 +173,12 @@ export default function Listing() {
       },
       body: JSON.stringify({
         sort_by: myObject.sort,
-        // sort_by: ["-date_created"],
-        page_limit: limit,
+        limit: limit,
         publisher_slug: "polis-press",
         category_id: result,
         page: page,
       }),
     });
-
 
     const books = await response.json();
     setBooks(books?.result?.product);
@@ -167,8 +189,6 @@ export default function Listing() {
   };
 
   const filterBySeries = async () => {
-    console.log(myObject);
-    
     const response = await fetch("/api/product/series", {
       method: "POST",
       headers: {
@@ -187,17 +207,19 @@ export default function Listing() {
     setBooks(books?.result?.product);
   };
 
-
-
   const filterBooks = async (arr) => {
+    if (router?.query?.slug?.length < 3) {
+      console.log("length < 3", router?.query?.slug?.length < 3);
+      return filterByPublisher();
+    }
     console.log("filterBooks");
     const categoryArr = arr?.map((item) => item?.category_id?.id);
-    const check = arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
-      setMyObject((prev) => ({
-        ...prev,
-        page:  router.query.page || 1,
-        arr: [check],
-      }));
+    const check =
+      arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
+    setMyObject((prev) => ({
+      ...prev,
+      arr: [check],
+    }));
   };
 
   const handleViewChange = (view) => {
@@ -224,20 +246,19 @@ export default function Listing() {
     });
   };
 
-
   const Paginations = ({ length }) => {
     const pageNumbers = [];
     console.log("Paginations length", length);
 
     if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 5); i++) {
+      for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
           <Pagination.Item
             onClick={() => {
               updatePage(i);
             }}
             key={i}
-            active={i === page}
+            active={i == page}
           >
             {i}
           </Pagination.Item>
@@ -256,7 +277,7 @@ export default function Listing() {
   return (
     <div className="listing-page">
       <Navbar />
-      <MenuBar sendDataToParent={sendDataToParent} />
+      <MenuBar />
       <div className="listing-banner">
         {/* <img
           src=""
@@ -268,7 +289,7 @@ export default function Listing() {
       <div className="container-fluid">
         <div className="main-body">
           <SidebarWrapper />
-          <ListAside siteMenu={siteMenu} sendDataToParent={sendDataToParent} />
+          <ListAside siteMenu={siteMenu}  />
           <div className="right-side">
             <div className="block-title">
               {title} {categoryIds?.current[0]?.category_id?.name}
@@ -332,7 +353,6 @@ export default function Listing() {
                 <button className="btn" onClick={closePanel}>
                   <img src="/icons/close.svg" alt="" />
                 </button>
-                
 
                 {siteMenu?.map((item) => {
                   return (
@@ -356,7 +376,6 @@ export default function Listing() {
                     </ul>
                   );
                 })}
-
               </div>
             )}
 

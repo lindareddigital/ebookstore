@@ -130,9 +130,4 @@ export default function Manage({ params }) {
   );
 }
 
-export const getServerSideProps = async () => {
- 
-  const siteMenu = await apiManager.getSiteMenu();
 
-  return { props: { siteMenu } };
-};

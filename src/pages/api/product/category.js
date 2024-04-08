@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const publisher_slug = req.body.publisher_slug;
     const category_id = req.body.category_id;
     const sort_by = req.body.sort_by || ["-date_created"];
-    const limit = req.body.page_limit || 15;
+    const limit = req.body.limit || 15;
     const page = req.body.page || 1;
 
     const result = await apiManager.getProductByCategory(publisher_slug, category_id, sort_by, page,limit );

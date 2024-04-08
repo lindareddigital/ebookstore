@@ -89,7 +89,7 @@ export default function SinglePageTab() {
               <Swiper
                 onSwiper={getSwiper}
                 ref={swiperRef}
-                loop={true}
+                rewind={true}
                 className={`booklist-carousel`}
                 slidesPerView={"5"}
                 onSnapIndexChange={onRealIndexChange}
