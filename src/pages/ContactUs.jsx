@@ -3,6 +3,9 @@ import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function ContactUs() {
+
+
+  
   return (
     <div className="contactus-page">
       <Navbar />
@@ -106,11 +109,6 @@ export default function ContactUs() {
     </div>
   );
 }
-
-export const getServerSideProps = async () => {
-  const siteMenu = await apiManager.getSiteMenu();
-  return { props: { siteMenu } };
-};
 
 
 

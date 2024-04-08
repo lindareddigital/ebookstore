@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   try {
     const publisher_slug = req.body.publisher_slug;
     const series_tags = req.body.series_tags || [];
-    const limit = req.body.page_limit || 5;
+    const limit = req.body.page_limit || 15;
     const page = req.body.page || 1;
     const sort = req.body.sort || ["-date_created"];
 

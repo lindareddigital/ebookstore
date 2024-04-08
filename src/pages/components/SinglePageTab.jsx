@@ -91,7 +91,7 @@ export default function SinglePageTab() {
                 ref={swiperRef}
                 loop={true}
                 className={`booklist-carousel`}
-                slidesPerView={"auto"}
+                slidesPerView={"5"}
                 onSnapIndexChange={onRealIndexChange}
               >
                 <div className="swiper-wrapper booklist-carousel-inner">

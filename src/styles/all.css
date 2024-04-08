@@ -208,6 +208,11 @@ a:hover{
   justify-content: center;
 }
 
+.single-page .home-banner{
+  padding: 0px;
+
+}
+
 .home-banner .leftbox{
   background: #EBC700;
   width: 311px;
@@ -307,8 +312,11 @@ a:hover{
   margin-right: 20px;
 }
 
-.single-page .home-banner{
+.single-page .home-banner img{
   padding: 0;
+  height: 320px;
+  width: calc(100vw - 32px);
+  object-fit: cover;
 }
 
 .single-page .header-main{

@@ -171,6 +171,9 @@ class ApiManager {
                 ... on block_hero {
                   id
                   content
+                  image{
+                    id
+                  }
                 }
                 ... on block_richtext {
                   id
@@ -482,7 +485,6 @@ class ApiManager {
   };
 
   getProductByPublisher = async (publisher_slug, page, limit, sort_by) => {
-    // offset: Number(params.page) * pagesize - pagesize,
 
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 

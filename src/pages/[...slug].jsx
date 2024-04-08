@@ -18,8 +18,9 @@ export default function Singlepage() {
   const publisher = router.query.slug?.[0];
   const slug = router.query.slug?.[2];
   const page = router.query.page || 1;
-  const limit = router.query.limit || 5;
+  const limit = router.query.limit || 15;
   const [menu, setMenu] = useState(null);
+  const [banner, setBanner] = useState("");
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
   const [products, setProducts] = useState(null);
   const [productTotalCount, setProductTotalCount] = useState(null);
@@ -37,18 +38,32 @@ export default function Singlepage() {
     const fetchMenu = async () => {
       try {
         const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
-
         const result = await res.json();
-        // console.log("res", result, result?.result?.site_menu);
-        const tempMenu = result?.result?.site_menu;
-        setMenu(tempMenu);
+        setMenu(result?.result?.site_menu);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
 
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/page/${publisher}`);
+        const result = await response.json();
+        const heroBanner = result?.result?.pages[0].blocks?.find((item) => {
+          return item.collection === "block_hero";
+        });
+        setBanner(heroBanner?.item?.image?.id);
+
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
+
+    fetchData();
     fetchMenu();
   }, [publisher, channel, slug]);
+
+
 
   //預設首頁資料
   const filterByPublisher = async () => {
@@ -72,10 +87,7 @@ export default function Singlepage() {
 
   useEffect(() => {
     if (router?.query?.slug?.length < 3) {
-      console.log(
-        "router?.query?.slug?.length < 3",
-        router?.query?.slug?.length < 3
-      );
+      console.log("length < 3", router?.query?.slug?.length < 3);
       filterByPublisher();
     }
   }, [router]);
@@ -102,13 +114,11 @@ export default function Singlepage() {
     } else if (matchedMenuItem && matchedMenuItem.type === "url") {
       window.open(matchedMenuItem.landing, "_blank");
     } else {
+      console.log('117');
+      
       filterByPublisher();
     }
   }, [matchedMenuItem, page, limit, myObject.sort]);
-
-  //  const sendDataToParent = (data) => {
-  //    console.log("Data from ListAside:", data);
-  //  };
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
@@ -271,11 +281,11 @@ export default function Singlepage() {
           </div>
 
           <div className="home-banner">
-            {publisher === "seashore" ? (
-              <img src="/images/haibin.svg" className="" alt="..."></img>
-            ) : (
-              <img src="/images/yidin.svg" className="" alt="..."></img>
-            )}
+            {banner!= "" && <img
+              src={`https://directus-cms.vicosys.com.hk/assets/${banner}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+              className=""
+              alt="banner"
+            ></img>}
           </div>
 
           <div className="top-area">

@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     console.log("publisher", req.query.publisher);
 
 
-    const limit = req.query.limit || 10;
+    const limit = req.query.limit || 15;
     const page = req.query.page || 1;
     const sort = req.query.sort || ["-date_created"];
     const publisher = req.query.publisher;

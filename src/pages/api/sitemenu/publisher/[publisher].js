@@ -16,8 +16,7 @@ export default async function handler(req, res) {
     //    return res.status(400).json({ error: "Invalid publisher provided" });
     //  }
 
-    const result = await apiManager.getSideMenuByPublisher(
-      req.query.publisher);
+    const result = await apiManager.getSideMenuByPublisher(req.query.publisher);
     // console.log("resultresultresult", result);
 
     return res.status(200).json({ result });
