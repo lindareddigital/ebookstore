@@ -237,6 +237,15 @@ export default function Singlepage() {
     }
   };
 
+  const getPageColor = (publisher) => {
+    if (publisher === "seashore") {
+      return "seashore-color";
+    } else if (publisher === "ichiban") {
+      return "ichiban-color";
+    }
+    return "";
+  };
+
   if (publisher != "seashore" && publisher != "ichiban") {
     return <Error statusCode={404} />;
   }

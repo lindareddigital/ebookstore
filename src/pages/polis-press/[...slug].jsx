@@ -15,6 +15,8 @@ import { useGlobalStore } from "src/pages/store/global.store";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
+  const [panelView, setPanelView] = useState("");
+
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(0);
@@ -345,7 +347,9 @@ export default function Listing() {
             {currentView === "list" && <ListList books={books} />}
 
             <div className="">
-              {length > 15 && Math.ceil(length / 5) > 1 && <Paginations length={length} />}
+              {length > 15 && Math.ceil(length / 5) > 1 && (
+                <Paginations length={length} />
+              )}
             </div>
           </div>
 
@@ -356,37 +360,77 @@ export default function Listing() {
                   <img src="/icons/close.svg" alt="" />
                 </button>
 
-                {siteMenu?.map((item) => {
-                  return (
-                    <ul className="">
-                      <div className="title">{item.title}</div>
-                      {item.menu_items?.map((menuItem) => (
-                        <li key={menuItem.site_menu_items_id.id}>
-                          <div
-                            onClick={() =>
-                              handleClick(
-                                item.channel,
-                                menuItem.site_menu_items_id,
-                                item.publisher
-                              )
-                            }
-                          >
-                            {menuItem.site_menu_items_id.title}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                })}
+                {panelView == "filter" &&
+                  siteMenu?.map((item) => {
+                    return (
+                      <ul className="">
+                        <div className="title">{item.title}</div>
+                        {item.menu_items?.map((menuItem) => (
+                          <li key={menuItem.site_menu_items_id.id}>
+                            <div
+                              onClick={() =>
+                                handleClick(
+                                  item.channel,
+                                  menuItem.site_menu_items_id,
+                                  item.publisher
+                                )
+                              }
+                            >
+                              {menuItem.site_menu_items_id.title}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  })}
+
+                {panelView == "sort" && (
+                  <div className="">
+                    <li
+                      data-value="-date_created"
+                      onClick={(event) => {
+                        const value = event.target.getAttribute("data-value");
+                        setMyObject((prev) => ({
+                          ...prev,
+                          sort: [value],
+                        }));
+                      }}
+                    >
+                      上市日期(新→舊)
+                    </li>
+                    <li
+                      data-value="date_created"
+                      onClick={(event) => {
+                        const value = event.target.getAttribute("data-value");
+                        setMyObject((prev) => ({
+                          ...prev,
+                          sort: [value],
+                        }));
+                      }}
+                    >
+                      上市日期(舊→新)
+                    </li>
+                  </div>
+                )}
               </div>
             )}
 
             <ul className="panel-btn">
-              <li onClick={openPanel}>
+              <li
+                onClick={() => {
+                  openPanel();
+                  setPanelView("filter");
+                }}
+              >
                 <img src="/icons/filter.svg" alt="" />
                 篩選
               </li>
-              <li>
+              <li
+                onClick={() => {
+                  openPanel();
+                  setPanelView("sort");
+                }}
+              >
                 <img src="/icons/sort.svg" alt="" />
                 排序
               </li>

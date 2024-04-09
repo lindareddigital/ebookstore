@@ -35,7 +35,7 @@ export default function ListList({ books }) {
                       <button className="wish-btn">
                         <img src="/icons/heart.svg" alt="" />
                       </button>
-                      <div className="">
+                      <div className="button-group">
                         <div className="btn button-radius">
                           <img src="/icons/heart.svg" alt="" />
                           收藏此書

@@ -16,8 +16,9 @@ export default function Navbar({}) {
 
   useEffect(() => {
     const fetchData = async () => {
-     const navMenu = await fetch(`/api/sitemenu/navimenu`);
-     setNavMenu(navMenu);
+     const response = await fetch(`/api/sitemenu/navimenu`);
+     const navMenu = await response.json();
+     setNavMenu(navMenu.result.site_menu[0].menu_items);
     };
     fetchData();
   }, []);
@@ -91,36 +92,33 @@ export default function Navbar({}) {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  href="/listing/all"
+                  href="/polis-press/all"
                 >
                   全站分類
                 </Link>
               </li> */}
 
-              {navMenu?.result?.site_menu?.menu_items?.map((item) => {
-                return (
-                  <>
-                    <li className="nav-item" key={item.id}>
-                      <Link
-                        href={{
-                          pathname: `/listing`,
-                          query: { slug: `${item.site_menu_items_id.slug}` },
-                        }}
+              {navMenu &&
+                navMenu.map((item) => {
+                  {/* {console.log("MenuBar", item); } */}
+                  return (
+                    <div className="nav-item" key={item.site_menu_items_id.id}>
+                      <div
+                        onClick={() => handleClick(item.site_menu_items_id)}
                         className="nav-link"
                       >
                         {item.site_menu_items_id.title}
-                      </Link>
-                    </li>
-                  </>
-                );
-              })}
+                      </div>
+                    </div>
+                  );
+                })}
               <li className="nav-item">
-                <Link className="nav-link" href={{ pathname: `/seashores/` }}>
+                <Link className="nav-link" href={{ pathname: `/seashore` }}>
                   海濱
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href={{ pathname: `/ichiban/` }}>
+                <Link className="nav-link" href={{ pathname: `/ichiban` }}>
                   一丁
                 </Link>
               </li>
