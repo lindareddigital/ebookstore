@@ -267,6 +267,10 @@ a:hover{
   box-shadow: 0px 4px 30px 0px #00000029;
 }
 
+.home-recommend-tabs .book-item{
+  margin: 0px 8px;
+}
+
 .grid-view{
   width: 1048px;
   /* max-width: 1048px; */
@@ -927,20 +931,30 @@ span{
   position: relative;
   margin-bottom: 8px;
   margin-left: 32px;
+  display: flex;
+  align-items: center;
 }
 
 .listing-page .block-title{
   margin-left: 24px;
 }
 
-.block-title::before{
+/* .block-title::before{
   content: '';
   width: 8px;
   height: 31px;
   background-color: var(--Black, #28251C);
   position: absolute;
-  left: -24px;
+  left: 0px;
   top: 8px;
+} */
+
+.block-title .dot{
+  margin-right: 8px;
+  width: 8px;
+  height: 31px;
+  border-radius: 0;
+  background-color: var(--Black, #28251C);
 }
 
 .home-recommend-tabs .nav-item.active{
@@ -2274,13 +2288,9 @@ footer .accordion{
 
 @media (max-width: 992px){
 
-.listing-page .right-side{
-  height: 1000px;
-  overflow: auto;
-} 
-
 .listing-page{
   height: 100vh;
+  overflow: auto;
 }
 
 .single-page .yt-block .wrap,
@@ -2364,6 +2374,7 @@ footer .accordion{
 
 .grid-view{
   width: calc(100vw - 32px);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
 .news-tabs .tab-pane{
@@ -2445,6 +2456,7 @@ footer .accordion{
 
 .listing-page .book-item > img{
   width: 100%;
+  height: auto;
 }
 
 .panel-btn{
@@ -2679,7 +2691,7 @@ footer .accordion{
   height: 807px;
 }
 
-.book-item{
+.listing-page .book-item{
   margin-bottom: 24px;
   width: unset;
   height: unset;
@@ -2763,15 +2775,17 @@ footer .box{
 
 .home-page .home-banner{
   flex-direction: column-reverse;
-  height: unset;
+  height: 695px;
   width: calc(100vw - 32px)!important;
   /* width: 100vw; */
-  padding: 0 0 38px 0;
+  padding: 0 0 48px 0;
+  justify-content: space-between;
 }
 
 .home-banner .leftbox{
   width: calc(100vw - 32px);
   margin-top: 20px;
+  height: 411px;
 }
 
 .home-banner .leftbox .topright{
@@ -2780,7 +2794,16 @@ footer .box{
 
 .carousel-item img {
   width: calc(100vw - 32px);
-  height: auto;
+  height: 187px;
+  /* clip-path: inset(-100px 0px 0px -100vmax); */
+}
+
+/* .carousel-control-next, .carousel-control-prev{
+  display: none;
+} */
+
+.home-banner .leftbox .desc{
+  padding: 8px 0px;
 }
 
 .home-banner-carousel{
@@ -2805,8 +2828,13 @@ footer .box{
 }
 
 .posts-categories,
-.logo{
+.header-search-bar .logo{
   display: none;
+}
+
+.logo {
+  width: 29px;
+  height: 36px;
 }
 
 .yt-block > .more{

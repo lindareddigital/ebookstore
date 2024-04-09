@@ -11,7 +11,7 @@ export default function MediaBlock({ video }) {
   const ytVideo = video?.item?.cards;
 
   return (
-    <>
+    <>{ ytVideo.length != 0 &&
       <div className="container-fluid seashore-media-block">
         <div className="single-separator">
           <img
@@ -26,7 +26,7 @@ export default function MediaBlock({ video }) {
               width="871"
               height="490"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[0].youtube
+                ytVideo[0]?.youtube
               )}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -71,6 +71,7 @@ export default function MediaBlock({ video }) {
           ></img>
         </div>
       </div>
+    }
     </>
   );
 }

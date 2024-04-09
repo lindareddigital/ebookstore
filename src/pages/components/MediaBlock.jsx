@@ -14,7 +14,7 @@ export default function MediaBlock({ posts,video }) {
   const ytVideo = video?.item?.cards;
 
   return (
-    <>
+    <>{ytVideo?.length != 0 && ytVideo && ytVideo.length > 0 && ytVideo[0] && 
       <div className="container-fluid media-block">
         <div className="yt-block">
           <iframe
@@ -87,6 +87,7 @@ export default function MediaBlock({ posts,video }) {
           <img className="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>
+    }
       <SocialLinksBlock />
     </>
   );

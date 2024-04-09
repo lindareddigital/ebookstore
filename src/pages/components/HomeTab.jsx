@@ -63,7 +63,10 @@ export default function HomeTab({books}) {
           defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
         >
           <Nav variant="tabs">
-            <div className="block-title">新書上市</div>
+            <div className="block-title">
+            <div className="dot"></div>
+            新書上市
+            </div>
 
             {/* {blocks.map((item) => (
               <div>

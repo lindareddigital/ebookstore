@@ -3,14 +3,24 @@ import { useEffect, useRef,useState } from 'react';
 import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
+import { useRouter } from "next/router";
 
 export default function Navbar({}) {
-  const { width, mobile } = useCalc();
   const [navMenu, setNavMenu] = useState(null);
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setOpen((prev) => !prev);
+  };
+
+  const handleClick = (item) => {
+    if (typeof sendDataToParent === "function") {
+      sendDataToParent(item.title);
+    }
+    router.push(`/polis-press/${item.slug}`, undefined, {
+      shallow: true,
+    });
   };
 
 
@@ -47,8 +57,8 @@ export default function Navbar({}) {
               <img src="/icons/nav-menu.svg" alt="" />
             )}
           </button>
-          <Link className="navbar-brand" href="#">
-            大邑文化
+          <Link className="navbar-brand" href="/">
+            <img className="logo" src="/images/logo.jpeg" alt=""></img>
           </Link>
           <Link
             href="/member"
@@ -100,7 +110,9 @@ export default function Navbar({}) {
 
               {navMenu &&
                 navMenu.map((item) => {
-                  {/* {console.log("MenuBar", item); } */}
+                  {
+                    /* {console.log("MenuBar", item); } */
+                  }
                   return (
                     <div className="nav-item" key={item.site_menu_items_id.id}>
                       <div
