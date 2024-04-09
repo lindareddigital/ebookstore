@@ -4,13 +4,14 @@ import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
+import {extractYouTubeId} from "src/utilities/tool.js";
 
 
 
+export default function MediaBlock({ posts,video }) {
 
-export default function MediaBlock({ posts }) {
-
-  console.log("post", posts);
+  console.log("video", video?.item?.cards);
+  const ytVideo = video?.item?.cards;
 
   return (
     <>
@@ -19,32 +20,33 @@ export default function MediaBlock({ posts }) {
           <iframe
             width="871"
             height="490"
-            src="https://www.youtube.com/embed/55R1KVI4h74?si=qr6If8TgjJ425APu"
+            src={`https://www.youtube.com/embed/${extractYouTubeId(
+              ytVideo[0].youtube
+            )}`}
             title="YouTube video player"
-            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
-          <div className="title">X萬獸探險隊益智桌遊：算數王之戰</div>
-          <div className="desc">
-            在使用帥氣的絕招卡時，可以吸收牌中的動物常識，利用數字加總及學到的知識，讓這場對戰贏得勝利。現在就來一場與朋友之間的精采對戰，看看哪個牌組才是真正的王者吧！
-          </div>
+          <div className="title">{ytVideo[0].title}</div>
+          <div className="desc">{ytVideo[0].description}</div>
           <div className="more">
             <iframe
               width="322"
               height="181"
-              src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
+              src={`https://www.youtube.com/embed/${extractYouTubeId(
+                ytVideo[1].youtube
+              )}`}
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
             <iframe
               width="322"
               height="181"
-              src="https://www.youtube.com/embed/H4uG7XiXf78?si=HUo2Q9ujcf2kAY8n"
+              src={`https://www.youtube.com/embed/${extractYouTubeId(
+                ytVideo[2].youtube
+              )}`}
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>

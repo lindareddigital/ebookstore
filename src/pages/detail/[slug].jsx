@@ -152,10 +152,3 @@ export default function Detail({}) {
   );
 }
 
-
-// export const getServerSideProps = async () => {
-//   const result = await apiManager.getPageBySlug();
-//   const siteMenu = await apiManager.getSiteMenu();
-
-//   return { props: { data: result, siteMenu } };
-// };

@@ -163,7 +163,7 @@ export default function Footer() {
               <Link href="">常見問題</Link>
             </li>
             <li>
-              <Link href="/contactus">聯絡我們</Link>
+              <Link href="/ContactUs">聯絡我們</Link>
             </li>
           </div>
           <div className="box">

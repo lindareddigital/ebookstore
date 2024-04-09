@@ -22,6 +22,7 @@ export default function Listing() {
   const categoryIds = useRef([]);
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
+    title: ""
     // page: 1,
   });
   const isFirstRendering = useRef(true);
@@ -64,6 +65,7 @@ export default function Listing() {
       setMyObject((prev) => ({
         ...prev,
         arr: matchedMenuItem?.query_tags,
+        title: matchedMenuItem.title,
       }));
       filterBySeries("polis-press", matchedMenuItem?.query_tags);
     }
@@ -289,15 +291,15 @@ export default function Listing() {
       <div className="container-fluid">
         <div className="main-body">
           <SidebarWrapper />
-          <ListAside siteMenu={siteMenu}  />
+          <ListAside siteMenu={siteMenu} />
           <div className="right-side">
             <div className="block-title">
-              {title} {categoryIds?.current[0]?.category_id?.name}
+              {title} {myObject.title}
             </div>
 
             <div className="listing-toolbar">
               <div className="amount">
-                {/* 商品清單共有<span>{filterData.length}</span>本 */}
+                <span>商品清單</span>共有<span>{length}</span>本
               </div>
 
               <div className="right-side">
@@ -343,7 +345,7 @@ export default function Listing() {
             {currentView === "list" && <ListList books={books} />}
 
             <div className="">
-              {Math.ceil(length / 5) > 1 && <Paginations length={length} />}
+              {length > 15 && Math.ceil(length / 5) > 1 && <Paginations length={length} />}
             </div>
           </div>
 

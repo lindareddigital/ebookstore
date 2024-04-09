@@ -6,30 +6,92 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-import apiManager from "src/pages/api/api";
+
+export default function Share({}) {
+  const [data, setData] = useState(null);
+  const [media, setMedia] = useState(null);
+
+  const [column, setColumn] = useState(null);
+  const [news, setNew] = useState(null);
 
 
-export default function Share({ data, siteMenu }) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/page/home`);
+        const result = await response.json();
+        setData(result?.result?.pages[0].blocks);
+        console.log("ddata", data);
+      } catch (error) {
+        console.error("获取数据时出错：", error);
+      }
+    };
 
-  console.log(
-    "Share",
-    data.data.pages[0].blocks,
-    data.data.pages[0].blocks[3].item.posts
-  );
+    const media = data?.find((item) => {
+      return item?.id === 3;
+    });
 
-  const column = data.data.pages[0].blocks[3].item.posts;
-  const news = data.data.pages[0].blocks[3].item.posts;
+    setMedia(media)
 
-  const allTags = column.reduce((acc, post) => {
-    return acc.concat(post.posts_id.tags);
+    // setColumn(media);
+    // setNew(media[1]?.item?.posts);
+
+    console.log("Share", media);
+
+    fetchData();
   }, []);
 
-  console.log(allTags);
+  // const allTags = column.reduce((acc, post) => {
+  //   return acc.concat(post.posts_id.tags);
+  // }, []);
+
+  // console.log(allTags);
+  // return null
+
+  const Paginations = ({ length }) => {
+    const pageNumbers = [];
+    console.log("Paginations length", length);
+
+    if (Number(length)) {
+      for (let i = 1; i <= Math.ceil(length / 15); i++) {
+        pageNumbers.push(
+          <Pagination.Item
+            onClick={() => {
+              updatePage(i);
+            }}
+            key={i}
+            active={i == page}
+          >
+            {i}
+          </Pagination.Item>
+        );
+      }
+      return (
+        <Pagination>
+          <Pagination.Prev
+            onClick={() => {
+              const prevPage = Math.max(1, Number(page) - 1);
+              updatePage(prevPage);
+            }}
+          />
+          {pageNumbers}
+          <Pagination.Next
+            onClick={() => {
+              const nextPage = Math.min(
+                Math.ceil(length / 5),
+                Number(page) + 1
+              );
+              updatePage(nextPage);
+            }}
+          />
+        </Pagination>
+      );
+    }
+  };
 
   return (
     <div className="share-page">
       <Navbar />
-
       <MenuBar />
       <Breadcrumb data={"分享專欄"} />
 
@@ -86,46 +148,47 @@ export default function Share({ data, siteMenu }) {
                   </select>
                 </div>
 
-                {column?.map((item) => {
-                  return (
-                    <>
-                      <div className="share-list-item overflow-hidden">
-                        <Link href="/" className="post-thumb">
-                          <img
-                            className="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                            alt=""
-                          ></img>
-                        </Link>
-                        <div className="post-info">
-                          <h4 className="post-title">
-                            <Link href="/" className="">
-                              {item.posts_id.title}
-                            </Link>
-                          </h4>
-                          <p className="post-excerpt">專欄主題:</p>
-                          <div className="post-meta">
-                            {item.posts_id.tags?.map((item) => {
-                              return (
-                                <Link
-                                  href="/posts/events"
-                                  className="post-meta-tag category"
-                                >
-                                  {item}
-                                </Link>
-                              );
-                            })}
-                            <div className="post-meta-date">
-                              2023/09/22
-                              <div className="dot"></div>
-                              小編
+                {media &&
+                  media?.item?.posts?.map((item) => {
+                    return (
+                      <>
+                        <div className="share-list-item overflow-hidden">
+                          <Link href="/" className="post-thumb">
+                            <img
+                              className="q-img__image"
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              alt=""
+                            ></img>
+                          </Link>
+                          <div className="post-info">
+                            <h4 className="post-title">
+                              <Link href="/" className="">
+                                {item.posts_id.title}
+                              </Link>
+                            </h4>
+                            <p className="post-excerpt">專欄主題:</p>
+                            <div className="post-meta">
+                              {item.posts_id.tags?.map((item) => {
+                                return (
+                                  <Link
+                                    href="/posts/events"
+                                    className="post-meta-tag category"
+                                  >
+                                    {item}
+                                  </Link>
+                                );
+                              })}
+                              <div className="post-meta-date">
+                                2023/09/22
+                                <div className="dot"></div>
+                                小編
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  );
-                })}
+                      </>
+                    );
+                  })}
               </div>
 
               <div className="posts-categories">
@@ -153,46 +216,47 @@ export default function Share({ data, siteMenu }) {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                {news?.map((item) => {
-                  return (
-                    <>
-                      <div className="share-list-item overflow-hidden">
-                        <Link href="/" className="post-thumb">
-                          <img
-                            className="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                            alt=""
-                          ></img>
-                        </Link>
-                        <div className="post-info">
-                          <h4 className="post-title">
-                            <Link href="/" className="">
-                              {item.posts_id.title}
-                            </Link>
-                          </h4>
-                          <p className="post-excerpt">專欄主題:</p>
-                          <div className="post-meta">
-                            {item.posts_id.tags?.map((item) => {
-                              return (
-                                <Link
-                                  href="/posts/events"
-                                  className="post-meta-tag category"
-                                >
-                                  {item}
-                                </Link>
-                              );
-                            })}
-                            <div className="post-meta-date">
-                              2023/09/22
-                              <div className="dot"></div>
-                              小編
+                {media &&
+                  media.map((item) => {
+                    return (
+                      <>
+                        <div className="share-list-item overflow-hidden">
+                          <Link href="/" className="post-thumb">
+                            <img
+                              className="q-img__image"
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              alt=""
+                            ></img>
+                          </Link>
+                          <div className="post-info">
+                            <h4 className="post-title">
+                              <Link href="/" className="">
+                                {item.posts_id.title}
+                              </Link>
+                            </h4>
+                            <p className="post-excerpt">專欄主題:</p>
+                            <div className="post-meta">
+                              {item.posts_id.tags?.map((item) => {
+                                return (
+                                  <Link
+                                    href="/posts/events"
+                                    className="post-meta-tag category"
+                                  >
+                                    {item}
+                                  </Link>
+                                );
+                              })}
+                              <div className="post-meta-date">
+                                2023/09/22
+                                <div className="dot"></div>
+                                小編
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  );
-                })}
+                      </>
+                    );
+                  })}
               </div>
             </div>
 
@@ -200,12 +264,13 @@ export default function Share({ data, siteMenu }) {
               <Pagination>
                 <Pagination.Prev />
                 <Pagination.Item>{1}</Pagination.Item>
-                {/* <Pagination.Ellipsis /> */}
-
-                {/* <Pagination.Ellipsis /> */}
                 <Pagination.Item>{2}</Pagination.Item>
                 <Pagination.Next />
               </Pagination>
+
+              {/* {Math.ceil(productTotalCount / 5) > 1 && (
+                <Paginations length={productTotalCount} />
+              )} */}
             </div>
           </div>
         </div>
@@ -214,11 +279,3 @@ export default function Share({ data, siteMenu }) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const result = await apiManager.getPageBySlug();
-  const siteMenu = await apiManager.getSiteMenu();
-
-  console.log("datadata", result);
-
-  return { props: { data: result, siteMenu } };
-};

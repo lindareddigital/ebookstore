@@ -20,6 +20,7 @@ export default function Singlepage() {
   const page = router.query.page || 1;
   const limit = router.query.limit || 15;
   const [menu, setMenu] = useState(null);
+  const [video, setVideo] = useState(null);
   const [banner, setBanner] = useState("");
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
   const [products, setProducts] = useState(null);
@@ -52,6 +53,12 @@ export default function Singlepage() {
         const heroBanner = result?.result?.pages[0].blocks?.find((item) => {
           return item.collection === "block_hero";
         });
+         const video = result?.result?.pages[0].blocks?.find((item) => {
+           return item?.id === "12";
+         });
+        console.log(video);
+         
+        setVideo(video);
         setBanner(heroBanner?.item?.image?.id);
 
       } catch (error) {
@@ -239,20 +246,6 @@ export default function Singlepage() {
       {publisher !== "" && (
         <div className="">
           <SidebarWrapper />
-          <div className="sidebtn-container">
-            <div className="message-btn">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg"
-                alt=""
-              ></img>
-            </div>
-            <div className="">
-              <button onClick="topFunction()" id="topBtn">
-                Top
-              </button>
-            </div>
-          </div>
-
           <div className="container-fluid header-main">
             <div className="header-search-bar">
               <h3>{publisher === "seashore" ? "海濱圖書" : "一丁文化"}</h3>
@@ -277,11 +270,13 @@ export default function Singlepage() {
           </div>
 
           <div className="home-banner">
-            {banner!= "" && <img
-              src={`https://directus-cms.vicosys.com.hk/assets/${banner}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-              className=""
-              alt="banner"
-            ></img>}
+            {banner != "" && (
+              <img
+                src={`https://directus-cms.vicosys.com.hk/assets/${banner}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                className=""
+                alt="banner"
+              ></img>
+            )}
           </div>
 
           <div className="top-area">
@@ -304,11 +299,7 @@ export default function Singlepage() {
 
           <div className="container-fluid">
             <div className="main-body content">
-              <ListAside
-                siteMenu={menu}
-                // sendDataToParent={sendDataToParent}
-                publisher={publisher}
-              />
+              <ListAside siteMenu={menu} publisher={publisher}/>
 
               <div className="right-side">
                 {/* <div className="block-title">系列：X萬獸探險隊</div> */}
@@ -356,7 +347,7 @@ export default function Singlepage() {
                 {currentView === "grid" && <GridList books={products} />}
                 {currentView === "list" && <ListList books={products} />}
                 <div className="">
-                  {Math.ceil(productTotalCount / 5) > 1 && (
+                  {length > 15 && Math.ceil(productTotalCount / 5) > 1 && (
                     <Paginations length={productTotalCount} />
                   )}
                 </div>{" "}
@@ -364,7 +355,7 @@ export default function Singlepage() {
             </div>
           </div>
 
-          <SeashoreMediaBlock />
+          {publisher === "seashore" && video != null && <SeashoreMediaBlock video={video} />}
           <SinglePageTab />
           <SocialLinksBlock />
         </div>

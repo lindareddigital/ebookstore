@@ -1,25 +1,29 @@
 import { Metadata } from 'next';
 
-export default async function imgBlob(url){
+// export default async function imgBlob(url){
 
-  const token = process.env.NEXT_PUBLIC_TOKEN;
+//   const token = process.env.NEXT_PUBLIC_TOKEN;
 
-  const imageUrl = `${url}?access_token=${token}`;
+//   const imageUrl = `${url}?access_token=${token}`;
 
-  const response = await fetch(imageUrl);
-  const blob = await response.blob();
-  const imageDataUrl = URL.createObjectURL(blob);
+//   const response = await fetch(imageUrl);
+//   const blob = await response.blob();
+//   const imageDataUrl = URL.createObjectURL(blob);
 
 
  
-  res.setHeader("Content-Type", response.headers.get("Content-Type"));
-  res.send(blob);
-
-
+//   res.setHeader("Content-Type", response.headers.get("Content-Type"));
+//   res.send(blob);
   
-  return imageDataUrl;
-};
+//   return imageDataUrl;
+// };
 
+export const extractYouTubeId = (url) => {
+  const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regExp);
+  
+  return match ? match[1] : null;
+}
 
 export const getDetailLink = (id) => {
   // const lng = useGlobalStore.getState().lng;

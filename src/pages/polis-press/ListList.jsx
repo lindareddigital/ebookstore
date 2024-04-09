@@ -35,13 +35,15 @@ export default function ListList({ books }) {
                       <button className="wish-btn">
                         <img src="/icons/heart.svg" alt="" />
                       </button>
-                      <div className="btn button-radius">
-                        <img src="/icons/heart.svg" alt="" />
-                        收藏此書
-                      </div>
-                      <div className="btn button-radius view-detail-btn">
-                        <img src="/icons/search.svg" alt="" />
-                        查看內頁
+                      <div className="">
+                        <div className="btn button-radius">
+                          <img src="/icons/heart.svg" alt="" />
+                          收藏此書
+                        </div>
+                        <div className="btn button-radius view-detail-btn">
+                          查看內頁
+                          <img src="/icons/viewmore.svg" alt="" />
+                        </div>
                       </div>
                     </div>
                   </div>

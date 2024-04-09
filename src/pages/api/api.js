@@ -153,6 +153,7 @@ class ApiManager {
                       image {
                           id
                       }
+                      youtube
                   }
                 }
                 ... on block_hero_group {
@@ -227,12 +228,8 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSideMenuByPublisher = async (publisher_slug,channel) => {
-    //"${publisher_slug}" "${category_slug}"
+  getSideMenuByPublisher = async (publisher_slug) => {
 
-    //  channel: {
-    //    _eq: "${channel}";
-    //  } 
     const gql = `query {
       site_menu( 
         filter: {
@@ -271,7 +268,6 @@ class ApiManager {
   };
 
   getSideMenuByChannelAndSlug = async (channel, category_slug) => {
-    //"${publisher_slug}" "${category_slug}"
     const gql = `
     query {
     site_menu(
@@ -583,10 +579,6 @@ class ApiManager {
 
     return await this.sdk(gql);
   };
-}
-
-function getCategoryIds(categories) {
-  return categories.map(category => category.category_id.id);
 }
 
 export default ApiManager.getSharedInstance();

@@ -26,7 +26,7 @@ export default function SidebarWrapper() {
       
   });
 
-  return(
+  return (
     <div className="sidebar-wrapper scroll-cling-top">
       {/* <div className="scroll-active"><div id="sidebar-menu-3-0" className="d-none d-lg-flex tab">
         <Link aria-current="page" href="" className="router-link-active router-link-exact-active">
@@ -49,14 +49,18 @@ export default function SidebarWrapper() {
         <Link  aria-current="page" href="/" className="router-link-active router-link-exact-active" ><span >X萬獸探險隊-特別篇</span></Link>
       </div>
       </div> */}
+      <div className="message-btn">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg"
+          alt=""
+        ></img>
+      </div>
       <div onClick={topFunction} className="back-to-top">
         {/* <span>返回頂端</span> */}
         <img src="/icons/backtop.svg" alt="" />
       </div>
-
     </div>
-
-  )
+  );
 
 }
 

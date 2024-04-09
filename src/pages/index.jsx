@@ -74,11 +74,16 @@ export default function Home() {
 
   console.log("media", media?.item?.posts);
   
+  const video = blocks?.find((item) => {
+    return item?.id === "11";
+  });
 
-  console.log("homeTab", homeTab?.item?.cards);
+  // console.log("video", video);
+
+  // console.log("homeTab", homeTab?.item?.cards);
   
 
-  console.log("heroBanner", heroBanner?.item.hero_cards);
+  // console.log("heroBanner", heroBanner?.item.hero_cards);
 
   return (
     <div className="home-page">
@@ -228,7 +233,7 @@ export default function Home() {
         {/* <HomeTabTwo /> */}
       </div>
 
-      <MediaBlock posts={media?.item?.posts} />
+      <MediaBlock posts={media?.item?.posts} video={video}/>
     </div>
   );
 }

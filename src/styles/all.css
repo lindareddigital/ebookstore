@@ -137,8 +137,8 @@ a:hover{
 }
 
 .logo{
-  width: 95px;
-  height: 95px;
+  width: 77px;
+  height: 96px;
   object-fit: cover;
   max-width: 100%;
   background-image: url(/images/logo.jpeg);
@@ -280,6 +280,11 @@ a:hover{
 .single-page .main-body{
  height: unset;
  background: unset;
+ justify-content: space-between;
+}
+
+.single-page .main-body{
+  justify-content: flex-end;
 }
 
 .single-page .content{
@@ -530,7 +535,7 @@ a:hover{
 }
 
 .listing-banner{
-  max-width: 1200px;
+  max-width: 1320px;
   height: 100px;
   margin: 32px auto;
   background: #D9D9D9;
@@ -567,10 +572,11 @@ a:hover{
   width:119px;
   height: 36px;
   padding: 6px 12px;
+  justify-content: space-between;
 }
 
 .list-view-item{
-  width: 1048px;
+  max-width: 1048px;
   height: 200px;
   padding: 20px;
   border-bottom: 1px solid #DEDEDE;
@@ -582,6 +588,7 @@ a:hover{
 .list-view-item .wrapper{
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   width: 80%;
 }
 
@@ -609,7 +616,14 @@ a:hover{
   font-size: 16px;
   font-weight: 500;
   line-height: 23px;
-  color: #DEDEDE;
+  /* color: #DEDEDE; */
+}
+
+.list-view-item .info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .list-view-item > img{
@@ -674,6 +688,10 @@ a:hover{
   line-height: 23px;
   letter-spacing: 0.2em;
   color: #000;
+}
+
+.listing-toolbar .amount span{
+
 }
 
 .listing-toolbar .right-side{
@@ -905,6 +923,10 @@ span{
   position: relative;
   margin-bottom: 8px;
   margin-left: 32px;
+}
+
+.listing-page .block-title{
+  margin-left: 24px;
 }
 
 .block-title::before{
@@ -1503,6 +1525,10 @@ footer a{
   padding: 0 16px;
   position: relative;
   justify-content: center;
+}
+
+.share-page .more-nav-tabs{
+  margin-top: 0;
 }
 
 .detail-page .more-nav-tabs .topright,
@@ -2137,7 +2163,7 @@ footer .container-fluid{
 }
 
 .single-page .home-recommend-tabs{
-  width: calc(100vw - 15%);
+  width: calc(100vw - 8%);
   position: relative;
   z-index: 999;
   right: 0;
@@ -2260,13 +2286,17 @@ footer .accordion{
   width: calc(100vw - 32px);
 }
 
+.list-view{
+  width: calc(100vw - 32px);
+}
+
 .list-view-item .wrapper{
   flex-direction: column;
   width: 100%;
 }
 
 .list-view-item .info{
-  width: 100%;
+  flex-direction: row;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2277,11 +2307,18 @@ footer .accordion{
   height: 26px;
   padding: 5.2px;
   border-radius: 2.6px;
+  display: block;
   position: relative;
 }
 
 .list-view .wish-btn img{
   position: absolute;
+  top: 1px;
+  right: 1px;
+}
+
+.list-view-item .price-num{
+  margin-top: 0;
 }
 
 .manage-page .leftbox{
@@ -2298,7 +2335,7 @@ footer .accordion{
 }
 
 .grid-view{
-  width: unset;
+  width: calc(100vw - 32px);
 }
 
 .news-tabs .tab-pane{
@@ -2380,7 +2417,6 @@ footer .accordion{
 
 .listing-page .book-item > img{
   width: 100%;
-  height: unset;
 }
 
 .panel-btn{
@@ -2559,6 +2595,10 @@ footer .accordion{
   width: 100%;
 }
 
+.single-page .home-banner img{
+  height: 187px;
+}
+
 .single-separator{
   width: calc(100vw - 32px);
   margin: auto;
@@ -2601,11 +2641,17 @@ footer .accordion{
 
 .book-item{
   margin-bottom: 24px;
+  width: unset;
+  height: unset;
+}
+
+.book-item img{
+  width: 100%;
+  height: auto;
 }
 
 .listing-page .book-item{
-  width: 46vw;
-  height: unset;
+  margin: auto;
 }
 
 .listing-page .block-title{
@@ -2623,11 +2669,6 @@ footer .accordion{
 .listing-toolbar{
   flex-direction: column;
   align-items: flex-start;
-}
-
-.book-item img{
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 
 .header-toolbar{
@@ -2971,14 +3012,6 @@ footer .container-fluid{
 
 .dropdown-toggle{
   display: none;
-}
-
-.book-item {
-}
-
-.book-item img {
-  height: unset;
-  aspect-ratio: 3/3;
 }
 
 footer li{
