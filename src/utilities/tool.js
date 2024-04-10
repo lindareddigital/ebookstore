@@ -18,9 +18,28 @@ import { Metadata } from 'next';
 //   return imageDataUrl;
 // };
 
+export const getPageColor = (publisher) => {
+  if (publisher === "seashore") {
+    return "seashore-color";
+  } else if (publisher === "ichiban") {
+    return "ichiban-color";
+  }
+  return "";
+};
+
+export const getPageBg = (publisher) => {
+  if (publisher === "seashore") {
+    return "seashore-bg";
+  } else if (publisher === "ichiban") {
+    return "ichiban-bg";
+  }
+  return "";
+};
+
+
 export const extractYouTubeId = (url) => {
   const regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-  const match = url.match(regExp);
+  const match = url?.match(regExp);
   
   return match ? match[1] : null;
 }

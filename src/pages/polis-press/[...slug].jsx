@@ -90,10 +90,7 @@ export default function Listing() {
       isFirstRendering.current = false;
       return;
     }
-
     filterBooks();
-
-    // filterByCategory();
   }, [page, myObject.limit, myObject.sort]);
 
   useEffect(() => {

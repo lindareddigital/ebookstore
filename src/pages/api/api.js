@@ -236,8 +236,7 @@ class ApiManager {
           publisher:
           {
             _eq: "${publisher_slug}"
-          },
-                
+          },         
       }) 
       { 
         id

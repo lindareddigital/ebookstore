@@ -1,8 +1,13 @@
 import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
+import { useRouter } from "next/router";
+
+import { getPageColor } from "src/utilities/tool.js";
 
 export default function GridList({ books }) {
+  const router = useRouter();
+  const publisher = router.query.slug?.[0];
   const [item, setItem] = useState({});
 
   // console.log("gridlist", books);
@@ -30,7 +35,9 @@ export default function GridList({ books }) {
                     alt={item.title}
                   />
                   <div className="desc">{item.title}</div>
-                  <div className="price-num">＄{item.price}</div>
+                  <div className={`price-num ${getPageColor(publisher)}`}>
+                    ＄{item.price}
+                  </div>
                 </div>
               </Link>
             );

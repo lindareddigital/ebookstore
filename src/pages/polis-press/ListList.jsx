@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
+import { getPageColor } from "src/utilities/tool.js";
+import { useRouter } from "next/router";
 
 export default function ListList({ books }) {
+  const router = useRouter();
+  const publisher = router.query.slug?.[0];
   const [item, setItem] = useState({});
 
   // console.log('8',books);
@@ -31,7 +35,9 @@ export default function ListList({ books }) {
                       <div className="desc">{item.description}</div>
                     </div>
                     <div className="info">
-                      <div className="price-num">＄{item.price}</div>
+                      <div className={`price-num ${getPageColor(publisher)}`}>
+                        ＄{item.price}
+                      </div>
                       <button className="wish-btn">
                         <img src="/icons/heart.svg" alt="" />
                       </button>

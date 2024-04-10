@@ -34,7 +34,7 @@ export default function Detail({}) {
       const res = await fetch(`/api/product/${id}`);
 
       const result = await res.json();
-      console.log('res',result.data);
+      console.log('37res',result.data);
       
       setItem(result.data);
       // console.log("ddata", result.data);
@@ -50,7 +50,7 @@ export default function Detail({}) {
 
   return (
     <div>
-    {item && (
+    {item != null && (
       <div className="detail-page">
         <Head>
           <title>{item.title}</title>

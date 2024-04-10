@@ -11,6 +11,7 @@ import SinglePageTab from "src/pages/components/SinglePageTab";
 import Pagination from "react-bootstrap/Pagination";
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 import Error from "next/error";
+import { getPageColor, getPageBg } from "src/utilities/tool.js";
 
 export default function Singlepage() {
   const router = useRouter();
@@ -244,14 +245,6 @@ export default function Singlepage() {
     }
   };
 
-  const getPageColor = (publisher) => {
-    if (publisher === "seashore") {
-      return "seashore-color";
-    } else if (publisher === "ichiban") {
-      return "ichiban-color";
-    }
-    return "";
-  };
 
   if (publisher != "seashore" && publisher != "ichiban") {
     return <Error statusCode={404} />;
@@ -262,8 +255,8 @@ export default function Singlepage() {
       {publisher !== "" && (
         <div className="">
           <SidebarWrapper />
-          <div className="container-fluid header-main">
-            <div className="header-search-bar">
+          <div className={` header-main ${getPageBg(publisher)}`}>
+            <div className={`header-search-bar `}>
               <h3>{publisher === "seashore" ? "海濱圖書" : "一丁文化"}</h3>
               <div className="header-toolbar">
                 <div className="navbar-link">
@@ -305,12 +298,14 @@ export default function Singlepage() {
               《海濱圖書》為新加坡大眾書局旗下出版品牌，2017年進軍台灣致力推廣多元化食譜，藉由食譜的簡單操作方法，告訴讀者即使沒有經驗，也能製作出一道道精緻美味的美食及飲品！
             </div>
           </div>
-          <div className="single-separator">
-            <img
-              src="/images/single-separator.svg"
-              className=""
-              alt="single-separator"
-            ></img>
+          <div className="container-fluid">
+            <div className="single-separator">
+              <img
+                src="/images/single-separator.svg"
+                className=""
+                alt="single-separator"
+              ></img>
+            </div>
           </div>
 
           <div className="container-fluid">
@@ -320,7 +315,7 @@ export default function Singlepage() {
               <div className="right-side">
                 <div className="listing-toolbar">
                   <div className="wrapper">
-                    <div className="amount">
+                    <div className={`amount ${getPageColor(publisher)}`}>
                       商品清單共有<span>{productTotalCount}</span>本
                     </div>
 
@@ -357,9 +352,9 @@ export default function Singlepage() {
                         ></div>
                       </li>
                     </ul>
-                    <div className="sortselect">
+                    <div className="sortselect social-mobile">
                       <p>篩選類別</p>
-                      
+
                       {menu?.map((item) => {
                         return (
                           <select
@@ -416,7 +411,7 @@ export default function Singlepage() {
           {publisher === "seashore" && video != null && (
             <SeashoreMediaBlock video={video} />
           )}
-          <SinglePageTab />
+          {publisher === "seashore" && <SinglePageTab />}
           <SocialLinksBlock />
         </div>
       )}
