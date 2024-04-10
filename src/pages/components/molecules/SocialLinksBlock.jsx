@@ -12,7 +12,10 @@ export default function SocialLinksBlock({ data }) {
     <>
       <div className="social-links">
         <div className="">
-          <div className="block-title">買書GO</div>
+          <div className="block-title">
+            <div class="dot"></div>
+            買書GO
+          </div>
           <ul className="container-fluid">
             <li>
               <Link href="">

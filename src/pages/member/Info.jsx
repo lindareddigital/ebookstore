@@ -5,7 +5,9 @@ export default function Info() {
   return (
     <>
       <form className="info contact-us">
-        <div className="block-title">會員資料管理</div>
+        <div className="block-title">
+          <div class="dot"></div>會員資料管理
+        </div>
         <div className="red-word">*必須填寫</div>
         <div className="">
           <label htmlFor="exampleInputEmail1" className="form-label">

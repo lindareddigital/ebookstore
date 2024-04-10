@@ -12,13 +12,13 @@ export const NextIcon = ({  }) => {
       <path
         d="M12.2568 7.51465L20.7421 15.9999"
         stroke="#28251C"
-        strokeWidth="3"
+        stroke-width="3"
         strokeLinecap="square"
       />
       <path
         d="M12.2568 24.4854L17.2066 19.5356"
         stroke="#28251C"
-        strokeWidth="3"
+        stroke-width="3"
         strokeLinecap="square"
       />
     </svg>

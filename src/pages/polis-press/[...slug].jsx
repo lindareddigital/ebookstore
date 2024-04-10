@@ -296,6 +296,7 @@ export default function Listing() {
           <ListAside siteMenu={siteMenu} />
           <div className="right-side">
             <div className="block-title">
+              <div class="dot"></div>
               {title} {myObject.title}
             </div>
 

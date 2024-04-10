@@ -75,7 +75,9 @@ export default function SinglePageTab() {
             defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
           >
             <Nav variant="tabs">
-              <div className="block-title">美味食譜</div>
+              <div className="block-title">
+                <div class="dot"></div>美味食譜
+              </div>
               <div className="swiper-button-group">
                 <div onClick={previous} className="swiper-button-prev">
                   <PrevIcon />
@@ -96,7 +98,9 @@ export default function SinglePageTab() {
               >
                 <div className="swiper-wrapper booklist-carousel-inner">
                   {recipe?.map((item) => {
-                    {/* {console.log("recipe", item, item?.id);} */}
+                    {
+                      /* {console.log("recipe", item, item?.id);} */
+                    }
 
                     return (
                       <SwiperSlide className="swiper-slide" key={`${item?.id}`}>

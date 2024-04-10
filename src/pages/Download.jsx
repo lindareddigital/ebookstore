@@ -10,7 +10,9 @@ export default function Download({}) {
       <Breadcrumb data={"書單下載"} />
       <div className="">
         <form className="download form-area">
-          <div className="block-title">書單下載</div>
+          <div className="block-title">
+            <div class="dot"></div>書單下載
+          </div>
 
           <div className="">
             <form className="input-group">
@@ -52,7 +54,9 @@ export default function Download({}) {
             </form>
           </div>
 
-          <div className="block-title">教案下載</div>
+          <div className="block-title">
+            <div class="dot"></div>教案下載
+          </div>
 
           <div className="">
             <form className="input-group">

@@ -5,7 +5,7 @@ import { useEffect, useRef,useState } from 'react';
 export default function ListList({ books }) {
   const [item, setItem] = useState({});
 
-  console.log('8',books);
+  // console.log('8',books);
   
 
   return (

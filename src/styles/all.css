@@ -351,6 +351,7 @@ a:hover{
   display: flex;
   justify-content: center;
   max-width: calc(100vw - 32px);
+  margin: auto;
 }
 
 .single-page .single-separator img{
@@ -934,24 +935,10 @@ span{
   text-align: left;
   position: relative;
   margin-bottom: 8px;
-  margin-left: 32px;
+  /* margin-left: 32px; */
   display: flex;
   align-items: center;
 }
-
-.listing-page .block-title{
-  margin-left: 24px;
-}
-
-/* .block-title::before{
-  content: '';
-  width: 8px;
-  height: 31px;
-  background-color: var(--Black, #28251C);
-  position: absolute;
-  left: 0px;
-  top: 8px;
-} */
 
 .block-title .dot{
   margin-right: 8px;
@@ -1506,9 +1493,7 @@ footer a{
 
  .social-links li{
   display: flex;
-  margin: 0 8px;
   justify-content: center;
-  padding: 53px 62px;
   border-radius: 20px;
   background: var(--White);
   max-width: 311px;
@@ -2768,6 +2753,7 @@ footer .accordion{
 
 .yt-block{
   flex-direction: column;
+  margin: auto;
 }
 
 footer .box{
@@ -3032,8 +3018,8 @@ footer .accordion{
 
 .social-links ul{
   flex-wrap: wrap;
-  width: 100%;
   justify-content: center;
+  width: calc(100vw - 32px);
 }
 
 .block-title{
