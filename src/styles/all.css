@@ -353,6 +353,10 @@ a:hover{
   max-width: calc(100vw - 32px);
 }
 
+.single-page .single-separator img{
+  width: 100%;
+}
+
 .list-aside{
   width: 200px;
 }
@@ -1046,9 +1050,10 @@ span{
 }
 
 .single-page .yt-block{
-  margin: 80px auto;
+  margin: 80px 0;
   flex-direction: row;
   max-width: 1320px;
+  width: unset;
   justify-content: space-between;
 }
 
@@ -2288,6 +2293,15 @@ footer .accordion{
 
 @media (max-width: 992px){
 
+.sortselect{
+  margin-top: 8px;
+  margin-left: 0;
+}
+
+.show-desktop{
+  display: none;
+}
+
 .listing-page{
   height: 100vh;
   overflow: auto;
@@ -2502,6 +2516,14 @@ footer .accordion{
   display: none;
 }
 
+.single-page .listing-toolbar .wrapper{
+  display: flex;
+  align-items: center;
+  width: calc(100vw - 32px);
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
 .single-page .listing-toolbar .right-side{
   display: block;
   width: calc(100vw - 32px);
@@ -2623,6 +2645,7 @@ footer .accordion{
 
 .single-page .home-recommend-tabs{
   position: unset;
+  width: calc(100vw - 32px);
 }
 
 .single-page .swiper-backface-hidden .swiper-slide{
@@ -2642,13 +2665,17 @@ footer .accordion{
   display: block;
 }
 
-.single-page .home-banner img,
-.single-separator img{
+.single-page .home-banner img{
   width: 100%;
 }
 
 .single-page .home-banner img{
   height: 187px;
+}
+
+.single-page .book-item{
+  width: unset;
+  height: unset;
 }
 
 .single-separator{
@@ -3044,7 +3071,7 @@ footer .accordion{
 }
 
 .social-mobile{
-  display: block;
+  display: flex;
 }
 
 footer .container-fluid{

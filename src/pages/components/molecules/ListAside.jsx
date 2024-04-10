@@ -4,7 +4,7 @@ import apiManager from "src/pages/api/api";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function ListAside({ sendDataToParent, siteMenu }) {
+export default function ListAside({ siteMenu }) {
   const router = useRouter();
   const handleClick = (channel, item,publisher) => {
     router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {

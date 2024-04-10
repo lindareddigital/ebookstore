@@ -21,22 +21,23 @@ export default function Share({}) {
         const response = await fetch(`/api/page/home`);
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
-        console.log("ddata", data);
+        const media = data?.find((item) => {
+          return item?.id === "3";
+        });
+
+        setMedia(media);
+
+        // setColumn(media);
+        // setNew(media[1]?.item?.posts);
+
+        console.log("Share", media);
+        console.log("ddata", data, result?.result?.pages[0].blocks);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
 
-    const media = data?.find((item) => {
-      return item?.id === 3;
-    });
-
-    setMedia(media)
-
-    // setColumn(media);
-    // setNew(media[1]?.item?.posts);
-
-    console.log("Share", media);
+    
 
     fetchData();
   }, []);
@@ -217,7 +218,7 @@ export default function Share({}) {
                 aria-labelledby="nav-profile-tab"
               >
                 {media &&
-                  media.map((item) => {
+                  media?.item?.posts?.map((item) => {
                     return (
                       <>
                         <div className="share-list-item overflow-hidden">

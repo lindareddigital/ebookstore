@@ -30,6 +30,7 @@ export default function Singlepage() {
     sort: ["-date_created"],
   });
 
+
   // console.log("router", publisher, channel,limit);
 
   useEffect(() => {
@@ -184,6 +185,12 @@ export default function Singlepage() {
     setProducts(books?.result?.product);
   };
 
+  const handleClick = (channel, item, publisher) => {
+    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+      shallow: true,
+    });
+  };
+
   const handleViewChange = (view) => {
     setCurrentView(view);
   };
@@ -308,17 +315,16 @@ export default function Singlepage() {
 
           <div className="container-fluid">
             <div className="main-body content">
-              <ListAside siteMenu={menu} publisher={publisher}/>
+              <ListAside siteMenu={menu} publisher={publisher} />
 
               <div className="right-side">
-                {/* <div className="block-title">系列：X萬獸探險隊</div> */}
                 <div className="listing-toolbar">
-                  <div className="amount">
-                    商品清單共有<span>{productTotalCount}</span>本
-                  </div>
+                  <div className="wrapper">
+                    <div className="amount">
+                      商品清單共有<span>{productTotalCount}</span>本
+                    </div>
 
-                  <div className="right-side">
-                    <ul className="view_type">
+                    <ul className="view_type social-mobile">
                       顯示模式
                       <li>
                         <div
@@ -333,6 +339,49 @@ export default function Singlepage() {
                         ></div>
                       </li>
                     </ul>
+                  </div>
+
+                  <div className="right-side">
+                    <ul className="view_type show-desktop">
+                      顯示模式
+                      <li>
+                        <div
+                          onClick={() => handleViewChange("grid")}
+                          className="type1"
+                        ></div>
+                      </li>
+                      <li>
+                        <div
+                          onClick={() => handleViewChange("list")}
+                          className="type2 here"
+                        ></div>
+                      </li>
+                    </ul>
+                    <div className="sortselect">
+                      <p>篩選類別</p>
+                      
+                      {menu?.map((item) => {
+                        return (
+                          <select
+                            className="form-select"
+                            onChange={() =>
+                              handleClick(
+                                item.channel,
+                                menuItem?.site_menu_items_id,
+                                item.publisher
+                              )
+                            }
+                          >
+                            <div className="title">{item.title}</div>
+                            {item?.menu_items?.map((menuItem) => (
+                              <option key={menuItem?.site_menu_items_id?.id}>
+                                {menuItem?.site_menu_items_id?.title}
+                              </option>
+                            ))}
+                          </select>
+                        );
+                      })}
+                    </div>
                     <div className="sortselect">
                       <p>排序依</p>
                       <select
@@ -364,7 +413,9 @@ export default function Singlepage() {
             </div>
           </div>
 
-          {publisher === "seashore" && video != null && <SeashoreMediaBlock video={video} />}
+          {publisher === "seashore" && video != null && (
+            <SeashoreMediaBlock video={video} />
+          )}
           <SinglePageTab />
           <SocialLinksBlock />
         </div>
