@@ -29,22 +29,23 @@ export default function Detail({}) {
   console.log("id", id);
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`/api/product/${id}`);
+    console.log("wqeopkwqeopwqkope", id);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/product/${id}`);
 
-      const result = await res.json();
-      console.log('37res',result.data);
-      
-      setItem(result.data);
-      // console.log("ddata", result.data);
-    } catch (error) {
-      console.error("", error);
-    }
-  };
+        const result = await res.json();
+        console.log("37res", result.data);
 
-  fetchData();
-  }, []);
+        setItem(result.data);
+        // console.log("ddata", result.data);
+      } catch (error) {
+        console.error("", error);
+      }
+    };
+
+    fetchData();
+  }, [router]);
 
   console.log("detaildetail", item);
 

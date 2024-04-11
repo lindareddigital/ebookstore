@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 
 function Login() {
-  const {session, loading} = useSession();
+  // const {session, loading} = useSession();
 
   const router = useRouter();
   const { id } = router.query;

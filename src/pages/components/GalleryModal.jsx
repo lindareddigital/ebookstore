@@ -1,4 +1,4 @@
-import { useEffect, useRef,useState } from 'react';
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import apiManager from 'src/pages/api/api';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,45 +14,48 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-
-
-
+import { FreeMode, Navigation, Thumbs, Controller } from "swiper/modules";
 
 export default function GalleryModal({ item,show, onHide }) {
   const swiperRef = useRef(null);
   const subswiperRef = useRef(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  // const thumbsSwiper = useRef(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState();
+  const [firstSwiper, setFirstSwiper] = useState();
+  const [secondSwiper, setSecondSwiper] = useState();
+  const swiper1Ref = useRef(null);
+  const swiper2Ref = useRef();
 
-  // const { next, previous, onRealIndexChange } = useSwiperFunc(swiperRef);
-
-  const getSwiper = (swiper) => {
-    if (swiperRef.current !== swiper) {
-      swiperRef.current = swiper;
+  useLayoutEffect(() => {
+    if (swiper1Ref.current !== null) {
+      swiper1Ref.current.controller.control = swiper2Ref.current;
     }
+  }, []);
+
+  const subnext = () => {
+    subswiperRef?.current?.swiper?.slideNext();
   };
 
-// const subnext = () => {
-//   subswiperRef.current.slideNext();
-// };
+  const subprevious = () => {
+    subswiperRef?.current?.swiper?.slidePrev();
+  };
 
-// const subprevious = () => {
-//   subswiperRef.current.slidePrev();
-// };
+  const next = () => {
+    console.log(
+      "swiperRef?.current?.swiper?",
+      firstSwiper?.slideTo(0, 500),
+      swiperRef?.current?.swiper,
+      swiper1Ref,
+      secondSwiper
+    );
+    swiperRef?.current?.swiper?.slideNext();
+  };
 
-// const next = () => {
-//   swiperRef.current.slideNext();
-// };
+  const previous = () => {
+    swiperRef?.current?.swiper?.slidePrev();
+  };
 
-// const previous = () => {
-//   swiperRef.current.slidePrev();
-// };
-
-
-  // console.log("5566", item);
-
-
-  const [swiperIndex, setSwiperIndex] = useState(0);
+  console.log("modal", item);
 
   return (
     <Modal
@@ -68,21 +71,26 @@ export default function GalleryModal({ item,show, onHide }) {
       </Modal.Header>
       <Modal.Body>
         <Swiper
-          // onSwiper={getSwiper}
-          // ref={swiperRef}
+          onSwiper={(swiper) => {
+            if (swiper1Ref.current !== null) {
+              swiper1Ref.current = swiper;
+              setFirstSwiper(swiper);
+            }
+          }}
+          preloadImages={false}
+          controller={{ control: secondSwiper }}
+          spaceBetween={10}
+          // slidesPerView={1}
+          grabCursor={true}
           navigation={true}
-          loop={true}
+          // ref={swiperRef}
           slidesPerView={"auto"}
           className="primary-swiper"
-          // onSnapIndexChange={onRealIndexChange}
           thumbs={{
             swiper:
               thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
           }}
-          modules={[Thumbs, FreeMode, Navigation]}
-          // slideToClickedSlide={true}
-          // watchslidesvisibility={true}
-          // watchslidesprogress={true}
+          modules={[Thumbs, FreeMode, Navigation, Controller]}
         >
           {item.images.map((item) => {
             {
@@ -91,7 +99,7 @@ export default function GalleryModal({ item,show, onHide }) {
               }
             }
             return (
-              <SwiperSlide key={item.product_id}>
+              <SwiperSlide key={item.directus_files_id}>
                 <img
                   className="primary-img"
                   src={`https://directus-cms.vicosys.com.hk/assets/${item.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -99,39 +107,37 @@ export default function GalleryModal({ item,show, onHide }) {
               </SwiperSlide>
             );
           })}
-          {/* onClick={next} */}
-          <div className="swiper-button-next">
+          <div onClick={next} className="swiper-button-next">
             <NextIcon />
           </div>
-          {/* onClick={previous} */}
-          <div className="swiper-button-prev">
+          <div onClick={previous} className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>
         <Swiper
-          // onSwiper={getSwiper}
-          // ref={subswiperRef}
+          controller={{ control: firstSwiper }}
+          loop={false}
+          spaceBetween={10}
+          slidesPerView={8}
+          watchSlidesProgress
+          touchRatio={0.2}
+          preloadImages={false}
+          lazy
+          slideToClickedSlide={true}
           onSwiper={setThumbsSwiper}
-          // rewind={true}
-          loop={true}
-          // navigation={true}
-          slidesPerView={"5"}
           direction={"vertical"}
           className="sub-swiper"
           freeMode={true}
-          thumbs={{
-            swiper:
-              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-          }}
-          // onSnapIndexChange={onRealIndexChange}
-          modules={[FreeMode, Navigation, Thumbs]}
+          modules={[Navigation, Thumbs, Controller]}
         >
-          {item.images.map((i) => {
+          {item?.images?.map((i) => {
             {
-              /* console.log(i); */
+              /* {
+              console.log(i);
+            } */
             }
             return (
-              <SwiperSlide key={i.product_id}>
+              <SwiperSlide key={i.directus_files_id}>
                 <div className="index-area">{i.id}</div>
                 <img
                   src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -139,15 +145,15 @@ export default function GalleryModal({ item,show, onHide }) {
               </SwiperSlide>
             );
           })}
-          {/* onClick={subnext} */}
-          <div className="swiper-button-next">
+          <div onClick={subnext} className="swiper-button-next">
             <NextIcon />
           </div>
-          {/* onClick={subprevious} */}
-          <div className="swiper-button-prev">
+          <div onClick={subprevious} className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>
+
+        
       </Modal.Body>
     </Modal>
   );

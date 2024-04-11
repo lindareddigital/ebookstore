@@ -95,6 +95,7 @@ export default function ContactUs() {
             <span className="red-word">*</span>
             <div className="sub-word">(請上傳JPG圖檔)</div>
           </label>
+
           <input className="form-control" type="file" id="formFile"></input>
         </div>
         <div className="button-group">

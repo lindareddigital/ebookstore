@@ -38,13 +38,6 @@ export default function Listing() {
   const [title, setTitle] = useState("");
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
-  // useEffect(() => {
-  //   if (router?.query?.slug?.length < 3) {
-  //     console.log("length < 3", router?.query?.slug?.length < 3);
-  //     filterByPublisher();
-  //   }
-  // }, [router]);
-
   useEffect(() => {
     if (siteMenu && slug) {
       console.log("siteMenu && slug", slug);
@@ -110,7 +103,7 @@ export default function Listing() {
         console.log("foundItem", foundItem?.title);
 
         if (router?.query?.slug?.length < 3) {
-          console.log("length < 3", router?.query?.slug?.length < 3);
+          console.log("length < 3", router?.query,router?.query?.slug?.length < 3);
           filterByPublisher();
         }
 

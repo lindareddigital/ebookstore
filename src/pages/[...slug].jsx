@@ -258,7 +258,7 @@ export default function Singlepage() {
           <div className={` header-main ${getPageBg(publisher)}`}>
             <div className={`header-search-bar `}>
               <h3>{publisher === "seashore" ? "海濱圖書" : "一丁文化"}</h3>
-              <div className="header-toolbar">
+              <div className={`header-toolbar ${getPageBg(publisher)}`}>
                 <div className="navbar-link">
                   <Link href={{ pathname: `/` }} type="button" className="btn ">
                     <img src="/icons/home.svg" alt="" />
@@ -315,8 +315,15 @@ export default function Singlepage() {
               <div className="right-side">
                 <div className="listing-toolbar">
                   <div className="wrapper">
-                    <div className={`amount ${getPageColor(publisher)}`}>
-                      商品清單共有<span>{productTotalCount}</span>本
+                    <div className={`amount`}>
+                      <span className={`amount ${getPageColor(publisher)}`}>
+                        商品清單{" "}
+                      </span>
+                      共有
+                      <span className={`amount ${getPageColor(publisher)}`}>
+                        {productTotalCount}
+                      </span>
+                      本
                     </div>
 
                     <ul className="view_type social-mobile">
