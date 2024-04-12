@@ -16,7 +16,6 @@ import { useGlobalStore } from "src/pages/store/global.store";
 export default function Listing() {
   const [panel, setPanel] = useState(false);
   const [panelView, setPanelView] = useState("");
-
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(0);
@@ -25,7 +24,6 @@ export default function Listing() {
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
     title: ""
-    // page: 1,
   });
   const isFirstRendering = useRef(true);
   const [currentView, setCurrentView] = useState("grid");
@@ -51,7 +49,12 @@ export default function Listing() {
       const categoryIds = matchedMenuItem.category.map(
         (category) => category.category_id.id
       );
-      filterByCategory("polis-press", categoryIds, page);
+      setMyObject((prev) => ({
+        ...prev,
+        // arr: categoryIds,
+        title: matchedMenuItem.title,
+      }));
+      filterByCategory(categoryIds);
     } else if (
       matchedMenuItem?.type === "product_by_series" &&
       matchedMenuItem?.query_tags != null
@@ -59,10 +62,10 @@ export default function Listing() {
       console.log("matchedMenuItem.query_tags", matchedMenuItem);
       setMyObject((prev) => ({
         ...prev,
-        arr: matchedMenuItem?.query_tags,
+        // arr: matchedMenuItem?.query_tags,
         title: matchedMenuItem.title,
       }));
-      filterBySeries("polis-press", matchedMenuItem?.query_tags);
+      filterBySeries(matchedMenuItem?.query_tags);
     }
   }, [matchedMenuItem]);
 
@@ -129,7 +132,7 @@ export default function Listing() {
 
   //預設首頁資料
   const filterByPublisher = async () => {
-    const response = await fetch(`api/product/publisher/polis-press`, {
+    const response = await fetch(`api/product/publisher/polis-press/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -143,7 +146,7 @@ export default function Listing() {
     });
     const books = await response.json();
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
-    console.log("146books", books?.result?.product);
+    console.log("151", books?.result?.product);
 
     setLength(length);
     setBooks(books?.result?.product);
@@ -157,9 +160,7 @@ export default function Listing() {
     });
   };
 
-  const filterByCategory = async () => {
-    const result = categoryIds.current?.map((item) => item.category_id.id);
-    console.log(result);
+  const filterByCategory = async (categoryIds) => {
     const response = await fetch("/api/product/category/", {
       method: "POST",
       headers: {
@@ -169,7 +170,7 @@ export default function Listing() {
         sort_by: myObject.sort,
         limit: limit,
         publisher_slug: "polis-press",
-        category_id: result,
+        category_id: categoryIds,
         page: page,
       }),
     });
@@ -182,7 +183,7 @@ export default function Listing() {
     setLength(length);
   };
 
-  const filterBySeries = async () => {
+  const filterBySeries = async (query_tags) => {
     const response = await fetch("/api/product/series", {
       method: "POST",
       headers: {
@@ -191,7 +192,7 @@ export default function Listing() {
       body: JSON.stringify({
         sort: myObject.sort,
         page: page,
-        series_tags: myObject.arr,
+        series_tags: query_tags,
         publisher_slug: "polis-press",
       }),
     });
@@ -204,7 +205,7 @@ export default function Listing() {
   const filterBooks = async (arr) => {
     if (router?.query?.slug?.length < 3) {
       console.log("length < 3", router?.query?.slug?.length < 3);
-      return filterByPublisher();
+     filterByPublisher();
     }
     console.log("filterBooks");
     const categoryArr = arr?.map((item) => item?.category_id?.id);
@@ -286,7 +287,7 @@ export default function Listing() {
           <ListAside siteMenu={siteMenu} />
           <div className="right-side">
             <div className="block-title">
-              <div class="dot"></div>
+              <div className="dot"></div>
               {title} {myObject.title}
             </div>
 

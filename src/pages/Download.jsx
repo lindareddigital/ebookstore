@@ -11,7 +11,7 @@ export default function Download({}) {
       <div className="">
         <form className="download form-area">
           <div className="block-title">
-            <div class="dot"></div>書單下載
+            <div className="dot"></div>書單下載
           </div>
 
           <div className="">
@@ -55,7 +55,7 @@ export default function Download({}) {
           </div>
 
           <div className="block-title">
-            <div class="dot"></div>教案下載
+            <div className="dot"></div>教案下載
           </div>
 
           <div className="">

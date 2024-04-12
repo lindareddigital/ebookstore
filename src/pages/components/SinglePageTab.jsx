@@ -76,7 +76,7 @@ export default function SinglePageTab() {
           >
             <Nav variant="tabs">
               <div className="block-title">
-                <div class="dot"></div>美味食譜
+                <div className="dot"></div>美味食譜
               </div>
               <div className="swiper-button-group">
                 <div onClick={previous} className="swiper-button-prev">

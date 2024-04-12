@@ -95,13 +95,6 @@ export default function Singlepage() {
   };
 
   useEffect(() => {
-    if (router?.query?.slug?.length < 3) {
-      console.log("length < 3", router?.query?.slug?.length < 3);
-      filterByPublisher();
-    }
-  }, [router]);
-
-  useEffect(() => {
     if (menu && slug) {
       const matchedItem = findMenuItemBySlug(menu, slug);
       console.log("matchedItem", matchedItem, menu, slug);
@@ -110,6 +103,8 @@ export default function Singlepage() {
   }, [menu, slug]);
 
   useEffect(() => {
+    console.log( matchedMenuItem?.type);
+
     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
       const categoryIds = matchedMenuItem.category.map(
         (category) => category.category_id.id
@@ -122,8 +117,10 @@ export default function Singlepage() {
       filterBySeries(matchedMenuItem?.query_tags);
     } else if (matchedMenuItem && matchedMenuItem.type === "url") {
       window.open(matchedMenuItem.landing, "_blank");
+    }else{
+      filterByPublisher();
     }
-  }, [matchedMenuItem, page, limit, myObject.sort]);
+  }, [matchedMenuItem, page, limit, myObject.sort,router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {

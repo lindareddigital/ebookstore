@@ -12,14 +12,6 @@ export default async function handler(req, res) {
     const publisher = req.body.publisher;
 
 
-
-    // if (
-    //   req.query.publisher != "polis_press" &&
-    //   req.query.publisher != "seashore"
-    // ) {
-    //   return res.status(400).json({ error: "Invalid publisher provided" });
-    // }
-
     const result = await apiManager.getProductByPublisher(publisher,page,limit,sort);
 
     res.status(200).json({ result });

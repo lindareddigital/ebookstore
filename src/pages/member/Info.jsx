@@ -6,7 +6,7 @@ export default function Info() {
     <>
       <form className="info contact-us">
         <div className="block-title">
-          <div class="dot"></div>會員資料管理
+          <div className="dot"></div>會員資料管理
         </div>
         <div className="red-word">*必須填寫</div>
         <div className="">
