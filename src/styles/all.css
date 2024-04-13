@@ -291,7 +291,8 @@ a:hover{
 }
 
 .single-page .main-body{
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
+  /* width: unset; */
 }
 
 .single-page .content{
@@ -816,7 +817,7 @@ span{
   position: absolute;
 }
 
-.sub-swiper .swiper-button-prev, .swiper-button-next{
+.sub-swiper .swiper-button-prev,.sub-swiper .swiper-button-next{
   bottom: 0;
 }
 
@@ -850,6 +851,7 @@ span{
 .home-recommend-tabs .swiper-button-group{
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .home-recommend-tabs .swiper-button-prev, 
@@ -857,6 +859,15 @@ span{
   background-image: url(/icons/swiperright.svg);
   height: 32px;
   width: 32px;
+}
+
+.home-recommend-tabs .swiper-button-next{
+  right: 0;
+}
+
+.home-recommend-tabs .swiper-button-prev{
+  position: absolute;
+  right: 20px;
 }
 
 .pannel-container {
@@ -2196,10 +2207,11 @@ footer .container-fluid{
 }
 
 .single-page .home-recommend-tabs{
-  width: calc(100vw - 8%);
   position: relative;
   z-index: 999;
   right: 0;
+  /* width: unset; */
+  width: calc(100vw - 15%);
 }
 
 .recipe-desc{

@@ -68,63 +68,68 @@ export default function SinglePageTab() {
 
   return (
     <>
-      <div className="main-body">
-        <div className="home-recommend-tabs">
-          <Tab.Container
-            id="nav-tab"
-            defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
-          >
-            <Nav variant="tabs">
-              <div className="block-title">
-                <div className="dot"></div>美味食譜
-              </div>
-              <div className="swiper-button-group">
-                <div onClick={previous} className="swiper-button-prev">
-                  <PrevIcon />
+      <div className="container-fluid">
+        <div className="main-body">
+          <div className="home-recommend-tabs">
+            <Tab.Container
+              id="nav-tab"
+              defaultActiveKey="0925676a-75da-4bd8-8c36-f6b17ebf8263"
+            >
+              <Nav variant="tabs">
+                <div className="block-title">
+                  <div className="dot"></div>美味食譜
                 </div>
-                <div onClick={next} className="swiper-button-next">
-                  <NextIcon />
+                <div className="swiper-button-group">
+                  <div onClick={previous} className="swiper-button-prev">
+                    <PrevIcon />
+                  </div>
+                  <div onClick={next} className="swiper-button-next">
+                    <NextIcon />
+                  </div>
                 </div>
-              </div>
-            </Nav>
-            <Tab.Content>
-              <Swiper
-                onSwiper={getSwiper}
-                ref={swiperRef}
-                rewind={true}
-                className={`booklist-carousel`}
-                slidesPerView={"5"}
-                onSnapIndexChange={onRealIndexChange}
-              >
-                <div className="swiper-wrapper booklist-carousel-inner">
-                  {recipe?.map((item) => {
-                    {
-                      /* {console.log("recipe", item, item?.id);} */
-                    }
+              </Nav>
+              <Tab.Content>
+                <Swiper
+                  onSwiper={getSwiper}
+                  ref={swiperRef}
+                  rewind={true}
+                  className={`booklist-carousel`}
+                  slidesPerView={"5"}
+                  onSnapIndexChange={onRealIndexChange}
+                >
+                  <div className="swiper-wrapper booklist-carousel-inner">
+                    {recipe?.map((item) => {
+                      {
+                        /* {console.log("recipe", item, item?.id);} */
+                      }
 
-                    return (
-                      <SwiperSlide className="swiper-slide" key={`${item?.id}`}>
-                        <Link
+                      return (
+                        <SwiperSlide
+                          className="swiper-slide"
                           key={`${item?.id}`}
-                          href={{ pathname: `/detail/${item?.id}` }}
-                          className={``}
                         >
-                          <div className="recipe-card">
-                            <img
-                              src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                              className=""
-                              alt={item.title}
-                            />
-                            <div className="desc mt-2">{item.title}</div>
-                          </div>
-                        </Link>
-                      </SwiperSlide>
-                    );
-                  })}
-                </div>
-              </Swiper>
-            </Tab.Content>
-          </Tab.Container>
+                          <Link
+                            key={`${item?.id}`}
+                            href={{ pathname: `/detail/${item?.id}` }}
+                            className={``}
+                          >
+                            <div className="recipe-card">
+                              <img
+                                src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                                className=""
+                                alt={item.title}
+                              />
+                              <div className="desc mt-2">{item.title}</div>
+                            </div>
+                          </Link>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </div>
+                </Swiper>
+              </Tab.Content>
+            </Tab.Container>
+          </div>
         </div>
       </div>
     </>

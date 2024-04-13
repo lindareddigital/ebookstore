@@ -2,13 +2,11 @@ import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import apiManager from 'src/pages/api/api';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
 import Modal from "react-bootstrap/Modal";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
-// Import Swiper styles
 import 'swiper/css';
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -19,10 +17,9 @@ import { FreeMode, Navigation, Thumbs, Controller } from "swiper/modules";
 export default function GalleryModal({ item,show, onHide }) {
   const swiperRef = useRef(null);
   const subswiperRef = useRef(null);
-  // const thumbsSwiper = useRef(null);
   const [thumbsSwiper, setThumbsSwiper] = useState();
   const [firstSwiper, setFirstSwiper] = useState();
-  const [secondSwiper, setSecondSwiper] = useState();
+  // const [secondSwiper, setSecondSwiper] = useState();
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef();
 
@@ -41,13 +38,10 @@ export default function GalleryModal({ item,show, onHide }) {
   };
 
   const next = () => {
-    console.log(
-      "swiperRef?.current?.swiper?",
-      firstSwiper?.slideTo(0, 500),
-      swiperRef?.current?.swiper,
-      swiper1Ref,
-      secondSwiper
-    );
+    // console.log(
+    //   "swiperRef?.current?.swiper?",
+    //   swiperRef?.current?.swiper,
+    // );
     swiperRef?.current?.swiper?.slideNext();
   };
 
@@ -78,12 +72,12 @@ export default function GalleryModal({ item,show, onHide }) {
             }
           }}
           preloadImages={false}
-          controller={{ control: secondSwiper }}
+          loop={true}
+          // controller={{ control: secondSwiper }}
           spaceBetween={10}
-          // slidesPerView={1}
           grabCursor={true}
           navigation={true}
-          // ref={swiperRef}
+          ref={swiperRef}
           slidesPerView={"auto"}
           className="primary-swiper"
           thumbs={{
@@ -124,6 +118,7 @@ export default function GalleryModal({ item,show, onHide }) {
           preloadImages={false}
           lazy
           slideToClickedSlide={true}
+          ref={subswiperRef}
           onSwiper={setThumbsSwiper}
           direction={"vertical"}
           className="sub-swiper"
@@ -152,8 +147,6 @@ export default function GalleryModal({ item,show, onHide }) {
             <PrevIcon />
           </div>
         </Swiper>
-
-        
       </Modal.Body>
     </Modal>
   );
