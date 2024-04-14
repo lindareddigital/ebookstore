@@ -183,8 +183,9 @@ export default function Singlepage() {
     setProducts(books?.result?.product);
   };
 
-  const handleClick = (channel, item, publisher) => {
-    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+  const handleClick = (channel, slug, publisher) => {
+    
+    router.push(`/${publisher}/${channel}/${slug}`, undefined, {
       shallow: true,
     });
   };
@@ -360,26 +361,31 @@ export default function Singlepage() {
                       <p>篩選類別</p>
 
                       {menu?.map((item) => {
-                        return (
-                          <select
-                            className="form-select"
-                            onChange={() =>
-                              handleClick(
-                                item.channel,
-                                menuItem?.site_menu_items_id,
-                                item.publisher
-                              )
-                            }
-                          >
-                            <div className="title">{item.title}</div>
-                            {item?.menu_items?.map((menuItem) => (
-                              <option key={menuItem?.site_menu_items_id?.id}>
-                                {menuItem?.site_menu_items_id?.title}
-                              </option>
-                            ))}
-                          </select>
-                        );
-                      })}
+                        {
+                          console.log(item)
+                          return (
+                            <select
+                              className="form-select"
+                              onChange={(event) =>
+                                handleClick(
+                                  item.channel,
+                                  event.target.value,
+                                  item.publisher
+                                )
+                              }
+                            >
+                              <div className="title">{item.title}</div>
+                              {item?.menu_items?.map((menuItem) => (
+                                <option
+                                  value={menuItem?.site_menu_items_id?.slug}
+                                  key={menuItem?.site_menu_items_id?.id}
+                                >
+                                  {menuItem?.site_menu_items_id?.title}
+                                </option>
+                              ))}
+                            </select>
+                          );
+                        }})}
                     </div>
                     <div className="sortselect">
                       <p>排序依</p>

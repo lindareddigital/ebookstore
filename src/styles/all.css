@@ -290,9 +290,13 @@ a:hover{
  justify-content: space-between;
 }
 
+.listing-page .right-side{
+  justify-content: flex-end;
+  width: 80%;
+}
+
 .single-page .main-body{
-  /* justify-content: flex-end; */
-  /* width: unset; */
+  width: 100%;
 }
 
 .single-page .content{
@@ -819,6 +823,19 @@ span{
 
 .sub-swiper .swiper-button-prev,.sub-swiper .swiper-button-next{
   bottom: 0;
+  position: absolute;
+}
+
+.sub-swiper .swiper-button-prev{
+  transform: rotate(90deg) translate(-46%, -50%);
+  left: 29%;
+  top: 34px;
+}
+
+.sub-swiper .swiper-button-next{
+  transform: rotate(90deg) translate(0%);
+  right: 40%;
+
 }
 
 .sub-swiper .index-area{
@@ -829,12 +846,15 @@ span{
   position: absolute;
   left: 0;
   bottom: 0;
-  background: #EBC700;
   text-align: center;
   font-size: 14px;
   font-weight: 700;
   /* line-height: 20px;
   letter-spacing: 0.2em; */
+}
+
+.sub-swiper .index-area.active{
+  background: #EBC700;
 }
 
 .navbar-collapse{
@@ -1732,6 +1752,7 @@ footer .container-fluid{
   width: 100%;
   height: 100%;
   background: #E9E9E9;
+  padding: 32px 0px;
  }
 
  .sub-swiper .swiper-wrapper .swiper-slide{
@@ -1743,6 +1764,10 @@ footer .container-fluid{
  .sub-swiper .swiper-wrapper .swiper-slide img{
   width: 100%;
   height: 100%;
+ }
+
+ .sub-swiper .swiper-wrapper .swiper-slide img.active{
+  border: 5px solid #EBC700;
  }
 
  .swiper-button-next::after, .swiper-button-prev::after ,
@@ -2406,7 +2431,7 @@ footer .accordion{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 100% !important;
 }
 
 .list-view .wish-btn{

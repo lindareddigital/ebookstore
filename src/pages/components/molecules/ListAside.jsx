@@ -8,7 +8,9 @@ import { getPageColor } from "src/utilities/tool.js";
 export default function ListAside({ siteMenu }) {
   const router = useRouter();
   const publisher = router.query.slug?.[0];
-  const handleClick = (channel, item,publisher) => {
+  const handleClick = (channel, item, publisher, menuItem) => {
+    console.log(item, menuItem);
+
     router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
@@ -37,7 +39,8 @@ export default function ListAside({ siteMenu }) {
                     handleClick(
                       item.channel,
                       menuItem?.site_menu_items_id,
-                      item.publisher
+                      item.publisher,
+                      menuItem
                     )
                   }
                 >

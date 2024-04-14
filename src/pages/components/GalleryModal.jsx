@@ -20,6 +20,8 @@ export default function GalleryModal({ item,show, onHide }) {
   const [thumbsSwiper, setThumbsSwiper] = useState();
   const [firstSwiper, setFirstSwiper] = useState();
   // const [secondSwiper, setSecondSwiper] = useState();
+  const [swiperIndex, setSwiperIndex] = useState(0);
+
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef();
 
@@ -29,12 +31,8 @@ export default function GalleryModal({ item,show, onHide }) {
     }
   }, []);
 
-  const subnext = () => {
-    subswiperRef?.current?.swiper?.slideNext();
-  };
-
-  const subprevious = () => {
-    subswiperRef?.current?.swiper?.slidePrev();
+  const onActiveIndexChange = (swiper) => {    
+    setSwiperIndex(swiper.realIndex);
   };
 
   const next = () => {
@@ -74,6 +72,7 @@ export default function GalleryModal({ item,show, onHide }) {
           preloadImages={false}
           loop={true}
           // controller={{ control: secondSwiper }}
+          onActiveIndexChange={onActiveIndexChange}
           spaceBetween={10}
           grabCursor={true}
           navigation={true}
@@ -111,8 +110,7 @@ export default function GalleryModal({ item,show, onHide }) {
         <Swiper
           controller={{ control: firstSwiper }}
           loop={false}
-          spaceBetween={10}
-          slidesPerView={8}
+          slidesPerView={"auto"}
           watchSlidesProgress
           touchRatio={0.2}
           preloadImages={false}
@@ -120,12 +118,13 @@ export default function GalleryModal({ item,show, onHide }) {
           slideToClickedSlide={true}
           ref={subswiperRef}
           onSwiper={setThumbsSwiper}
+          // onActiveIndexChange={onActiveIndexChange}
           direction={"vertical"}
           className="sub-swiper"
           freeMode={true}
           modules={[Navigation, Thumbs, Controller]}
         >
-          {item?.images?.map((i) => {
+          {item?.images?.map((i,index) => {
             {
               /* {
               console.log(i);
@@ -133,17 +132,26 @@ export default function GalleryModal({ item,show, onHide }) {
             }
             return (
               <SwiperSlide key={i.directus_files_id}>
-                <div className="index-area">{i.id}</div>
+                <div
+                  className={`index-area ${
+                    index === swiperIndex ? "active" : ""
+                  }`}
+                >
+                  {index}
+                </div>
                 <img
+                  className={`${
+                    index === swiperIndex ? "active" : ""
+                  }`}
                   src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 />
               </SwiperSlide>
             );
           })}
-          <div onClick={subnext} className="swiper-button-next">
+          <div onClick={next} className="swiper-button-next">
             <NextIcon />
           </div>
-          <div onClick={subprevious} className="swiper-button-prev">
+          <div onClick={previous} className="swiper-button-prev">
             <PrevIcon />
           </div>
         </Swiper>

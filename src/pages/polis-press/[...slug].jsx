@@ -19,7 +19,6 @@ export default function Listing() {
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(0);
-  // const obj = useGlobalStore((state) => state.obj);
   const categoryIds = useRef([]);
   const [myObject, setMyObject] = useState({
     sort: ["-date_created"],
@@ -36,6 +35,9 @@ export default function Listing() {
   const [title, setTitle] = useState("");
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
+  
+
+
   useEffect(() => {
     if (siteMenu && slug) {
       console.log("siteMenu && slug", slug);
@@ -51,7 +53,6 @@ export default function Listing() {
       );
       setMyObject((prev) => ({
         ...prev,
-        // arr: categoryIds,
         title: matchedMenuItem.title,
       }));
       filterByCategory(categoryIds);
@@ -62,12 +63,11 @@ export default function Listing() {
       console.log("matchedMenuItem.query_tags", matchedMenuItem);
       setMyObject((prev) => ({
         ...prev,
-        // arr: matchedMenuItem?.query_tags,
         title: matchedMenuItem.title,
       }));
       filterBySeries(matchedMenuItem?.query_tags);
     }
-  }, [matchedMenuItem]);
+  }, [matchedMenuItem, page, limit, myObject.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
@@ -87,7 +87,7 @@ export default function Listing() {
       return;
     }
     filterBooks();
-  }, [page, myObject.limit, myObject.sort]);
+  }, [page, limit, myObject.sort]);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -104,11 +104,6 @@ export default function Listing() {
         });
         setTitle(foundItem?.title);
         console.log("foundItem", foundItem?.title);
-
-        if (router?.query?.slug?.length < 3) {
-          console.log("length < 3", router?.query,router?.query?.slug?.length < 3);
-          filterByPublisher();
-        }
 
         if (foundItem) {
           var arr = foundItem.menu_items.find(
@@ -132,21 +127,23 @@ export default function Listing() {
 
   //預設首頁資料
   const filterByPublisher = async () => {
-    const response = await fetch(`api/product/publisher/polis-press/`, {
+    console.log("filterByPublisher");
+    
+    const response = await fetch(`api/product/publisher/polis-press`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
-        page: page,
+        sort: ["-date_created"],
+        page: 1,
         publisher: "polis-press",
-        limit: limit,
+        limit: 15,
       }),
     });
     const books = await response.json();
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
-    console.log("151", books?.result?.product);
+    console.log("146books", books?.result?.product);
 
     setLength(length);
     setBooks(books?.result?.product);
