@@ -13,27 +13,6 @@ import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 export default function HomeTab({books}) {
   console.log('',books);
-  
-  // const [books, setBooks] = useState(null);
- 
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch("/api/product/publisher/大邑文化");
-  //       const books = await response.json();
-  //       setBooks(books.result.product);
-  //       console.log("books", books);
-  //     } catch (error) {
-  //       console.error("获取数据时出错：", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-
-  
   const swiperRef = useRef(null);
   const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
@@ -138,11 +117,19 @@ export default function HomeTab({books}) {
                         className={``}
                       >
                         <div className="book-item">
-                          <img
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                            className=""
-                            alt={item.title}
-                          />
+                          {item.cover_image ? (
+                            <img
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              className=""
+                              alt={item.title}
+                            />
+                          ) : (
+                            <img
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              className=""
+                              alt={item.title}
+                            />
+                          )}
                           <div className="desc mt-2">{item.title}</div>
                           <div className="price-num">$ {item.Price}</div>
                         </div>

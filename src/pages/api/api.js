@@ -193,7 +193,6 @@ class ApiManager {
       }
     `;
 
-    
     return await this.sdk(gql);
   };
 
@@ -229,7 +228,6 @@ class ApiManager {
   };
 
   getSideMenuByPublisher = async (publisher_slug) => {
-
     const gql = `query {
       site_menu( 
         filter: {
@@ -298,7 +296,6 @@ class ApiManager {
     return;
   };
 
-  // getProductDetail
   getProductDetail = () => {
     return this.get({
       path: `/items/product/?fields[]=*&fields[]=images.*`,
@@ -309,8 +306,35 @@ class ApiManager {
     return;
   };
 
-  getColumnsMenu = () => {
-    return;
+  getPosts = async (tag, limit, page) => {
+    // tags: {
+    //             _in: [${tag}]
+    //           }
+  
+    const gql = `
+      query {
+        posts( 
+          limit: ${limit}
+          page: ${page}      
+          filter: {
+          
+          } 
+        ) 
+        {
+          id
+          title
+          tags
+          content
+          key_image{
+            id
+          }  
+        }
+      }
+    `;
+
+    console.log("getPosts", gql);
+
+    return await this.sdk(gql);
   };
 
   getColumnByCategory = () => {
@@ -326,11 +350,16 @@ class ApiManager {
     return;
   };
 
-  getProductBySeries = async (publisher_slug, series_tags, limit, page,sort) => {
+  getProductBySeries = async (
+    publisher_slug,
+    series_tags,
+    limit,
+    page,
+    sort
+  ) => {
     // const formattedArr = arr.map((item) => `"${item}"`).join(", ");
     const formattedArr = series_tags.map((item) => `"${item}"`).join('", "');
-    console.log('333');
-    
+    console.log("333");
 
     const gql = `
       query {
@@ -394,7 +423,6 @@ class ApiManager {
       }
     `;
 
-
     console.log("getProductBySeries", gql);
 
     return await this.sdk(gql);
@@ -408,7 +436,7 @@ class ApiManager {
     limit
   ) => {
     const category_id = category.map((item) => `"${item}"`).join(", ");
-    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");       
+    const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
     const gql = `
       query {
@@ -480,7 +508,6 @@ class ApiManager {
   };
 
   getProductByPublisher = async (publisher_slug, page, limit, sort_by) => {
-
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
 
     const gql = `
@@ -538,8 +565,6 @@ class ApiManager {
         }
     }
     `;
-
-    
 
     console.log("getProductByPublisher", gql);
 

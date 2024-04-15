@@ -6,6 +6,7 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import { useRouter } from "next/router";
 
 export default function Share({}) {
   const [data, setData] = useState(null);
@@ -13,40 +14,67 @@ export default function Share({}) {
 
   const [column, setColumn] = useState(null);
   const [news, setNew] = useState(null);
-
+  const router = useRouter();
+  const page = router.query.page || 1;
+  const tag = router.query.tag || "";
+  const limit = router.query.limit || 5;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/page/home`);
-        const result = await response.json();
-        setData(result?.result?.pages[0].blocks);
-        const media = data?.find((item) => {
-          return item?.id == "3";
+        // const response = await fetch(`/api/posts`);
+
+        const response = await fetch("/api/posts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            page: page,
+            tag: tag,
+            limit: limit,
+          }),
         });
 
-        setMedia(media);
+        const data = await response.json();
+        setData(data?.data?.posts);
+
+        setMedia(data?.data?.posts);
+
+        console.log("ddata", data?.data?.posts);
 
         // setColumn(media);
         // setNew(media[1]?.item?.posts);
 
         console.log("Share", media);
-        console.log("ddata", data, result?.result?.pages[0].blocks);
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
 
-    
-
     fetchData();
-  }, []);
+  }, [router]);
 
-  // const allTags = column.reduce((acc, post) => {
-  //   return acc.concat(post.posts_id.tags);
-  // }, []);
+  const handleClick = (tag) => {
+    router.push(`/share/?tag=${tag}`, undefined, {
+      shallow: true,
+    });
+  };
 
-  // console.log(allTags);
+  const allTags = [
+    ...new Set(media?.flatMap((post) => post?.tags).filter((tag) => tag)),
+  ];
+
+  const tagsWithLength = allTags.map((tag) => {
+    return {
+      tag: tag,
+      length: media?.filter((post) => post?.tags?.includes(tag)).length,
+    };
+  });
+
+  console.log(tagsWithLength);
+
+  console.log(allTags);
   // return null
 
   const Paginations = ({ length }) => {
@@ -149,66 +177,62 @@ export default function Share({}) {
                   </select>
                 </div>
 
-                {media &&
-                  media?.item?.posts?.map((item) => {
-                    return (
-                      <>
-                        <div className="share-list-item overflow-hidden">
-                          <Link href="/" className="post-thumb">
-                            <img
-                              className="q-img__image"
-                              src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                              alt=""
-                            ></img>
-                          </Link>
-                          <div className="post-info">
-                            <h4 className="post-title">
-                              <Link href="/" className="">
-                                {item.posts_id.title}
-                              </Link>
-                            </h4>
-                            <p className="post-excerpt">專欄主題:</p>
-                            <div className="post-meta">
-                              {item.posts_id.tags?.map((item) => {
-                                return (
-                                  <Link
-                                    href="/posts/events"
-                                    className="post-meta-tag category"
-                                  >
-                                    {item}
-                                  </Link>
-                                );
-                              })}
-                              <div className="post-meta-date">
-                                2023/09/22
-                                <div className="dot"></div>
-                                小編
-                              </div>
+                {data?.map((item) => {
+                  return (
+                    <>
+                      <div className="share-list-item overflow-hidden">
+                        <Link href="/" className="post-thumb">
+                          <img
+                            className="q-img__image"
+                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            alt=""
+                          ></img>
+                        </Link>
+                        <div className="post-info">
+                          <h4 className="post-title">
+                            <Link href="/" className="">
+                              {item?.title}
+                            </Link>
+                          </h4>
+                          <p className="post-excerpt">專欄主題:</p>
+                          <div className="post-meta">
+                            {item?.tags?.map((item) => {
+                              return (
+                                <div
+                                  onClick={() => handleClick(item)}
+                                  className="post-meta-tag category"
+                                >
+                                  {item}
+                                </div>
+                              );
+                            })}
+                            <div className="post-meta-date">
+                              2023/09/22
+                              <div className="dot"></div>
+                              小編
                             </div>
                           </div>
                         </div>
-                      </>
-                    );
-                  })}
+                      </div>
+                    </>
+                  );
+                })}
               </div>
 
               <div className="posts-categories">
-                <div className="posts-category">
-                  <div className="">新知分享</div>
-                  <div className="">0</div>
-                </div>
-                <Link href="" className="posts-category">
-                  <div className="">文學分享</div>
-                  <div className="">17</div>
-                </Link>
-                <Link href="" className="posts-category">
-                  <div className="">趣聞分享</div>
-                  <div className="">9</div>
-                </Link>
-                <Link href="/" className="posts-category">
-                  <div className="">開放自由投稿</div>
-                  <div className="">3</div>
-                </Link>
+                {tagsWithLength?.map((item) => {
+                  return (
+                    <>
+                      <div
+                        onClick={() => handleClick(item.tag)}
+                        className="posts-category"
+                      >
+                        <div className="">{item.tag}</div>
+                        <div className="">{item.length}</div>
+                      </div>
+                    </>
+                  );
+                })}
               </div>
 
               <div
@@ -217,34 +241,34 @@ export default function Share({}) {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                {media &&
-                  media?.item?.posts?.map((item) => {
+                {
+                  data?.map((item) => {
                     return (
                       <>
                         <div className="share-list-item overflow-hidden">
                           <Link href="/" className="post-thumb">
                             <img
                               className="q-img__image"
-                              src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                               alt=""
                             ></img>
                           </Link>
                           <div className="post-info">
                             <h4 className="post-title">
                               <Link href="/" className="">
-                                {item.posts_id.title}
+                                {item?.title}
                               </Link>
                             </h4>
                             <p className="post-excerpt">專欄主題:</p>
                             <div className="post-meta">
-                              {item.posts_id.tags?.map((item) => {
+                              {item?.tags?.map((item) => {
                                 return (
-                                  <Link
-                                    href="/posts/events"
+                                  <div
+                                    onClick={() => handleClick(item)}
                                     className="post-meta-tag category"
                                   >
                                     {item}
-                                  </Link>
+                                  </div>
                                 );
                               })}
                               <div className="post-meta-date">
@@ -262,16 +286,9 @@ export default function Share({}) {
             </div>
 
             <div className="">
-              <Pagination>
-                <Pagination.Prev />
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Next />
-              </Pagination>
-
-              {/* {Math.ceil(productTotalCount / 5) > 1 && (
-                <Paginations length={productTotalCount} />
-              )} */}
+              {Math.ceil(data?.length / 5) > 1 && (
+                <Paginations length={data?.length} />
+              )}
             </div>
           </div>
         </div>

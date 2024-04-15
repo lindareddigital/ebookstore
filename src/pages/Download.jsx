@@ -9,13 +9,13 @@ export default function Download({}) {
       <MenuBar />
       <Breadcrumb data={"書單下載"} />
       <div className="">
-        <form className="download form-area">
+        <div className="download form-area">
           <div className="block-title">
             <div className="dot"></div>書單下載
           </div>
 
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="大邑文化書單"
                 className="form-control"
@@ -25,10 +25,10 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="海濱圖書書單"
                 className="form-control"
@@ -38,10 +38,10 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="海濱圖書書單"
                 className="form-control"
@@ -51,7 +51,7 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
 
           <div className="block-title">
@@ -59,7 +59,7 @@ export default function Download({}) {
           </div>
 
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="大邑文化書單"
                 className="form-control"
@@ -69,10 +69,10 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="海濱圖書書單"
                 className="form-control"
@@ -82,10 +82,10 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
           <div className="">
-            <form className="input-group">
+            <div className="input-group">
               <input
                 placeholder="海濱圖書書單"
                 className="form-control"
@@ -95,9 +95,9 @@ export default function Download({}) {
                 <img src="/icons/download.svg"></img>
                 下載
               </button>
-            </form>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

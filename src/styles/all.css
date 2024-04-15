@@ -211,7 +211,7 @@ a:hover{
 
 .single-page .home-banner{
   padding: 0px;
-
+  max-width: 1320px;
 }
 
 .home-banner .leftbox{
@@ -1184,14 +1184,15 @@ span{
   position: relative;
 }
 
-
-
-
 .home-recommend-tabs{
   position: absolute;
   z-index: 999;
   right: 0;
   width: calc(100vw - 15%);
+}
+
+.detail-page .home-recommend-tabs{
+  width: calc(100vw - 9%);
 }
 
 .carousel-inner{
@@ -1957,7 +1958,7 @@ footer .container-fluid{
   height: 268px;
   background: #EBC700;
   padding: 32px 24px;
-
+  overflow: auto;
 }
 
 .message-btn img{
@@ -2139,10 +2140,6 @@ footer .container-fluid{
   border: 1px solid #DEDEDE;
 }
 
-.download .form-control{
-
-}
-
 .download .input-group .search-btn{
   font-size: 16px;
   font-weight: 700;
@@ -2230,9 +2227,7 @@ footer .container-fluid{
   position: relative;
   z-index: 999;
   right: 0;
-  /* width: unset; */
-  /* width: calc(100vw - 32px); */
-  width: calc(100vw - 50%);
+  width: calc(100vw - 15%);
 }
 
 .recipe-desc{
@@ -2296,6 +2291,22 @@ footer .accordion{
   margin-right: 8px;
 }
 
+@media (max-width: 1720px){
+
+
+.single-page .home-recommend-tabs{
+  width: calc(100vw - 32px);
+
+}
+
+}
+
+@media (max-width: 1382px){
+.single-page .home-recommend-tabs{
+  width: calc(100vw - 32px);
+
+}
+}
 @media (max-width: 1320px){
 
 
