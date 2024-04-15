@@ -114,14 +114,13 @@ export default function GalleryModal({ item,show, onHide }) {
           controller={{ control: firstSwiper }}
           loop={true}
           rewind={true}
-          slidesPerView={"auto"}
-          watchSlidesProgress
-          touchRatio={0.2}
+          slidesPerView={5}
+          // watchSlidesProgress
+          // touchRatio={0.2}
           preloadImages={false}
           slideToClickedSlide={true}
           ref={subswiperRef}
           onSwiper={setThumbsSwiper}
-          // onActiveIndexChange={onActiveIndexChange}
           direction={mobile ? "horizontal" : "vertical"}
           className="sub-swiper"
           freeMode={true}

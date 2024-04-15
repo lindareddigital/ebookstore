@@ -87,7 +87,7 @@ export default function Listing() {
       return;
     }
     filterBooks();
-  }, [page, limit, myObject.sort]);
+  }, [page, limit, myObject.sort,router]);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -283,10 +283,12 @@ export default function Listing() {
           <SidebarWrapper />
           <ListAside siteMenu={siteMenu} />
           <div className="right-side">
+          {myObject.title!="" &&
             <div className="block-title">
               <div className="dot"></div>
               {title} {myObject.title}
             </div>
+          }
 
             <div className="listing-toolbar">
               <div className="amount">

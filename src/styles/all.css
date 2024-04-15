@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
- 
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -1487,7 +1487,7 @@ footer a{
 }
 
 .keyword-block .pill{
-  width: 51px;
+  /* width: 51px; */
   height: 22px;
   border-radius: 5px;
   background: #EBC700;
@@ -1739,6 +1739,7 @@ footer .container-fluid{
   width: 166px;
   height: 721px;
   padding: 8px 24px;
+  background: #E9E9E9;
  }
 
  .sub-swiper .swiper-wrapper{
@@ -1780,14 +1781,6 @@ footer .container-fluid{
   line-height: 34.75px;
 }
 
-/* .content .info{
-  width: 574px;
-  color: #28251C;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 23.17px;
-} */
-
 .content .view-detail-btn img{
   /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(302deg) brightness(103%) contrast(103%); */
   margin-right: 8px;
@@ -1795,6 +1788,14 @@ footer .container-fluid{
 
 .content li{
   margin-bottom: 8px;
+}
+
+.detail-page .detail .info li{
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23.17px;
+  color: #28251C;
 }
 
 .navbar-nav .nav-link {
@@ -1813,13 +1814,8 @@ footer .container-fluid{
   padding-bottom: 16px;
 }
 
-.news-tabs .nav-link{
- 
-}
-
 .news-tabs .tab-pane{
   width: 938px;
-
 }
 
 .tab-pane,.detail-area,.raw-html {
@@ -2375,6 +2371,10 @@ footer .accordion{
 
 @media (max-width: 992px){
 
+.home-recommend-tabs .swiper-button-prev{
+  left: auto;
+}
+
 .single-page .home-recommend-tabs{
   width: calc(100vw - 32px) !important;
 }
@@ -2545,12 +2545,25 @@ footer .accordion{
   height: 40px;
 }
 
+.contactus-page .input-group{
+  width: calc(100vw - 32px);
+}
+
+.contactus-page .form-area{
+  width: calc(100vw - 32px);
+  margin-bottom: 48px;
+}
+
+.contactus-page .block-title{
+  margin: 0;
+}
+
 .button-group{
   flex-direction: row;
 }
 
 .more-nav-tabs{
-  margin-top: 0px;
+  margin-top: 48px;
   margin-bottom: 0;
   height: 66px;
   background: #EBC700;
@@ -2808,6 +2821,7 @@ footer .accordion{
 
 .keyword-block{
   margin-top: 8px;
+  overflow: auto;
 }
 
 .main-body{
@@ -2869,9 +2883,6 @@ footer .accordion{
 
 .social-links .block-title{
   width: calc(100vw - 32px);
-}
-
-.listing-toolbar .amount{
 }
 
 .listing-page .block-title::before{
@@ -2977,10 +2988,7 @@ footer .box{
 
 .header-search-bar .right-side{
   height: 38px;
-}
-
-.keyword-block .pill{
-  width: 44px;
+  width: unset;
 }
 
 .share-list{
@@ -3124,7 +3132,6 @@ footer .accordion-item{
 footer .accordion-button::after{
   width: 24px;
   height: 24px;
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(16deg) brightness(100%) contrast(104%);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 
 }
@@ -3189,10 +3196,20 @@ footer .accordion{
   height: unset;
 }
 
+.detail-page .block-title{
+  margin: 0;
+}
+
+
+
 .detail-page .content .info,
 .detail-page .detail,
 .detail-page .buy-book{
   width: calc(100vw - 32px);
+}
+
+.detail-page .detail{
+  margin-bottom: 48px;
 }
 
 .detail-page .buy-book{
