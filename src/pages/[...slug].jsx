@@ -360,32 +360,52 @@ export default function Singlepage() {
                     <div className="sortselect social-mobile">
                       <p>篩選類別</p>
 
-                      {menu?.map((item) => {
-                        {
-                          console.log(item)
-                          return (
-                            <select
-                              className="form-select"
-                              onChange={(event) =>
-                                handleClick(
-                                  item.channel,
-                                  event.target.value,
-                                  item.publisher
-                                )
-                              }
-                            >
-                              <div className="title">{item.title}</div>
-                              {item?.menu_items?.map((menuItem) => (
-                                <option
-                                  value={menuItem?.site_menu_items_id?.slug}
-                                  key={menuItem?.site_menu_items_id?.id}
-                                >
-                                  {menuItem?.site_menu_items_id?.title}
-                                </option>
-                              ))}
-                            </select>
-                          );
-                        }})}
+                      {/* <select
+                        className="form-select"
+                        onChange={(event) =>
+                          handleClick(
+                            item.channel,
+                            event.target.value,
+                            item.publisher
+                          )
+                        }
+                      >
+                        {menu?.map((item) => (
+                          <optgroup label={item.title} key={item.title}>
+                            {item?.menu_items?.map((menuItem) => (
+                              <option
+                                value={menuItem?.site_menu_items_id?.slug}
+                                key={menuItem?.site_menu_items_id?.id}
+                              >
+                                {menuItem?.site_menu_items_id?.title}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select> */}
+                      {menu?.map((item) => (
+                        <select
+                          className="form-select"
+                          onChange={(event) =>
+                            handleClick(
+                              item.channel,
+                              event.target.value,
+                              item.publisher
+                            )
+                          }
+                        >
+                          <optgroup label={item.title} key={item.title}>
+                            {item?.menu_items?.map((menuItem) => (
+                              <option
+                                value={menuItem?.site_menu_items_id?.slug}
+                                key={menuItem?.site_menu_items_id?.id}
+                              >
+                                {menuItem?.site_menu_items_id?.title}
+                              </option>
+                            ))}
+                          </optgroup>
+                        </select>
+                      ))}
                     </div>
                     <div className="sortselect">
                       <p>排序依</p>

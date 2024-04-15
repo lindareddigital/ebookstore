@@ -22,7 +22,7 @@ export default function Share({}) {
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
         const media = data?.find((item) => {
-          return item?.id === "3";
+          return item?.id == "3";
         });
 
         setMedia(media);

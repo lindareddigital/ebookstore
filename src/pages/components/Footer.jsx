@@ -101,6 +101,9 @@ export default function Footer() {
               >
                 <div className="accordion-body">
                   <li>
+                    <Link href="/Download">書單下載</Link>
+                  </li>
+                  <li>
                     <Link href="">常見問題</Link>
                   </li>
                   <li>
@@ -112,7 +115,7 @@ export default function Footer() {
           </div>
           <div className="box">
             <li className="title">
-              <Link href="">關於我們</Link>
+              關於我們
             </li>
             <li>
               <Link href="">關於大邑</Link>
@@ -123,7 +126,7 @@ export default function Footer() {
           </div>
           <div className="box">
             <li className="title">
-              <Link href="/">會員中心</Link>
+              會員中心
             </li>
             <li>
               <Link
@@ -154,7 +157,7 @@ export default function Footer() {
           </div>
           <div className="box">
             <li className="title">
-              <Link href="/share">客戶服務</Link>
+              客戶服務
             </li>
             <li>
               <Link href="/Download">書單下載</Link>
@@ -168,9 +171,7 @@ export default function Footer() {
           </div>
           <div className="box">
             <li className="title">
-              <Link target="_blank" href="">
-                社群
-              </Link>
+              社群
             </li>
             <div className="social-sqare-container">
               <li className="social-sqare">

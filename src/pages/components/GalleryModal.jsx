@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Modal from "react-bootstrap/Modal";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import useCalc from "src/pages/components/atoms/useCalc";
 
 import 'swiper/css';
 import "swiper/css/free-mode";
@@ -24,6 +25,8 @@ export default function GalleryModal({ item,show, onHide }) {
 
   const swiper1Ref = useRef(null);
   const swiper2Ref = useRef();
+  const { mobile } = useCalc();
+
 
   useLayoutEffect(() => {
     if (swiper1Ref.current !== null) {
@@ -109,22 +112,22 @@ export default function GalleryModal({ item,show, onHide }) {
         </Swiper>
         <Swiper
           controller={{ control: firstSwiper }}
-          loop={false}
+          loop={true}
+          rewind={true}
           slidesPerView={"auto"}
           watchSlidesProgress
           touchRatio={0.2}
           preloadImages={false}
-          lazy
           slideToClickedSlide={true}
           ref={subswiperRef}
           onSwiper={setThumbsSwiper}
           // onActiveIndexChange={onActiveIndexChange}
-          direction={"vertical"}
+          direction={mobile ? "horizontal" : "vertical"}
           className="sub-swiper"
           freeMode={true}
           modules={[Navigation, Thumbs, Controller]}
         >
-          {item?.images?.map((i,index) => {
+          {item?.images?.map((i, index) => {
             {
               /* {
               console.log(i);
@@ -137,12 +140,10 @@ export default function GalleryModal({ item,show, onHide }) {
                     index === swiperIndex ? "active" : ""
                   }`}
                 >
-                  {index}
+                  {index + 1}
                 </div>
                 <img
-                  className={`${
-                    index === swiperIndex ? "active" : ""
-                  }`}
+                  className={`${index === swiperIndex ? "active" : ""}`}
                   src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 />
               </SwiperSlide>

@@ -129,16 +129,16 @@ export default function Listing() {
   const filterByPublisher = async () => {
     console.log("filterByPublisher");
     
-    const response = await fetch(`api/product/publisher/polis-press`, {
+    const response = await fetch(`/api/product/publisher/polis-press`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: ["-date_created"],
-        page: 1,
+        sort: myObject.sort,
+        page: page,
         publisher: "polis-press",
-        limit: 15,
+        limit: limit,
       }),
     });
     const books = await response.json();
