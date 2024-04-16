@@ -292,9 +292,6 @@ class ApiManager {
 
     return await this.sdk(gql);
   };
-  getProduct = () => {
-    return;
-  };
 
   getProductDetail2 = () => {
     return this.get({
@@ -302,7 +299,7 @@ class ApiManager {
     });
   };
 
-  getProductDetail = async() => {
+  getProductDetail = async () => {
     const gql = `
         query {
         product {
@@ -372,15 +369,18 @@ class ApiManager {
         posts( 
           limit: ${limit}
           page: ${page}      
-          filter: {
-          
-          } 
+         
         ) 
         {
           id
           title
           tags
           content
+          category{
+            id
+            name
+            slug
+          }
           key_image{
             id
           }  
@@ -390,6 +390,47 @@ class ApiManager {
 
     console.log("getPosts", gql);
 
+    return await this.sdk(gql);
+  };
+
+  getColumnsMenu = async () => {
+    const gql = `
+      query {
+      site_menu( 
+        filter: {
+          publisher:{
+            _eq: "polis-press"
+          },
+          channel: {
+            _eq: "columns"
+          }
+        }
+      ) 
+      { 
+        id
+        title
+        publisher
+        channel
+        menu_items {
+          site_menu_items_id {
+            id
+            title
+            slug
+            type
+            landing
+            query_tags
+            category {
+              category_id {
+                id
+                name
+                slug
+              }
+            }
+          }
+        }
+      }
+    } 
+    `;
     return await this.sdk(gql);
   };
 

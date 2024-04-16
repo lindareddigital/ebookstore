@@ -202,11 +202,12 @@ a:hover{
 
 .home-banner{
   background: #fff;
-  width: 100vw;
+  /* width: 1320px; */
+  max-width: 1320px;
   margin: auto;
   padding: 80px 0px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .single-page .home-banner{
@@ -268,10 +269,6 @@ a:hover{
 
 .listing-page .book-item:hover{
   box-shadow: 0px 4px 30px 0px #00000029;
-}
-
-.home-recommend-tabs .book-item{
-  margin: 0px 8px;
 }
 
 .grid-view{
@@ -495,7 +492,6 @@ a:hover{
 .carousel-item img{
   width: 984px;
   height: 492px;
-
   object-fit: cover;
 }
 
@@ -768,7 +764,7 @@ span{
 }
 
 .swiper-slide{
-  margin-right: 10px;
+  margin-right: 16px;
   width: auto !important;
 }
 
@@ -1185,10 +1181,10 @@ span{
 }
 
 .home-recommend-tabs{
-  position: absolute;
+  /* position: absolute; */
   z-index: 999;
   right: 0;
-  width: calc(100vw - 15%);
+  /* width: calc(100vw - 15%); */
 }
 
 .detail-page .home-recommend-tabs{
@@ -2313,6 +2309,19 @@ footer .accordion{
 }
 
 @media (max-width: 1200px){
+
+.home-banner .leftbox{
+  width: calc(100vw - 32px);
+}
+
+.home-banner-carousel{
+  margin: auto;
+}
+
+.home-banner{
+  flex-direction: column-reverse;
+}
+
 .manage-page .leftbox{
   width: 100%;
 }
@@ -2330,6 +2339,7 @@ footer .accordion{
 }
 
 .social-links li{
+  max-width: unset;
   width: 49%;
   aspect-ratio: 16/9;
   height: auto;
@@ -2346,10 +2356,6 @@ footer .accordion{
 
 .header-search-input{
   width: 600px !important;
-}
-
-.home-banner{
-  width: 100vw;
 }
 
 .grid-view{
