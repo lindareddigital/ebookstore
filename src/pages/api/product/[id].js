@@ -6,15 +6,15 @@ export default async function handler(req, res) {
   try {
     const detail = await apiManager.getProductDetail();
 
-    const data = detail?.data.find((item) => {
+    const data = detail?.product?.find((item) => {
       return item.id === id;
     });
 
-    const relatedBooks = detail?.data.filter((item) => {
+    const relatedBooks = detail?.product?.filter((item) => {
       return item.series === data.series;
     });
-    
-    res.status(200).json({ data, relatedBooks });
+
+    res.status(200).json({ data: data, relatedBooks });
   } catch (err) {
     res.status(500).json({ error: "Failed to load data" });
 

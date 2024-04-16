@@ -82,10 +82,10 @@ export default function Listing() {
 
   useEffect(() => {
     console.log("myObject", myObject);
-    if (isFirstRendering.current) {
-      isFirstRendering.current = false;
-      return;
-    }
+    // if (isFirstRendering.current) {
+    //   isFirstRendering.current = false;
+    //   return;
+    // }
     filterBooks();
   }, [page, limit, myObject.sort,router]);
 
@@ -200,7 +200,7 @@ export default function Listing() {
   };
 
   const filterBooks = async (arr) => {
-    if (router?.query?.slug?.length < 3) {
+    if (router?.query?.slug?.length < 3 ) {
       console.log("length < 3", router?.query?.slug?.length < 3);
      filterByPublisher();
     }

@@ -296,10 +296,66 @@ class ApiManager {
     return;
   };
 
-  getProductDetail = () => {
+  getProductDetail2 = () => {
     return this.get({
       path: `/items/product/?fields[]=*&fields[]=images.*`,
     });
+  };
+
+  getProductDetail = async() => {
+    const gql = `
+        query {
+        product {
+            id
+            status
+            sort
+            title
+            Author
+            Publisher {
+            id
+            slug
+            }
+            illustrator
+            keyword
+            series
+            book_number
+            description
+            Language
+            binding_layout
+            isbn
+            format
+            table_of_contents
+            date_created
+            date_updated
+            price
+            discounted_price
+            discount 
+            cover_image{
+              id
+            }
+            images{
+              id
+              product_id{
+                id
+              }
+              directus_files_id{
+                id
+              }
+            }
+            tags {
+              id
+            category_id {
+              id
+            }
+            }
+        }  
+    }
+    
+    `;
+
+    // console.log("getSideMenuByChannelAndSlug", gql);
+
+    return await this.sdk(gql);
   };
 
   getProductRelatedBooks = () => {
@@ -310,7 +366,7 @@ class ApiManager {
     // tags: {
     //             _in: [${tag}]
     //           }
-  
+
     const gql = `
       query {
         posts( 

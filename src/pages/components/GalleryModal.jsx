@@ -88,7 +88,7 @@ export default function GalleryModal({ item,show, onHide }) {
           }}
           modules={[Thumbs, FreeMode, Navigation, Controller]}
         >
-          {item.images.map((item) => {
+          {item?.images?.map((item) => {
             {
               {
                 /* console.log("5566", item); */
@@ -98,7 +98,7 @@ export default function GalleryModal({ item,show, onHide }) {
               <SwiperSlide key={item.directus_files_id}>
                 <img
                   className="primary-img"
-                  src={`https://directus-cms.vicosys.com.hk/assets/${item.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  src={`https://directus-cms.vicosys.com.hk/assets/${item?.directus_files_id?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 />
               </SwiperSlide>
             );
@@ -143,7 +143,7 @@ export default function GalleryModal({ item,show, onHide }) {
                 </div>
                 <img
                   className={`${index === swiperIndex ? "active" : ""}`}
-                  src={`https://directus-cms.vicosys.com.hk/assets/${i.directus_files_id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  src={`https://directus-cms.vicosys.com.hk/assets/${i?.directus_files_id?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 />
               </SwiperSlide>
             );
