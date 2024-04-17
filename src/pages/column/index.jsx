@@ -7,75 +7,92 @@ import MenuBar from "src/pages/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import { useRouter } from "next/router";
+import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 export default function Share({}) {
   const [data, setData] = useState(null);
-  const [media, setMedia] = useState(null);
+  const [allPost, setAllPost] = useState(null);
   const [menu, setMenu] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [length, setLength] = useState(0);
 
   const router = useRouter();
   const page = router.query.page || 1;
-  const tag = router.query.tag || "";
+  const category = router.query.category || "";
   const limit = router.query.limit || 5;
-
   useEffect(() => {
     const fetchData = async () => {
-      try {
+        try {
+          const response = await fetch("/api/posts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              page: page,
+              category: category,
+              limit: limit,
+            }),
+          });
 
-        const response = await fetch("/api/posts", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            page: page,
-            tag: tag,
-            limit: limit,
-          }),
-        });
+          const data = await response.json();
+          setData(data?.data?.posts);
+          setMenu(data?.menu?.site_menu[0]?.menu_items);
+          setSelected(data?.menu?.site_menu[0]?.menu_items[0]);
+          setLength(data?.data?.posts_aggregated[0]?.countDistinct?.id);
+          console.log(
+            "ddata",
+            data?.data?.posts,
+            data?.data?.posts_aggregated[0]?.countDistinct?.id,
+
+            data?.menu?.site_menu[0]?.menu_items
+          );
+
+          console.log(selected);
+        } catch (error) {
+          console.error("获取数据时出错：", error);
+        }
+    };
+
+    const fetchAll = async () => {
+      try {
+        const response = await fetch(`api/allPosts`);
 
         const data = await response.json();
-        setData(data?.data?.posts);
-        setMenu(data?.menu?.site_menu[0]?.menu_items);
-        setSelected(data?.menu?.site_menu[0]?.menu_items[0]);
-
+        setAllPost(data?.data?.posts);
+  
         console.log(
-          "ddata",
+          "ALL",
           data?.data?.posts,
-          data?.menu?.site_menu[0]?.menu_items
+     
         );
-
-        console.log(selected);
-        
 
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
     };
 
+    fetchAll();
+
     fetchData();
   }, [router]);
 
   const handleSelected = (item) => {
-    
     setSelected(item);
-
-        console.log("handleSelected", item,selected);
+    console.log("handleSelected", item,selected);
   };
 
-  const handleClick = (tag,slug) => {
+  const handleClick = (category) => {
+    console.log("click", category);  
     const queryObj = {};
-    if (tag) {
-      queryObj.tag = tag;
-    }
-    if (slug) {
-      queryObj.slug = slug;
+    if (category) {
+      queryObj.category = category;
     }
 
     router.push(
       {
-        pathname: "/share",
+        pathname: "/column",
         query: queryObj,
       },
       undefined,
@@ -83,12 +100,21 @@ export default function Share({}) {
     );
   };
 
+  const updatePage = (i) => {
+    console.log("updatePage", i);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: i },
+    });
+  };
+
   const tagsWithLength = selected?.site_menu_items_id?.category?.map((item) => {
     return {
       name: item.category_id.name,
-      length: data?.filter((post) =>
+      length: allPost?.filter((post) =>
         post?.category?.name?.includes(item.category_id.name)
       ).length,
+      category_id: item.category_id.id,
     };
   });
 
@@ -99,29 +125,42 @@ export default function Share({}) {
     console.log("Paginations length", length);
 
     if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 15); i++) {
+      for (let i = 1; i <= Math.ceil(length / 5); i++) {
         pageNumbers.push(
-          <Pagination.Item
-            onClick={() => {
-              updatePage(i);
-            }}
-            key={i}
-            active={i == page}
-          >
-            {i}
-          </Pagination.Item>
+          <>
+            <li
+              onClick={() => {
+                updatePage(i);
+              }}
+              className={`page-item ${i == page ? "active" : ""}`}
+            >
+              <div class="page-link">
+                {i}
+                <span class="visually-hidden">(current)</span>
+              </div>
+            </li>
+          </>
         );
       }
       return (
         <Pagination>
-          <Pagination.Prev
+          {/* <Pagination.Prev
             onClick={() => {
               const prevPage = Math.max(1, Number(page) - 1);
               updatePage(prevPage);
             }}
-          />
+          /> */}
+          <div
+            onClick={() => {
+              const prevPage = Math.max(1, Number(page) - 1);
+              updatePage(prevPage);
+            }}
+            className=""
+          >
+            <PrevIcon />
+          </div>
           {pageNumbers}
-          <Pagination.Next
+          <div
             onClick={() => {
               const nextPage = Math.min(
                 Math.ceil(length / 5),
@@ -129,7 +168,20 @@ export default function Share({}) {
               );
               updatePage(nextPage);
             }}
-          />
+            className=""
+          >
+            <NextIcon />
+          </div>
+
+          {/* <Pagination.Next
+            onClick={() => {
+              const nextPage = Math.min(
+                Math.ceil(length / 5),
+                Number(page) + 1
+              );
+              updatePage(nextPage);
+            }}
+          /> */}
         </Pagination>
       );
     }
@@ -186,14 +238,11 @@ export default function Share({}) {
                   <select
                     className="form-select"
                     id="floatingSelect"
-                    onChange={(event) => handleSelected(event.target.value)}
+                    onChange={(event) => handleClick(event.target.value)}
                   >
-                    {menu?.map((item) => (
-                      <option
-                        key={item.id}
-                        value={item.site_menu_items_id?.title}
-                      >
-                        {item.site_menu_items_id?.title}
+                    {tagsWithLength?.map((item) => (
+                      <option key={item?.category_id} value={item?.category_id}>
+                        {item?.name}
                       </option>
                     ))}
                   </select>
@@ -203,7 +252,10 @@ export default function Share({}) {
                   return (
                     <>
                       <div className="share-list-item overflow-hidden">
-                        <Link href={`/share/${item.id}`} className="post-thumb">
+                        <Link
+                          href={`/column/${item.id}`}
+                          className="post-thumb"
+                        >
                           <img
                             className="q-img__image"
                             src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -212,7 +264,7 @@ export default function Share({}) {
                         </Link>
                         <div className="post-info">
                           <h4 className="post-title">
-                            <Link href="/" className="">
+                            <Link href={`/column/${item.id}`} className="">
                               {item?.title}
                             </Link>
                           </h4>
@@ -220,10 +272,7 @@ export default function Share({}) {
                           <div className="post-meta">
                             {item?.tags?.map((item) => {
                               return (
-                                <div
-                                  onClick={() => handleClick(item)}
-                                  className="post-meta-tag category"
-                                >
+                                <div className="post-meta-tag category">
                                   {item}
                                 </div>
                               );
@@ -246,7 +295,7 @@ export default function Share({}) {
                   return (
                     <>
                       <div
-                        onClick={() => handleClick(item.slug)}
+                        onClick={() => handleClick(item.category_id)}
                         className="posts-category"
                       >
                         <div className="">{item.name}</div>
@@ -284,10 +333,7 @@ export default function Share({}) {
                           <div className="post-meta">
                             {item?.tags?.map((item) => {
                               return (
-                                <div
-                                  onClick={() => handleClick(item)}
-                                  className="post-meta-tag category"
-                                >
+                                <div className="post-meta-tag category">
                                   {item}
                                 </div>
                               );
@@ -307,9 +353,7 @@ export default function Share({}) {
             </div>
 
             <div className="">
-              {Math.ceil(data?.length / 5) > 1 && (
-                <Paginations length={data?.length} />
-              )}
+              {Math.ceil(length / 5) > 1 && <Paginations length={length} />}
             </div>
           </div>
         </div>

@@ -1586,6 +1586,11 @@ footer a{
 
 .pagination{
   justify-content: center;
+  align-items: center;
+}
+
+.pagination > div{
+  margin: 0px 13px;
 }
 
 .page-link{
@@ -1623,7 +1628,7 @@ footer a{
   color: #000;
 }
 
-.page-link a{
+.page-link{
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -1701,6 +1706,7 @@ footer .container-fluid{
   width: 424px;
   height: 424px;
   border: 1px solid #E9E9E9;
+  object-fit: cover;
 }
 
  .modal-content .primary-img{
@@ -1811,7 +1817,8 @@ footer .container-fluid{
 }
 
 .news-tabs .tab-pane{
-  width: 938px;
+  max-width: 938px;
+  width: 70%;
 }
 
 .tab-pane,.detail-area,.raw-html {
@@ -1946,7 +1953,7 @@ footer .container-fluid{
 }
 
 .posts-categories{
-  max-width: 310px;
+  width: 310px;
   height: 268px;
   background: #EBC700;
   padding: 32px 24px;
@@ -1995,8 +2002,10 @@ footer .container-fluid{
 }
 
 .post-excerpt{
-  margin-bottom: 16px;
-  color: #777;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #000;
+  opacity: 0.4;
   font-size: 16px;
   font-weight: 500;
   line-height: 23px;
@@ -2014,7 +2023,7 @@ footer .container-fluid{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 4px;
+  margin-right: 8px;
 }
 
 .post-meta{
@@ -2520,7 +2529,7 @@ footer .accordion{
 }
 
 .news-tabs .tab-pane{
-  width: unset;
+  width: 100%;
 }
 
 .post-meta{

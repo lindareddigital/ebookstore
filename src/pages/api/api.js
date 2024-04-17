@@ -355,21 +355,62 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getProductRelatedBooks = () => {
-    return;
+  getAllPosts = async () => {
+  
+    const gql = `
+      query {
+        posts
+        {
+          id
+          title
+          tags
+          content
+          category{
+            id
+            name
+            slug
+          }
+          key_image{
+            id
+          }  
+        }
+      }
+    `;
+
+    console.log("getAllPosts", gql);
+
+    return await this.sdk(gql);
   };
 
-  getPosts = async (tag, limit, page) => {
-    // tags: {
-    //             _in: [${tag}]
-    //           }
+  getPosts = async (category, limit, page) => {
+    let query = "";
+    let query2 = "";
 
+    if (category.length !== 0) {
+      query = `
+        filter: {
+          category: {
+            id:{
+              _in: ["${category}"]
+            } 
+          }
+        } `;
+      query2 = `(
+      filter: {
+        category: {
+          id:{
+            _in: ["${category}"]
+          } 
+        }
+      } )`;
+
+    }
     const gql = `
       query {
         posts( 
           limit: ${limit}
-          page: ${page}      
-         
+          page: ${page} 
+          ${query}      
         ) 
         {
           id
@@ -384,6 +425,13 @@ class ApiManager {
           key_image{
             id
           }  
+        }
+        posts_aggregated
+          ${query2}
+         {
+          countDistinct {
+            id
+          }
         }
       }
     `;
