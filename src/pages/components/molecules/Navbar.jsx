@@ -186,39 +186,6 @@ export default function Navbar({}) {
               <button className="search-btn" type="submit">
                 <img src="/icons/search.svg"></img>
               </button>
-
-              <div className="header-toolbar">
-                <div className="navbar-link">
-                  <button type="button" className="btn">
-                    <img src="/icons/cart.svg" alt="" />
-                    購物車
-                  </button>
-                  <hr className="nav-hr" />
-
-                  <button type="button" className="btn">
-                    <img src="/icons/member.svg" alt="" />
-                    登入
-                  </button>
-                  <div className="dot"></div>
-                  <button type="button" className="btn">
-                    註冊
-                  </button>
-                </div>
-
-                <div className="label-group">
-                  <Link href={{ pathname: `/seashore/` }}>
-                    <button type="button" className="btn">
-                      海濱
-                    </button>
-                  </Link>
-                  <hr className="nav-hr" />
-                  <Link href={{ pathname: `/ichiban` }}>
-                    <button type="button" className="btn">
-                      一丁
-                    </button>
-                  </Link>
-                </div>
-              </div>
             </form>
             <div className="keyword-block">
               <div className="pill">HOT</div>
@@ -226,6 +193,39 @@ export default function Navbar({}) {
               <Link href="">成語-民間故事</Link>
               <Link href="">X極限挑戰王</Link>
               <Link href=""></Link>
+            </div>
+          </div>
+
+          <div className="header-toolbar">
+            <div className="navbar-link">
+              <button type="button" className="btn">
+                <img src="/icons/cart.svg" alt="" />
+                購物車
+              </button>
+              <hr className="nav-hr" />
+
+              <button type="button" className="btn">
+                <img src="/icons/member.svg" alt="" />
+                登入
+              </button>
+              <div className="dot"></div>
+              <button type="button" className="btn">
+                註冊
+              </button>
+            </div>
+
+            <div className="label-group">
+              <Link href={{ pathname: `/seashore/` }}>
+                <button type="button" className="btn">
+                  海濱
+                </button>
+              </Link>
+              <hr className="nav-hr" />
+              <Link href={{ pathname: `/ichiban` }}>
+                <button type="button" className="btn">
+                  一丁
+                </button>
+              </Link>
             </div>
           </div>
         </div>

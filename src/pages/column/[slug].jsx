@@ -51,7 +51,7 @@ export default function Detail({}) {
   return (
     <div>
       {item != null && (
-        <div className="detail-page">
+        <div className="detail-page column-page">
           <Head>
             <title>{item.title}</title>
           </Head>
@@ -61,6 +61,9 @@ export default function Detail({}) {
             <Breadcrumb data={item?.category?.name} />
 
             <div className="detail">
+              <div class="article-title">
+                <h1>{item.title}</h1>
+              </div>
               <div className="content">
                 <>
                   <img

@@ -99,6 +99,7 @@ a:hover{
   letter-spacing: 1.8px;
   text-transform: uppercase;
   margin-right: 80px;
+  cursor: pointer;
 }
 
 .dropdown-item {
@@ -117,7 +118,7 @@ a:hover{
   display: flex;
   align-items: flex-start;
   width: 100%;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 
 .header-search-bar .right-side{
@@ -390,6 +391,7 @@ a:hover{
   border-bottom: 1px solid #DEDEDE;
   align-items: center;
   display: flex;
+  cursor: pointer;
 }
 
 
@@ -630,7 +632,8 @@ a:hover{
   font-size: 16px;
   font-weight: 500;
   line-height: 23px;
-  /* color: #DEDEDE; */
+  color: #000;
+  opacity: 0.4;
 }
 
 .list-view-item .info{
@@ -1042,6 +1045,7 @@ span{
   margin-bottom: 28px;
   align-items: baseline;
   justify-content: space-between;
+  align-items: center;
   max-width: 1320px;
 }
 
@@ -1073,7 +1077,12 @@ span{
 .yt-block{
   display: flex;
   flex-direction: column;
-  width: 871px;
+  max-width: 871px;
+  width: 70%;
+}
+
+.yt-block > iframe{
+  width: 100%;
 }
 
 .single-page .yt-block{
@@ -1300,6 +1309,7 @@ span{
 }
 
 .share-block{
+  max-width: 424px;
   width: 424px;
   padding: 60px 16px 16px 16px;
   background: var(--Yellow, #EBC700);
@@ -1612,6 +1622,10 @@ footer a{
   border-color: unset;
 }
 
+.page-item{
+  margin-bottom: 0 !important;
+}
+
 .page-item:last-child .page-link,
 .page-item:first-child .page-link{
   background: unset;
@@ -1685,6 +1699,10 @@ footer .container-fluid{
   width: 100%;
   display: flex;
   align-items: flex-start;
+}
+
+.column-page .content{
+  flex-direction: column;
 }
 
 .detail-page .fdc{
@@ -2054,6 +2072,7 @@ footer .container-fluid{
   width: 160px;
   height: 160px;
   margin-right: 12px;
+  object-fit: cover;
 }
 
 .post-meta-date{
@@ -2115,6 +2134,10 @@ footer .container-fluid{
 .manage-page .info div:last-child{
   justify-content: flex-end;
   flex-direction: row;
+}
+
+.home-recommend-tabs .block-title{
+  margin-left: unset;
 }
 
 .manage-page .block-title{
@@ -2321,6 +2344,11 @@ footer .accordion{
 
 .home-banner .leftbox{
   width: calc(100vw - 32px);
+  margin: auto;
+}
+
+.home-recommend-tabs{
+  width: calc(100vw - 15%);
 }
 
 .home-banner-carousel{
@@ -2357,10 +2385,6 @@ footer .accordion{
 
 .social-links ul{
   flex-wrap: wrap;
-}
-
-.media-block{
-  flex-direction: column;
 }
 
 .header-search-input{
@@ -2691,6 +2715,7 @@ footer .accordion{
 .pannel-container .filter-area{
   width: 100vw;
   z-index: 9999;
+  height: 500px;
   position: fixed;
   bottom: 50px;
   left: 0;
@@ -2865,6 +2890,7 @@ footer .accordion{
 }
 
 .share-block{
+  max-width: unset;
   width: calc(100vw - 32px);
   margin: 48px auto;
   height: 807px;
@@ -2970,7 +2996,7 @@ footer .box{
 
 .home-banner .leftbox{
   width: calc(100vw - 32px);
-  margin-top: 20px;
+  margin-top: 65px;
   height: 411px;
 }
 

@@ -2,8 +2,8 @@
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
-import GridList from "./GridList";
-import ListList from "./ListList";
+import GridList from "../GridList";
+import ListList from "../ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
@@ -12,6 +12,8 @@ import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import Pagination from "react-bootstrap/Pagination";
 import { useGlobalStore } from "src/pages/store/global.store";
+import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
@@ -201,7 +203,7 @@ export default function Listing() {
 
   const filterBooks = async (arr) => {
     if (router?.query?.slug?.length < 3 ) {
-      console.log("length < 3", router?.query?.slug?.length < 3);
+      console.log("length < 3", router?.query?.slug);
      filterByPublisher();
     }
     console.log("filterBooks");
@@ -245,22 +247,45 @@ export default function Listing() {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
-          <Pagination.Item
-            onClick={() => {
-              updatePage(i);
-            }}
-            key={i}
-            active={i == page}
-          >
-            {i}
-          </Pagination.Item>
+          <>
+            <li
+              onClick={() => {
+                updatePage(i);
+              }}
+              className={`page-item ${i == page ? "active" : ""}`}
+            >
+              <div class="page-link">
+                {i}
+                <span class="visually-hidden">(current)</span>
+              </div>
+            </li>
+          </>
         );
       }
       return (
         <Pagination>
-          <Pagination.Prev />
+          <div
+            onClick={() => {
+              const prevPage = Math.max(1, Number(page) - 1);
+              updatePage(prevPage);
+            }}
+            className=""
+          >
+            <PrevIcon />
+          </div>{" "}
           {pageNumbers}
-          <Pagination.Next />
+          <div
+            onClick={() => {
+              const nextPage = Math.min(
+                Math.ceil(length / 5),
+                Number(page) + 1
+              );
+              updatePage(nextPage);
+            }}
+            className=""
+          >
+            <NextIcon />
+          </div>
         </Pagination>
       );
     }

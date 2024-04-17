@@ -12,6 +12,8 @@ import Pagination from "react-bootstrap/Pagination";
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 import Error from "next/error";
 import { getPageColor, getPageBg } from "src/utilities/tool.js";
+import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 export default function Singlepage() {
   const router = useRouter();
@@ -91,6 +93,7 @@ export default function Singlepage() {
     const books = await response.json();
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
     setProductTotalCount(length);
+
     setProducts(books?.result?.product);
   };
 
@@ -209,27 +212,34 @@ export default function Singlepage() {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
-          <Pagination.Item
-            onClick={() => {
-              updatePage(i);
-            }}
-            key={i}
-            active={i == page}
-          >
-            {i}
-          </Pagination.Item>
+          <>
+            <li
+              onClick={() => {
+                updatePage(i);
+              }}
+              className={`page-item ${i == page ? "active" : ""}`}
+            >
+              <div class="page-link">
+                {i}
+                <span class="visually-hidden">(current)</span>
+              </div>
+            </li>
+          </>
         );
       }
       return (
         <Pagination>
-          <Pagination.Prev
+          <div
             onClick={() => {
               const prevPage = Math.max(1, Number(page) - 1);
               updatePage(prevPage);
             }}
-          />
+            className=""
+          >
+            <PrevIcon />
+          </div>
           {pageNumbers}
-          <Pagination.Next
+          <div
             onClick={() => {
               const nextPage = Math.min(
                 Math.ceil(length / 5),
@@ -237,7 +247,10 @@ export default function Singlepage() {
               );
               updatePage(nextPage);
             }}
-          />
+            className=""
+          >
+            <NextIcon />
+          </div>
         </Pagination>
       );
     }
@@ -430,9 +443,10 @@ export default function Singlepage() {
                 {currentView === "grid" && <GridList books={products} />}
                 {currentView === "list" && <ListList books={products} />}
                 <div className="">
-                  {length > 15 && Math.ceil(productTotalCount / 5) > 1 && (
-                    <Paginations length={productTotalCount} />
-                  )}
+                  {productTotalCount > 15 &&
+                    Math.ceil(productTotalCount / 5) > 1 && (
+                      <Paginations length={productTotalCount} />
+                    )}
                 </div>{" "}
               </div>
             </div>

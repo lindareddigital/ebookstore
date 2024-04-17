@@ -144,12 +144,6 @@ export default function Share({}) {
       }
       return (
         <Pagination>
-          {/* <Pagination.Prev
-            onClick={() => {
-              const prevPage = Math.max(1, Number(page) - 1);
-              updatePage(prevPage);
-            }}
-          /> */}
           <div
             onClick={() => {
               const prevPage = Math.max(1, Number(page) - 1);
@@ -172,16 +166,6 @@ export default function Share({}) {
           >
             <NextIcon />
           </div>
-
-          {/* <Pagination.Next
-            onClick={() => {
-              const nextPage = Math.min(
-                Math.ceil(length / 5),
-                Number(page) + 1
-              );
-              updatePage(nextPage);
-            }}
-          /> */}
         </Pagination>
       );
     }
