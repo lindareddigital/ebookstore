@@ -288,6 +288,10 @@ a:hover{
  justify-content: space-between;
 }
 
+.listing-page .main-body{
+  padding-top: 0;
+}
+
 .listing-page .right-side{
   justify-content: flex-end;
   width: 80%;
@@ -1197,7 +1201,8 @@ span{
 }
 
 .detail-page .home-recommend-tabs{
-  width: calc(100vw - 9%);
+  /* width: calc(100vw - 9%); */
+  width: 1320px;
 }
 
 .carousel-inner{
@@ -1597,6 +1602,7 @@ footer a{
 .pagination{
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .pagination > div{

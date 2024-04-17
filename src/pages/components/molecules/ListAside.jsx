@@ -11,9 +11,12 @@ export default function ListAside({ siteMenu }) {
   const handleClick = (channel, item, publisher, menuItem) => {
     console.log(item, menuItem);
 
-    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
-      shallow: true,
-    });
+      if (publisher === "polis-press"){
+        publisher = "books"
+      }
+      router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+        shallow: true,
+      });
   };
 
   useEffect(() => {

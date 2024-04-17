@@ -2,8 +2,8 @@
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
-import GridList from "../components/GridList";
-import ListList from "../components/ListList";
+import GridList from "../../components/GridList";
+import ListList from "../../components/ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
@@ -30,8 +30,8 @@ export default function Listing() {
   const [currentView, setCurrentView] = useState("grid");
   const router = useRouter();
   const [menu, setMenu] = useState(null);
-  const channel = router.query.channel;
-  const slug = router.query.slug?.[1];
+  const channel = router.query.channel?.[0];
+  const slug = router.query.channel?.[1];
   const page = router.query.page || 1;
   const limit = router.query.limit || 15;
   const [title, setTitle] = useState("");
@@ -97,11 +97,13 @@ export default function Listing() {
         const res = await fetch("/api/sitemenu/publisher/polis-press");
         const response = await res.json();
         const tempMenu = response.result.site_menu;
+        console.log("100", router.query?.channel?.[1]);
+        
         setSiteMenu(tempMenu);
 
         const foundItem = tempMenu.find((menu) => {
           return menu.menu_items.some(
-            (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+            (item) => item.site_menu_items_id.slug === router.query?.channel?.[1]
           );
         });
         setTitle(foundItem?.title);
@@ -109,7 +111,7 @@ export default function Listing() {
 
         if (foundItem) {
           var arr = foundItem.menu_items.find(
-            (item) => item.site_menu_items_id.slug === router.query?.slug?.[1]
+            (item) => item.site_menu_items_id.slug === router.query?.channel?.[1]
           ).site_menu_items_id;
           console.log(
             "category arr",
@@ -202,9 +204,8 @@ export default function Listing() {
   };
 
   const filterBooks = async (arr) => {
-    if (router?.query?.slug?.length < 3 ) {
-      console.log("length < 3", router?.query?.slug);
-     filterByPublisher();
+    if (!channel?.[0] && !channel?.[1]) {
+      filterByPublisher();
     }
     console.log("filterBooks");
     const categoryArr = arr?.map((item) => item?.category_id?.id);
@@ -235,7 +236,7 @@ export default function Listing() {
     } else if (item.type === "product_by_series") {
       filterBySeries(item.query_tags);
     }
-    router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+    router.push(`/books/${channel}/${item.slug}`, undefined, {
       shallow: true,
     });
   };

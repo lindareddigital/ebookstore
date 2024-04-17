@@ -15,7 +15,7 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    router.push(`/polis-press/${item.slug}`, undefined, {
+    router.push(`/books/${item.slug}`, undefined, {
       shallow: true,
     });
 
