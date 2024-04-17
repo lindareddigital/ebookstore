@@ -2,8 +2,8 @@
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
-import GridList from "./GridList";
-import ListList from "./ListList";
+import GridList from "../components/GridList";
+import ListList from "../components/ListList";
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import ListAside from 'src/pages/components/molecules/ListAside';
