@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       if (!slug) {
         slug = "home";
       }
-      const result = await apiManager.getPageBySlug(slug);
+    const result = await apiManager.getPageBySlug(slug);
 
       return res.status(200).json({ result });
 

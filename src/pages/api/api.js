@@ -137,15 +137,12 @@ class ApiManager {
                   content
                   group_type
                   posts {
-                      posts_id {
-                          id
-                          title
-                          tags
-                          key_image {
-                              id
-                              location
-                          }
-                      }
+                    id
+                    title
+                    tags
+                    key_image {
+                        id
+                    }
                   }
                   cards {
                       title
@@ -192,7 +189,7 @@ class ApiManager {
         }
       }
     `;
-
+    
     return await this.sdk(gql);
   };
 

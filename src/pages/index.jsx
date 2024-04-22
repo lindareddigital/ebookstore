@@ -126,8 +126,8 @@ export default function Home() {
                       alt=""
                     />
 
-                    <div className="desc">{item.posts_id.title}</div>
-                    <div className="desc">{item.posts_id.tags}</div>
+                    <div className="desc">{item.title}</div>
+                    <div className="desc">{item.tags}</div>
                   </div>
                 </>
               );

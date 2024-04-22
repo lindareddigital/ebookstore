@@ -44,7 +44,7 @@ export default function MediaBlock({ posts,video }) {
               width="322"
               height="181"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[2].youtube
+                ytVideo[1].youtube
               )}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -72,7 +72,7 @@ export default function MediaBlock({ posts,video }) {
                     alt=""
                   /> */}
 
-                  <div className="desc">{item.posts_id.title}</div>
+                  <div className="desc">{item.title}</div>
                   {/* <div className="desc">{item.posts_id.tags}</div> */}
                 </div>
               </>
