@@ -5,6 +5,9 @@ export default async function handler(req, res) {
   try {
       
       let { slug } = req.query;
+
+      console.log('6666',slug);
+      
       if (!slug) {
         slug = "home";
       }

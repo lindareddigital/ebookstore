@@ -24,7 +24,7 @@ export default function Share({}) {
   useEffect(() => {
     const fetchData = async () => {
         try {
-          const response = await fetch("/api/posts", {
+          const response = await fetch("/api/columns", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function Share({}) {
 
     const fetchAll = async () => {
       try {
-        const response = await fetch(`api/allPosts`);
+        const response = await fetch(`api/allColumns`);
 
         const data = await response.json();
         setAllPost(data?.data?.posts);

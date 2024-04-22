@@ -15,6 +15,8 @@ import { getPageColor, getPageBg } from "src/utilities/tool.js";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
+
+
 export default function Singlepage() {
   const router = useRouter();
   const channel = router.query.slug?.[1];
@@ -37,7 +39,8 @@ export default function Singlepage() {
   // console.log("router", publisher, channel,limit);
 
   useEffect(() => {
-    if (!publisher) {
+    if (!publisher)
+    {
       return;
     }
     const fetchMenu = async () => {
@@ -54,10 +57,10 @@ export default function Singlepage() {
       try {
         const response = await fetch(`/api/page/${publisher}`);
         const result = await response.json();
-        const heroBanner = result?.result?.pages[0].blocks?.find((item) => {
+        const heroBanner = result?.result?.pages[0]?.blocks?.find((item) => {
           return item.collection === "block_hero";
         });
-         const video = result?.result?.pages[0].blocks?.find((item) => {
+         const video = result?.result?.pages[0]?.blocks?.find((item) => {
            return item?.id === "12";
          });
         console.log(video);
@@ -257,9 +260,14 @@ export default function Singlepage() {
   };
 
 
-  if (publisher != "seashore" && publisher != "ichiban") {
+  if (
+    publisher != "seashore" &&
+    publisher != "ichiban" 
+    // &&
+    // publisher != "posts"
+  ) {
     return <Error statusCode={404} />;
-  }
+  } 
 
   return (
     <div className="single-page">

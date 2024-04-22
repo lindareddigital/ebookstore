@@ -139,6 +139,9 @@ class ApiManager {
                   posts {
                     id
                     title
+                    category{
+                      slug
+                    }
                     tags
                     key_image {
                         id
@@ -184,12 +187,24 @@ class ApiManager {
                   limit
                   category{ id, name }         
                 }
+                 ...on block_download_group {
+                    id
+                    title
+                    download_item {
+                        id
+                        title
+                        file {
+                            id
+                        }
+                        external_url
+                    }
+                }
           }
           }
         }
       }
     `;
-    
+
     return await this.sdk(gql);
   };
 
@@ -353,7 +368,6 @@ class ApiManager {
   };
 
   getAllPosts = async () => {
-  
     const gql = `
       query {
         posts
@@ -400,7 +414,6 @@ class ApiManager {
           } 
         }
       } )`;
-
     }
     const gql = `
       query {
@@ -434,6 +447,90 @@ class ApiManager {
     `;
 
     console.log("getPosts", gql);
+
+    return await this.sdk(gql);
+  };
+
+  getAllColumns = async () => {
+    const gql = `
+      query {
+        posts
+        {
+          id
+          title
+          tags
+          content
+          category{
+            id
+            name
+            slug
+          }
+          key_image{
+            id
+          }  
+        }
+      }
+    `;
+
+    console.log("getAllColumns", gql);
+
+    return await this.sdk(gql);
+  };
+
+  getColumns = async (category, limit, page) => {
+    let query = "";
+    let query2 = "";
+
+    if (category.length !== 0) {
+      query = `
+        filter: {
+          category: {
+            id:{
+              _in: ["${category}"]
+            } 
+          }
+        } `;
+      query2 = `(
+      filter: {
+        category: {
+          id:{
+            _in: ["${category}"]
+          } 
+        }
+      } )`;
+    }
+    const gql = `
+      query {
+        posts( 
+          limit: ${limit}
+          page: ${page} 
+          ${query}      
+        ) 
+        {
+          id
+          title
+          tags
+          content
+          category{
+            id
+            name
+            slug
+          }
+          key_image{
+            id
+          }  
+        }
+        posts_aggregated
+          ${query2}
+         {
+          countDistinct {
+            id
+          }
+        }
+      }
+    `;
+
+    console.log("getColumns", gql);
 
     return await this.sdk(gql);
   };

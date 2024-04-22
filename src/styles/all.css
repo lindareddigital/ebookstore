@@ -1197,7 +1197,7 @@ span{
   /* position: absolute; */
   z-index: 999;
   right: 0;
-  /* width: calc(100vw - 15%); */
+  width: calc(100vw - 15%);
 }
 
 .detail-page .home-recommend-tabs{
@@ -1214,6 +1214,16 @@ span{
   justify-content: space-between;
   display: flex;
   margin-bottom: 80px;
+}
+
+.column-page .detail{
+  flex-direction: column;
+}
+
+.column-page .article-title{
+  font-size: 1.56rem;
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
 .detail-area{

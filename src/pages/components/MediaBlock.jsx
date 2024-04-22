@@ -21,7 +21,7 @@ export default function MediaBlock({ posts,video }) {
             width="871"
             height="490"
             src={`https://www.youtube.com/embed/${extractYouTubeId(
-              ytVideo[0].youtube
+              ytVideo[0]?.youtube
             )}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -34,7 +34,7 @@ export default function MediaBlock({ posts,video }) {
               width="322"
               height="181"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[1].youtube
+                ytVideo[1]?.youtube
               )}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -44,7 +44,7 @@ export default function MediaBlock({ posts,video }) {
               width="322"
               height="181"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[1].youtube
+                ytVideo[1]?.youtube
               )}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
