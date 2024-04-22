@@ -18,6 +18,7 @@ export default function Posts() {
 
   const router = useRouter();
   const page = router.query.page || 1;
+  const slug = router.query.slug;
   const category = router.query.category || "";
   const limit = router.query.limit || 5;
   useEffect(() => {
@@ -25,8 +26,9 @@ export default function Posts() {
       try {
         const response = await fetch("/api/page/latest-news");
         const result = await response.json();
-        setData(result?.result?.pages[0].blocks);
-        console.log("dd", data);
+        setData(result?.result?.pages[0]);
+        console.log("dd", data, data?.blocks[0]?.item?.posts,result?.result);
+        console.log("dd", data?.title);
 
         
         } catch (error) {
@@ -120,7 +122,7 @@ export default function Posts() {
     }
   };
  
-
+  // return null
   return (
     <>
       <div className="share-page">
@@ -139,26 +141,18 @@ export default function Posts() {
                 >
                   <img className="topright" src="/icons/leftboxicon.svg"></img>
 
-                  {menu?.map((item) => (
-                    <button
-                      className={`nav-link ${
-                        selected?.site_menu_items_id?.title ===
-                        item?.site_menu_items_id?.title
-                          ? "active"
-                          : ""
-                      }`}
-                      id="nav-home-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#nav-home"
-                      type="button"
-                      role="tab"
-                      aria-controls="nav-home"
-                      aria-selected="true"
-                      onClick={() => handleSelected(item)}
-                    >
-                      {item?.site_menu_items_id?.title}
-                    </button>
-                  ))}
+                  <button
+                    className={`nav-link active`}
+                    id="nav-home-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-home"
+                    aria-selected="true"
+                  >
+                    {data?.title}
+                  </button>
                 </div>
               </nav>
               <div className="tab-content" id="nav-tabContent">
@@ -168,7 +162,7 @@ export default function Posts() {
                   role="tabpanel"
                   aria-labelledby="nav-home-tab"
                 >
-                  {data?.map((item) => {
+                  {data?.blocks[0]?.item?.posts?.map((item) => {
                     return (
                       <>
                         <div className="share-list-item overflow-hidden">
@@ -210,15 +204,13 @@ export default function Posts() {
                   })}
                 </div>
 
-               
-
                 <div
                   className="tab-pane fade"
                   id="nav-profile"
                   role="tabpanel"
                   aria-labelledby="nav-profile-tab"
                 >
-                  {data?.map((item) => {
+                  {data?.blocks[0]?.item?.posts?.map((item) => {
                     return (
                       <>
                         <div className="share-list-item overflow-hidden">

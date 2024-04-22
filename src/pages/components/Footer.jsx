@@ -33,7 +33,7 @@ export default function Footer() {
                     <Link href="">關於大邑</Link>
                   </li>
                   <li>
-                    <Link href="">隱私/服務條款</Link>
+                    <Link href="/terms">隱私/服務條款</Link>
                   </li>
                 </div>
               </div>
@@ -114,20 +114,16 @@ export default function Footer() {
             </div>
           </div>
           <div className="box">
-            <li className="title">
-              關於我們
-            </li>
+            <li className="title">關於我們</li>
             <li>
               <Link href="">關於大邑</Link>
             </li>
             <li>
-              <Link href="">隱私/服務條款</Link>
+              <Link href="/terms">隱私/服務條款</Link>
             </li>
           </div>
           <div className="box">
-            <li className="title">
-              會員中心
-            </li>
+            <li className="title">會員中心</li>
             <li>
               <Link
                 href={{
@@ -156,9 +152,7 @@ export default function Footer() {
             </li>
           </div>
           <div className="box">
-            <li className="title">
-              客戶服務
-            </li>
+            <li className="title">客戶服務</li>
             <li>
               <Link href="/Download">書單下載</Link>
             </li>
@@ -170,9 +164,7 @@ export default function Footer() {
             </li>
           </div>
           <div className="box">
-            <li className="title">
-              社群
-            </li>
+            <li className="title">社群</li>
             <div className="social-sqare-container">
               <li className="social-sqare">
                 <img src="/icons/footerfb.svg"></img>

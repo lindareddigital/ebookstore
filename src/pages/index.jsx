@@ -133,12 +133,10 @@ export default function Home() {
               );
             })}
           </div>
-          <Link href="/share" className={``}>
-            <div className="read-more-btn">
+            <Link href="/posts/news" className="read-more-btn">
               查看更多
               <img className="" src="/icons/viewmore.svg"></img>
-            </div>
-          </Link>
+            </Link>
           <img className="newsbg" src="/icons/newsbg.svg"></img>
         </div>
         <div

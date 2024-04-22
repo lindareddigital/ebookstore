@@ -260,14 +260,14 @@ export default function Singlepage() {
   };
 
 
-  if (
-    publisher != "seashore" &&
-    publisher != "ichiban" 
-    // &&
-    // publisher != "posts"
-  ) {
-    return <Error statusCode={404} />;
-  } 
+  // if (
+  //   publisher != "seashore" &&
+  //   publisher != "ichiban" 
+  //   // &&
+  //   // publisher != "posts"
+  // ) {
+  //   return <Error statusCode={404} />;
+  // } 
 
   return (
     <div className="single-page">

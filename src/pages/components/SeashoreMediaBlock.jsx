@@ -40,7 +40,7 @@ export default function MediaBlock({ video }) {
               width="322"
               height="181"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[1].youtube
+                ytVideo[1]?.youtube
               )}`}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -50,7 +50,7 @@ export default function MediaBlock({ video }) {
               width="322"
               height="181"
               src={`https://www.youtube.com/embed/${extractYouTubeId(
-                ytVideo[2].youtube
+                ytVideo[2]?.youtube
               )}`}
               title="YouTube video player"
               frameBorder="0"

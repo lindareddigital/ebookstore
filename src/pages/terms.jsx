@@ -17,10 +17,10 @@ export default function General() {
           const response = await fetch("/api/page/terms");
 
           const result = await response.json();
-          if (router.query.slug) {
+          // if (router.query.slug) {
             setItem(result?.result?.pages?.[0]);
-          }
-          console.log("ddata", item);
+          // }
+          console.log("ddata", item, result?.result?.pages?.[0]);
         } catch (error) {
           console.error("获取数据时出错：", error);
         }
@@ -40,7 +40,7 @@ export default function General() {
       <div className="detail-page column-page">
         <div className="container-fluid fdc">
           <div className="detail">
-            <InnerHTML text={item?.content} className="" />
+            <InnerHTML text={item?.blocks[0]?.item?.content} className="" />
           </div>
         </div>
       </div>

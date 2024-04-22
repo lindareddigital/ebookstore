@@ -1198,6 +1198,7 @@ span{
   z-index: 999;
   right: 0;
   width: calc(100vw - 15%);
+  max-width: 1320px;
 }
 
 .detail-page .home-recommend-tabs{

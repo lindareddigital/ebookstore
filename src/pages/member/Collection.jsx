@@ -1,4 +1,4 @@
-import GridList from "src/pages/polis-press/GridList.jsx";
+import GridList from "src/pages/components/GridList";
 import { useEffect, useState} from "react";
 
 export default function Collection() {
