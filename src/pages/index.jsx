@@ -120,15 +120,18 @@ export default function Home() {
             {posts?.item?.posts?.map((item) => {
               return (
                 <>
-                  <div className="e-banner-product">
-                    <img
-                      // src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image}`}
-                      alt=""
-                    />
+                  <Link
+                    href={`/posts/news/${item.id}`}
+                    className="e-banner-product"
+                  >
+                    {/* <img
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                      alt={item.title}
+                    /> */}
 
                     <div className="desc">{item.title}</div>
                     <div className="desc">{item.tags}</div>
-                  </div>
+                  </Link>
                 </>
               );
             })}

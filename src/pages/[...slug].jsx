@@ -14,7 +14,7 @@ import Error from "next/error";
 import { getPageColor, getPageBg } from "src/utilities/tool.js";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-
+import General from "src/pages/General";
 
 
 export default function Singlepage() {
@@ -35,12 +35,10 @@ export default function Singlepage() {
     sort: ["-date_created"],
   });
 
-
   // console.log("router", publisher, channel,limit);
 
   useEffect(() => {
-    if (!publisher)
-    {
+    if (!publisher) {
       return;
     }
     const fetchMenu = async () => {
@@ -60,14 +58,13 @@ export default function Singlepage() {
         const heroBanner = result?.result?.pages[0]?.blocks?.find((item) => {
           return item.collection === "block_hero";
         });
-         const video = result?.result?.pages[0]?.blocks?.find((item) => {
-           return item?.id === "12";
-         });
+        const video = result?.result?.pages[0]?.blocks?.find((item) => {
+          return item?.id === "12";
+        });
         console.log(video);
-         
+
         setVideo(video);
         setBanner(heroBanner?.item?.image?.id);
-
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -76,8 +73,6 @@ export default function Singlepage() {
     fetchData();
     fetchMenu();
   }, [publisher, channel, slug]);
-
-
 
   //預設首頁資料
   const filterByPublisher = async () => {
@@ -109,7 +104,7 @@ export default function Singlepage() {
   }, [menu, slug]);
 
   useEffect(() => {
-    console.log( matchedMenuItem?.type);
+    console.log(matchedMenuItem?.type);
 
     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
       const categoryIds = matchedMenuItem.category.map(
@@ -123,10 +118,10 @@ export default function Singlepage() {
       filterBySeries(matchedMenuItem?.query_tags);
     } else if (matchedMenuItem && matchedMenuItem.type === "url") {
       window.open(matchedMenuItem.landing, "_blank");
-    }else{
+    } else {
       filterByPublisher();
     }
-  }, [matchedMenuItem, page, limit, myObject.sort,router]);
+  }, [matchedMenuItem, page, limit, myObject.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
@@ -190,7 +185,6 @@ export default function Singlepage() {
   };
 
   const handleClick = (channel, slug, publisher) => {
-    
     router.push(`/${publisher}/${channel}/${slug}`, undefined, {
       shallow: true,
     });
@@ -259,15 +253,22 @@ export default function Singlepage() {
     }
   };
 
+  if (
+    publisher === "about" ||
+    publisher === "terms" ||
+    publisher === "privacy-policy"
+  ) {
+    return <General />;
+  }
 
-  // if (
-  //   publisher != "seashore" &&
-  //   publisher != "ichiban" 
-  //   // &&
-  //   // publisher != "posts"
-  // ) {
-  //   return <Error statusCode={404} />;
-  // } 
+  if (
+    publisher != "seashore" &&
+    publisher != "ichiban"
+    // &&
+    // publisher != "posts"
+  ) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <div className="single-page">
@@ -460,7 +461,7 @@ export default function Singlepage() {
             </div>
           </div>
 
-          {publisher === "seashore" && video != null && (
+          { video != null && (
             <SeashoreMediaBlock video={video} />
           )}
           {publisher === "seashore" && <SinglePageTab />}

@@ -53,7 +53,7 @@ export default function Detail({}) {
       {item != null && (
         <div className="detail-page column-page">
           <Head>
-            <title>{item.title}</title>
+            <title>{item?.title}</title>
           </Head>
           <Navbar />
           <MenuBar />
@@ -62,7 +62,7 @@ export default function Detail({}) {
 
             <div className="detail">
               <div class="article-title">
-                <h1>{item.title}</h1>
+                <h1>{item?.title}</h1>
               </div>
               <div className="content">
                 <>
@@ -74,8 +74,8 @@ export default function Detail({}) {
                   />
 
                   <div className="info">
-                    <h1>{item.title}</h1>
-                    <InnerHTML text={item.content} className="" />
+                    <h1>{item?.title}</h1>
+                    <InnerHTML text={item?.content} className="" />
                   </div>
                 </>
 

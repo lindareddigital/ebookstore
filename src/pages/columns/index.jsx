@@ -92,7 +92,7 @@ export default function Share({}) {
 
     router.push(
       {
-        pathname: "/column",
+        pathname: "/columns",
         query: queryObj,
       },
       undefined,
@@ -237,7 +237,7 @@ export default function Share({}) {
                     <>
                       <div className="share-list-item overflow-hidden">
                         <Link
-                          href={`/column/${item.id}`}
+                          href={`/columns/${item.id}`}
                           className="post-thumb"
                         >
                           <img

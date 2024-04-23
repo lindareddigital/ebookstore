@@ -48,7 +48,7 @@ export default function Listing() {
     }
   }, [siteMenu, slug]);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
       const categoryIds = matchedMenuItem.category.map(
         (category) => category.category_id.id
@@ -68,12 +68,19 @@ export default function Listing() {
         title: matchedMenuItem.title,
       }));
       filterBySeries(matchedMenuItem?.query_tags);
+    }else{
+      setMyObject((prev) => ({
+        ...prev,
+        title: "",
+      }));
     }
   }, [matchedMenuItem, page, limit, myObject.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
-      for (const menuItemData of menuItem.menu_items) {
+      for (const menuItemData of menuItem.item.menu_items) {
+        // console.log(menuItemData);
+        
         if (menuItemData.site_menu_items_id.slug === slug) {
           return menuItemData.site_menu_items_id;
         }
@@ -94,31 +101,39 @@ export default function Listing() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await fetch("/api/sitemenu/publisher/polis-press");
+        const res = await fetch("/api/page/books");
+
         const response = await res.json();
-        const tempMenu = response.result.site_menu;
-        console.log("100", router.query?.channel?.[1]);
+        const tempMenu = response?.result?.pages[0].blocks;
+        // console.log(
+        //   "100",
+        //   router.query?.channel?.[1],
+        //   response?.result?.pages[0].blocks
+        // );
         
         setSiteMenu(tempMenu);
 
         const foundItem = tempMenu.find((menu) => {
-          return menu.menu_items.some(
+          return menu?.item?.menu_items?.some(
             (item) => item.site_menu_items_id.slug === router.query?.channel?.[1]
           );
         });
-        setTitle(foundItem?.title);
-        console.log("foundItem", foundItem?.title);
+        setTitle(foundItem?.item.title);
+        // console.log("foundItem", foundItem?.item.title, foundItem);
 
         if (foundItem) {
-          var arr = foundItem.menu_items.find(
+          var arr = foundItem.item.menu_items.find(
             (item) => item.site_menu_items_id.slug === router.query?.channel?.[1]
           ).site_menu_items_id;
-          console.log(
-            "category arr",
-            slug,
-            categoryIds?.current[0]?.category_id?.name
-          );
+          // console.log(
+          //   "category arr",
+          //   slug,
+          //   categoryIds,
+          //   arr
+          // );
         } else {
+          console.log('not found');
+          
           return null;
         }
         categoryIds.current = arr.category;

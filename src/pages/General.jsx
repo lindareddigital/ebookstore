@@ -7,6 +7,10 @@ import InnerHTML from "src/pages/components/atoms/InnerHTML";
 
 export default function General() {
     const router = useRouter();
+    const slug = router.query.slug?.[0];
+
+    console.log(slug);
+    
 
     const [item, setItem] = useState(null);
 
@@ -14,7 +18,7 @@ export default function General() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch("/api/page/terms");
+          const response = await fetch(`/api/page/${slug}`);
 
           const result = await response.json();
           // if (router.query.slug) {

@@ -8,13 +8,13 @@ import { getPageColor } from "src/utilities/tool.js";
 export default function ListAside({ siteMenu }) {
   const router = useRouter();
   const publisher = router.query.slug?.[0];
-  const handleClick = (channel, item, publisher, menuItem) => {
+  const handleClick = (channel, item, menuItem) => {
     console.log(item, menuItem);
 
-      if (publisher === "polis-press"){
-        publisher = "books"
-      }
-      router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
+      // if (publisher === "polis-press"){
+      //   publisher = "books"
+      // }
+      router.push(`/books/${channel}/${item.slug}`, undefined, {
         shallow: true,
       });
   };
@@ -25,7 +25,7 @@ export default function ListAside({ siteMenu }) {
     fetchData();
   }, []);
 
-  // console.log("ListAside siteMenu", siteMenu);
+  console.log("ListAside siteMenu", siteMenu);
 
   return (
     <aside className="list-aside">
@@ -33,16 +33,16 @@ export default function ListAside({ siteMenu }) {
         return (
           <ul className="">
             <div className={`title ${getPageColor(publisher)}`}>
-              {item.title}
+              {item?.item?.title}
             </div>
-            {item.menu_items?.map((menuItem) => (
+            {item?.item?.menu_items?.map((menuItem) => (
               <li key={menuItem?.site_menu_items_id?.id}>
                 <div
                   onClick={() =>
                     handleClick(
-                      item.channel,
+                      item.item.channel,
                       menuItem?.site_menu_items_id,
-                      item.publisher,
+                      item.item.publisher,
                       menuItem
                     )
                   }

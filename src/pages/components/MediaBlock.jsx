@@ -67,10 +67,10 @@ export default function MediaBlock({ posts,video }) {
             return (
               <>
                 <div className="e-banner-product">
-                  {/* <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item.posts_id.key_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  <img
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     alt=""
-                  /> */}
+                  />
 
                   <div className="desc">{item.title}</div>
                   {/* <div className="desc">{item.posts_id.tags}</div> */}
@@ -81,9 +81,9 @@ export default function MediaBlock({ posts,video }) {
 
           <hr />
 
-          <div className="read-more-btn">
+          <Link href="/columns" className="read-more-btn">
             查看更多 <img className="" src="/icons/viewmore.svg"></img>
-          </div>
+          </Link>
           <img className="newsbg" src="/icons/nine.svg"></img>
         </div>
       </div>

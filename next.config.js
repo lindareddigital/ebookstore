@@ -5,14 +5,14 @@ const nextConfig = {
   future: {
     webpack5: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: "/terms",
-        destination: "/",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/terms",
+  //       destination: "/",
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig

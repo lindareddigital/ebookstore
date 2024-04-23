@@ -188,16 +188,37 @@ class ApiManager {
                   category{ id, name }         
                 }
                  ...on block_download_group {
+                  id
+                  title
+                  download_item {
                     id
                     title
-                    download_item {
+                    file {
                         id
-                        title
-                        file {
-                            id
-                        }
-                        external_url
                     }
+                    external_url
+                  }
+                }
+                ...on site_menu {
+                  id
+                  title
+                  channel
+                  menu_items{
+                    site_menu_items_id {
+                      id
+                      title
+                      slug
+                      query_tags
+                      type
+                      category {
+                        category_id {
+                          id
+                          name
+                          slug
+                        }
+                      }
+                    }
+                  }
                 }
           }
           }

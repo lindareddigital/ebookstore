@@ -30,10 +30,13 @@ export default function Footer() {
               >
                 <div className="accordion-body">
                   <li>
-                    <Link href="">關於大邑</Link>
+                    <Link href="/about">關於大邑</Link>
                   </li>
                   <li>
-                    <Link href="/terms">隱私/服務條款</Link>
+                    <Link href="/privacy-policy">隱私</Link>
+                  </li>
+                  <li>
+                    <Link href="/terms">服務條款</Link>
                   </li>
                 </div>
               </div>
@@ -101,7 +104,7 @@ export default function Footer() {
               >
                 <div className="accordion-body">
                   <li>
-                    <Link href="/Download">書單下載</Link>
+                    <Link href="/download">書單下載</Link>
                   </li>
                   <li>
                     <Link href="">常見問題</Link>
@@ -116,10 +119,13 @@ export default function Footer() {
           <div className="box">
             <li className="title">關於我們</li>
             <li>
-              <Link href="">關於大邑</Link>
+              <Link href="/about">關於大邑</Link>
             </li>
             <li>
-              <Link href="/terms">隱私/服務條款</Link>
+              <Link href="/privacy-policy">隱私</Link>
+            </li>
+            <li>
+              <Link href="/terms">服務條款</Link>
             </li>
           </div>
           <div className="box">
@@ -154,7 +160,7 @@ export default function Footer() {
           <div className="box">
             <li className="title">客戶服務</li>
             <li>
-              <Link href="/Download">書單下載</Link>
+              <Link href="/download">書單下載</Link>
             </li>
             <li>
               <Link href="">常見問題</Link>
