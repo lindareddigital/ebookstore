@@ -38,6 +38,7 @@ export default function Listing() {
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
   
+  console.log('41',channel,slug);
 
 
   useEffect(() => {
@@ -78,9 +79,7 @@ export default function Listing() {
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
-      for (const menuItemData of menuItem.item.menu_items) {
-        // console.log(menuItemData);
-        
+      for (const menuItemData of menuItem.item.menu_items) {        
         if (menuItemData.site_menu_items_id.slug === slug) {
           return menuItemData.site_menu_items_id;
         }
@@ -133,7 +132,11 @@ export default function Listing() {
           // );
         } else {
           console.log('not found');
-          
+          setTitle("");
+          setMyObject((prev) => ({
+            ...prev,
+            title: "",
+          }));
           return null;
         }
         categoryIds.current = arr.category;
@@ -226,10 +229,10 @@ export default function Listing() {
     const categoryArr = arr?.map((item) => item?.category_id?.id);
     const check =
       arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
-    setMyObject((prev) => ({
-      ...prev,
-      arr: [check],
-    }));
+      setMyObject((prev) => ({
+        ...prev,
+        arr: [check],
+      }));
   };
 
   const handleViewChange = (view) => {
@@ -244,8 +247,8 @@ export default function Listing() {
     setPanel(true);
   };
 
-  const handleClick = (channel, item, publisher) => {
-    console.log("item", item);
+  const handleClick = (channel, item) => {
+    // console.log("item", item);
     if (item.type === "product_by_category") {
       filterByCategory(item.category);
     } else if (item.type === "product_by_series") {

@@ -43,9 +43,16 @@ export default function Singlepage() {
     }
     const fetchMenu = async () => {
       try {
-        const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
+        // const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
+        const res = await fetch(`/api/page/${publisher}`);
+
         const result = await res.json();
-        setMenu(result?.result?.site_menu);
+        const filteredMenu = result?.result?.pages[0].blocks.filter(
+          (item) => item.collection === "site_menu"
+        );
+
+        setMenu(filteredMenu);
+        
       } catch (error) {
         console.error("获取数据时出错：", error);
       }
@@ -55,13 +62,16 @@ export default function Singlepage() {
       try {
         const response = await fetch(`/api/page/${publisher}`);
         const result = await response.json();
+
+        console.log(result?.result?.pages[0]?.blocks);
+
         const heroBanner = result?.result?.pages[0]?.blocks?.find((item) => {
           return item.collection === "block_hero";
         });
         const video = result?.result?.pages[0]?.blocks?.find((item) => {
-          return item?.id === "12";
+          return item?.collection === "block_cardgroup";
         });
-        console.log(video);
+        // console.log(video);
 
         setVideo(video);
         setBanner(heroBanner?.item?.image?.id);
@@ -124,8 +134,12 @@ export default function Singlepage() {
   }, [matchedMenuItem, page, limit, myObject.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
+    const menuItemArray = Object.values(menu);
+
     for (const menuItem of menu) {
-      for (const menuItemData of menuItem.menu_items) {
+      // console.log("77", menuItem);
+      
+      for (const menuItemData of menuItem.item.menu_items) {
         if (menuItemData.site_menu_items_id.slug === slug) {
           return menuItemData.site_menu_items_id;
         }

@@ -220,6 +220,17 @@ class ApiManager {
                     }
                   }
                 }
+                ...on promotion {
+                    id
+                    url
+                    name
+                    image {
+                        id
+                    }
+                    status
+                    start_at
+                    end_at
+                }
           }
           }
         }

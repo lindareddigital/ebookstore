@@ -2,6 +2,7 @@ import apiManager from 'src/pages/api/api';
 import HomeTab from 'src/pages/components/HomeTab';
 import MediaBlock from 'src/pages/components/MediaBlock';
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
+import Popup from "src/pages/components/Popup";
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
@@ -10,14 +11,8 @@ import { useEffect, useState } from "react";
 
 
 export default function Home() {
-  // const swiperRef = useRef(null);
-
-  // const { next, previous } = useSwiperFunc(swiperRef);
-  // const containerRef = useRef(null);
-
-
-  // console.log('data',data);
-
+  
+  const [show, setShow] = useState(true);
   const [data, setData] = useState(null);
   const [siteMenu, setSiteMenu] = useState(null);
 
@@ -78,6 +73,10 @@ export default function Home() {
     return item?.id === "11";
   });
 
+  const promotion = blocks?.find((item) => {
+    return item.collection === "promotion";
+  });
+
   // console.log("video", video);
 
   // console.log("homeTab", homeTab?.item?.cards);
@@ -88,7 +87,13 @@ export default function Home() {
   return (
     <div className="home-page">
       <SidebarWrapper />
-
+      {posts?.item?.posts && (
+        <Popup
+          promotion={promotion}
+          show={show}
+          onHide={() => setShow(false)}
+        />
+      )}
       <div className="sidebtn-container">
         <div id="fb-root"></div>
         <div
@@ -106,7 +111,6 @@ export default function Home() {
           ></img>
         </div>
       </div>
-
       <Navbar />
       <MenuBar />
       <div className="home-banner">
@@ -136,10 +140,10 @@ export default function Home() {
               );
             })}
           </div>
-            <Link href="/posts/news" className="read-more-btn">
-              查看更多
-              <img className="" src="/icons/viewmore.svg"></img>
-            </Link>
+          <Link href="/posts/news" className="read-more-btn">
+            查看更多
+            <img className="" src="/icons/viewmore.svg"></img>
+          </Link>
           <img className="newsbg" src="/icons/newsbg.svg"></img>
         </div>
         <div
@@ -228,13 +232,11 @@ export default function Home() {
           </button>
         </div>
       </div>
-
       <div className="main-body">
         {homeTab && <HomeTab books={homeTab?.item?.cards} />}
         {/* <HomeTabTwo /> */}
       </div>
-
-      <MediaBlock posts={media?.item?.posts} video={video}/>
+      <MediaBlock posts={media?.item?.posts} video={video} />
     </div>
   );
 }

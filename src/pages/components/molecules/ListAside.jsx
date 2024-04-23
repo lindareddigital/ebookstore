@@ -9,12 +9,12 @@ export default function ListAside({ siteMenu }) {
   const router = useRouter();
   const publisher = router.query.slug?.[0];
   const handleClick = (channel, item, menuItem) => {
-    console.log(item, menuItem);
+    console.log(item, menuItem, router.query,'12');
 
       // if (publisher === "polis-press"){
       //   publisher = "books"
       // }
-      router.push(`/books/${channel}/${item.slug}`, undefined, {
+      router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
         shallow: true,
       });
   };

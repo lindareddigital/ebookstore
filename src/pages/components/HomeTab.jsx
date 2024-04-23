@@ -131,7 +131,7 @@ export default function HomeTab({books}) {
                             />
                           )}
                           <div className="desc mt-2">{item.title}</div>
-                          <div className="price-num">$ {item.Price}</div>
+                          {/* <div className="price-num">$ {item.Price}</div> */}
                         </div>
                       </Link>
                     </SwiperSlide>
