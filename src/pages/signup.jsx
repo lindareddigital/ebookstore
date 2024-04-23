@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-// import { cookies } from "next/headers";
 
 
 function Login() {
@@ -17,7 +16,7 @@ function Login() {
   //   [id]
   // );
 
-   const Login = async () => {
+   const signup = async () => {
      const response = await fetch(
        "https://directus-cms.vicosys.com.hk/auth/login",
        {
@@ -53,24 +52,12 @@ function Login() {
      );
 
      if (response.ok) {
-      // router.push("/member");
-      const data = await response.json();
-      console.log("token", data.data.access_token);
-
-      localStorage.setItem("token", data.data.access_token);
-
-      
-
+       router.push("/member");
      } else {
        // Handle errors
      }
    }
 
-
-
-  // const fetcher = (url, params) => fetch(url + params.id).then((r) => r.json());
-
-  // const { data: product, error } = useSWR(id && !loading ? ["/products", params] : null, fetcher);
 
   return (
     <>
@@ -94,33 +81,51 @@ function Login() {
       <div className="contactus-page">
         <Navbar />
         <MenuBar />
-        <Breadcrumb data={"登入"} />
-        <form onSubmit={handleSubmit} className="form-area contact-us">
-          <div className="block-title">登入</div>
+        <Breadcrumb data={"註冊"} />
+        <form className="form-area contact-us">
+          <div className="block-title">註冊</div>
           <div className="red-word">*必須填寫</div>
           <div className="">
-            <label htmlFor="email" className="form-label">
-              帳號<span className="red-word">*</span>
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              姓名<span className="red-word">*</span>
             </label>
             <input
               type="email"
               className="form-control"
-              id="email"
-              name="email"
+              id="exampleInputEmail1"
               aria-describedby="emailHelp"
             ></input>
           </div>
-
           <div className="">
-            <label htmlFor="password" className="form-label">
-              密碼 <span className="red-word">*</span>
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              暱稱
             </label>
             <input
               type="password"
               className="form-control"
-              id="password"
-              name="password"
-              aria-describedby="password"
+              id="exampleInputPassword1"
+            ></input>
+          </div>
+          <div className="">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              電郵 <span className="red-word">*</span>
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            ></input>
+          </div>
+          <div className="">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              類型 <span className="red-word">*</span>
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
             ></input>
           </div>
 
@@ -128,11 +133,7 @@ function Login() {
             <button type="submit" className="btn cancel-btn info-site-btn">
               取消
             </button>
-            <button
-              onSubmit={handleSubmit}
-              type="submit"
-              className="btn info-site-btn"
-            >
+            <button type="submit" className="btn info-site-btn">
               確認傳送
             </button>
           </div>

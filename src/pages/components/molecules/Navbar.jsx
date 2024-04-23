@@ -204,14 +204,14 @@ export default function Navbar({}) {
               </button>
               <hr className="nav-hr" />
 
-              <button type="button" className="btn">
+              <Link href={{ pathname: `/login` }} type="button" className="btn">
                 <img src="/icons/member.svg" alt="" />
                 登入
-              </button>
+              </Link>
               <div className="dot"></div>
-              <button type="button" className="btn">
+              <Link href={{ pathname: `/signup` }} type="button" className="btn">
                 註冊
-              </button>
+              </Link>
             </div>
 
             <div className="label-group">

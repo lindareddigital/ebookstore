@@ -17,10 +17,12 @@ export default function Popup({ promotion, onHide,show }) {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <img
-            className=""
-            src={`https://directus-cms.vicosys.com.hk/assets/${promotion?.item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-          />
+          <Link target="_blank" href={`${promotion?.item?.url}`}>
+            <img
+              className=""
+              src={`https://directus-cms.vicosys.com.hk/assets/${promotion?.item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+            />
+          </Link>
         </Modal.Body>
       </Modal>
     </div>

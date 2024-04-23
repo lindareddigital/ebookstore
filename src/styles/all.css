@@ -2180,6 +2180,10 @@ footer .container-fluid{
   margin-bottom: 20px;
 }
 
+.contactus-page .form-area > div:not(:last-child){
+  justify-content: space-between;
+}
+
 .button-group{
   display: flex;
   flex-direction: column;
