@@ -12,13 +12,12 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Manage({}) {
-  const [tab, setTab] = useState("");
+  const [tab, setTab] = useState("info");
   const [info, setInfo] = useState(null);
   const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {
-    console.log("tab", id.tab);
-  }, [tab]);
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -91,16 +90,20 @@ export default function Manage({}) {
         shallow: true,
       });
     }
-
-
     
   }, []);
 
   const router = useRouter();
-  const id = router.query;
-  // console.log(id.tab);
 
- 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpiry");
+    localStorage.removeItem("email");
+
+    router.push(`/`, undefined, {
+      shallow: true,
+    });
+  };
 
   const renderContent = () => {
     if (tab === "info") {
@@ -130,7 +133,7 @@ export default function Manage({}) {
         <Navbar />
         <MenuBar />
         <Breadcrumb data={"會員中心"} />
-        {isLogin &&
+        {isLogin && (
           <div className="container-fluid">
             <div className="content">
               <div className="leftbox">
@@ -188,7 +191,7 @@ export default function Manage({}) {
                   </div>
                 </div>
 
-                <div className="read-more-btn">
+                <div onClick={logout} className="read-more-btn">
                   登出
                   <img className="" src="/icons/viewmore.svg"></img>
                 </div>
@@ -198,7 +201,7 @@ export default function Manage({}) {
               <div className="right-side">{renderContent()}</div>
             </div>
           </div>
-        }
+        )}
       </div>
     </>
   );

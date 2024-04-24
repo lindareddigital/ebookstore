@@ -2184,6 +2184,10 @@ footer .container-fluid{
   justify-content: space-between;
 }
 
+.download > div:not(:last-child){
+  justify-content: flex-start !important;
+}
+
 .button-group{
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
@@ -38,6 +38,12 @@ function Signup() {
     } else {
     }
   };
+
+   useEffect(() => {
+     if (localStorage.getItem("email") != null) {
+       router.push("/member");
+     }
+   }, []);
 
 
   return (

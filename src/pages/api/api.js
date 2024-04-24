@@ -244,6 +244,33 @@ class ApiManager {
     return;
   };
 
+  getBookMark = async () => {
+    const gql = `
+      query {
+        site_menu( 
+        filter: {
+        channel: {
+          _eq: "navi-menu"
+        }       
+        }) 
+        { 
+          id
+          title
+          publisher
+          menu_items {
+            site_menu_items_id {
+              id
+              title
+              slug
+              query_tags
+            }
+          }
+        }
+      } 
+    `;
+    return await this.sdk(gql);
+  };
+
   getNaviMenu = async () => {
     const gql = `
       query {
