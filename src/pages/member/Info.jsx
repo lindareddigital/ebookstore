@@ -1,7 +1,12 @@
 
 
 
-export default function Info() {
+export default function Info({info}) {
+
+  console.log(info);
+  
+
+
   return (
     <>
       <form className="info contact-us">
@@ -10,57 +15,62 @@ export default function Info() {
         </div>
         <div className="red-word">*必須填寫</div>
         <div className="">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="name" className="form-label">
             姓名<span className="red-word">*</span>
           </label>
           <input
-            type="email"
+            value={info?.first_name}
+            type="name"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="name"
+            aria-describedby="name"
           ></input>
         </div>
         <div className="">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="birth" className="form-label">
             生日
           </label>
           <input
-            type="password"
+            value={info?.status}
+            type="birth"
             className="form-control"
-            id="exampleInputPassword1"
+            id="birth"
           ></input>
         </div>
         <div className="">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="email" className="form-label">
             電郵 <span className="red-word">*</span>
           </label>
           <input
+            value={info?.email}
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="email"
+            aria-describedby="email"
           ></input>
         </div>
         <div className="">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="phone" className="form-label">
             手機 <span className="red-word">*</span>
           </label>
           <input
-            type="email"
+            value={info?.phone}
+            type="phone"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="phone"
+            aria-describedby="phone"
           ></input>
         </div>
         <div className="">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="location" className="form-label">
             地址
           </label>
           <input
-            type="email"
+            value={info?.location}
+            type="location"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="location"
+            aria-describedby="location"
           ></input>
         </div>
         <div className="">

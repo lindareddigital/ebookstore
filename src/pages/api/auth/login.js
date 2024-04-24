@@ -1,11 +1,23 @@
-import { signIn } from "@/auth";
+import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
     const { email, password } = req.body;
-    await signIn("credentials", { email, password });
 
-    res.status(200).json({ success: true });
+    const response = await fetch(
+      "https://directus-cms.vicosys.com.hk/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+
+    const data = await response.json();
+    console.log("token", data.data.access_token);
+
+
+    res.status(200).json({ data: data.data });
   } catch (error) {
     if (error.type === "CredentialsSignin") {
       res.status(401).json({ error: "Invalid credentials." });

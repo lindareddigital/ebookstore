@@ -2222,6 +2222,10 @@ footer .container-fluid{
   color: #28251C;
 }
 
+.contact-us{
+  min-height: 600px;
+}
+
 .contact-us .form-control,
 .contact-us .form-select{
   display: flex;

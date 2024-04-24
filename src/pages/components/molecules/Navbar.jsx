@@ -10,6 +10,8 @@ export default function Navbar({}) {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
   const toggleOpen = () => {
     setOpen((prev) => !prev);
   };
@@ -18,11 +20,22 @@ export default function Navbar({}) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    router.push(`/polis-press/${item.slug}`, undefined, {
+    router.push(`/books/${item.slug}`, undefined, {
       shallow: true,
     });
   };
 
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpiry");
+    localStorage.removeItem("email");
+    setEmail("");
+
+    router.push(`/`, undefined, {
+      shallow: true,
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +44,10 @@ export default function Navbar({}) {
      setNavMenu(navMenu.result.site_menu[0].menu_items);
     };
     fetchData();
+
+    setEmail(localStorage.getItem("email"));
+    console.log("email", email, localStorage.getItem("email"));
+    
   }, []);
 
 
@@ -203,15 +220,33 @@ export default function Navbar({}) {
                 購物車
               </button>
               <hr className="nav-hr" />
-
-              <Link href={{ pathname: `/login` }} type="button" className="btn">
-                <img src="/icons/member.svg" alt="" />
-                登入
-              </Link>
-              <div className="dot"></div>
-              <Link href={{ pathname: `/signup` }} type="button" className="btn">
-                註冊
-              </Link>
+              {email === null ? (
+                <Link
+                  href={{ pathname: `/login` }}
+                  type="button"
+                  className="btn"
+                >
+                  <img src="/icons/member.svg" alt="" />
+                  登入
+                </Link>
+              ) : (
+                <div onClick={logout} type="button" className="btn">
+                  <img src="/icons/member.svg" alt="" />
+                  登出
+                </div>
+              )}
+              {email === null && (
+                <>
+                  <div className="dot"></div>
+                  <Link
+                    href={{ pathname: `/signup` }}
+                    type="button"
+                    className="btn"
+                  >
+                    註冊
+                  </Link>
+                </>
+              )}
             </div>
 
             <div className="label-group">
