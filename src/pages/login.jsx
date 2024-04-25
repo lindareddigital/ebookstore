@@ -32,11 +32,11 @@ function Login() {
      });
 
      if (response.ok) {
-       const data = await response.json();
-       console.log("token", data.data.access_token);
+      const data = await response.json();
+      console.log("token", data.data.access_token);
 
-       localStorage.setItem("token", data.data.access_token);
-       localStorage.setItem("email", email);
+      localStorage.setItem("token", data.data.access_token);
+      localStorage.setItem("email", email);
 
        router.push("/member");
      }

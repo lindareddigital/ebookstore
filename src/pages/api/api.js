@@ -244,29 +244,49 @@ class ApiManager {
     return;
   };
 
-  getBookMark = async () => {
+  getUserBookMark = async (id) => {
+    console.log('7788',id);
+    
     const gql = `
       query {
-        site_menu( 
-        filter: {
-        channel: {
-          _eq: "navi-menu"
-        }       
-        }) 
-        { 
-          id
-          title
-          publisher
-          menu_items {
-            site_menu_items_id {
+        user_bookmark(
+            filter: {
+            user: {
+              _eq: "${id}"
+            }
+        }
+        ) { 
+            id
+            product {
               id
               title
-              slug
-              query_tags
             }
-          }
         }
-      } 
+    }
+    `;
+
+    console.log("getUserBookMark", gql);
+
+    return await this.sdk(gql);
+  };
+
+  setUserBookMark = async () => {
+    const gql = `
+      query {
+        user_bookmark(
+            filter: {
+            user: {
+              _eq: "${id}"
+            }
+        }
+        ) { 
+            id
+            product {
+                id
+                title
+            }
+        }
+    }
     `;
     return await this.sdk(gql);
   };

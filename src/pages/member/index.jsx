@@ -60,6 +60,8 @@ export default function Manage({}) {
 
           const expiryTime = new Date().getTime() + 1000 * 60 * 30; // 30 minutes
           localStorage.setItem("tokenExpiry", expiryTime.toString());
+          localStorage.setItem("id", info.id);
+
         }
       };
       loadInfo();

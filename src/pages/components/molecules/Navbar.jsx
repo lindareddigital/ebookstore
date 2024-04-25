@@ -11,6 +11,8 @@ export default function Navbar({}) {
 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [info, setInfo] = useState(null);
+
 
   const toggleOpen = () => {
     setOpen((prev) => !prev);
@@ -39,9 +41,9 @@ export default function Navbar({}) {
 
   useEffect(() => {
     const fetchData = async () => {
-     const response = await fetch(`/api/sitemenu/navimenu`);
-     const navMenu = await response.json();
-     setNavMenu(navMenu.result.site_menu[0].menu_items);
+      const response = await fetch(`/api/sitemenu/navimenu`);
+      const navMenu = await response.json();
+      setNavMenu(navMenu.result.site_menu[0].menu_items);
     };
     fetchData();
 

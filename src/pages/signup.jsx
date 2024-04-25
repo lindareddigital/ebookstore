@@ -48,13 +48,6 @@ function Signup() {
 
   return (
     <>
-      {/* {!session && <button onClick={() => signIn()}>登入</button>}
-      {session && (
-        <>
-          <p>使用者 email: {user.email}</p>
-          <button onClick={() => signOut()}>登出</button>
-        </>
-      )} */}
       <div className="contactus-page">
         <Navbar />
         <MenuBar />

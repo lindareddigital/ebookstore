@@ -18,6 +18,16 @@ import { Metadata } from 'next';
 //   return imageDataUrl;
 // };
 
+export const isInTimeRange = (start, end) =>{
+  // Convert start and end times to Date objects
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+
+  const currentTime = new Date();
+
+  return currentTime >= startDate && currentTime <= endDate;
+}
+
 export const getPageColor = (publisher) => {
   if (publisher === "seashore") {
     return "seashore-color";

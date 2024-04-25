@@ -47,7 +47,7 @@ export default function Singlepage() {
         const res = await fetch(`/api/page/${publisher}`);
 
         const result = await res.json();
-        const filteredMenu = result?.result?.pages[0].blocks.filter(
+        const filteredMenu = result?.result?.pages[0].blocks?.filter(
           (item) => item.collection === "site_menu"
         );
 
