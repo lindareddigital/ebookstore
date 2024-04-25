@@ -160,7 +160,7 @@ export default function Listing() {
         sort: myObject.sort,
         page: page,
         publisher: "polis-press",
-        limit: limit,
+        limit: 15,
       }),
     });
     const books = await response.json();

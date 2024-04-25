@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import  useTokenExpiration  from "src/hooks/useTokenExpiration";
 
 export default function Manage({}) {
   const [tab, setTab] = useState("info");
@@ -17,21 +18,6 @@ export default function Manage({}) {
   const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const expiryTime = localStorage.getItem("tokenExpiry");
-
-    if (
-      token &&
-      expiryTime &&
-      new Date().getTime() < parseInt(expiryTime, 10)
-    ) {
-    } else {
-      localStorage.removeItem("token");
-      localStorage.removeItem("tokenExpiry");
-    }
   }, []);
 
   useEffect(() => {
@@ -50,7 +36,7 @@ export default function Manage({}) {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data.data, "all data");
+          // console.log(data.data, "all data");
           const info = data.data.find((item) => {
             return item.email === email;
           });
@@ -58,8 +44,6 @@ export default function Manage({}) {
           setInfo(info);
           console.log("info", info);
 
-          const expiryTime = new Date().getTime() + 1000 * 60 * 30; // 30 minutes
-          localStorage.setItem("tokenExpiry", expiryTime.toString());
           localStorage.setItem("id", info.id);
 
         }
@@ -67,30 +51,21 @@ export default function Manage({}) {
       loadInfo();
       setLogin(true)
 
-      const tokenExpiryTime = 1000 * 60 * 30; // 30 minutes
-      const expiryTime = new Date().getTime() + tokenExpiryTime;
-      localStorage.setItem("tokenExpiry", expiryTime.toString());
+      // useTokenExpiration()
+     
+    }
 
-      const interval = setInterval(() => {
-        const token = localStorage.getItem("token");
-        const expiryTime = localStorage.getItem("tokenExpiry");
+    const tokenExpiry = localStorage.getItem("tokenExpiry");
 
-        if (
-          !token ||
-          !expiryTime ||
-          new Date().getTime() >= parseInt(expiryTime, 10)
-        ) {
-          localStorage.removeItem("token");
-          localStorage.removeItem("tokenExpiry");
-          clearInterval(interval);
-        }
-      }, 60000); // Check every minute
+    // console.log("5566", tokenExpiry);
+    
 
-      return () => clearInterval(interval);
-    }else{
-      router.push(`/login`, undefined, {
-        shallow: true,
-      });
+    const currentTime = new Date().getTime();
+    if (currentTime >= parseInt(tokenExpiry, 10)) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("tokenExpiry");
+      console.log("logout");
+      router.push(`/login`);
     }
     
   }, []);

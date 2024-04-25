@@ -518,6 +518,7 @@ footer {
   justify-content: flex-start;
   margin: auto;
   border-bottom: 1px solid #fff;
+  cursor: pointer;
 }
 
 .share-block .e-banner-product{
@@ -2004,7 +2005,12 @@ footer .container-fluid{
   right: 0;
   top: 0;
   position: absolute;
-  padding: 8px
+  padding: 8px;
+  z-index: 9999;
+}
+
+.wish-active{
+  background: #EBC700 !important;
 }
 
 .wish-btn img{

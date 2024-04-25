@@ -85,10 +85,13 @@ class ApiManager {
     }
   };
 
-  sdk_graphql_query = async (gql, variables) => {
+  useUserToken = async (gql, token) => {
+
+    console.log("90", token);
+    
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
-      .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
+      .with(staticToken(token));
 
     const result = await client.query(gql);
 
@@ -244,9 +247,9 @@ class ApiManager {
     return;
   };
 
-  getUserBookMark = async (id) => {
-    console.log('7788',id);
-    
+  getUserBookMark = async (id,token) => {    
+    console.log("token", token);
+
     const gql = `
       query {
         user_bookmark(
@@ -267,10 +270,12 @@ class ApiManager {
 
     console.log("getUserBookMark", gql);
 
-    return await this.sdk(gql);
+    return await this.useUserToken(gql,token);
   };
 
-  setUserBookMark = async () => {
+  setUserBookMark = async (token) => {
+    console.log('token',token);
+    
     const gql = `
       query {
         user_bookmark(
@@ -288,7 +293,7 @@ class ApiManager {
         }
     }
     `;
-    return await this.sdk(gql);
+    return await this.useUserToken(gql,token);
   };
 
   getNaviMenu = async () => {
@@ -827,12 +832,19 @@ class ApiManager {
 
   getProductByPublisher = async (publisher_slug, page, limit, sort_by) => {
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
+    let query = "";
+
+    if(!limit){
+      query = ``;
+    }else{
+      query = `limit: ${limit} `;
+    }
 
     const gql = `
     query {
         product ( 
           sort: [${sort_by_json}]
-          limit: ${limit} 
+          ${query} 
           page: ${page}
           filter: {
             Publisher: {

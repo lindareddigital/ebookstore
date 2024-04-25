@@ -119,13 +119,13 @@ export default function HomeTab({books}) {
                         <div className="book-item">
                           {item.cover_image ? (
                             <img
-                              src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                               className=""
                               alt={item.title}
                             />
                           ) : (
                             <img
-                              src={`https://directus-cms.vicosys.com.hk/assets/${item.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                              src={`https://directus-cms.vicosys.com.hk/assets/${item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                               className=""
                               alt={item.title}
                             />

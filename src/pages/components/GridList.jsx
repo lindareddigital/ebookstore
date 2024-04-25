@@ -2,15 +2,38 @@ import Link from 'next/link';
 import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 import { useRouter } from "next/router";
-
 import { getPageColor } from "src/utilities/tool.js";
 
-export default function GridList({ books }) {
+export default function GridList({ books, bookMark,arr }) {
   const router = useRouter();
   const publisher = router.query.slug?.[0];
-  const [item, setItem] = useState({});
+  const [userId, setId] = useState("");
 
-  // console.log("gridlist", books);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("id");
+    setId(userId);
+  }, []);
+
+  const handleChange = async(item) => {
+    console.log("19", item);
+
+    const selected = bookMark.find((item)=>{ item.product.id === item.id})
+    console.log(selected);
+    
+    
+    const response = await fetch(`api/bookmark/deleteBookMark`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: userId, product: item.id,id: id }),
+    });
+
+  };
+  console.log('books',books);
+  console.log("bookMark", bookMark);
+  console.log("arr", arr);
 
   return (
     <>
@@ -19,14 +42,20 @@ export default function GridList({ books }) {
         <hr></hr> */}
         <div className="grid-view">
           {books?.map((item) => {
+            console.log(arr?.includes(item?.id),item.id);
             return (
-              <Link
+              <div
                 key={`${item.id}`}
-                href={{ pathname: `/detail/${item.id}` }}
+                // href={{ pathname: `/detail/${item.id}` }}
                 className={``}
               >
                 <div className="book-item">
-                  <button className="wish-btn">
+                  <button
+                    onClick={()=>{handleChange(item)}}
+                    className={`wish-btn ${
+                      arr?.includes(item?.id) ? "wish-active" : ""
+                    }`}
+                  >
                     <img src="/icons/heart.svg" alt="" />
                   </button>
                   <img
@@ -39,7 +68,7 @@ export default function GridList({ books }) {
                     ＄{item.price}
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
