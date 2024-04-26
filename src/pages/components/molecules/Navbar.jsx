@@ -127,9 +127,9 @@ export default function Navbar({}) {
             aria-label="會員中心"
           ></Link>
           <div className="nav-right">
-            <button className="search-btn btn" type="submit">
+            {/* <button className="search-btn btn" type="submit">
               <img src="/icons/cart.svg" alt="" />
-            </button>
+            </button> */}
             <hr className="nav-hr" />
             <button className="search-btn btn" type="submit">
               <img src="/icons/member.svg" alt="" />
@@ -257,10 +257,10 @@ export default function Navbar({}) {
 
           <div className="header-toolbar">
             <div className="navbar-link">
-              <button type="button" className="btn">
+              {/* <button type="button" className="btn">
                 <img src="/icons/cart.svg" alt="" />
                 購物車
-              </button>
+              </button> */}
               <hr className="nav-hr" />
               {email === null ? (
                 <Link

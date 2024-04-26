@@ -27,7 +27,12 @@ export default function Detail({}) {
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  // console.log("id", id);
+  const [filteredData, setFilteredData] = useState(books);
+
+  const [userId, setId] = useState("");
+  const [arr, setArr] = useState([]);
+  const [bookMark, setBookMark] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,7 +53,115 @@ export default function Detail({}) {
     fetchData();
   }, [router]);
 
-  console.log("detaildetail", item);
+
+    useEffect(() => {
+      const userId = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+      setId(userId);
+
+      const getUserBookMark = async () => {
+        const response = await fetch(`/api/bookmark/getUserBookMark`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: userId,
+            token: token,
+          }),
+        });
+        const books = await response.json();
+        // console.log("user_bookmark", books?.result?.user_bookmark);
+        // console.log(token);
+        setBookMark(books?.result?.user_bookmark);
+
+        const productIds = books?.result?.user_bookmark?.map(
+          (item) => item.product.id
+        );
+
+        setArr(productIds);
+        // console.log("arr", arr);
+      };
+
+      getUserBookMark();
+
+      const filterByPublisher = async () => {
+        if (!arr || arr.length === 0) {
+          return;
+        }
+        const response = await fetch(`/api/product/publisher/polis-press`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            publisher: "polis-press",
+          }),
+        });
+
+        const books = await response.json();
+        // console.log(books?.result?.product, "all books");
+
+        if (router.pathname.includes("/member")) {
+          const filteredData = books?.result?.product?.filter((item) => {
+            return arr?.includes(item.id);
+          });
+          setFilteredData(filteredData);
+          // console.log(filteredData, "filteredData");
+        }
+      };
+
+      filterByPublisher();
+    }, [arr]);
+
+    const handleChange = async (item) => {
+      console.log("click item.id", item.id);
+
+      console.log("bookMark", bookMark);
+
+      const selected = bookMark?.find((book) => book.product.id === item.id);
+      console.log("selected", selected);
+
+      const token = localStorage.getItem("token");
+
+      if (selected != undefined) {
+        //delete
+        const response = await fetch(`api/bookmark/deleteBookMark`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: token,
+            user: userId,
+            product: item.id,
+            id: selected?.id,
+          }),
+        });
+        if (response.status === 204) {
+          console.log("Bookmark deleted successfully.");
+        }
+      } else {
+        //add
+        const response = await fetch(`api/bookmark/addBookMark`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: token,
+            user: userId,
+            product: item.id,
+            id: selected?.id,
+          }),
+        });
+        const data = await response.json();
+        console.log("add func", data);
+      }
+
+    };
+
+  // console.log("detaildetail", item);
 
   return (
     <div>
@@ -67,7 +180,7 @@ export default function Detail({}) {
                 <>
                   <img
                     onClick={() => setShow(true)}
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item.cover_image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className="primary-img"
                     alt={item.cover_image}
                   />
@@ -85,9 +198,16 @@ export default function Detail({}) {
                       <li>定價：{item.price}元</li>
                     </ul>
                     <div className="button-group">
-                      <div className="btn button-radius">
+                      <div
+                        onClick={() => {
+                          handleChange(item);
+                        }}
+                        className={` btn button-radius ${
+                          arr?.includes(item?.id) ? "wish-active" : ""
+                        }`}
+                      >
                         <img src="/icons/heart.svg" alt="" />
-                        收藏此書
+                        {arr?.includes(item?.id) ? "取消收藏" : "收藏此書"}
                       </div>
                       <div className="btn button-radius view-detail-btn">
                         <img src="/icons/search.svg" alt="" />

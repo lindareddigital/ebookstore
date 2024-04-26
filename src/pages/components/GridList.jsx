@@ -127,7 +127,7 @@ export default function GridList({ books }) {
       console.log("add func", data);
     }
 
-    window.location.reload();
+    // window.location.reload();
   };
   // console.log("books", books);
   // console.log("bookMark", bookMark);
@@ -161,12 +161,24 @@ export default function GridList({ books }) {
                     >
                       <img src="/icons/heart.svg" alt="" />
                     </button>
-                    <img
-                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    <Link
+                      key={`${item.id}`}
+                      href={{ pathname: `/detail/${item.id}` }}
                       className=""
-                      alt={item.title}
-                    />
-                    <div className="desc">{item.title}</div>
+                    >
+                      <img
+                        src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                        className=""
+                        alt={item.title}
+                      />
+                    </Link>
+                    <Link
+                      key={`${item.id}`}
+                      href={{ pathname: `/detail/${item.id}` }}
+                      className="desc"
+                    >
+                      {item.title}
+                    </Link>
                     <div className={`price-num ${getPageColor(publisher)}`}>
                       ＄{item.price}
                     </div>

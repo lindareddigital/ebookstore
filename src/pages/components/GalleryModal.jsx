@@ -50,7 +50,7 @@ export default function GalleryModal({ item,show, onHide }) {
     swiperRef?.current?.swiper?.slidePrev();
   };
 
-  console.log("modal", item);
+  // console.log("modal", item);
 
   return (
     <Modal

@@ -5,22 +5,133 @@ import { getPageColor } from "src/utilities/tool.js";
 import { useRouter } from "next/router";
 
 export default function ListList({ books }) {
+  const [filteredData, setFilteredData] = useState(books);
+
   const router = useRouter();
   const publisher = router.query.slug?.[0];
-  const [item, setItem] = useState({});
+  const [userId, setId] = useState("");
+  const [arr, setArr] = useState([]);
+  const [bookMark, setBookMark] = useState(null);
 
-  // console.log('8',books);
+   useEffect(() => {
+     const userId = localStorage.getItem("id");
+     const token = localStorage.getItem("token");
+     setId(userId);
+
+     const getUserBookMark = async () => {
+       const response = await fetch(`/api/bookmark/getUserBookMark`, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           id: userId,
+           token: token,
+         }),
+       });
+       const books = await response.json();
+       // console.log("user_bookmark", books?.result?.user_bookmark);
+       // console.log(token);
+       setBookMark(books?.result?.user_bookmark);
+
+       const productIds = books?.result?.user_bookmark?.map(
+         (item) => item.product.id
+       );
+
+       setArr(productIds);
+       // console.log("arr", arr);
+     };
+
+     getUserBookMark();
+
+     const filterByPublisher = async () => {
+       if (!arr || arr.length === 0) {
+         return;
+       }
+       const response = await fetch(`/api/product/publisher/polis-press`, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           publisher: "polis-press",
+         }),
+       });
+
+       const books = await response.json();
+       // console.log(books?.result?.product, "all books");
+
+       if (router.pathname.includes("/member")) {
+         const filteredData = books?.result?.product?.filter((item) => {
+           return arr?.includes(item.id);
+         });
+         setFilteredData(filteredData);
+         // console.log(filteredData, "filteredData");
+       }
+     };
+
+     filterByPublisher();
+   }, [arr]);
+
+   const handleChange = async (item) => {
+     console.log("click item.id", item.id);
+
+     console.log("bookMark", bookMark);
+
+     const selected = bookMark?.find((book) => book.product.id === item.id);
+     console.log("selected", selected);
+
+     const token = localStorage.getItem("token");
+
+     if (selected != undefined) {
+       //delete
+       const response = await fetch(`api/bookmark/deleteBookMark`, {
+         method: "DELETE",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           token: token,
+           user: userId,
+           product: item.id,
+           id: selected?.id,
+         }),
+       });
+       if (response.status === 204) {
+         console.log("Bookmark deleted successfully.");
+       }
+     } else {
+       //add
+       const response = await fetch(`api/bookmark/addBookMark`, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           token: token,
+           user: userId,
+           product: item.id,
+           id: selected?.id,
+         }),
+       });
+       const data = await response.json();
+       console.log("add func", data);
+     }
+
+    //  window.location.reload();
+   };
+
   
 
   return (
     <>
       <div className="list-view">
         <ul className="">
-          {books?.map((item) => {
+          {filteredData?.map((item) => {
             return (
-              <Link
-                key={`${item.id}`}
-                href={{ pathname: `/detail/${item.id}` }}
+              <div
+                // key={`${item.id}`}
+                // href={{ pathname: `/detail/${item.id}` }}
                 className={``}
               >
                 <li className="list-view-item">
@@ -38,23 +149,41 @@ export default function ListList({ books }) {
                       <div className={`price-num ${getPageColor(publisher)}`}>
                         ＄{item.price}
                       </div>
-                      <button className="wish-btn">
+                      <button
+                        onClick={() => {
+                          handleChange(item);
+                        }}
+                        className={`wish-btn ${
+                          arr?.includes(item?.id) ? "wish-active" : ""
+                        }`}
+                      >
                         <img src="/icons/heart.svg" alt="" />
                       </button>
                       <div className="button-group">
-                        <div className="btn button-radius">
+                        <div
+                          onClick={() => {
+                            handleChange(item);
+                          }}
+                          className={` btn button-radius ${
+                            arr?.includes(item?.id) ? "wish-active" : ""
+                          }`}
+                        >
                           <img src="/icons/heart.svg" alt="" />
-                          收藏此書
+                          {arr?.includes(item?.id) ? "取消收藏" : "收藏此書"}
                         </div>
-                        <div className="btn button-radius view-detail-btn">
+                        <Link
+                          key={`${item.id}`}
+                          href={{ pathname: `/detail/${item.id}` }}
+                          className="btn button-radius view-detail-btn"
+                        >
                           查看內頁
                           <img src="/icons/viewmore.svg" alt="" />
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </li>
-              </Link>
+              </div>
             );
           })}
         </ul>

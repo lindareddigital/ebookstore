@@ -1,7 +1,7 @@
 import Info from "./Info";
-import Collection from "./Collection";
+import Collection from "./collection";
 import Notification from "./Notification";
-import Message from "./Message";
+import Message from "./message";
 import Contribution from "./Contribution";
 import Link from "next/link";
 import { useRouter } from "next/router";
