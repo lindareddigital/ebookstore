@@ -4,6 +4,7 @@ import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import { useRouter } from "next/router";
+// import useTokenExpiration from "src/hooks/useTokenExpiration";
 
 export default function Navbar({}) {
   const [navMenu, setNavMenu] = useState(null);
@@ -32,7 +33,7 @@ export default function Navbar({}) {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpiry");
     localStorage.removeItem("email");
-    setEmail("");
+    setEmail(null);
 
     router.push(`/`, undefined, {
       shallow: true,
@@ -49,6 +50,45 @@ export default function Navbar({}) {
 
     setEmail(localStorage.getItem("email"));
     console.log("email", email, localStorage.getItem("email"));
+
+
+    const checkTokenExpiration = () => {
+      const token = localStorage.getItem("token");
+      const expiryTime = localStorage.getItem("tokenExpiry");
+
+      if (
+        token &&
+        expiryTime &&
+        new Date().getTime() < parseInt(expiryTime, 10)
+      ) {
+        const interval = setInterval(() => {
+          const currentTime = new Date().getTime();
+          if (currentTime >= parseInt(expiryTime, 10)) {
+            clearInterval(interval); // 清除定时器
+            localStorage.removeItem("token");
+            localStorage.removeItem("tokenExpiry");
+            console.log("logout");
+            location.replace(`/login`);
+          }
+        }, 60000); // 每分一次
+
+        return () => clearInterval(interval);
+      } else {
+        // 如果令牌已过期或不存在，执行退出登录逻辑并返回清除定时器的函数
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiry");
+        localStorage.removeItem("email");
+        console.log("logout");
+        if (router.pathname == "/member") {
+          console.log("", router.pathname);
+          
+          location.replace(`/login`);
+        }
+        return () => {};
+      }
+    };
+
+    checkTokenExpiration();
     
   }, []);
 

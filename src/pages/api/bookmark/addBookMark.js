@@ -10,10 +10,9 @@ export default async function handler(req, res) {
         .json({ error: "Invalid user && product data provided" });
     }
 
-
     const user = req.body.user;
     const product = req.body.product;
-
+    const token = req.body.token;
 
     const response = await fetch(
       `https://directus-cms.vicosys.com.hk/items/user_bookmark`,
@@ -21,15 +20,13 @@ export default async function handler(req, res) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ "user":user, "product": product }),
+        body: JSON.stringify({ user: user, product: product }),
       }
     );
 
     const result = await response.json();
-
-
-   
 
     res.status(200).json({ result });
   } catch (err) {

@@ -43,7 +43,6 @@ export default function Singlepage() {
     }
     const fetchMenu = async () => {
       try {
-        // const res = await fetch(`/api/sitemenu/publisher/${publisher}`);
         const res = await fetch(`/api/page/${publisher}`);
 
         const result = await res.json();

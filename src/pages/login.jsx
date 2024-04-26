@@ -4,19 +4,10 @@ import { useRouter } from "next/router";
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-// import { cookies } from "next/headers";
-
 
 function Login() {
-  // const {session, loading} = useSession();
 
   const router = useRouter();
-
-  // const params = useMemo(
-  //   () => ({ id, accessToken: session?.accessToken }),
-  //   [id]
-  // );
-
 
    const Login = async (event) => {
      event.preventDefault();
@@ -36,7 +27,6 @@ function Login() {
        console.log("token", data.data.access_token);
        const expiryTime = new Date().getTime() + 1000 * 60 * 15; // 15 minutes
       localStorage.setItem("tokenExpiry", expiryTime.toString());
-
       localStorage.setItem("token", data.data.access_token);
       localStorage.setItem("email", email);
 
