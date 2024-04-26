@@ -13,10 +13,13 @@ export default function GridList({ books }) {
 
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
+  const [firstRender, setFirstRender] = useState(true);
+  
 
   useEffect(() => {
-    // 当 books 改变时更新 filteredData
-    setFilteredData(books);
+    if (firstRender) {
+      setFilteredData(books);
+    }
   }, [books]);
 
   useEffect(() => {
@@ -36,8 +39,8 @@ export default function GridList({ books }) {
         }),
       });
       const books = await response.json();
-      console.log("user_bookmark", books?.result?.user_bookmark);
-      console.log(token);
+      // console.log("user_bookmark", books?.result?.user_bookmark);
+      // console.log(token);
       setBookMark(books?.result?.user_bookmark);
 
       const productIds = books?.result?.user_bookmark?.map(
@@ -45,13 +48,12 @@ export default function GridList({ books }) {
       );
 
       setArr(productIds);
-      console.log("arr", arr);
+      // console.log("arr", arr);
     };
 
     getUserBookMark();
 
     const filterByPublisher = async () => {
-      console.log("all book");
       if (!arr || arr.length === 0) {
         return;
       }
@@ -66,22 +68,19 @@ export default function GridList({ books }) {
       });
 
       const books = await response.json();
-      console.log(books?.result?.product, "all books");
-
+      // console.log(books?.result?.product, "all books");
 
       if (router.pathname.includes("/member")) {
         const filteredData = books?.result?.product?.filter((item) => {
           return arr?.includes(item.id);
         });
-
         setFilteredData(filteredData);
-        console.log(filteredData, "filteredData");
+        // console.log(filteredData, "filteredData");
       }
-
     };
 
     filterByPublisher();
-  }, []);
+  }, [arr]);
 
   const handleChange = async (item) => {
     console.log("click item.id", item.id);
@@ -130,9 +129,9 @@ export default function GridList({ books }) {
 
     window.location.reload();
   };
-  console.log("books", books);
-  console.log("bookMark", bookMark);
-  console.log("bookmark arr", arr);
+  // console.log("books", books);
+  // console.log("bookMark", bookMark);
+  // console.log("bookmark arr", arr);
 
   return (
     <>
@@ -140,40 +139,41 @@ export default function GridList({ books }) {
         {/* <div className="title">{props.Title}</div>
         <hr></hr> */}
         <div className="grid-view">
-          {filteredData?.map((item) => {
-            {
-              /* console.log(arr?.includes(item?.id),item.id); */
-            }
-            return (
-              <div
-                key={`${item.id}`}
-                // href={{ pathname: `/detail/${item.id}` }}
-                className={``}
-              >
-                <div className="book-item">
-                  <button
-                    onClick={() => {
-                      handleChange(item);
-                    }}
-                    className={`wish-btn ${
-                      arr?.includes(item?.id) ? "wish-active" : ""
-                    }`}
-                  >
-                    <img src="/icons/heart.svg" alt="" />
-                  </button>
-                  <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                    className=""
-                    alt={item.title}
-                  />
-                  <div className="desc">{item.title}</div>
-                  <div className={`price-num ${getPageColor(publisher)}`}>
-                    ＄{item.price}
+          {filteredData!= [] &&
+            filteredData?.map((item) => {
+              {
+                /* console.log(arr?.includes(item?.id),item.id); */
+              }
+              return (
+                <div
+                  key={`${item.id}`}
+                  // href={{ pathname: `/detail/${item.id}` }}
+                  className={``}
+                >
+                  <div className="book-item">
+                    <button
+                      onClick={() => {
+                        handleChange(item);
+                      }}
+                      className={`wish-btn ${
+                        arr?.includes(item?.id) ? "wish-active" : ""
+                      }`}
+                    >
+                      <img src="/icons/heart.svg" alt="" />
+                    </button>
+                    <img
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                      className=""
+                      alt={item.title}
+                    />
+                    <div className="desc">{item.title}</div>
+                    <div className={`price-num ${getPageColor(publisher)}`}>
+                      ＄{item.price}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </>

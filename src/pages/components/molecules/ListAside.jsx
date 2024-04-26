@@ -7,13 +7,13 @@ import { getPageColor } from "src/utilities/tool.js";
 
 export default function ListAside({ siteMenu }) {
   const router = useRouter();
-  const publisher = router.query.slug?.[0];
+  let publisher = router.query.slug?.[0];
   const handleClick = (channel, item, menuItem) => {
-    console.log(item, menuItem,'12', publisher);
+    console.log(item, menuItem, "publisher", publisher);
 
-      // if (publisher === "polis-press"){
-      //   publisher = "books"
-      // }
+      if (router.pathname.includes("books")) {
+        publisher = "books";
+      }
       router.push(`/${publisher}/${channel}/${item.slug}`, undefined, {
         shallow: true,
       });

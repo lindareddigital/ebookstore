@@ -12,12 +12,9 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 export default function Manage({}) {
-  const [tab, setTab] = useState("info");
+  const [tab, setTab] = useState("collection");
   const [info, setInfo] = useState(null);
   const [isLogin, setLogin] = useState(false);
-
-  useEffect(() => {
-  }, []);
 
   useEffect(() => {
 
@@ -48,24 +45,19 @@ export default function Manage({}) {
         }
       };
       loadInfo();
-      setLogin(true)
-
-      // useTokenExpiration()
-     
+      setLogin(true)     
     }
 
-    const tokenExpiry = localStorage.getItem("tokenExpiry");
+    // const tokenExpiry = localStorage.getItem("tokenExpiry");
 
     // console.log("5566", tokenExpiry);
-    
-
-    const currentTime = new Date().getTime();
-    if (currentTime >= parseInt(tokenExpiry, 10)) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("tokenExpiry");
-      console.log("logout");
-      router.push(`/login`);
-    }
+    // const currentTime = new Date().getTime();
+    // if (currentTime >= parseInt(tokenExpiry, 10)) {
+    //   localStorage.removeItem("token");
+    //   localStorage.removeItem("tokenExpiry");
+    //   console.log("logout");
+    //   router.push(`/login`);
+    // }
     
   }, []);
 
@@ -83,17 +75,17 @@ export default function Manage({}) {
 
   const renderContent = () => {
     if (tab === "info") {
-      return <Info info={info}/>;
+      return <Info info={info} />;
     }
-
-    if (tab === "collection" || router.query.tab === "collection") {
+    //  || router.pathname === "/member/collection"
+    if (tab === "collection") {
       return <Collection />;
     }
 
     if (tab === "notification") {
       return <Notification />;
     }
-
+    //|| router.pathname === "/member/message"
     if (tab === "message") {
       return <Message />;
     }
@@ -148,9 +140,12 @@ export default function Manage({}) {
                     </div>
                   </div>
                   <div className="e-banner-product">
+                  {/* router.push(`member/message`, undefined, {
+                          shallow: true,
+                        }); */}
                     <div
                       onClick={() => {
-                        setTab("message");
+                        setTab("message");                 
                       }}
                     >
                       <div className="desc">訊息管理</div>

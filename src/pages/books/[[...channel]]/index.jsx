@@ -38,7 +38,7 @@ export default function Listing() {
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
   
-  console.log('41',channel,slug);
+  console.log("channel,slug", channel, slug);
 
 
   useEffect(() => {
