@@ -167,7 +167,7 @@ export default function Posts() {
                       <>
                         <div className="share-list-item overflow-hidden">
                           <Link
-                            href={`/column/${item.id}`}
+                            href={`/columns/${item.id}`}
                             className="post-thumb"
                           >
                             <img
@@ -178,7 +178,7 @@ export default function Posts() {
                           </Link>
                           <div className="post-info">
                             <h4 className="post-title">
-                              <Link href={`/column/${item.id}`} className="">
+                              <Link href={`/columns/${item.id}`} className="">
                                 {item?.title}
                               </Link>
                             </h4>

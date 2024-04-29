@@ -127,6 +127,7 @@ export default function Home() {
                   <Link
                     href={`/posts/news/${item.id}`}
                     className="e-banner-product"
+                    key={`${item?.id}`}
                   >
                     {/* <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}

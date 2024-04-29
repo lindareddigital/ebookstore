@@ -86,9 +86,8 @@ class ApiManager {
   };
 
   useUserToken = async (gql, token) => {
-
     console.log("90", token);
-    
+
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
       .with(staticToken(token));
@@ -139,6 +138,7 @@ class ApiManager {
                   id
                   content
                   group_type
+                  url
                   posts {
                     id
                     title
@@ -247,7 +247,7 @@ class ApiManager {
     return;
   };
 
-  getUserBookMark = async (id,token) => {    
+  getUserBookMark = async (id, token) => {
     console.log("token", token);
 
     const gql = `
@@ -270,12 +270,12 @@ class ApiManager {
 
     console.log("getUserBookMark", gql);
 
-    return await this.useUserToken(gql,token);
+    return await this.useUserToken(gql, token);
   };
 
   setUserBookMark = async (token) => {
-    console.log('token',token);
-    
+    console.log("token", token);
+
     const gql = `
       query {
         user_bookmark(
@@ -293,7 +293,7 @@ class ApiManager {
         }
     }
     `;
-    return await this.useUserToken(gql,token);
+    return await this.useUserToken(gql, token);
   };
 
   getNaviMenu = async () => {
@@ -660,7 +660,17 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getColumnByCategory = () => {
+  passContactForm = () => {
+    const gql = `
+     query {
+      contact_form( 
+        
+      ) 
+      { 
+    
+      }
+    } 
+    `;
     return;
   };
 
@@ -834,9 +844,9 @@ class ApiManager {
     const sort_by_json = sort_by.map((item) => `"${item}"`).join(", ");
     let query = "";
 
-    if(!limit){
+    if (!limit) {
       query = ``;
-    }else{
+    } else {
       query = `limit: ${limit} `;
     }
 
