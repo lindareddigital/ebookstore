@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@directus/sdk": "^15.0.2",
+    "@directus/sdk": "^15.1.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.2",
     "cors": "^2.8.5",

@@ -1,17 +1,19 @@
 import apiManager from "src/pages/api/api";
-import { Directus } from "@directus/sdk";
 
 export default async function handler(req, res) {
   try {
-    const publisher_slug = req.body.publisher_slug;
     const token = req.body.token;
-   
-    const directus = new Directus("https://directus-cms.vicosys.com.hk", {
-      auth: { staticToken: token },
-    });
+    const id = req.body.id;
+    const transformedArray = req.body.transformedArray;
 
-    
-    res.status(200).json({ result });
+    const result = await apiManager.patchForm(
+      token,
+      id,
+      transformedArray
+    );
+
+ 
+    res.status(200).json({ result:result });
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ error: "Internal Server Error" });

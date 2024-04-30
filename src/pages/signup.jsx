@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Head from "next/head";
 
 
 function Signup() {
@@ -49,6 +50,9 @@ function Signup() {
   return (
     <>
       <div className="contactus-page">
+        <Head>
+          <title>註冊</title>
+        </Head>
         <Navbar />
         <MenuBar />
         <Breadcrumb data={"註冊"} />

@@ -2,10 +2,18 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import MenuBar from "src/pages/components/molecules/MenuBar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import { useEffect, useState } from "react";
-import { createDirectus, rest, createItem } from "@directus/sdk";
 import Head from "next/head";
 import { z } from "zod";
+import {
+  createDirectus,
+  rest,
+  utilsImport,
+  staticToken,
+  uploadFiles,
+} from "@directus/sdk";
+import apiManager from "src/pages/api/api";
 import { Directus } from "@directus/sdk";
+
 
 export const signUpFormSchema = z.object({
   email: z.string().email({ message: "錯誤的信箱格式" }),
@@ -21,20 +29,9 @@ export default function ContactUs() {
   });
   const [errors, setErrors] = useState({});
 
-  // 读取文件并将其转换为 Base64 字符串
-  function readFileAsBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(",")[1]); // 忽略前缀 data:image/png;base64,
-      reader.onerror = (error) => reject(error);
-      reader.readAsDataURL(file);
-    });
-  }
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-  
 
     const email = formData.get("email");
     const phone = formData.get("phone");
@@ -63,47 +60,38 @@ export default function ContactUs() {
       }
     }
 
-    const fileInput = event.currentTarget.querySelector("#formFile");
-    const selectedFiles = fileInput.files;
-    const picData = new FormData(); // 创建 FormData 对象
+    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+      .with(rest())
+      .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
 
-    let filesDataArray = [];
+    const fileInput = document.querySelector("#formFile");
 
-    if (selectedFiles && selectedFiles.length > 0) {
-      for (let i = 0; i < selectedFiles.length; i++) {
-        const selectedFile = selectedFiles[i];
-
-        const allowedExtensions = [".docx", ".doc", ".jpg", ".jpeg", ".png"];
-        const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
-
-        if (!allowedExtensions.includes(`.${fileExtension}`)) {
-          console.log(
-            `文件 ${selectedFile.name} 的类型无效，请选择有效的文件类型。`
-          );
-          return;
-        }
-
-        const base64String = await readFileAsBase64(selectedFile);
-
-        const fileData = {
-          filename: selectedFile.name,
-          type: selectedFile.type,
-          size: selectedFile.size,
-          data: base64String,
-        };
-
-        filesDataArray.push(fileData);
-        picData.append("files", fileData);
-
-        console.log("文件信息:", fileData);
-      }
-    } else {
-      console.log("未选择任何文件。");
+    const picData = new FormData();
+    for (const file of fileInput.files) {
+      picData.append("files", file);
     }
+    const result = await client.request(uploadFiles(picData));
+    console.log("result", result);
+
+     let ids = [];
+
+     if (Array.isArray(result)) {
+       ids = result.map((item) => item.id);
+     } else if (typeof result === "object" && result.id) {
+       ids.push(result.id);
+     }
+
+     console.log("ids:", ids);
+
+     const transformedArray = ids.map((id) => ({
+       directus_files_id: {
+         id: id,
+       },
+     }));
+
+     console.log(transformedArray);
 
     let token = localStorage.getItem("token");
-
-    
 
     const response = await fetch(
       "https://directus-cms.vicosys.com.hk/items/contact_form",
@@ -120,78 +108,29 @@ export default function ContactUs() {
           nickname,
           type,
           content,
-          ...(filesDataArray && { attachment: filesDataArray }),
         }),
       }
     );
 
-    // const res = await fetch(
-    //   "https://directus-cms.vicosys.com.hk/items/contact_form",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //     body: picData,
-    //     // JSON.stringify({
-    //     // email,
-    //     // fullname,
-    //     // phone,
-    //     // nickname,
-    //     // type,
-    //     // content,
-    //     // ...(picData && { attachment: picData }),
-    //     // }),
-    //   }
-    // );
+    const data = await response.json();
+    console.log("data", data.data.id);
 
+    const id = data.data.id
 
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const patchForm = await fetch("/api/patchForm", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
         token,
+        id,
+        transformedArray 
       }),
     });
 
-    // const test = await directus.files.createOne(formData);
-
-  
-   
-    // formData.append("file", fileInput.files[0]);
-
-
-
-    const file = await directus.files.createOne(picData);
-
-    await directus.items("contact_form").createOne({
-      email: email,
-      phone: phone,
-      fullname: fullname,
-      nickname: nickname,
-      type: type,
-      content: content,
-      // // for singe file field
-      file: file.id,
-      // // for multiple files field
-      // file: [file.id],
-      attachment: filesDataArray,
-    });
-
+    console.log("patchForm", patchForm);
     
-
-   
-
-    const data = await response.json();
-    // const ddata = await res.json();
-    console.log("data", data);
-    // console.log("ddata", ddata);
   };
 
-  // 处理输入框值变化
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -203,7 +142,7 @@ export default function ContactUs() {
   return (
     <div className="contactus-page">
       <Head>
-        <title>{"聯絡我們"}</title>
+        <title>聯絡我們</title>
       </Head>
       <Navbar />
       <MenuBar />
@@ -298,7 +237,6 @@ export default function ContactUs() {
         <div className="">
           <label htmlFor="formFile" className="form-label">
             附件
-            <span className="red-word">*</span>
             <div className="sub-word">(請上傳 docx.doc.jpg.jpeg.png 格式)</div>
           </label>
 
@@ -311,7 +249,10 @@ export default function ContactUs() {
           ></input>
         </div>
         <div className="button-group">
-          <button type="submit" className="btn cancel-btn info-site-btn">
+          <button
+            type="submit"
+            className="btn cancel-btn info-site-btn"
+          >
             取消
           </button>
           <button type="submit" className="btn info-site-btn">

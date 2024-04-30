@@ -2,7 +2,13 @@
 
 const Endpoint = "https://directus-cms.vicosys.com.hk";
 const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
-import {createDirectus, graphql, staticToken} from "@directus/sdk";
+import {
+  createDirectus,
+  graphql,
+  staticToken,
+  rest,
+  uploadFiles,
+} from "@directus/sdk";
 
 class ApiManager {
   static instance;
@@ -105,6 +111,24 @@ class ApiManager {
     const result = await client.query(gql);
 
     return result;
+  };
+
+  patchForm = async (token, id, transformedArray) => {
+    const res = await fetch(
+      `https://directus-cms.vicosys.com.hk/items/contact_form/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          attachment: transformedArray,
+        }),
+      }
+    );
+
+    return res;
   };
 
   getPageBySlug = async (slug) => {
