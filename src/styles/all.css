@@ -576,7 +576,7 @@ footer {
 }
 
 .form-comments{
-  height: 400px;
+  height: 220px !important;
 }
 
 .accordion-button{
@@ -622,6 +622,8 @@ footer {
   display: flex;
   flex-direction: column;
 }
+
+
 
 .list-view-item .price-num{
   text-align: end;
@@ -2273,6 +2275,17 @@ footer .container-fluid{
   font-size: 18px;
   font-weight: 400;
   line-height: 26px;
+  justify-content: flex-start !important;
+}
+
+.toast-header{
+  justify-content: flex-end;
+}
+
+.toast-body{
+  font-size: 18px;
+  line-height: 26px;
+  color: #28251C;
 }
 
 .contactus-page .info-site-btn,
