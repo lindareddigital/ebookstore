@@ -19,7 +19,6 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
 
 export default function Detail({}) {
-  const { mobile } = useCalc();
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
   const [books, setBooks] = useState(null);
@@ -33,6 +32,8 @@ export default function Detail({}) {
   const [userId, setId] = useState("");
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
+  const [isLogin, setLogin] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +84,9 @@ export default function Detail({}) {
         // console.log("arr", arr);
       };
 
-      getUserBookMark();
+      if (isLogin) {
+        getUserBookMark();
+      }
 
       const filterByPublisher = async () => {
         if (!arr || arr.length === 0) {

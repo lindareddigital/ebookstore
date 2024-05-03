@@ -197,7 +197,7 @@ footer {
 
     display: flex;
     height: 60px;
-    padding-left: 20px;
+    padding-left: 60px;
     justify-content: space-between;
     align-items: center;
 
@@ -1904,6 +1904,15 @@ footer .container-fluid{
 .news-tabs .tab-pane{
   max-width: 938px;
   width: 70%;
+}
+
+.news-tabs .search-tab-pane{
+  max-width: unset;
+  width: 100%;
+}
+
+.news-tabs .list-view-item{
+  max-width: unset;
 }
 
 .tab-pane,.detail-area,.raw-html {

@@ -33,7 +33,7 @@ export default function ContactUs() {
     const formData = new FormData(event.currentTarget);     
 
     const email = formData.get("email");
-    const phone = formData.get("phone");
+    const title = formData.get("title");
     const fullname = formData.get("fullname");
     const nickname = formData.get("nickname");
     const type = formData.get("type");
@@ -86,7 +86,7 @@ export default function ContactUs() {
         body: JSON.stringify({
           email,
           fullname,
-          phone,
+          title,
           nickname,
           type,
           content,
@@ -163,8 +163,8 @@ export default function ContactUs() {
       <Toast
         onClose={() => setShowToast(false)}
         show={showToast}
-        // delay={3000}
-        // autohide
+        delay={3000}
+        autohide
         style={{
           position: "absolute",
           top: 200,

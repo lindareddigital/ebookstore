@@ -6,8 +6,6 @@ import {
   createDirectus,
   graphql,
   staticToken,
-  rest,
-  uploadFiles,
 } from "@directus/sdk";
 
 class ApiManager {
@@ -92,7 +90,7 @@ class ApiManager {
   };
 
   useUserToken = async (gql, token) => {
-    console.log("90", token);
+    // console.log("90", token);
 
     const client = createDirectus("https://directus-cms.vicosys.com.hk")
       .with(graphql({ credentials: "include" }))
@@ -267,8 +265,94 @@ class ApiManager {
     return await this.sdk(gql);
   };
 
-  getSearchKeywords = async () => {
-    return;
+  getSearchBooks = async (input, limit, page) => {
+    const gql = `
+      query {
+        product(
+          limit: ${limit}
+          page: ${page}
+          filter: {
+            _or:  [
+                {title: { _contains: "${input}"}},
+                {description: { _contains: "${input}"}},
+                { format: { _contains: "${input}"}},
+                { isbn: { _contains: "${input}"}},
+            ]
+        }) {
+            id
+            title
+            isbn
+            description
+            keyword
+            table_of_contents
+            date_created
+            price
+            discounted_price
+            discount 
+            cover_image{
+              id
+            }
+            
+        }
+        product_aggregated(filter: {
+            _or:  [
+                {title: { _contains: "${input}"}},
+                {description: { _contains: "${input}"}},
+                { format: { _contains: "${input}"}},
+                { isbn: { _contains: "${input}"}},
+            ]
+        }) 
+            {     
+              count {
+                id
+              }
+            }
+    }
+    `;
+
+    return await this.sdk(gql);
+  };
+
+  getSearchPosts = async (input, limit, page) => {
+    const gql = `
+       query {
+        posts(
+          limit: ${limit}
+          page: ${page}
+          filter: {
+            _or:  [
+              {title: { _contains: "${input}"}},
+              {content: { _contains: "${input}"}},
+            ]
+        }) {
+          id
+          title
+          tags
+          content
+          category{
+            id
+            name
+            slug
+          }
+          key_image{
+            id
+          }      
+        }
+        posts_aggregated(filter: {
+          _or:  [
+            {title: { _contains: "${input}"}},
+            {content: { _contains: "${input}"}},
+          ]
+        }) 
+        {     
+          count {
+            id
+          }
+        }
+    }
+    `;
+
+    return await this.sdk(gql);
   };
 
   getUserBookMark = async (id, token) => {

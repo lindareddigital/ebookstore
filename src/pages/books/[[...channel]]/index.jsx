@@ -98,6 +98,8 @@ export default function Listing() {
   }, [page, limit, myObject.sort,router]);
 
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
     const fetchMenu = async () => {
       try {
         const res = await fetch("/api/page/books");

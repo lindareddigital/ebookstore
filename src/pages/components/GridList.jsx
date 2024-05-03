@@ -145,11 +145,7 @@ export default function GridList({ books }) {
                 /* console.log(arr?.includes(item?.id),item.id); */
               }
               return (
-                <div
-                  key={`${item.id}`}
-                  // href={{ pathname: `/detail/${item.id}` }}
-                  className={``}
-                >
+                <div key={`${item.id}`} className={``}>
                   <div className="book-item">
                     <button
                       onClick={() => {

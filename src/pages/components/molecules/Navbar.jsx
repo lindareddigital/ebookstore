@@ -4,7 +4,6 @@ import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
 import useCalc from 'src/pages/components/atoms/useCalc';
 import { useRouter } from "next/router";
-// import useTokenExpiration from "src/hooks/useTokenExpiration";
 
 export default function Navbar({}) {
   const [navMenu, setNavMenu] = useState(null);
@@ -12,6 +11,8 @@ export default function Navbar({}) {
 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [searchKeywords, setSearchKeywords] = useState("");
+
   const [info, setInfo] = useState(null);
 
 
@@ -38,6 +39,25 @@ export default function Navbar({}) {
     router.push(`/`, undefined, {
       shallow: true,
     });
+  };
+
+   const handleKeyDown = (e) => {
+     if (e.key === "Enter") {
+       console.log("Enter 键被按下");
+       search(searchKeywords);
+     }
+   };
+
+  const search = async (input) => {
+    router.push(
+      {
+        pathname: "/search",
+        query: input,
+      },
+      undefined,
+      { shallow: true }
+    );
+    
   };
 
   useEffect(() => {
@@ -138,19 +158,21 @@ export default function Navbar({}) {
 
           <form className="input-group">
             <input
+              onKeyDown={
+                (e) => {
+                  setSearchKeywords(e.target.value)
+                  handleKeyDown(e);
+                }}
               onChange={(e) => setSearchKeywords(e.target.value)}
               className="form-control header-search-input"
               type="text"
             ></input>
             <button
               onClick={() => {
-                searchDataKeywords();
-                setTimeout(() => {
-                  setIsSearchOn(true);
-                }, 300);
+                search(searchKeywords);
               }}
               className="search-btn"
-              type="submit"
+              type="button"
             >
               <img src="/icons/search.svg" alt="" />
             </button>
@@ -239,10 +261,21 @@ export default function Navbar({}) {
                 </ul>
               </div>
               <input
+                onKeyDown={(e) => {
+                  setSearchKeywords(e.target.value)
+                  handleKeyDown(e);
+                }}
+                onChange={(e) => setSearchKeywords(e.target.value)}
                 className="form-control header-search-input"
                 type="text"
               ></input>
-              <button className="search-btn" type="submit">
+              <button
+                onClick={() => {
+                  search(searchKeywords);
+                }}
+                className="search-btn"
+                type="button"
+              >
                 <img src="/icons/search.svg"></img>
               </button>
             </form>

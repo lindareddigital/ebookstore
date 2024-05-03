@@ -33,14 +33,14 @@ export default function Manage({}) {
         if (response.ok) {
           const data = await response.json();
           // console.log(data.data, "all data");
-          const info = data.data.find((item) => {
+          const info = data?.data?.find((item) => {
             return item.email === email;
           });
 
           setInfo(info);
           console.log("info", info);
 
-          localStorage.setItem("id", info.id);
+          localStorage.setItem("id", info?.id);
 
         }
       };

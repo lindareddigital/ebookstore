@@ -12,7 +12,8 @@ export default function ListList({ books }) {
   const [userId, setId] = useState("");
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
-
+  console.log(filteredData);
+  
    useEffect(() => {
      const userId = localStorage.getItem("id");
      const token = localStorage.getItem("token");
@@ -127,13 +128,9 @@ export default function ListList({ books }) {
     <>
       <div className="list-view">
         <ul className="">
-          {filteredData?.map((item) => {
+          {books?.map((item) => {
             return (
-              <div
-                // key={`${item.id}`}
-                // href={{ pathname: `/detail/${item.id}` }}
-                className={``}
-              >
+              <div key={`${item.id}`} className={``}>
                 <li className="list-view-item">
                   <img
                     src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
