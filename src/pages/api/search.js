@@ -6,6 +6,10 @@ export default async function handler(req, res) {
     const limit = req.body.page_limit || 5;
     const page = req.body.page || 1;
 
+    console.log("Search", page, input);
+    
+    
+
     const books = await apiManager.getSearchBooks(input, limit, page);
     const posts = await apiManager.getSearchPosts(input, limit, page);
 

@@ -2248,6 +2248,10 @@ footer .container-fluid{
   min-height: 600px;
 }
 
+.share-page{
+  min-height: 1200px;
+}
+
 .contact-us .form-control,
 .contact-us .form-select{
   display: flex;

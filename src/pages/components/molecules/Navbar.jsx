@@ -42,10 +42,10 @@ export default function Navbar({}) {
   };
 
    const handleKeyDown = (e) => {
-     if (e.key === "Enter") {
-       console.log("Enter 键被按下");
-       search(searchKeywords);
-     }
+    //  if (e.key === "Enter") {
+    //    console.log("Enter 键被按下");
+    //    search(searchKeywords);
+    //  }
    };
 
   const search = async (input) => {
@@ -55,7 +55,7 @@ export default function Navbar({}) {
         query: input,
       },
       undefined,
-      { shallow: true }
+      { shallow: false }
     );
     
   };

@@ -16,7 +16,9 @@ export default function Search({}) {
   const [posts, setPosts] = useState(null);
   const [books, setBooks] = useState(null);
   const [selected, setSelected] = useState("columns");
-  let arr = [];
+  const [arr, setArr] = useState(null);
+  const [searchStr, setSearchStr] = useState("");
+
 
   const router = useRouter();
   const page = router.query.page || 1;
@@ -24,14 +26,19 @@ export default function Search({}) {
 
 
   useEffect(() => {
-    render()
-  }, [router]);
+    render();
+  }, [page, limit, router.query]);
 
 
    const render = async () => {
-     const url = window.location.href;
-     const decodedQuery = decodeURIComponent(url.split("?")[1]);
-    //  console.log(decodedQuery);
+    const url = window.location.href;
+    const decodedQuery = decodeURIComponent(url.split("?")[1]);
+    // if(searchStr == ""){
+      setSearchStr(decodedQuery);
+    // }
+
+    console.log("searchStr", searchStr);
+    
 
      const response = await fetch("/api/search", {
        method: "POST",
@@ -39,7 +46,9 @@ export default function Search({}) {
          "Content-Type": "application/json",
        },
        body: JSON.stringify({
-         input: decodedQuery,
+         input: searchStr,
+         limit: limit,
+         page: page,
        }),
      });
 
@@ -48,20 +57,22 @@ export default function Search({}) {
      setBooks(result.books.product);
      setPosts(result.posts.posts);
      console.log(result, posts, books);
-     arr.push(result.posts?.posts_aggregated?.[0].count?.id);
-     arr.push(result.books?.product_aggregated?.[0].count?.id);
+     setArr([
+       result.posts?.posts_aggregated?.[0].count?.id,
+       result.books?.product_aggregated?.[0].count?.id,
+     ]);
      console.log('arr',arr);
      
-     
-     // books.product_aggregated[0].count.id
-     // posts.posts_aggregated[0].count.id
    };
 
    const length = useMemo(() => {
-     return selected === "column" ? arr[0] : arr[1]
+    if (arr && arr.length >= 2) {
+      return selected === "column" ? arr[0] : arr[1];
+    } else {
+      return null;
+    }
    }, [selected]);
-        console.log("arr", arr);
-       console.log("length", length);
+    console.log("length", length);
    
 
   const handleSelected = (item) => {
@@ -103,6 +114,7 @@ export default function Search({}) {
         pageNumbers.push(
           <>
             <li
+              key={i}
               onClick={() => {
                 updatePage(i);
               }}
