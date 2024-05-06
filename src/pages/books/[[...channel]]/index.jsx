@@ -399,21 +399,21 @@ export default function Listing() {
 
                 {panelView == "filter" &&
                   siteMenu?.map((item) => {
+                    console.log(item)
                     return (
                       <ul className="">
-                        <div className="title">{item.title}</div>
-                        {item.menu_items?.map((menuItem) => (
-                          <li key={menuItem.site_menu_items_id.id}>
+                        <div className="title">{item?.item?.title}</div>
+                        {item?.item?.menu_items?.map((menuItem) => (
+                          <li key={menuItem?.site_menu_items_id?.id}>
                             <div
                               onClick={() =>
                                 handleClick(
-                                  item.channel,
-                                  menuItem.site_menu_items_id,
-                                  item.publisher
+                                  item.item.channel,
+                                  menuItem?.site_menu_items_id,
                                 )
                               }
                             >
-                              {menuItem.site_menu_items_id.title}
+                              {menuItem?.site_menu_items_id?.title}
                             </div>
                           </li>
                         ))}

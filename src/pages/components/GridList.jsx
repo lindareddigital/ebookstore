@@ -19,6 +19,7 @@ export default function GridList({ books }) {
   useEffect(() => {
     if (firstRender) {
       setFilteredData(books);
+      setFirstRender(false)
     }
   }, [books]);
 
@@ -127,11 +128,8 @@ export default function GridList({ books }) {
       console.log("add func", data);
     }
 
-    // window.location.reload();
   };
-  // console.log("books", books);
-  // console.log("bookMark", bookMark);
-  // console.log("bookmark arr", arr);
+
 
   return (
     <>

@@ -1,7 +1,6 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
@@ -12,7 +11,7 @@ import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 
 
 export default function HomeTab({books}) {
-  console.log('',books);
+  // console.log('',books);
   const swiperRef = useRef(null);
   const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);

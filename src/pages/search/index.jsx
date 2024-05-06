@@ -22,35 +22,36 @@ export default function Search({}) {
 
   const router = useRouter();
   const page = router.query.page || 1;
-  const limit = router.query.limit || 5;
 
 
   useEffect(() => {
     render();
-  }, [page, limit, router.query]);
+  }, [page, router.query]);
 
 
-   const render = async () => {
+  const render = async () => {
     const url = window.location.href;
-    const decodedQuery = decodeURIComponent(url.split("?")[1]);
-    // if(searchStr == ""){
-      setSearchStr(decodedQuery);
-    // }
+    const decodedUrl = decodeURIComponent(url);
+    const match = decodedUrl.match(/search\?([^=&]*)/);
+    let decodedQuery = null;
 
-    console.log("searchStr", searchStr);
-    
+    if (match) {
+      const query = match[1];
+      decodedQuery = query.split("=")[0];
+    }
 
-     const response = await fetch("/api/search", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify({
-         input: searchStr,
-         limit: limit,
-         page: page,
-       }),
-     });
+    console.log("decodedQuery", decodedQuery);
+
+    const response = await fetch("/api/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: decodedQuery,
+        page: page,
+      }),
+    });
 
      const result = await response.json();
 
@@ -63,7 +64,7 @@ export default function Search({}) {
      ]);
      console.log('arr',arr);
      
-   };
+  };
 
    const length = useMemo(() => {
     if (arr && arr.length >= 2) {
@@ -110,7 +111,7 @@ export default function Search({}) {
     console.log("Paginations length", length);
 
     if (Number(length)) {
-      for (let i = 1; i <= Math.ceil(length / 5); i++) {
+      for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
           <>
             <li
@@ -143,7 +144,7 @@ export default function Search({}) {
           <div
             onClick={() => {
               const nextPage = Math.min(
-                Math.ceil(length / 5),
+                Math.ceil(length / 15),
                 Number(page) + 1
               );
               updatePage(nextPage);
@@ -278,7 +279,7 @@ export default function Search({}) {
             </div>
 
             <div className="">
-              {Math.ceil(length / 5) > 1 && <Paginations length={length} />}
+              {Math.ceil(length / 15) > 1 && <Paginations length={length} />}
             </div>
           </div>
         </div>

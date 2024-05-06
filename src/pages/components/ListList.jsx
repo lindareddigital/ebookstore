@@ -12,7 +12,7 @@ export default function ListList({ books }) {
   const [userId, setId] = useState("");
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
-  console.log(filteredData);
+  // console.log(filteredData);
   
    useEffect(() => {
      const userId = localStorage.getItem("id");
@@ -31,7 +31,7 @@ export default function ListList({ books }) {
          }),
        });
        const books = await response.json();
-       // console.log("user_bookmark", books?.result?.user_bookmark);
+      //  console.log("user_bookmark", books?.result?.user_bookmark);
        // console.log(token);
        setBookMark(books?.result?.user_bookmark);
 
@@ -132,14 +132,25 @@ export default function ListList({ books }) {
             return (
               <div key={`${item.id}`} className={``}>
                 <li className="list-view-item">
-                  <img
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                    className=""
-                    alt={item.title}
-                  />
+                  <Link
+                    key={`${item.id}`}
+                    href={{ pathname: `/detail/${item.id}` }}
+                  >
+                    <img
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                      className="cover-img"
+                      alt={item.title}
+                    />
+                  </Link>
                   <div className="wrapper">
                     <div className="textarea">
-                      <div className="title">{item.title}</div>
+                      <Link
+                        key={`${item.id}`}
+                        href={{ pathname: `/detail/${item.id}` }}
+                        className="title"
+                      >
+                        {item.title}
+                      </Link>
                       <div className="desc">{item.description}</div>
                     </div>
                     <div className="info">

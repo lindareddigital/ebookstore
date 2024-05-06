@@ -12,11 +12,8 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 import HomeTab from "src/pages/components/HomeTab";
 import GalleryModal from "src/pages/components/GalleryModal";
-
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-
-
 
 export default function Detail({}) {
   const [show, setShow] = useState(false);
@@ -72,8 +69,11 @@ export default function Detail({}) {
           }),
         });
         const books = await response.json();
-        // console.log("user_bookmark", books?.result?.user_bookmark);
+
+        if (!books?.result?.user_bookmark) return
+          // console.log("user_bookmark", books?.result?.user_bookmark);
         // console.log(token);
+        setLogin(true);
         setBookMark(books?.result?.user_bookmark);
 
         const productIds = books?.result?.user_bookmark?.map(
@@ -82,11 +82,10 @@ export default function Detail({}) {
 
         setArr(productIds);
         // console.log("arr", arr);
-      };
+      };      
 
-      if (isLogin) {
-        getUserBookMark();
-      }
+      getUserBookMark();
+    
 
       const filterByPublisher = async () => {
         if (!arr || arr.length === 0) {
@@ -118,18 +117,18 @@ export default function Detail({}) {
     }, [arr]);
 
     const handleChange = async (item) => {
-      console.log("click item.id", item.id);
+      // console.log("click item.id", item.id);
 
-      console.log("bookMark", bookMark);
+      // console.log("bookMark", bookMark);
 
       const selected = bookMark?.find((book) => book.product.id === item.id);
-      console.log("selected", selected);
+      // console.log("selected", selected);
 
       const token = localStorage.getItem("token");
 
       if (selected != undefined) {
         //delete
-        const response = await fetch(`api/bookmark/deleteBookMark`, {
+        const response = await fetch(`/api/bookmark/deleteBookMark`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -146,7 +145,7 @@ export default function Detail({}) {
         }
       } else {
         //add
-        const response = await fetch(`api/bookmark/addBookMark`, {
+        const response = await fetch(`/api/bookmark/addBookMark`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

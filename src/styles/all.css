@@ -655,7 +655,7 @@ footer {
   height: 100%;
 }
 
-.list-view-item > img{
+.list-view-item .cover-img{
   width: 160px;
   height: 160px;
 }
@@ -2018,7 +2018,7 @@ footer .container-fluid{
   top: 0;
   position: absolute;
   padding: 8px;
-  z-index: 99;
+  z-index: 9;
 }
 
 .wish-active{
@@ -2869,7 +2869,7 @@ footer .accordion{
   padding: 10px 0; 
 }
 
-.list-view-item > img{
+.list-view-item .cover-img{
   width: 85px;
   height: 85px;
 }
@@ -3049,8 +3049,12 @@ footer .accordion{
 }
 
 .header-search-bar{
-  width: calc(100vw - 0px);
+  width: calc(100vw - 32px);
   justify-content: center; 
+}
+
+.listing-page .right-side{
+  width: 100%;
 }
 
 .single-page .header-search-bar{
@@ -3091,6 +3095,7 @@ footer .box{
   width: calc(50vw - 32px)!important;
   border-radius: 4px;
   height: 40px;
+  padding-left: unset;
 }
 
 .home-page .home-banner{
@@ -3137,7 +3142,7 @@ footer .box{
 
 .header-search-bar .right-side{
   height: 38px;
-  width: unset;
+  width: 100%;
 }
 
 .share-list{
@@ -3271,6 +3276,7 @@ footer .accordion-button{
 
 footer .accordion-item{
   background-color: unset;
+  border: unset;
 }
 
 .accordion-button:not(.collapsed)::after{

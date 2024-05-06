@@ -3,7 +3,7 @@ import apiManager from "src/pages/api/api";
 export default async function handler(req, res) {
   try {
     const input = req.body.input;
-    const limit = req.body.page_limit || 5;
+    const limit = req.body.page_limit || 15;
     const page = req.body.page || 1;
 
     console.log("Search", page, input);
