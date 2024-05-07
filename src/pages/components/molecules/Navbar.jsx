@@ -151,18 +151,21 @@ export default function Navbar({}) {
               <img src="/icons/cart.svg" alt="" />
             </button> */}
             <hr className="nav-hr" />
-            <button className="search-btn btn" type="submit">
+            <Link
+              href={{ pathname: `/member` }}
+              className="search-btn btn"
+              type="submit"
+            >
               <img src="/icons/member.svg" alt="" />
-            </button>
+            </Link>
           </div>
 
           <form className="input-group">
             <input
-              onKeyDown={
-                (e) => {
-                  setSearchKeywords(e.target.value)
-                  handleKeyDown(e);
-                }}
+              onKeyDown={(e) => {
+                setSearchKeywords(e.target.value);
+                handleKeyDown(e);
+              }}
               onChange={(e) => setSearchKeywords(e.target.value)}
               className="form-control header-search-input"
               type="text"
@@ -262,7 +265,7 @@ export default function Navbar({}) {
               </div>
               <input
                 onKeyDown={(e) => {
-                  setSearchKeywords(e.target.value)
+                  setSearchKeywords(e.target.value);
                   handleKeyDown(e);
                 }}
                 onChange={(e) => setSearchKeywords(e.target.value)}

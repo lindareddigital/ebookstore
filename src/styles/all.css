@@ -1167,7 +1167,7 @@ span{
   line-height: normal;
   letter-spacing: 7.44px;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-top: 20px;
 }
 
@@ -1350,7 +1350,7 @@ span{
 .share-block .e-banner-product img{
   width: 120px;
   margin-top: 8px;
-  /* height: 120px; */
+  height: 120px;
 }
 
 .share-block .newsbg{
@@ -2338,7 +2338,7 @@ footer .container-fluid{
 .recipe-card{
   width: 314px;
   height: 378px;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 20px;
   font-size: 18px;
   font-weight: 500;
@@ -2393,6 +2393,7 @@ footer .accordion{
 
 .seashore-color{
   color: #B70020 !important;
+  filter: invert(9%) sepia(88%) saturate(5482%) hue-rotate(346deg) brightness(99%) contrast(100%) !important;
 }
 
 .seashore-bg{
@@ -2410,6 +2411,7 @@ footer .accordion{
 }
 
 .ichiban-color{
+  filter: invert(62%) sepia(59%) saturate(729%) hue-rotate(25deg) brightness(103%) contrast(94%) !important;
   color: #ADC608 !important;
 }
 

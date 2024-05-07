@@ -227,7 +227,7 @@ export default function Singlepage() {
               onClick={() => {
                 updatePage(i);
               }}
-              className={`page-item ${i == page ? "active" : ""}`}
+              className={`${getPageColor(publisher)} page-item ${i == page ? "active" : ""}`}
             >
               <div class="page-link">
                 {i}
@@ -258,7 +258,7 @@ export default function Singlepage() {
               updatePage(nextPage);
             }}
             className=""
-          >
+            >
             <NextIcon />
           </div>
         </Pagination>

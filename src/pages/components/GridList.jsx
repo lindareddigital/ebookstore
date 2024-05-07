@@ -19,7 +19,7 @@ export default function GridList({ books }) {
   useEffect(() => {
     if (firstRender) {
       setFilteredData(books);
-      setFirstRender(false)
+      // setFirstRender(false)
     }
   }, [books]);
 

@@ -4,6 +4,7 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Toast from "react-bootstrap/Toast";
+import Link from "next/link";
 
 import {
   createDirectus,
@@ -18,6 +19,7 @@ export default function ContactUs() {
     title: "",
     fullname: "",
     content:"",
+    type:""
   });
   const [showToast, setShowToast] = useState(false);
   const [errors, setErrors] = useState({});
@@ -171,8 +173,7 @@ export default function ContactUs() {
           right: 20,
         }}
       >
-        <Toast.Header>
-        </Toast.Header>
+        <Toast.Header></Toast.Header>
         <Toast.Body>表單傳送成功！</Toast.Body>
       </Toast>
 
@@ -290,9 +291,7 @@ export default function ContactUs() {
           ></input>
         </div>
         <div className="button-group">
-          <button type="submit" className="btn cancel-btn info-site-btn">
-            取消
-          </button>
+          <Link href="/" className="btn cancel-btn info-site-btn">取消</Link>
           <button type="submit" className="btn info-site-btn">
             確認傳送
           </button>
