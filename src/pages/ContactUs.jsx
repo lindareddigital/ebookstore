@@ -18,9 +18,11 @@ export default function ContactUs() {
     email: "",
     title: "",
     fullname: "",
+    nickname:"",
     content:"",
     type:""
   });
+  const [isDisabled, setIsDisabled] = useState(true);
   const [showToast, setShowToast] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -125,10 +127,10 @@ export default function ContactUs() {
       [name]: value,
     }));
 
-    const errors = validateForm(formData);
-    if (Object.keys(errors).length > 0) {
+    const errors = validateForm({ ...formData, [name]: value });
       setErrors(errors);
-    }
+      setIsDisabled(Object.keys(errors).length > 0);
+
   };
 
   const validateForm = (data) => {
@@ -146,6 +148,9 @@ export default function ContactUs() {
     }
     if (!data.content) {
       errors.content = "內容不能為空";
+    }
+    if(!errors){
+      setIsDisabled(false); 
     }
     return errors;
   };
@@ -205,6 +210,8 @@ export default function ContactUs() {
             type="text"
             className="form-control"
             id="nickname"
+            value={formData.nickname}
+            onChange={handleChange}
           ></input>
         </div>
         <div className="">
@@ -269,7 +276,7 @@ export default function ContactUs() {
             name="content"
             className="form-control form-comments"
             id="content"
-            value={formData.content}
+            defaultValue={formData.content}
             onChange={handleChange}
           ></textarea>
         </div>
@@ -291,8 +298,14 @@ export default function ContactUs() {
           ></input>
         </div>
         <div className="button-group">
-          <Link href="/" className="btn cancel-btn info-site-btn">取消</Link>
-          <button type="submit" className="btn info-site-btn">
+          <Link href="/" className="btn cancel-btn info-site-btn">
+            取消
+          </Link>
+          <button
+            disabled={isDisabled}
+            type="submit"
+            className="btn info-site-btn"
+          >
             確認傳送
           </button>
         </div>

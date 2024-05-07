@@ -9,26 +9,18 @@ import Link from "next/link";
 import Toast from "react-bootstrap/Toast";
 
 
-function Signup() {
-  // const {session, loading} = useSession();
+function Forgetpassword() {
 
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
-    fullname: "",
-    nickname:"",
-    password:""
+    password: "",
+    ensurepassword:""
   });
   const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState("");
-
-
-  // const params = useMemo(
-  //   () => ({ id, accessToken: session?.accessToken }),
-  //   [id]
-  // );
 
   const signup = async (event) => {
     event.preventDefault();
@@ -42,17 +34,17 @@ function Signup() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-      setShowToast(true);
+    setShowToast(true);
 
     if (response.ok) {
       const data = await response.json();
       console.log("token", data);
-      setToastContent("帳號註冊成功！");
+      setToastContent("更改密碼成功！");
       router.push("/member");
 
       // localStorage.setItem("token", data.data.access_token);
     } else {
-      setToastContent("帳號註冊失敗！");
+      setToastContent("更改失敗！");
     }
   };
 
@@ -75,16 +67,12 @@ function Signup() {
     } else if (!isValidEmail(data.email)) {
       errors.email = "請輸入有效的郵件地址";
     }
-    if (!data.fullname) {
-      errors.fullname = "姓名不能為空";
-    }
     if (!data.password) {
       errors.password = "密碼不能為空";
     }
 
-    console.log('error',errors);
-    
-   
+    console.log("error", errors);
+
     if (!errors) {
       setIsDisabled(false);
     }
@@ -95,22 +83,21 @@ function Signup() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-   useEffect(() => {
-     if (localStorage.getItem("email") != null) {
-       router.push("/member");
-     }
-   }, []);
-
+  useEffect(() => {
+    if (localStorage.getItem("email") != null) {
+      router.push("/member");
+    }
+  }, []);
 
   return (
     <>
       <div className="contactus-page">
         <Head>
-          <title>註冊</title>
+          <title>忘記密碼</title>
         </Head>
         <Navbar />
         <MenuBar />
-        <Breadcrumb data={"註冊"} />
+        <Breadcrumb data={"忘記密碼"} />
         <Toast
           onClose={() => setShowToast(false)}
           show={showToast}
@@ -126,35 +113,8 @@ function Signup() {
           <Toast.Body>{toastContent}</Toast.Body>
         </Toast>
         <form onSubmit={signup} className="form-area contact-us">
-          <div className="block-title">註冊</div>
+          <div className="block-title">忘記密碼</div>
           <div className="red-word">*必須填寫</div>
-          <div className="">
-            <label htmlFor="fullname" className="form-label">
-              姓名<span className="red-word">*</span>
-            </label>
-            <input
-              type="fullname"
-              className="form-control"
-              id="fullname"
-              name="fullname"
-              aria-describedby="fullname"
-              value={formData.fullname}
-              onChange={handleChange}
-            ></input>
-          </div>
-          <div className="">
-            <label htmlFor="nickname" className="form-label">
-              暱稱
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="nickname"
-              name="nickname"
-              value={formData.nickname}
-              onChange={handleChange}
-            ></input>
-          </div>
           <div className="">
             <label htmlFor="email" className="form-label">
               電郵 <span className="red-word">*</span>
@@ -171,7 +131,7 @@ function Signup() {
           </div>
           <div className="">
             <label htmlFor="current-password" className="form-label">
-              密碼 <span className="red-word">*</span>
+              新密碼 <span className="red-word">*</span>
             </label>
             <input
               type="password"
@@ -180,6 +140,20 @@ function Signup() {
               name="password"
               aria-describedby="current-password"
               value={formData.password}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="">
+            <label htmlFor="current-password" className="form-label">
+              確認新密碼 <span className="red-word">*</span>
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="ensurepassword"
+              name="ensurepassword"
+              aria-describedby="ensurepassword"
+              value={formData.ensurepassword}
               onChange={handleChange}
             ></input>
           </div>
@@ -202,4 +176,5 @@ function Signup() {
   );
 }
 
-export default Signup;
+
+export default Forgetpassword;

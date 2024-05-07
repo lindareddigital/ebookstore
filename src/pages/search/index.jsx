@@ -212,17 +212,6 @@ export default function Search({}) {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                <div className="select-bar">
-                  <label className="">篩選類別</label>
-                  <select
-                    className="form-select"
-                    id="floatingSelect"
-                    onChange={(event) => handleClick(event.target.value)}
-                  >
-                    <option value={"columns"}>專欄</option>
-                    <option value={"books"}>書籍</option>
-                  </select>
-                </div>
 
                 {posts?.map((item) => {
                   return (

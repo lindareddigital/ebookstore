@@ -43,6 +43,8 @@ export default function Navbar({}) {
 
    const handleKeyDown = (e) => {
       if (e.key === "Enter") {
+      e.preventDefault();
+
       console.log("Enter 键被按下");
       const inputValue = inputRef.current.value;
       search(inputValue);
@@ -200,9 +202,6 @@ export default function Navbar({}) {
 
               {navMenu &&
                 navMenu.map((item) => {
-                  {
-                    /* {console.log("MenuBar", item); } */
-                  }
                   return (
                     <div className="nav-item" key={item.site_menu_items_id.id}>
                       <div
@@ -291,15 +290,8 @@ export default function Navbar({}) {
             </form>
             <div className="keyword-block">
               <div className="pill">HOT</div>
-              {/* <Link href="">X星際探險隊</Link>
-              <Link href="">成語-民間故事</Link>
-              <Link href="">X極限挑戰王</Link> */}
-
               {keyword &&
                 keyword.map((item) => {
-                  {
-                    /* {console.log("MenuBar", item); } */
-                  }
                   return (
                     <div
                       onClick={() => search(item.keyword)}
@@ -320,7 +312,7 @@ export default function Navbar({}) {
                 購物車
               </button> */}
               <hr className="nav-hr" />
-              {email === null ? (
+              {email === null && email != "" ? (
                 <Link
                   href={{ pathname: `/login` }}
                   type="button"
