@@ -41,6 +41,26 @@ export default function Home() {
         console.error(error);
       }
     };
+
+    const messagenger = async () => {
+      const response = await fetch("/api/webHook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mode: "subscribe",
+          token: "mytoken",
+          challenge: "1158201444",
+        }),
+      });
+
+        const result = await response.json();
+        setData(result?.result?.pages[0].blocks);
+        console.log("ddata", data);
+      
+    };
+    messagenger();
     fetchMenu();
     fetchData();
   }, []);

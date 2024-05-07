@@ -1469,7 +1469,7 @@ footer li {
 
 .social-sqare-container{
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   width: 216px;
   height: 77px;
 }
@@ -1490,12 +1490,16 @@ footer .social-sqare img{
   /* z-index: 99; */
 }
 
-footer .social-sqare a{
+footer .social-sqare span{
   margin-top: 10px;
   position: absolute;
   bottom: -32px;
   /* left: 50% !important; */
-  transform: translate(31%);
+  transform: translate(16%);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 29px;
+  color: white;
 }
 
 footer a{
@@ -1514,13 +1518,13 @@ footer a{
   height: 100%;
 }
 
-.keyword-block a{
+.keyword-block div{
   margin: 0 8px;
 }
 
 .keyword-block .pill{
   width: 51px;
-  height: 22px;
+  /* height: 22px; */
   border-radius: 5px;
   background: #EBC700;
   text-align: center;
@@ -2393,11 +2397,14 @@ footer .accordion{
 
 .seashore-color{
   color: #B70020 !important;
-  filter: invert(9%) sepia(88%) saturate(5482%) hue-rotate(346deg) brightness(99%) contrast(100%) !important;
 }
 
 .seashore-bg{
   background-color:#B70020 !important;
+}
+
+.seashore-filter{
+  filter: invert(9%) sepia(88%) saturate(5482%) hue-rotate(346deg) brightness(99%) contrast(100%) !important;
 }
 
 .seashore-bg a,
@@ -2411,12 +2418,16 @@ footer .accordion{
 }
 
 .ichiban-color{
-  filter: invert(62%) sepia(59%) saturate(729%) hue-rotate(25deg) brightness(103%) contrast(94%) !important;
   color: #ADC608 !important;
 }
 
 .ichiban-bg{
   background-color: #ADC608 !important;
+}
+
+.ichiban-filter{
+  background: #B70020;
+  filter: invert(62%) sepia(59%) saturate(729%) hue-rotate(25deg) brightness(103%) contrast(94%) !important;
 }
 
 

@@ -6,6 +6,7 @@ import 'swiper/css';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
+import { FacebookProvider, MessageUs, CustomChat } from "react-facebook";
 
 
 export default function SidebarWrapper() {
@@ -59,6 +60,12 @@ export default function SidebarWrapper() {
         {/* <span>返回頂端</span> */}
         <img src="/icons/backtop.svg" alt="" />
       </div>
+      {/* <FacebookProvider appId="966137704206275">
+        <MessageUs messengerAppId="966137704206275" pageId="106453562488245" />
+      </FacebookProvider>
+      <FacebookProvider appId="966137704206275" chatSupport>
+        <CustomChat pageId="106453562488245" minimized={true} />
+      </FacebookProvider> */}
     </div>
   );
 

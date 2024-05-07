@@ -227,9 +227,11 @@ export default function Singlepage() {
               onClick={() => {
                 updatePage(i);
               }}
-              className={`${getPageColor(publisher)} page-item ${i == page ? "active" : ""}`}
+              className={` page-item ${i == page ? "active" : ""}`}
             >
-              <div class="page-link">
+              <div
+                class={`${i == page ? getPageBg(publisher) : ""} page-link`}
+              >
                 {i}
                 <span class="visually-hidden">(current)</span>
               </div>

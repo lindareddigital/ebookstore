@@ -2,7 +2,7 @@ import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import { extractYouTubeId } from "src/utilities/tool.js";
-import { getPageColor } from "src/utilities/tool.js";
+import { getPageFilter, getPageColor } from "src/utilities/tool.js";
 import { useRouter } from "next/router";
 
 export default function MediaBlock({ video }) {
@@ -66,7 +66,7 @@ export default function MediaBlock({ video }) {
                 className="ytIcon"
               >
                 <img
-                  className={`${getPageColor(publisher)}`}
+                  className={`${getPageFilter(publisher)}`}
                   src="/icons/youtubeIcon.svg"
                   alt=""
                 />

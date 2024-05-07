@@ -404,6 +404,21 @@ class ApiManager {
     return await this.useUserToken(gql, token);
   };
 
+  getSearchKeyWord = async () => {
+
+    const gql = `
+      query {
+        search_keyword(
+          filter: {}
+        ) { 
+          keyword
+           
+        }
+    }
+    `;
+    return await this.sdk(gql);
+  };
+
   getNaviMenu = async () => {
     const gql = `
       query {

@@ -172,38 +172,36 @@ export default function Footer() {
           <div className="box">
             <li className="title">社群</li>
             <div className="social-sqare-container">
-              <li className="social-sqare">
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/polispresstw"
+                className="social-sqare"
+              >
                 <img src="/icons/footerfb.svg"></img>
-                <Link
-                  target="_blank"
-                  href="https://www.facebook.com/polispresstw"
-                >
-                  大邑
-                </Link>
-              </li>
-              <li className="social-sqare">
+                <span>大邑</span>
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/seashoretaiwan/"
+                className="social-sqare"
+              >
                 <img src="/icons/footerfb.svg"></img>
-                <Link
-                  target="_blank"
-                  href="https://www.facebook.com/seashoretaiwan/"
-                >
-                  海濱
-                </Link>
-              </li>
-              <li className="social-sqare">
+                  <span>海濱</span>
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/seashoretaiwan/"
+                className="social-sqare"
+              >
                 <img src="/icons/footerig.svg"></img>
-                <Link
-                  target="_blank"
-                  href="https://www.facebook.com/seashoretaiwan/"
-                ></Link>
-              </li>
-              <li className="social-sqare">
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/seashoretaiwan/"
+                className="social-sqare"
+              >
                 <img src="/icons/footeryt.svg"></img>
-                <Link
-                  target="_blank"
-                  href="https://www.facebook.com/seashoretaiwan/"
-                ></Link>
-              </li>
+              </Link>
             </div>
           </div>
           <div className="social-mobile">

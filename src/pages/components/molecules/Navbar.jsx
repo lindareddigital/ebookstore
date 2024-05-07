@@ -12,8 +12,8 @@ export default function Navbar({}) {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [searchKeywords, setSearchKeywords] = useState("");
-
-  const [info, setInfo] = useState(null);
+  const [keyword, setKeyword] = useState(null);
+  const inputRef = useRef(null);
 
 
   const toggleOpen = () => {
@@ -42,10 +42,12 @@ export default function Navbar({}) {
   };
 
    const handleKeyDown = (e) => {
-    //  if (e.key === "Enter") {
-    //    console.log("Enter 键被按下");
-    //    search(searchKeywords);
-    //  }
+      if (e.key === "Enter") {
+      console.log("Enter 键被按下");
+      const inputValue = inputRef.current.value;
+      search(inputValue);
+      }
+     
    };
 
   const search = async (input) => {
@@ -63,10 +65,13 @@ export default function Navbar({}) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`/api/sitemenu/navimenu`);
-      const navMenu = await response.json();
-      setNavMenu(navMenu.result.site_menu[0].menu_items);
+      const result = await response.json();
+      console.log("keyword", result.keyword.search_keyword);
+      setKeyword(result.keyword.search_keyword);
+      setNavMenu(result.result.site_menu[0].menu_items);
     };
     fetchData();
+
 
     setEmail(localStorage.getItem("email"));
     console.log("email", email, localStorage.getItem("email"));
@@ -162,6 +167,7 @@ export default function Navbar({}) {
 
           <form className="input-group">
             <input
+              ref={inputRef}
               onKeyDown={(e) => {
                 setSearchKeywords(e.target.value);
                 handleKeyDown(e);
@@ -264,6 +270,7 @@ export default function Navbar({}) {
                 </ul>
               </div>
               <input
+                ref={inputRef}
                 onKeyDown={(e) => {
                   setSearchKeywords(e.target.value);
                   handleKeyDown(e);
@@ -284,10 +291,25 @@ export default function Navbar({}) {
             </form>
             <div className="keyword-block">
               <div className="pill">HOT</div>
-              <Link href="">X星際探險隊</Link>
+              {/* <Link href="">X星際探險隊</Link>
               <Link href="">成語-民間故事</Link>
-              <Link href="">X極限挑戰王</Link>
-              <Link href=""></Link>
+              <Link href="">X極限挑戰王</Link> */}
+
+              {keyword &&
+                keyword.map((item) => {
+                  {
+                    /* {console.log("MenuBar", item); } */
+                  }
+                  return (
+                    <div
+                      onClick={() => search(item.keyword)}
+                      className=""
+                      key={item.id}
+                    >
+                      {item.keyword}
+                    </div>
+                  );
+                })}
             </div>
           </div>
 
