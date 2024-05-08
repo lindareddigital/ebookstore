@@ -13,7 +13,7 @@ import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 export default function HomeTab({books}) {
   // console.log('',books);
   const swiperRef = useRef(null);
-  const { next, previous } = useSwiperFunc(swiperRef);
+  // const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   const getSwiper = (swiper) => {
@@ -26,6 +26,14 @@ export default function HomeTab({books}) {
     if (swiper.realIndex !== swiperIndex) {
       setSwiperIndex(swiper.realIndex);
     }
+  };
+
+  const next = () => {
+    swiperRef.current.slideNext();
+  };
+
+  const previous = () => {
+    swiperRef.current.slidePrev();
   };
 
   if (!books) {
@@ -42,8 +50,8 @@ export default function HomeTab({books}) {
         >
           <Nav variant="tabs">
             <div className="block-title">
-            <div className="dot"></div>
-            新書上市
+              <div className="dot"></div>
+              新書上市
             </div>
 
             {/* {blocks.map((item) => (
@@ -90,7 +98,7 @@ export default function HomeTab({books}) {
             <Swiper
               onSwiper={getSwiper}
               ref={swiperRef}
-              loop={true}
+              rewind={true}
               className={`booklist-carousel`}
               slidesPerView={5}
               onSnapIndexChange={onRealIndexChange}
@@ -112,7 +120,7 @@ export default function HomeTab({books}) {
                     >
                       <Link
                         key={`${item?.image?.id}`}
-                        href={{ pathname: `/detail/${item?.id}` }}
+                        href={{ pathname: `/detail/${item?.image?.id}` }}
                         className={``}
                       >
                         <div className="book-item">

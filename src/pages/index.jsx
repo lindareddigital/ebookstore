@@ -145,7 +145,7 @@ export default function Home() {
               return (
                 <>
                   <Link
-                    href={`/posts/news/${item.id}`}
+                    href={`/posts/news/${item?.id}`}
                     className="e-banner-product"
                     key={`${item?.id}`}
                   >

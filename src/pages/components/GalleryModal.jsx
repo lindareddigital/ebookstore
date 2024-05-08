@@ -73,7 +73,7 @@ export default function GalleryModal({ item,show, onHide }) {
             }
           }}
           preloadImages={false}
-          loop={true}
+          rewind={true}
           // controller={{ control: secondSwiper }}
           onActiveIndexChange={onActiveIndexChange}
           spaceBetween={10}

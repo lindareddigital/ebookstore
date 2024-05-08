@@ -40,12 +40,12 @@ export default function Desc({ item }) {
             </button>
             <button
               className="nav-link"
-              id="nav-contact-tab"
+              id="nav-list-tab"
               data-bs-toggle="tab"
-              data-bs-target="#nav-contact"
+              data-bs-target="#nav-list"
               type="button"
               role="tab"
-              aria-controls="nav-contact"
+              aria-controls="nav-list"
               aria-selected="false"
             >
               目錄
@@ -78,7 +78,7 @@ export default function Desc({ item }) {
         </nav>
         <div className="detail-area" id="nav-tabContent">
           <div
-            className="tab-pane fade show active"
+            className="tab-pane show active"
             id="nav-description"
             role="tabpanel"
             aria-labelledby="nav-description-tab"
@@ -86,27 +86,40 @@ export default function Desc({ item }) {
             <InnerHTML text={item.description} className="" />
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane"
             id="nav-Author"
             role="tabpanel"
             aria-labelledby="nav-Author-tab"
           >
             {item.Author}
-            <InnerHTML text={item.description} className="" />
-
-            {/* <InnerHTML text={item.Author} className="" /> */}
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane"
+            id="nav-list"
+            role="tabpanel"
+            aria-labelledby="nav-list-tab"
+          >
+            <InnerHTML text={item.table_of_contents} className="" />
+          </div>
+          <div
+            className="tab-pane"
             id="nav-format"
             role="tabpanel"
             aria-labelledby="nav-format-tab"
           >
-            {item.format}
-            {/* <InnerHTML text={item.format} className="" /> */}
+            規格:{item.format}
+            <br />
+            書號:{item.book_number}
+            <br />
+            語言:{item.Language}
+            <br />
+            ISBN:{item.isbn}
+            <br />
+            規格:{item.binding_layout}
+            <br />
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane"
             id="nav-more"
             role="tabpanel"
             aria-labelledby="nav-more-tab"

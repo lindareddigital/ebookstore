@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useCalc from 'src/pages/components/atoms/useCalc';
-import Desc from "../detail/Desc";
+import Desc from "../../detail/Desc";
 import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Head from 'next/head';
 import GalleryModal from "src/pages/components/GalleryModal";
@@ -18,7 +18,7 @@ export default function Detail({}) {
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  console.log("posts id", id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +33,9 @@ export default function Detail({}) {
 
           const data = await response.json();
 
+          // console.log('5566',data?.data?.posts);
+          
+
           const item = data?.data?.posts?.find((item) => {
             return item.id === id;
           });
@@ -46,7 +49,7 @@ export default function Detail({}) {
     fetchData();
   }, [router]);
 
-  console.log("column data", item);
+  console.log("post data", item);
 
   return (
     <div>

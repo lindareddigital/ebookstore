@@ -248,7 +248,7 @@ export default function Share({}) {
                         </Link>
                         <div className="post-info">
                           <h4 className="post-title">
-                            <Link href={`/column/${item.id}`} className="">
+                            <Link href={`/columns/${item.id}`} className="">
                               {item?.title}
                             </Link>
                           </h4>

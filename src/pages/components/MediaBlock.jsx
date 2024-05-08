@@ -72,7 +72,11 @@ export default function MediaBlock({ posts,video }) {
             {posts?.map((item) => {
               return (
                 <>
-                  <div key={`${item?.id}`} className="e-banner-product">
+                  <Link
+                    href={`/columns/${item?.id}`}
+                    key={`${item?.id}`}
+                    className="e-banner-product"
+                  >
                     <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                       alt=""
@@ -80,7 +84,7 @@ export default function MediaBlock({ posts,video }) {
 
                     <div className="desc">{item.title}</div>
                     {/* <div className="desc">{item.posts_id.tags}</div> */}
-                  </div>
+                  </Link>
                 </>
               );
             })}

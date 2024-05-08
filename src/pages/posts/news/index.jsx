@@ -167,7 +167,7 @@ export default function Posts() {
                       <>
                         <div className="share-list-item overflow-hidden">
                           <Link
-                            href={`/columns/${item.id}`}
+                            href={`/posts/news/${item.id}`}
                             className="post-thumb"
                           >
                             <img
@@ -178,7 +178,7 @@ export default function Posts() {
                           </Link>
                           <div className="post-info">
                             <h4 className="post-title">
-                              <Link href={`/columns/${item.id}`} className="">
+                              <Link href={`/posts/news/${item.id}`} className="">
                                 {item?.title}
                               </Link>
                             </h4>
@@ -214,7 +214,10 @@ export default function Posts() {
                     return (
                       <>
                         <div className="share-list-item overflow-hidden">
-                          <Link href="/" className="post-thumb">
+                          <Link
+                            href={`/posts/news/${item.id}`}
+                            className="post-thumb"
+                          >
                             <img
                               className="q-img__image"
                               src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -223,7 +226,10 @@ export default function Posts() {
                           </Link>
                           <div className="post-info">
                             <h4 className="post-title">
-                              <Link href="/" className="">
+                              <Link
+                                href={`/posts/news/${item.id}`}
+                                className=""
+                              >
                                 {item?.title}
                               </Link>
                             </h4>

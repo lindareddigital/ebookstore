@@ -900,7 +900,8 @@ span{
 
 .home-recommend-tabs .swiper-button-prev{
   position: absolute;
-  right: 20px;
+  /* right: 20px; */
+  left: -80px;
 }
 
 .pannel-container {
@@ -1091,7 +1092,7 @@ span{
 .yt-block{
   display: flex;
   flex-direction: column;
-  max-width: 871px;
+  /* max-width: 871px; */
   width: 70%;
 }
 
@@ -1238,7 +1239,7 @@ span{
 }
 
 .detail-area{
-  margin: 80px 0;
+  /* margin: 80px 0; */
 }
 
 .gray-cover{
@@ -1336,7 +1337,7 @@ span{
 
 .share-block{
   max-width: 424px;
-  width: 424px;
+  width: 29%;
   padding: 60px 16px 16px 16px;
   background: var(--Yellow, #EBC700);
   display: flex;
@@ -1927,6 +1928,14 @@ footer .container-fluid{
   font-weight: 400;
 }
 
+.detail-page .tab-pane{
+  display: none;
+}
+
+.detail-page .tab-pane.active{
+  display: block;
+}
+
 .carousel-control-next, .carousel-control-prev{
   height: 50px !important;
   top: 50% !important;
@@ -2147,6 +2156,7 @@ footer .container-fluid{
   font-weight: 400;
   line-height: 33px;
   margin: auto;
+  cursor: pointer;
 }
 
 .posts-category:hover{
@@ -2183,6 +2193,7 @@ footer .container-fluid{
   font-weight: 400;
   line-height: 20px;
   color: #28251C;
+  width: 100px;
 }
 
 .form-area{
@@ -2532,7 +2543,6 @@ footer .accordion{
 @media (max-width: 992px){
 
 .home-recommend-tabs .swiper-button-prev{
-  left: auto;
 }
 
 .single-page .home-recommend-tabs{

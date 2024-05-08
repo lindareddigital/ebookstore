@@ -173,6 +173,7 @@ class ApiManager {
                     }
                   }
                   cards {
+                      id
                       title
                       description
                       image {
@@ -405,7 +406,6 @@ class ApiManager {
   };
 
   getSearchKeyWord = async () => {
-
     const gql = `
       query {
         search_keyword(
@@ -528,8 +528,8 @@ class ApiManager {
             title
             Author
             Publisher {
-            id
-            slug
+              id
+              slug
             }
             illustrator
             keyword
@@ -578,6 +578,38 @@ class ApiManager {
     const gql = `
       query {
         posts
+        {
+          id
+          title
+          tags
+          content
+          category{
+            id
+            name
+            slug
+          }
+          key_image{
+            id
+          }  
+        }
+      }
+    `;
+
+    console.log("getAllPosts", gql);
+
+    return await this.sdk(gql);
+  };
+
+  getPostByID = async (id) => {
+    const gql = `
+      query {
+        posts
+        (filter: {
+          id:{
+            _eq: ${id}
+          } 
+        
+      })
         {
           id
           title
