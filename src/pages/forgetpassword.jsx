@@ -16,11 +16,12 @@ function Forgetpassword() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    ensurepassword:""
+    confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [toastContent, setToastContent] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const signup = async (event) => {
     event.preventDefault();
@@ -58,6 +59,10 @@ function Forgetpassword() {
     const errors = validateForm({ ...formData, [name]: value });
     setErrors(errors);
     setIsDisabled(Object.keys(errors).length > 0);
+
+    if (name === "confirmPassword") {
+      setPasswordMatch(formData.password === value);
+    }
   };
 
   const validateForm = (data) => {
@@ -69,6 +74,9 @@ function Forgetpassword() {
     }
     if (!data.password) {
       errors.password = "密碼不能為空";
+    }
+    if (!data.confirmPassword) {
+      errors.confirmPassword = "密碼不能為空";
     }
 
     console.log("error", errors);
@@ -129,6 +137,8 @@ function Forgetpassword() {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.email && <div className="red-word">{errors.email}</div>}
+
           <div className="">
             <label htmlFor="current-password" className="form-label">
               新密碼 <span className="red-word">*</span>
@@ -143,6 +153,8 @@ function Forgetpassword() {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.password && <div className="red-word">{errors.password}</div>}
+
           <div className="">
             <label htmlFor="current-password" className="form-label">
               確認新密碼 <span className="red-word">*</span>
@@ -150,13 +162,17 @@ function Forgetpassword() {
             <input
               type="password"
               className="form-control"
-              id="ensurepassword"
-              name="ensurepassword"
-              aria-describedby="ensurepassword"
-              value={formData.ensurepassword}
+              id="confirmPassword"
+              name="confirmPassword"
+              aria-describedby="confirmPassword"
+              value={formData.confirmPassword}
               onChange={handleChange}
             ></input>
           </div>
+          {errors.confirmPassword && (
+            <div className="red-word">{errors.confirmPassword}</div>
+          )}
+          {!passwordMatch && <div className="red-word">確認密碼錯誤</div>}
 
           <div className="button-group">
             <Link href="/" className="btn cancel-btn info-site-btn">

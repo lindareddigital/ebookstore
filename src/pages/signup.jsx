@@ -142,6 +142,8 @@ function Signup() {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.fullname && <div className="red-word">{errors.fullname}</div>}
+
           <div className="">
             <label htmlFor="nickname" className="form-label">
               暱稱
@@ -169,6 +171,8 @@ function Signup() {
               onChange={handleChange}
             ></input>
           </div>
+          {errors.email && <div className="red-word">{errors.email}</div>}
+
           <div className="">
             <label htmlFor="current-password" className="form-label">
               密碼 <span className="red-word">*</span>
@@ -183,7 +187,7 @@ function Signup() {
               onChange={handleChange}
             ></input>
           </div>
-
+          {errors.password && <div className="red-word">{errors.password}</div>}
           <div className="button-group">
             <Link href="/" className="btn cancel-btn info-site-btn">
               取消
