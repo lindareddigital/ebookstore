@@ -8,6 +8,7 @@ import 'swiper/css';
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
 
 
 export default function Home() {
@@ -16,8 +17,15 @@ export default function Home() {
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
   const [homeTab, setHomeTab] = useState(null); // Define homeTab here
+  const router = useRouter();
+  // const isFirstRendering = useRef(true);
+
 
   useEffect(() => {
+    // if (isFirstRendering.current) {
+    //   isFirstRendering.current = false;
+    //   return;
+    // }
     const fetchData = async () => {
       try {
         const response = await fetch("/api/page/home");
@@ -57,17 +65,25 @@ export default function Home() {
       // console.log("ddata", data);
     };
 
+    console.log("61", data);
 
-    console.log('61',data);
-    
     const homeTab = data?.find((item) => {
       return item.collection === "block_product_query";
     });
 
     console.log(homeTab);
-    
 
     const categoryIds = homeTab?.item?.category?.map((item) => item.id);
+
+    const executeOperations = async () => {
+      await fetchData();
+
+      const categoryIds = homeTab?.item?.category?.map((item) => item.id);
+
+      if (categoryIds) {
+        await getProductsByCategory(categoryIds);
+      }
+    };
 
     const getProductsByCategory = async (categoryIds) => {
       console.log(
@@ -91,6 +107,9 @@ export default function Home() {
           }),
         });
         const books = await response.json();
+
+        // console.log(books?.result?.product);
+
         setBooks(books?.result?.product);
       } catch (error) {
         console.error(error);
@@ -107,9 +126,10 @@ export default function Home() {
 
     messagenger();
     fetchMenu();
-    fetchData();
-    getProductsByCategory(categoryIds);
-  }, []);
+    // fetchData();
+    executeOperations();
+    // getProductsByCategory(categoryIds);
+  }, [books]);
 
   const blocks = data;
 
@@ -301,7 +321,7 @@ export default function Home() {
         </div>
       </div>
       <div className="main-body">
-        {homeTab && <HomeTab books={books} />}
+        {books && <HomeTab books={books} />}
         {/* <HomeTabTwo /> */}
       </div>
       <MediaBlock posts={column?.item?.posts} video={video} />
