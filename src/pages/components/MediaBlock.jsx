@@ -1,16 +1,15 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
-import useCalc from 'src/pages/components/atoms/useCalc';
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 import {extractYouTubeId} from "src/utilities/tool.js";
+import { v4 as uuidv4 } from "uuid";
 
 
 
 export default function MediaBlock({ posts,video }) {
 
-  console.log("video", video?.item?.cards);
+  // console.log("video", video?.item?.cards);
   const ytVideo = video?.item?.cards;
   const item = video?.item;
 
@@ -69,12 +68,12 @@ export default function MediaBlock({ posts,video }) {
             </div>
             <img className="topright" src="/icons/columnIcon.svg"></img>
 
-            {posts?.map((item) => {
+            {posts?.map((item,index) => {
               return (
                 <>
                   <Link
                     href={`/columns/${item?.id}`}
-                    key={`${item?.id}`}
+                    key={uuidv4()}
                     className="e-banner-product"
                   >
                     <img

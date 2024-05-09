@@ -291,12 +291,12 @@ export default function Navbar({}) {
             <div className="keyword-block">
               <div className="pill">HOT</div>
               {keyword &&
-                keyword.map((item) => {
+                keyword.map((item,index) => {
                   return (
                     <div
                       onClick={() => search(item.keyword)}
                       className=""
-                      key={item.id}
+                      key={index}
                     >
                       {item.keyword}
                     </div>

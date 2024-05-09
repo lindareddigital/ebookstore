@@ -14,6 +14,7 @@ import Pagination from "react-bootstrap/Pagination";
 import { useGlobalStore } from "src/pages/store/global.store";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
@@ -63,7 +64,7 @@ export default function Listing() {
       matchedMenuItem?.type === "product_by_series" &&
       matchedMenuItem?.query_tags != null
     ) {
-      console.log("matchedMenuItem.query_tags", matchedMenuItem);
+      // console.log("matchedMenuItem.query_tags", matchedMenuItem);
       setMyObject((prev) => ({
         ...prev,
         title: matchedMenuItem.title,
@@ -89,7 +90,7 @@ export default function Listing() {
   };
 
   useEffect(() => {
-    console.log("myObject", myObject);
+    // console.log("myObject", myObject);
     // if (isFirstRendering.current) {
     //   isFirstRendering.current = false;
     //   return;
@@ -151,7 +152,7 @@ export default function Listing() {
 
   //預設首頁資料
   const filterByPublisher = async () => {
-    console.log("filterByPublisher");
+    // console.log("filterByPublisher");
     
     const response = await fetch(`/api/product/publisher/polis-press`, {
       method: "POST",
@@ -167,7 +168,7 @@ export default function Listing() {
     });
     const books = await response.json();
     const length = books?.result?.product_aggregated?.[0].countDistinct?.id;
-    console.log("146books", books?.result?.product);
+    // console.log("books", books?.result?.product);
 
     setLength(length);
     setBooks(books?.result?.product);
@@ -227,7 +228,7 @@ export default function Listing() {
     if (!channel?.[0] && !channel?.[1]) {
       filterByPublisher();
     }
-    console.log("filterBooks");
+    // console.log("filterBooks");
     const categoryArr = arr?.map((item) => item?.category_id?.id);
     const check =
       arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
@@ -274,6 +275,7 @@ export default function Listing() {
                 updatePage(i);
               }}
               className={`page-item ${i == page ? "active" : ""}`}
+              key={uuidv4()}
             >
               <div class="page-link">
                 {i}
@@ -399,7 +401,7 @@ export default function Listing() {
 
                 {panelView == "filter" &&
                   siteMenu?.map((item) => {
-                    console.log(item)
+                    {/* console.log(item) */}
                     return (
                       <ul className="">
                         <div className="title">{item?.item?.title}</div>

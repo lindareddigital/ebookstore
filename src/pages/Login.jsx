@@ -76,6 +76,7 @@ function Login() {
             </label>
             <input
               type="password"
+              autocomplete="on"
               className="form-control"
               id="password"
               name="password"

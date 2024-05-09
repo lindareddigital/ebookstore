@@ -12,14 +12,14 @@ export const PrevIcon = ({ }) => {
       <path
         d="M20.2427 24.4928L11.7574 16.0075"
         stroke="#28251C"
-        stroke-width="3"
-        stroke-linecap="square"
+        strokeWidth="3"
+        strokeLinecap="square"
       />
       <path
         d="M20.2427 7.52209L15.2929 12.4718"
         stroke="#28251C"
-        stroke-width="3"
-        stroke-linecap="square"
+        strokeWidth="3"
+        strokeLinecap="square"
       />
     </svg>
   );

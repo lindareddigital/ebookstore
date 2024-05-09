@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import apiManager from 'src/pages/api/api';
 import { useEffect, useRef,useState } from 'react';
 import { useRouter } from "next/router";
 import { getPageColor } from "src/utilities/tool.js";
+import { v4 as uuidv4 } from "uuid";
 
 export default function GridList({ books }) {
   const [filteredData, setFilteredData] = useState(books);
@@ -14,13 +14,13 @@ export default function GridList({ books }) {
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
   const [firstRender, setFirstRender] = useState(true);
-  
+
 
   useEffect(() => {
-    if (firstRender) {
+    // if (firstRender) {
       setFilteredData(books);
-      // setFirstRender(false)
-    }
+    //   setFirstRender(false)
+    
   }, [books]);
 
   useEffect(() => {
@@ -84,12 +84,12 @@ export default function GridList({ books }) {
   }, [arr]);
 
   const handleChange = async (item) => {
-    console.log("click item.id", item.id);
+    // console.log("click item.id", item.id);
 
-    console.log("bookMark", bookMark);
+    // console.log("bookMark", bookMark);
 
     const selected = bookMark?.find((book) => book.product.id === item.id);
-    console.log("selected", selected);
+    // console.log("selected", selected);
 
     const token = localStorage.getItem("token");
 
@@ -125,11 +125,9 @@ export default function GridList({ books }) {
         }),
       });
       const data = await response.json();
-      console.log("add func", data);
+      // console.log("add func", data);
     }
-
   };
-
 
   return (
     <>
@@ -137,13 +135,13 @@ export default function GridList({ books }) {
         {/* <div className="title">{props.Title}</div>
         <hr></hr> */}
         <div className="grid-view">
-          {filteredData!= [] &&
+          {filteredData != [] &&
             filteredData?.map((item) => {
               {
                 /* console.log(arr?.includes(item?.id),item.id); */
               }
               return (
-                <div key={`${item.id}`} className={``}>
+                <div key={uuidv4()} className={``}>
                   <div className="book-item">
                     <button
                       onClick={() => {
@@ -156,7 +154,7 @@ export default function GridList({ books }) {
                       <img src="/icons/heart.svg" alt="" />
                     </button>
                     <Link
-                      key={`${item.id}`}
+                      key={uuidv4()}
                       href={{ pathname: `/detail/${item.id}` }}
                       className=""
                     >
@@ -167,7 +165,7 @@ export default function GridList({ books }) {
                       />
                     </Link>
                     <Link
-                      key={`${item.id}`}
+                      key={uuidv4()}
                       href={{ pathname: `/detail/${item.id}` }}
                       className="desc"
                     >

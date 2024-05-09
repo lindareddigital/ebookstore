@@ -1,4 +1,3 @@
-import apiManager from 'src/pages/api/api';
 import HomeTab from 'src/pages/components/HomeTab';
 import MediaBlock from 'src/pages/components/MediaBlock';
 import SidebarWrapper from 'src/pages/components/SidebarWrapper';
@@ -8,6 +7,7 @@ import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 
 export default function Home() {
@@ -24,9 +24,9 @@ export default function Home() {
 
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
-        console.log("ddata", data);
+        // console.log("data", data);
       } catch (error) {
-        console.error("获取数据时出错：", error);
+        console.error(error);
       }
     };
 
@@ -57,7 +57,7 @@ export default function Home() {
 
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
-        console.log("ddata", data);
+        // console.log("ddata", data);
       
     };
     messagenger();
@@ -71,9 +71,9 @@ export default function Home() {
     return item.collection === "block_cardgroup";
   });
 
-  console.log("posts", posts?.item?.posts);
+  // console.log("posts", posts?.item?.posts);
 
-  console.log("block", blocks);
+  // console.log("block", blocks);
 
   const heroBanner = blocks?.find((item) => {
     return item.collection === "block_hero_group";
@@ -87,7 +87,7 @@ export default function Home() {
     return item?.item?.group_type === "posts";
   });
 
-  console.log("media", media?.item?.posts);
+  // console.log("media", media?.item?.posts);
   
   const video = blocks?.find((item) => {
     return item?.id === "11";
@@ -141,13 +141,13 @@ export default function Home() {
             <div className="trangle"></div>
           </div>
           <div className="wrapper">
-            {posts?.item?.posts?.map((item) => {
+            {posts?.item?.posts?.map((item,index) => {
               return (
                 <>
                   <Link
                     href={`/posts/news/${item?.id}`}
                     className="e-banner-product"
-                    key={`${item?.id}`}
+                    key={uuidv4()}
                   >
                     {/* <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}

@@ -5,11 +5,11 @@ import { isInTimeRange } from "src/utilities/tool.js";
 
 
 export default function Popup({ promotion, onHide,show }) {
-  console.log(
-    "Popup",
-    promotion,
-    isInTimeRange(promotion?.item?.start_at, promotion?.item?.end_at)
-  );
+  // console.log(
+  //   "Popup",
+  //   promotion,
+  //   isInTimeRange(promotion?.item?.start_at, promotion?.item?.end_at)
+  // );
 
 
   return (

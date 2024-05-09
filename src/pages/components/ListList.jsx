@@ -15,72 +15,72 @@ export default function ListList({ books }) {
   // console.log(filteredData);
   
    useEffect(() => {
-     const userId = localStorage.getItem("id");
-     const token = localStorage.getItem("token");
-     setId(userId);
+    const userId = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
+    setId(userId);
 
-     const getUserBookMark = async () => {
-       const response = await fetch(`/api/bookmark/getUserBookMark`, {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           id: userId,
-           token: token,
-         }),
-       });
-       const books = await response.json();
-      //  console.log("user_bookmark", books?.result?.user_bookmark);
-       // console.log(token);
-       setBookMark(books?.result?.user_bookmark);
+    const getUserBookMark = async () => {
+      const response = await fetch(`/api/bookmark/getUserBookMark`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: userId,
+          token: token,
+        }),
+      });
+      const books = await response.json();
+    //  console.log("user_bookmark", books?.result?.user_bookmark);
+      // console.log(token);
+      setBookMark(books?.result?.user_bookmark);
 
-       const productIds = books?.result?.user_bookmark?.map(
-         (item) => item.product.id
-       );
+      const productIds = books?.result?.user_bookmark?.map(
+        (item) => item.product.id
+      );
 
-       setArr(productIds);
-       // console.log("arr", arr);
-     };
+      setArr(productIds);
+      // console.log("arr", arr);
+    };
 
-     getUserBookMark();
+    getUserBookMark();
 
-     const filterByPublisher = async () => {
-       if (!arr || arr.length === 0) {
-         return;
-       }
-       const response = await fetch(`/api/product/publisher/polis-press`, {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           publisher: "polis-press",
-         }),
-       });
+    const filterByPublisher = async () => {
+      if (!arr || arr.length === 0) {
+        return;
+      }
+      const response = await fetch(`/api/product/publisher/polis-press`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          publisher: "polis-press",
+        }),
+      });
 
-       const books = await response.json();
-       // console.log(books?.result?.product, "all books");
+      const books = await response.json();
+      // console.log(books?.result?.product, "all books");
 
-       if (router.pathname.includes("/member")) {
-         const filteredData = books?.result?.product?.filter((item) => {
-           return arr?.includes(item.id);
-         });
-         setFilteredData(filteredData);
-         // console.log(filteredData, "filteredData");
-       }
-     };
+      if (router.pathname.includes("/member")) {
+        const filteredData = books?.result?.product?.filter((item) => {
+          return arr?.includes(item.id);
+        });
+        setFilteredData(filteredData);
+        // console.log(filteredData, "filteredData");
+      }
+    };
 
-     filterByPublisher();
+    filterByPublisher();
    }, [arr]);
 
    const handleChange = async (item) => {
-     console.log("click item.id", item.id);
+    //  console.log("click item.id", item.id);
 
-     console.log("bookMark", bookMark);
+    //  console.log("bookMark", bookMark);
 
      const selected = bookMark?.find((book) => book.product.id === item.id);
-     console.log("selected", selected);
+    //  console.log("selected", selected);
 
      const token = localStorage.getItem("token");
 

@@ -1,15 +1,15 @@
 import { cache } from "react";
 import { useEffect, useRef, useState } from "react";
-import apiManager from "src/pages/api/api";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getPageColor } from "src/utilities/tool.js";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ListAside({ siteMenu }) {
   const router = useRouter();
   let publisher = router.query.slug?.[0];
   const handleClick = (channel, item, menuItem) => {
-    console.log(item, menuItem, "publisher", publisher);
+    // console.log(item, menuItem, "publisher", publisher);
 
       if (router.pathname.includes("books")) {
         publisher = "books";
@@ -36,7 +36,7 @@ export default function ListAside({ siteMenu }) {
               {item?.item?.title}
             </div>
             {item?.item?.menu_items?.map((menuItem) => (
-              <li key={menuItem?.site_menu_items_id?.id}>
+              <li key={uuidv4()}>
                 <div
                   onClick={() =>
                     handleClick(

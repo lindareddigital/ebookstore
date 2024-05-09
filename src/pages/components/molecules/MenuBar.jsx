@@ -15,9 +15,10 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    console.log(item.slug);
+    // console.log(item.slug);
+    const slug = item.slug ? item.slug : "";
     
-    router.push(`/books/${item.slug}`, undefined, {
+    router.push(`/books/${slug}`, undefined, {
       shallow: true,
     });
 
