@@ -1240,6 +1240,7 @@ span{
 
 .detail-area{
   /* margin: 80px 0; */
+  min-height: 500px;
 }
 
 .gray-cover{
@@ -2437,7 +2438,7 @@ footer .accordion{
 }
 
 .ichiban-filter{
-  background: #B70020;
+  /* color: #ADC608; */
   filter: invert(62%) sepia(59%) saturate(729%) hue-rotate(25deg) brightness(103%) contrast(94%) !important;
 }
 

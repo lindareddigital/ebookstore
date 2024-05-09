@@ -24,7 +24,7 @@ export default function Home() {
 
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
-        // console.log("data", data);
+        console.log("data", result);
       } catch (error) {
         console.error(error);
       }
@@ -71,9 +71,9 @@ export default function Home() {
     return item.collection === "block_cardgroup";
   });
 
-  // console.log("posts", posts?.item?.posts);
+  console.log("posts", posts?.item?.posts);
 
-  // console.log("block", blocks);
+  console.log("block", blocks);
 
   const heroBanner = blocks?.find((item) => {
     return item.collection === "block_hero_group";

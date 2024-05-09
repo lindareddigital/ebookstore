@@ -146,7 +146,7 @@ function Forgetpassword() {
             <input
               type="password"
               className="form-control"
-              autocomplete="on"
+              autoComplete="on"
               id="password"
               name="password"
               aria-describedby="current-password"
@@ -162,7 +162,7 @@ function Forgetpassword() {
             </label>
             <input
               type="password"
-              autocomplete="on"
+              autoComplete="on"
               className="form-control"
               id="confirmPassword"
               name="confirmPassword"

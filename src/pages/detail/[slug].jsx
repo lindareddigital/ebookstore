@@ -23,7 +23,7 @@ export default function Detail({}) {
   const router = useRouter();
   const id = router.query.slug;
 
-  // console.log("id", id);
+  console.log("id", id);
   const [filteredData, setFilteredData] = useState(books);
 
   const [userId, setId] = useState("");
@@ -37,19 +37,40 @@ export default function Detail({}) {
       try {
         const res = await fetch(`/api/product/${id}`);
         const result = await res.json();
-        // console.log("res", result);
-        const filterBooks = result?.relatedBooks?.filter((item) => {
-          return item.id != id;
+        console.log("res", result);
+        
+        setItem(result.data.product[0]);
+
+        const categoryIds = item.tags.map(
+          (category) => category.category_id.id
+        );
+
+        const response = await fetch(`/api/product/category`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sort_by: ["-date_created"],
+            publisher_slug: "polis-press",
+            category_id: categoryIds,
+            page: 1,
+            limit: 5,
+          }),
         });
-        setBooks(filterBooks);
-        setItem(result.data);
+        const books = await response.json();
+        setBooks(books.result.product);
+        // console.log("books", books.result.product);
+        
       } catch (error) {
         // console.error("", error);
       }
     };
 
+    
+
     fetchData();
-  }, [router]);
+  }, [id]);
 
 
     useEffect(() => {

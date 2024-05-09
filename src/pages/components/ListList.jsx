@@ -119,7 +119,7 @@ export default function ListList({ books }) {
        console.log("add func", data);
      }
 
-    //  window.location.reload();
+     window.location.reload();
    };
 
   

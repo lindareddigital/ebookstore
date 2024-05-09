@@ -72,7 +72,7 @@ export default function GalleryModal({ item,show, onHide }) {
               setFirstSwiper(swiper);
             }
           }}
-          preloadImages={false}
+          preloadimages={false}
           rewind={true}
           // controller={{ control: secondSwiper }}
           onActiveIndexChange={onActiveIndexChange}
@@ -117,7 +117,7 @@ export default function GalleryModal({ item,show, onHide }) {
           slidesPerView={5}
           // watchSlidesProgress
           // touchRatio={0.2}
-          preloadImages={false}
+          preloadimages={false}
           slideToClickedSlide={true}
           ref={subswiperRef}
           onSwiper={setThumbsSwiper}

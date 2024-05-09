@@ -22,15 +22,7 @@ export default function Detail({}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/posts/getPostById", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id:id
-          }),
-        });
+        const res = await fetch(`/api/posts/${id}`);
 
         const data = await res.json();          
         const item = data.data.posts[0];

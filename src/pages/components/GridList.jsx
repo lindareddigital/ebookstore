@@ -81,7 +81,7 @@ export default function GridList({ books }) {
     };
 
     filterByPublisher();
-  }, [arr]);
+  }, []);
 
   const handleChange = async (item) => {
     // console.log("click item.id", item.id);
@@ -127,6 +127,7 @@ export default function GridList({ books }) {
       const data = await response.json();
       // console.log("add func", data);
     }
+     window.location.reload();
   };
 
   return (

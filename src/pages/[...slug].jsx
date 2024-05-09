@@ -15,6 +15,7 @@ import { getPageColor, getPageBg } from "src/utilities/tool.js";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 import General from "src/pages/General";
+import { v4 as uuidv4 } from "uuid";
 
 
 export default function Singlepage() {
@@ -53,7 +54,7 @@ export default function Singlepage() {
         setMenu(filteredMenu);
         
       } catch (error) {
-        console.error("获取数据时出错：", error);
+        console.error(error);
       }
     };
 
@@ -62,7 +63,7 @@ export default function Singlepage() {
         const response = await fetch(`/api/page/${publisher}`);
         const result = await response.json();
 
-        console.log(result?.result?.pages[0]?.blocks);
+        // console.log(result?.result?.pages[0]?.blocks);
 
         const heroBanner = result?.result?.pages[0]?.blocks?.find((item) => {
           return item.collection === "block_hero";
@@ -113,7 +114,7 @@ export default function Singlepage() {
   }, [menu, slug]);
 
   useEffect(() => {
-    console.log(matchedMenuItem?.type);
+    // console.log(matchedMenuItem?.type);
 
     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
       const categoryIds = matchedMenuItem.category.map(
@@ -246,7 +247,7 @@ export default function Singlepage() {
               const prevPage = Math.max(1, Number(page) - 1);
               updatePage(prevPage);
             }}
-            className=""
+            className="pagination"
           >
             <PrevIcon />
           </div>
@@ -259,8 +260,8 @@ export default function Singlepage() {
               );
               updatePage(nextPage);
             }}
-            className=""
-            >
+            className="pagination"
+          >
             <NextIcon />
           </div>
         </Pagination>
@@ -431,11 +432,11 @@ export default function Singlepage() {
                             )
                           }
                         >
-                          <optgroup label={item.title} key={item.title}>
+                          <optgroup label={item.title}>
                             {item?.menu_items?.map((menuItem) => (
                               <option
                                 value={menuItem?.site_menu_items_id?.slug}
-                                key={menuItem?.site_menu_items_id?.id}
+                                key={uuidv4()}
                               >
                                 {menuItem?.site_menu_items_id?.title}
                               </option>
@@ -476,9 +477,7 @@ export default function Singlepage() {
             </div>
           </div>
 
-          { video != null && (
-            <SeashoreMediaBlock video={video} />
-          )}
+          {video != null && <SeashoreMediaBlock video={video} />}
           {publisher === "seashore" && <SinglePageTab />}
           <SocialLinksBlock />
         </div>

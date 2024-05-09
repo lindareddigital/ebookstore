@@ -4,6 +4,27 @@
 export default function Info({info}) {
 
   console.log(info);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    title: "",
+    fullname: "",
+    birth: "",
+    phone: "",
+    location: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    // const errors = validateForm({ ...formData, [name]: value });
+    // setErrors(errors);
+    // setIsDisabled(Object.keys(errors).length > 0);
+  };
   
 
 
@@ -20,10 +41,11 @@ export default function Info({info}) {
           </label>
           <input
             value={info?.first_name}
-            type="name"
+            onChange={handleChange}
+            type="fullname"
             className="form-control"
-            id="name"
-            aria-describedby="name"
+            id="fullname"
+            aria-describedby="fullname"
           ></input>
         </div>
         <div className="">
@@ -32,6 +54,7 @@ export default function Info({info}) {
           </label>
           <input
             value={info?.status}
+            onChange={handleChange}
             type="birth"
             className="form-control"
             id="birth"
@@ -43,6 +66,7 @@ export default function Info({info}) {
           </label>
           <input
             value={info?.email}
+            onChange={handleChange}
             type="email"
             className="form-control"
             id="email"
@@ -55,6 +79,7 @@ export default function Info({info}) {
           </label>
           <input
             value={info?.phone}
+            onChange={handleChange}
             type="phone"
             className="form-control"
             id="phone"
@@ -67,6 +92,7 @@ export default function Info({info}) {
           </label>
           <input
             value={info?.location}
+            onChange={handleChange}
             type="location"
             className="form-control"
             id="location"
@@ -74,7 +100,7 @@ export default function Info({info}) {
           ></input>
         </div>
         <div className="">
-          <button type="submit" className="btn cancel-btn info-site-btn">
+          <button type="button" className="btn cancel-btn info-site-btn">
             取消
           </button>
           <button type="submit" className="info-site-btn btn">

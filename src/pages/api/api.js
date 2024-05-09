@@ -163,6 +163,7 @@ class ApiManager {
                   url
                   posts {
                     id
+                    cards_id
                     title
                     category{
                       slug
@@ -518,10 +519,16 @@ class ApiManager {
     });
   };
 
-  getProductDetail = async () => {
+  getProductDetail = async (id) => {
     const gql = `
         query {
-        product {
+        product 
+        (filter: {
+            id:{
+              _eq: "${id}"
+            }  
+          } )
+        {
             id
             status
             sort

@@ -2,10 +2,10 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
-    const id = req.body.id;
+    const id = req.query.id;
     const data = await apiManager.getPostByID(id);
 
-    console.log('888',id);
+    // console.log('888',id);
     
 
     res.status(200).json({ data });

@@ -179,7 +179,7 @@ function Signup() {
             </label>
             <input
               type="password"
-              autocomplete="on"
+              autoComplete="on"
               className="form-control"
               id="password"
               name="password"

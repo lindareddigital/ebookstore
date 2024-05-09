@@ -8,6 +8,7 @@ import Link from 'next/link';
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import { v4 as uuidv4 } from "uuid";
 
 
 export default function HomeTab({books}) {
@@ -114,12 +115,9 @@ export default function HomeTab({books}) {
                   }
 
                   return (
-                    <SwiperSlide
-                      className="swiper-slide"
-                      key={`${item?.image?.id}`}
-                    >
+                    <SwiperSlide className="swiper-slide" key={uuidv4()}>
                       <Link
-                        key={`${item?.image?.id}`}
+                        key={uuidv4()}
                         href={{ pathname: `/detail/${item?.image?.id}` }}
                         className={``}
                       >

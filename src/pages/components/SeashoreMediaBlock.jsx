@@ -6,7 +6,7 @@ import { getPageFilter, getPageColor } from "src/utilities/tool.js";
 import { useRouter } from "next/router";
 
 export default function MediaBlock({ video }) {
-  console.log("video", video?.item?.cards);
+  // console.log("video", video?.item?.cards);
   const router = useRouter();
   const publisher = router.query.slug?.[0];
   const ytVideo = video?.item?.cards;
