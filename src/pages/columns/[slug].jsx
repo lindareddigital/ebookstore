@@ -9,41 +9,39 @@ import GalleryModal from "src/pages/components/GalleryModal";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import Error from "next/error";
 
 export default function Detail({}) {
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
   const id = router.query.slug;
 
-  // console.log("id", id);
+  console.log("id", id);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/posts/getPostById", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: id,
-          }),
-        });
-
+        const res = await fetch(`/api/posts/${id}`);
         const data = await res.json();
         const item = data.data.posts[0];
         setItem(item);
+        setIsLoading(false);
       } catch (error) {
-        console.error("", error);
+        console.error(error);
       }
     };
 
     fetchData();
-  }, [router]);
+  }, [id]);
 
   // console.log("column data", item);
+
+  if (!item) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <div>

@@ -11,20 +11,18 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export default function Home() {
-  
   const [show, setShow] = useState(true);
   const [data, setData] = useState(null);
   const [siteMenu, setSiteMenu] = useState(null);
-
+  const [books, setBooks] = useState(null);
+  const [homeTab, setHomeTab] = useState(null); // Define homeTab here
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/page/home");
-
         const result = await response.json();
         setData(result?.result?.pages[0].blocks);
-        console.log("data", result);
       } catch (error) {
         console.error(error);
       }
@@ -36,7 +34,6 @@ export default function Home() {
         const response = await res.json();
         const tempMenu = response?.result?.site_menu;
         setSiteMenu(tempMenu);
-
       } catch (error) {
         console.error(error);
       }
@@ -55,20 +52,72 @@ export default function Home() {
         }),
       });
 
-        const result = await response.json();
-        setData(result?.result?.pages[0].blocks);
-        // console.log("ddata", data);
-      
+      const result = await response.json();
+      setData(result?.result?.pages[0].blocks);
+      // console.log("ddata", data);
     };
+
+
+    console.log('61',data);
+    
+    const homeTab = data?.find((item) => {
+      return item.collection === "block_product_query";
+    });
+
+    console.log(homeTab);
+    
+
+    const categoryIds = homeTab?.item?.category?.map((item) => item.id);
+
+    const getProductsByCategory = async (categoryIds) => {
+      console.log(
+        [`${homeTab?.item?.order_by}`],
+        categoryIds,
+        homeTab?.item?.limit
+      );
+
+      try {
+        const response = await fetch(`/api/product/category`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sort_by: [`${homeTab?.item?.order_by}`],
+            publisher_slug: "polis-press",
+            category_id: categoryIds,
+            page: 1,
+            limit: homeTab?.item?.limit,
+          }),
+        });
+        const books = await response.json();
+        setBooks(books?.result?.product);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    console.log(
+      "homeTab",
+      homeTab?.item?.limit,
+      homeTab?.item?.order_by,
+      categoryIds,
+      homeTab?.item.label
+    );
+
     messagenger();
     fetchMenu();
     fetchData();
+    getProductsByCategory(categoryIds);
   }, []);
 
   const blocks = data;
 
   const posts = blocks?.find((item) => {
-    return item.collection === "block_cardgroup";
+    return (
+      item.collection === "block_cardgroup" &&
+      item.item.headline === "最新消息(posts)"
+    );
   });
 
   console.log("posts", posts?.item?.posts);
@@ -79,16 +128,17 @@ export default function Home() {
     return item.collection === "block_hero_group";
   });
 
-  const homeTab = blocks?.find((item) => {
-    return item.id === '2';
-  });
-
-  const media = blocks?.find((item) => {
-    return item?.item?.group_type === "posts";
-  });
-
-  // console.log("media", media?.item?.posts);
   
+
+  const column = blocks?.find((item) => {
+    return (
+      item.item.headline === "分享專欄(posts)" &&
+      item.collection === "block_cardgroup"
+    );
+  });
+
+  console.log("column", column?.item?.posts);
+
   const video = blocks?.find((item) => {
     return item?.id === "11";
   });
@@ -97,10 +147,7 @@ export default function Home() {
     return item.collection === "promotion";
   });
 
-  // console.log("video", video);
-
-  // console.log("homeTab", homeTab?.item?.cards);
-  
+  console.log("video", video);
 
   // console.log("heroBanner", heroBanner?.item.hero_cards);
 
@@ -141,7 +188,7 @@ export default function Home() {
             <div className="trangle"></div>
           </div>
           <div className="wrapper">
-            {posts?.item?.posts?.map((item,index) => {
+            {posts?.item?.posts?.map((item) => {
               return (
                 <>
                   <Link
@@ -254,10 +301,10 @@ export default function Home() {
         </div>
       </div>
       <div className="main-body">
-        {homeTab && <HomeTab books={homeTab?.item?.cards} />}
+        {homeTab && <HomeTab books={books} />}
         {/* <HomeTabTwo /> */}
       </div>
-      <MediaBlock posts={media?.item?.posts} video={video} />
+      <MediaBlock posts={column?.item?.posts} video={video} />
     </div>
   );
 }

@@ -37,9 +37,9 @@ export default function HomeTab({books}) {
     swiperRef.current.slidePrev();
   };
 
-  if (!books) {
-    return null;
-  }
+  // if (!books) {
+  //   return null;
+  // }
 
 
   return (

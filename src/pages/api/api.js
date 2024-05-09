@@ -161,9 +161,9 @@ class ApiManager {
                   content
                   group_type
                   url
+                  headline
                   posts {
                     id
-                    cards_id
                     title
                     category{
                       slug

@@ -9,13 +9,15 @@ import GalleryModal from "src/pages/components/GalleryModal";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import Error from "next/error";
 
 export default function Detail({}) {
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const id = router.query.slug;
+
 
   // console.log("posts id", id);
 
@@ -23,19 +25,25 @@ export default function Detail({}) {
     const fetchData = async () => {
       try {
         const res = await fetch(`/api/posts/${id}`);
-
-        const data = await res.json();          
+        const data = await res.json();  
+            
         const item = data.data.posts[0];
         setItem(item);
+        setIsLoading(false);
       } catch (error) {
-        console.error("", error);
+        console.error(error);
+
       }
     };
 
     fetchData();
-  }, [router]);
+  }, [id]);
 
   // console.log("post data", item);
+
+  if (!item) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <div>

@@ -76,7 +76,7 @@ export default function Singlepage() {
         setVideo(video);
         setBanner(heroBanner?.item?.image?.id);
       } catch (error) {
-        console.error("获取数据时出错：", error);
+        console.error( error);
       }
     };
 

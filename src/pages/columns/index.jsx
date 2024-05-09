@@ -51,7 +51,7 @@ export default function Share({}) {
 
           console.log(selected);
         } catch (error) {
-          console.error("获取数据时出错：", error);
+          console.error(error);
         }
     };
 
