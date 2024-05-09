@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const id = req.body.id;
     const data = await apiManager.getPostByID(id);
 
-    console.log('id',id);
+    console.log('888',id);
     
 
     res.status(200).json({ data });

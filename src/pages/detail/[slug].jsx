@@ -37,14 +37,14 @@ export default function Detail({}) {
       try {
         const res = await fetch(`/api/product/${id}`);
         const result = await res.json();
-        console.log("37res", result);
-        const filterBooks = result?.relatedBooks.filter((item) => {
+        // console.log("res", result);
+        const filterBooks = result?.relatedBooks?.filter((item) => {
           return item.id != id;
         });
         setBooks(filterBooks);
         setItem(result.data);
       } catch (error) {
-        console.error("", error);
+        // console.error("", error);
       }
     };
 
@@ -74,7 +74,9 @@ export default function Detail({}) {
           // console.log("user_bookmark", books?.result?.user_bookmark);
         // console.log(token);
         setLogin(true);
-        setBookMark(books?.result?.user_bookmark);
+        if (token) {
+          setBookMark(books?.result?.user_bookmark);
+        }
 
         const productIds = books?.result?.user_bookmark?.map(
           (item) => item.product.id

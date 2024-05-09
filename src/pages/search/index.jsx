@@ -108,7 +108,7 @@ export default function Search({}) {
 
   const Paginations = ({ length }) => {
     const pageNumbers = [];
-    console.log("Paginations length", length);
+    // console.log("Paginations length", length);
 
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {

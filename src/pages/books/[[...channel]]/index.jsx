@@ -38,12 +38,12 @@ export default function Listing() {
   const [matchedMenuItem, setMatchedMenuItem] = useState(null);
 
   
-  console.log("channel,slug", channel, slug);
+  // console.log("channel,slug", channel, slug);
 
 
   useEffect(() => {
     if (siteMenu && slug) {
-      console.log("siteMenu && slug", slug);
+      // console.log("siteMenu && slug", slug);
       const matchedItem = findMenuItemBySlug(siteMenu, slug);
       setMatchedMenuItem(matchedItem);
     }
@@ -133,7 +133,7 @@ export default function Listing() {
           //   arr
           // );
         } else {
-          console.log('not found');
+          // console.log('not found');
           setTitle("");
           setMyObject((prev) => ({
             ...prev,
@@ -143,7 +143,7 @@ export default function Listing() {
         }
         categoryIds.current = arr.category;
       } catch (error) {
-        console.error("获取数据时出错：", error);
+        console.error(error);
       }
     };
     fetchMenu();
@@ -263,7 +263,7 @@ export default function Listing() {
 
   const Paginations = ({ length }) => {
     const pageNumbers = [];
-    console.log("Paginations length", length);
+    // console.log("Paginations length", length);
 
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {

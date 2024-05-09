@@ -25,7 +25,7 @@ export default function ListAside({ siteMenu }) {
     fetchData();
   }, []);
 
-  console.log("ListAside siteMenu", siteMenu);
+  // console.log("ListAside siteMenu", siteMenu);
 
   return (
     <aside className="list-aside">

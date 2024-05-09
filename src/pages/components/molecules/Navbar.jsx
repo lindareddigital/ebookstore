@@ -68,7 +68,7 @@ export default function Navbar({}) {
     const fetchData = async () => {
       const response = await fetch(`/api/sitemenu/navimenu`);
       const result = await response.json();
-      console.log("keyword", result.keyword.search_keyword);
+      // console.log("keyword", result.keyword.search_keyword);
       setKeyword(result.keyword.search_keyword);
       setNavMenu(result.result.site_menu[0].menu_items);
     };
@@ -76,7 +76,7 @@ export default function Navbar({}) {
 
 
     setEmail(localStorage.getItem("email"));
-    console.log("email", email, localStorage.getItem("email"));
+    // console.log("email", email, localStorage.getItem("email"));
 
 
     const checkTokenExpiration = () => {
@@ -91,21 +91,21 @@ export default function Navbar({}) {
         const interval = setInterval(() => {
           const currentTime = new Date().getTime();
           if (currentTime >= parseInt(expiryTime, 10)) {
-            clearInterval(interval); // 清除定时器
+            clearInterval(interval);
             localStorage.removeItem("token");
             localStorage.removeItem("tokenExpiry");
-            console.log("logout");
+            // console.log("logout");
             location.replace(`/login`);
           }
         }, 60000); // 每分一次
 
         return () => clearInterval(interval);
       } else {
-        // 如果令牌已过期或不存在，执行退出登录逻辑并返回清除定时器的函数
+  
         localStorage.removeItem("token");
         localStorage.removeItem("tokenExpiry");
         localStorage.removeItem("email");
-        console.log("logout");
+        // console.log("logout");
         if (router.pathname == "/member") {
           console.log("", router.pathname);
           

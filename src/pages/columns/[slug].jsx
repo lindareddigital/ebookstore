@@ -11,33 +11,30 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
 
 export default function Detail({}) {
-  const { mobile } = useCalc();
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
 
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  // console.log("id", id);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-          const response = await fetch("/api/allPosts", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          });
+        const res = await fetch("/api/posts/getPostById", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+          }),
+        });
 
-          const data = await response.json();
-
-          const item = data?.data?.posts?.find((item) => {
-            return item.id === id;
-          });
-
-          setItem(item);
+        const data = await res.json();
+        const item = data.data.posts[0];
+        setItem(item);
       } catch (error) {
         console.error("", error);
       }
@@ -46,7 +43,7 @@ export default function Detail({}) {
     fetchData();
   }, [router]);
 
-  console.log("column data", item);
+  // console.log("column data", item);
 
   return (
     <div>

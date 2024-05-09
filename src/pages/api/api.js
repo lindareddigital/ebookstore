@@ -601,12 +601,13 @@ class ApiManager {
   };
 
   getPostByID = async (id) => {
+    
     const gql = `
       query {
         posts
         (filter: {
           id:{
-            _eq: ${id}
+            _eq: "${id}"
           } 
         
       })
