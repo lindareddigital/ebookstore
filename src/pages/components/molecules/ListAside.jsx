@@ -29,9 +29,9 @@ export default function ListAside({ siteMenu }) {
 
   return (
     <aside className="list-aside">
-      {siteMenu?.map((item) => {
+      {siteMenu?.map((item,index) => {
         return (
-          <ul className="">
+          <ul className="" key={uuidv4()}>
             <div className={`title ${getPageColor(publisher)}`}>
               {item?.item?.title}
             </div>

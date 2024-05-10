@@ -3,7 +3,6 @@ import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
 import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
 import {extractYouTubeId} from "src/utilities/tool.js";
-import { v4 as uuidv4 } from "uuid";
 
 
 
@@ -73,7 +72,7 @@ export default function MediaBlock({ posts,video }) {
                 <>
                   <Link
                     href={`/columns/${item?.id}`}
-                    key={uuidv4()}
+                    key={index}
                     className="e-banner-product"
                   >
                     <img

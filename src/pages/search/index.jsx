@@ -121,9 +121,9 @@ export default function Search({}) {
               }}
               className={`page-item ${i == page ? "active" : ""}`}
             >
-              <div class="page-link">
+              <div className="page-link">
                 {i}
-                <span class="visually-hidden">(current)</span>
+                <span className="visually-hidden">(current)</span>
               </div>
             </li>
           </>

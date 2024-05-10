@@ -7,7 +7,6 @@ import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 
 
@@ -197,13 +196,13 @@ export default function Home() {
             <div className="trangle"></div>
           </div>
           <div className="wrapper">
-            {posts?.item?.posts?.map((item) => {
+            {posts?.item?.posts?.map((item,index) => {
               return (
                 <>
                   <Link
                     href={`/posts/news/${item?.id}`}
                     className="e-banner-product"
-                    key={uuidv4()}
+                    key={index}
                   >
                     {/* <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}

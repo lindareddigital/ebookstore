@@ -11,10 +11,8 @@ import Navbar from "src/pages/components/molecules/Navbar";
 import Panel from "src/pages/components/atoms/Panel";
 import { useRouter } from "next/router";
 import Pagination from "react-bootstrap/Pagination";
-import { useGlobalStore } from "src/pages/store/global.store";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-import { v4 as uuidv4 } from "uuid";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);
@@ -275,11 +273,11 @@ export default function Listing() {
                 updatePage(i);
               }}
               className={`page-item ${i == page ? "active" : ""}`}
-              key={uuidv4()}
+              key={i}
             >
-              <div class="page-link">
+              <div className="page-link">
                 {i}
-                <span class="visually-hidden">(current)</span>
+                <span className="visually-hidden">(current)</span>
               </div>
             </li>
           </>

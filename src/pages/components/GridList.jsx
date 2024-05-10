@@ -145,7 +145,7 @@ export default function GridList({ books }) {
         <hr></hr> */}
         <div className="grid-view">
           {filteredData != [] &&
-            filteredData?.map((item) => {
+            filteredData?.map((item,index) => {
               {
                 /* console.log(arr?.includes(item?.id),item.id); */
               }
@@ -174,7 +174,7 @@ export default function GridList({ books }) {
                       />
                     </Link>
                     <Link
-                      key={uuidv4()}
+                      key={index}
                       href={{ pathname: `/detail/${item.id}` }}
                       className="desc"
                     >

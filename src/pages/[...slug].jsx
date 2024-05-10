@@ -15,7 +15,6 @@ import { getPageColor, getPageBg } from "src/utilities/tool.js";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
 import General from "src/pages/General";
-import { v4 as uuidv4 } from "uuid";
 
 
 export default function Singlepage() {
@@ -223,21 +222,18 @@ export default function Singlepage() {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
-          <>
             <li
               onClick={() => {
                 updatePage(i);
               }}
               className={` page-item ${i == page ? "active" : ""}`}
+              key={`li-${i}`}
             >
-              <div
-                class={`${i == page ? getPageBg(publisher) : ""} page-link`}
-              >
+              <div className={`${i == page ? getPageBg(publisher) : ""} page-link`}>
                 {i}
-                <span class="visually-hidden">(current)</span>
+                <span className="visually-hidden">(current)</span>
               </div>
             </li>
-          </>
         );
       }
       return (
@@ -421,8 +417,9 @@ export default function Singlepage() {
                           </optgroup>
                         ))}
                       </select> */}
-                      {menu?.map((item) => (
+                      {menu?.map((item, index) => (
                         <select
+                          key={`select-${index}`}
                           className="form-select"
                           onChange={(event) =>
                             handleClick(
@@ -433,10 +430,10 @@ export default function Singlepage() {
                           }
                         >
                           <optgroup label={item.title}>
-                            {item?.menu_items?.map((menuItem) => (
+                            {item?.menu_items?.map((menuItem, index) => (
                               <option
                                 value={menuItem?.site_menu_items_id?.slug}
-                                key={uuidv4()}
+                                key={`optgroup-${index}`}
                               >
                                 {menuItem?.site_menu_items_id?.title}
                               </option>

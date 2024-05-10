@@ -8,7 +8,6 @@ import Link from 'next/link';
 import InnerHTML from "src/pages/components/atoms/InnerHTML";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-import { v4 as uuidv4 } from "uuid";
 
 
 export default function HomeTab({books}) {
@@ -106,7 +105,7 @@ export default function HomeTab({books}) {
               onSnapIndexChange={onRealIndexChange}
             >
               <div className="swiper-wrapper booklist-carousel-inner">
-                {books?.map((item) => {
+                {books?.map((item, index) => {
                   {
                     /* console.log(
                     "131",
@@ -116,9 +115,9 @@ export default function HomeTab({books}) {
                   }
 
                   return (
-                    <SwiperSlide className="swiper-slide" key={uuidv4()}>
+                    <SwiperSlide className="swiper-slide" key={index}>
                       <Link
-                        key={uuidv4()}
+                        key={index}
                         href={{ pathname: `/detail/${item?.id}` }}
                         className={``}
                       >

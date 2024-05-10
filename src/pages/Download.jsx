@@ -4,7 +4,6 @@ import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { v4 as uuidv4 } from "uuid";
 
 export default function Download() {
   const router = useRouter();
@@ -33,15 +32,15 @@ export default function Download() {
       <Breadcrumb data={"書單下載"} />
       <div className="">
         <div className="download form-area">
-          {data?.blocks?.map((block) => (
+          {data?.blocks?.map((block, index) => (
             <>
-              <div key={uuidv4()} className="block-title">
+              <div key={`block-${index}`} className="block-title">
                 <div className="dot"></div>
                 {block?.item?.title}
               </div>
 
-              {block?.item?.download_item?.map((item) => (
-                <div key={uuidv4()} className="">
+              {block?.item?.download_item?.map((item,index) => (
+                <div key={`item-${index}`} className="">
                   <div className="input-group">
                     <input
                       placeholder={item?.title}
@@ -65,7 +64,6 @@ export default function Download() {
               ))}
             </>
           ))}
-
         </div>
       </div>
     </div>
