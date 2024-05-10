@@ -6,7 +6,7 @@ import MenuBar from 'src/pages/components/molecules/MenuBar';
 import Navbar from 'src/pages/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 
@@ -16,21 +16,19 @@ export default function Home() {
   const [data, setData] = useState(null);
   const [siteMenu, setSiteMenu] = useState(null);
   const [books, setBooks] = useState(null);
-  const [homeTab, setHomeTab] = useState(null); // Define homeTab here
+  const [homeTab, setHomeTab] = useState(null); 
   const router = useRouter();
-  // const isFirstRendering = useRef(true);
+  const isFirstRendering = useRef(true);
 
 
   useEffect(() => {
-    // if (isFirstRendering.current) {
-    //   isFirstRendering.current = false;
-    //   return;
-    // }
+    
     const fetchData = async () => {
       try {
         const response = await fetch("/api/page/home");
-        const result = await response.json();
+        const result = await response.json();    
         setData(result?.result?.pages[0].blocks);
+        return result
       } catch (error) {
         console.error(error);
       }
@@ -65,32 +63,12 @@ export default function Home() {
       // console.log("ddata", data);
     };
 
-    console.log("61", data);
-
-    const homeTab = data?.find((item) => {
-      return item.collection === "block_product_query";
-    });
-
-    console.log(homeTab);
-
-    const categoryIds = homeTab?.item?.category?.map((item) => item.id);
-
-    const executeOperations = async () => {
-      await fetchData();
-
-      const categoryIds = homeTab?.item?.category?.map((item) => item.id);
-
-      if (categoryIds) {
-        await getProductsByCategory(categoryIds);
-      }
-    };
-
-    const getProductsByCategory = async (categoryIds) => {
-      console.log(
-        [`${homeTab?.item?.order_by}`],
-        categoryIds,
-        homeTab?.item?.limit
-      );
+    const getProductsByCategory = async (categoryIds, order_by,limit) => {
+      // console.log(
+      //   [`${order_by}`],
+      //   categoryIds,
+      //   limit
+      // );
 
       try {
         const response = await fetch(`/api/product/category`, {
@@ -99,37 +77,48 @@ export default function Home() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            sort_by: [`${homeTab?.item?.order_by}`],
+            sort_by: [`${order_by}`],
             publisher_slug: "polis-press",
             category_id: categoryIds,
             page: 1,
-            limit: homeTab?.item?.limit,
+            limit: limit,
           }),
         });
         const books = await response.json();
 
-        // console.log(books?.result?.product);
-
-        setBooks(books?.result?.product);
+        return books;
       } catch (error) {
         console.error(error);
       }
     };
 
-    console.log(
-      "homeTab",
-      homeTab?.item?.limit,
-      homeTab?.item?.order_by,
-      categoryIds,
-      homeTab?.item.label
-    );
 
+    const getHomeData = async () => {
+      const result = await fetchData();
+
+      const homeTab = result?.result?.pages[0].blocks?.find((item) => {
+        return item.collection === "block_product_query";
+      });
+
+      const categoryIds = homeTab?.item?.category?.map((item) => item.id);
+
+      if (categoryIds) {
+        const result = await getProductsByCategory(
+          categoryIds,
+          homeTab?.item?.order_by,
+          homeTab?.item?.limit
+        );
+        
+      setBooks(result?.result?.product);
+
+      }
+    };
+
+    getHomeData();
     messagenger();
     fetchMenu();
-    // fetchData();
-    executeOperations();
-    // getProductsByCategory(categoryIds);
-  }, [books]);
+
+  }, []);
 
   const blocks = data;
 
@@ -140,15 +129,13 @@ export default function Home() {
     );
   });
 
-  console.log("posts", posts?.item?.posts);
+  // console.log("posts", posts?.item?.posts);
 
-  console.log("block", blocks);
+  // console.log("block", blocks);
 
   const heroBanner = blocks?.find((item) => {
     return item.collection === "block_hero_group";
   });
-
-  
 
   const column = blocks?.find((item) => {
     return (
@@ -157,18 +144,20 @@ export default function Home() {
     );
   });
 
-  console.log("column", column?.item?.posts);
+  // console.log("column", column?.item?.posts);
 
   const video = blocks?.find((item) => {
-    return item?.id === "11";
+    return (
+      item.item.headline === "影片(custom)" &&
+      item.collection === "block_cardgroup"
+    );
   });
 
   const promotion = blocks?.find((item) => {
     return item.collection === "promotion";
   });
 
-  console.log("video", video);
-
+  // console.log("video", video);
   // console.log("heroBanner", heroBanner?.item.hero_cards);
 
   return (

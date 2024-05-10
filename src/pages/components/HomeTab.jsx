@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export default function HomeTab({books}) {
-  console.log('',books);
   const swiperRef = useRef(null);
   // const { next, previous } = useSwiperFunc(swiperRef);
   const [swiperIndex, setSwiperIndex] = useState(0);
