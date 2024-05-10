@@ -1,15 +1,15 @@
-import Info from "./Info";
-import Collection from "./Collection";
-import Notification from "./Notification";
-import Message from "../../components/message";
-import Contribution from "./Contribution";
+import Info from "../../components/member/Info";
+import Collection from "../../components/member/Collection";
+import Notification from "../../components/member/Notification";
+import Message from "../../components/member/Message";
+import Contribution from "../../components/member/Contribution";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { cache } from "react";
 import { useEffect, useRef, useState } from "react";
-import MenuBar from "src/pages/components/molecules/MenuBar";
-import Navbar from "src/pages/components/molecules/Navbar";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import MenuBar from "src/components/molecules/MenuBar";
+import Navbar from "src/components/molecules/Navbar";
+import Breadcrumb from "src/components/molecules/Breadcrumb";
 
 export default function slug({}) {
   // const [tab, setTab] = useState("collection");

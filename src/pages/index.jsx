@@ -1,9 +1,9 @@
-import HomeTab from 'src/pages/components/HomeTab';
-import MediaBlock from 'src/pages/components/MediaBlock';
-import SidebarWrapper from 'src/pages/components/SidebarWrapper';
-import Popup from "src/pages/components/Popup";
-import MenuBar from 'src/pages/components/molecules/MenuBar';
-import Navbar from 'src/pages/components/molecules/Navbar';
+import HomeTab from 'src/components/HomeTab';
+import MediaBlock from 'src/components/MediaBlock';
+import SidebarWrapper from 'src/components/SidebarWrapper';
+import Popup from "src/components/Popup";
+import MenuBar from 'src/components/molecules/MenuBar';
+import Navbar from 'src/components/molecules/Navbar';
 import 'swiper/css';
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";

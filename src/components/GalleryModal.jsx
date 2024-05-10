@@ -4,9 +4,9 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Modal from "react-bootstrap/Modal";
-import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
-import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-import useCalc from "src/pages/components/atoms/useCalc";
+import { NextIcon } from "src/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/components/atoms/icons/PrevIcon";
+import useCalc from "src/components/atoms/useCalc";
 
 import 'swiper/css';
 import "swiper/css/free-mode";

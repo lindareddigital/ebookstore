@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
-import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
+import SocialLinksBlock from "src/components/molecules/SocialLinksBlock";
 import {extractYouTubeId} from "src/utilities/tool.js";
 
 

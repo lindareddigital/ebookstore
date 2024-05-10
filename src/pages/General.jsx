@@ -1,9 +1,9 @@
-import Navbar from "src/pages/components/molecules/Navbar";
-import MenuBar from "src/pages/components/molecules/MenuBar";
+import Navbar from "src/components/molecules/Navbar";
+import MenuBar from "src/components/molecules/MenuBar";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import InnerHTML from "src/components/atoms/InnerHTML";
 
 export default function General() {
     const router = useRouter();

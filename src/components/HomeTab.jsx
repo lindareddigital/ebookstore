@@ -5,9 +5,8 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
-import InnerHTML from "src/pages/components/atoms/InnerHTML";
-import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
-import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import { NextIcon } from "src/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/components/atoms/icons/PrevIcon";
 
 
 export default function HomeTab({books}) {

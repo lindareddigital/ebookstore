@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useCalc from 'src/pages/components/atoms/useCalc';
-import Desc from "../../detail/Desc";
-import MenuBar from 'src/pages/components/molecules/MenuBar';
+import MenuBar from 'src/components/molecules/MenuBar';
 import Head from 'next/head';
-import GalleryModal from "src/pages/components/GalleryModal";
-import Navbar from "src/pages/components/molecules/Navbar";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
-import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import GalleryModal from "src/components/GalleryModal";
+import Navbar from "src/components/molecules/Navbar";
+import Breadcrumb from "src/components/molecules/Breadcrumb";
+import InnerHTML from "src/components/atoms/InnerHTML";
 import Error from "next/error";
 
 export default function Detail({}) {

@@ -1,9 +1,9 @@
 import useSWR from "swr";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
-import Navbar from "src/pages/components/molecules/Navbar";
-import MenuBar from "src/pages/components/molecules/MenuBar";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Navbar from "src/components/molecules/Navbar";
+import MenuBar from "src/components/molecules/MenuBar";
+import Breadcrumb from "src/components/molecules/Breadcrumb";
 import Head from "next/head";
 
 function Login() {

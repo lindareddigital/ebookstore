@@ -1,10 +1,6 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import apiManager from 'src/pages/api/api';
 import Link from 'next/link';
-import useCalc from 'src/pages/components/atoms/useCalc';
-
-
 
 
 export default function SocialLinksBlock({ data }) {

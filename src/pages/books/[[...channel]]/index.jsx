@@ -2,17 +2,17 @@
 import { cache } from 'react';
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from 'next/link';
-import GridList from "../../components/GridList";
-import ListList from "../../components/ListList";
-import SidebarWrapper from 'src/pages/components/SidebarWrapper';
-import MenuBar from 'src/pages/components/molecules/MenuBar';
-import ListAside from 'src/pages/components/molecules/ListAside';
-import Navbar from "src/pages/components/molecules/Navbar";
-import Panel from "src/pages/components/atoms/Panel";
+import GridList from "../../../components/GridList";
+import ListList from "../../../components/ListList";
+import SidebarWrapper from 'src/components/SidebarWrapper';
+import MenuBar from 'src/components/molecules/MenuBar';
+import ListAside from 'src/components/molecules/ListAside';
+import Navbar from "src/components/molecules/Navbar";
+import Panel from "src/components/atoms/Panel";
 import { useRouter } from "next/router";
 import Pagination from "react-bootstrap/Pagination";
-import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
-import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import { NextIcon } from "src/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/components/atoms/icons/PrevIcon";
 
 export default function Listing() {
   const [panel, setPanel] = useState(false);

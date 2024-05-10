@@ -1,4 +1,4 @@
-import GridList from "src/pages/components/GridList";
+import GridList from "src/components/GridList";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 

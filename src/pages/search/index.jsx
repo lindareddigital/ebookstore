@@ -2,14 +2,14 @@
 import Link from 'next/link';
 import { cache } from 'react';
 import { useEffect, useMemo, useState } from "react";
-import Navbar from "src/pages/components/molecules/Navbar";
-import MenuBar from "src/pages/components/molecules/MenuBar";
+import Navbar from "src/components/molecules/Navbar";
+import MenuBar from "src/components/molecules/MenuBar";
 import Pagination from "react-bootstrap/Pagination";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Breadcrumb from "src/components/molecules/Breadcrumb";
 import { useRouter } from "next/router";
-import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
-import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
-import ListList from "src/pages/components/ListList";
+import { NextIcon } from "src/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/components/atoms/icons/PrevIcon";
+import ListList from "src/components/ListList";
 
 
 export default function Search({}) {

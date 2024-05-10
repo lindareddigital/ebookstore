@@ -1,6 +1,6 @@
-import Navbar from "src/pages/components/molecules/Navbar";
-import MenuBar from "src/pages/components/molecules/MenuBar";
-import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Navbar from "src/components/molecules/Navbar";
+import MenuBar from "src/components/molecules/MenuBar";
+import Breadcrumb from "src/components/molecules/Breadcrumb";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Link from "next/link";

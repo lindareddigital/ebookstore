@@ -1,19 +1,19 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import SeashoreMediaBlock from "src/pages/components/SeashoreMediaBlock";
+import SeashoreMediaBlock from "src/components/SeashoreMediaBlock";
 import Link from 'next/link';
-import ListAside from 'src/pages/components/molecules/ListAside';
-import GridList from "src/pages/components/GridList";
-import ListList from "src/pages/components/ListList";
-import SidebarWrapper from "src/pages/components/SidebarWrapper";
+import ListAside from 'src/components/molecules/ListAside';
+import GridList from "src/components/GridList";
+import ListList from "src/components/ListList";
+import SidebarWrapper from "src/components/SidebarWrapper";
 import { useRouter } from "next/router";
-import SinglePageTab from "src/pages/components/SinglePageTab";
+import SinglePageTab from "src/components/SinglePageTab";
 import Pagination from "react-bootstrap/Pagination";
-import SocialLinksBlock from "src/pages/components/molecules/SocialLinksBlock";
+import SocialLinksBlock from "src/components/molecules/SocialLinksBlock";
 import Error from "next/error";
 import { getPageColor, getPageBg } from "src/utilities/tool.js";
-import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
-import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
+import { NextIcon } from "src/components/atoms/icons/NextIcon";
+import { PrevIcon } from "src/components/atoms/icons/PrevIcon";
 import General from "src/pages/General";
 
 

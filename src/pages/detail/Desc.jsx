@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import InnerHTML from "src/pages/components/atoms/InnerHTML";
+import InnerHTML from "src/components/atoms/InnerHTML";
 
 export default function Desc({ item }) {
   // console.log("678", item);
