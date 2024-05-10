@@ -35,7 +35,7 @@ export default function GridList({ books }) {
       });
       const books = await response.json();
       // console.log("user_bookmark", books?.result?.user_bookmark);
-      console.log(token);
+      // console.log(token);
       setBookMark(books?.result?.user_bookmark);
 
       const productIds = books?.result?.user_bookmark?.map(
@@ -64,28 +64,28 @@ export default function GridList({ books }) {
       const books = await response.json();
       // console.log(books?.result?.product, "all books");
 
+      console.log(router.pathname.includes("/member"));
+
+
       if (router.pathname.includes("/member")) {
         const filteredData = books?.result?.product?.filter((item) => {
           return arr?.includes(item.id);
         });
         setFilteredData(filteredData);
-        console.log(filteredData, "filteredData");
+        // console.log(filteredData, "filteredData");
         return filteredData;
       }
     };
 
 
     const getLikeData = async () => {
-      const books = await filterByPublisher();
-
-      // console.log(books);
-      
+      const books = await filterByPublisher();      
 
       if(token){
         getUserBookMark();
       }
         
-      }
+    }
     
     getLikeData()
     // filterByPublisher();
@@ -144,7 +144,7 @@ export default function GridList({ books }) {
         {/* <div className="title">{props.Title}</div>
         <hr></hr> */}
         <div className="grid-view">
-          {filteredData != [] &&
+          {
             filteredData?.map((item,index) => {
               {
                 /* console.log(arr?.includes(item?.id),item.id); */

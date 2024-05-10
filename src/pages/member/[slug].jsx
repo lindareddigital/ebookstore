@@ -11,16 +11,18 @@ import MenuBar from "src/pages/components/molecules/MenuBar";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
 
-export default function Manage({}) {
+export default function slug({}) {
   // const [tab, setTab] = useState("collection");
+  const router = useRouter();
   const [info, setInfo] = useState(null);
   const [isLogin, setLogin] = useState(false);
-  const router = useRouter();
   const tab = router.query.slug;
 
-  useEffect(() => {
+  console.log('5566',tab);
+  
 
-    if ((localStorage.getItem("email") != null)) {
+  useEffect(() => {
+    if (localStorage.getItem("email") != null) {
       const loadInfo = async () => {
         const email = localStorage.getItem("email") || "";
 
@@ -43,14 +45,18 @@ export default function Manage({}) {
           console.log("info", info);
 
           localStorage.setItem("id", info?.id);
-
         }
       };
       loadInfo();
-      setLogin(true)     
+      setLogin(true);
     }
-    
   }, []);
+
+   useEffect(() => {
+       console.log("Slug has changed from");
+     
+   }, [router.query.slug]); 
+
 
 
   const logout = () => {
@@ -64,6 +70,7 @@ export default function Manage({}) {
   };
 
   const renderContent = () => {
+    console.log("collectioncollection", tab);
     if (tab === "info") {
       return <Info info={info} />;
     }
@@ -82,12 +89,13 @@ export default function Manage({}) {
     console.log("tab", tab);
   };
 
+
   return (
     <>
       <div className="manage-page">
         <Navbar />
         <MenuBar />
-        <Breadcrumb data={"會員中心"} />
+        <Breadcrumb data={"會員中心1"} />
         {isLogin && (
           <div className="container-fluid">
             <div className="content">
@@ -132,7 +140,9 @@ export default function Manage({}) {
                 <img className="newsbg" src="/icons/newsbg.svg"></img>
               </div>
 
-              <div className="right-side">{renderContent()}</div>
+              <div className="right-side">
+                {renderContent()}
+              </div>
             </div>
           </div>
         )}
@@ -140,5 +150,3 @@ export default function Manage({}) {
     </>
   );
 }
-
-

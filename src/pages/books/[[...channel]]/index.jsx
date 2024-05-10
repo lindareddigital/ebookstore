@@ -267,33 +267,30 @@ export default function Listing() {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
-          <>
-            <li
-              onClick={() => {
-                updatePage(i);
-              }}
-              className={`page-item ${i == page ? "active" : ""}`}
-              key={i}
-            >
-              <div className="page-link">
-                {i}
-                <span className="visually-hidden">(current)</span>
-              </div>
-            </li>
-          </>
+          <li
+            onClick={() => {
+              updatePage(i);
+            }}
+            className={`page-item ${i == page ? "active" : ""}`}
+            key={i}
+          >
+            <div className="page-link">
+              {i}
+              <span className="visually-hidden">(current)</span>
+            </div>
+          </li>
         );
       }
       return (
         <Pagination>
-          <div
-            className=""
+          <div className=""
             onClick={() => {
               const prevPage = Math.max(1, Number(page) - 1);
               updatePage(prevPage);
             }}
           >
             <PrevIcon />
-          </div>{" "}
+          </div>
           {pageNumbers}
           <div
             className=""

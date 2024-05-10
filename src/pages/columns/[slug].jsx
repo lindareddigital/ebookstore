@@ -56,7 +56,7 @@ export default function Detail({}) {
             <Breadcrumb data={item?.category?.name} />
 
             <div className="detail">
-              <div class="article-title">
+              <div className="article-title">
                 <h1>{item?.title}</h1>
               </div>
               <div className="content">

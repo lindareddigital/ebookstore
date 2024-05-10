@@ -122,19 +122,17 @@ export default function Share({}) {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 5); i++) {
         pageNumbers.push(
-          <>
-            <li
-              onClick={() => {
-                updatePage(i);
-              }}
-              className={`page-item ${i == page ? "active" : ""}`}
-            >
-              <div className="page-link">
-                {i}
-                <span className="visually-hidden">(current)</span>
-              </div>
-            </li>
-          </>
+          <li
+            onClick={() => {
+              updatePage(i);
+            }}
+            className={`page-item ${i == page ? "active" : ""}`}
+          >
+            <div className="page-link">
+              {i}
+              <span className="visually-hidden">(current)</span>
+            </div>
+          </li>
         );
       }
       return (

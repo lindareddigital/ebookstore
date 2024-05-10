@@ -113,20 +113,18 @@ export default function Search({}) {
     if (Number(length)) {
       for (let i = 1; i <= Math.ceil(length / 15); i++) {
         pageNumbers.push(
-          <>
-            <li
-              key={i}
-              onClick={() => {
-                updatePage(i);
-              }}
-              className={`page-item ${i == page ? "active" : ""}`}
-            >
-              <div className="page-link">
-                {i}
-                <span className="visually-hidden">(current)</span>
-              </div>
-            </li>
-          </>
+          <li
+            key={i}
+            onClick={() => {
+              updatePage(i);
+            }}
+            className={`page-item ${i == page ? "active" : ""}`}
+          >
+            <div className="page-link">
+              {i}
+              <span className="visually-hidden">(current)</span>
+            </div>
+          </li>
         );
       }
       return (

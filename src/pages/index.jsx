@@ -17,7 +17,6 @@ export default function Home() {
   const [books, setBooks] = useState(null);
   const [homeTab, setHomeTab] = useState(null); 
   const router = useRouter();
-  const isFirstRendering = useRef(true);
 
 
   useEffect(() => {
@@ -198,7 +197,6 @@ export default function Home() {
           <div className="wrapper">
             {posts?.item?.posts?.map((item,index) => {
               return (
-                <>
                   <Link
                     href={`/posts/news/${item?.id}`}
                     className="e-banner-product"
@@ -212,7 +210,6 @@ export default function Home() {
                     <div className="desc">{item.title}</div>
                     <div className="desc">{item.tags}</div>
                   </Link>
-                </>
               );
             })}
           </div>
@@ -230,17 +227,16 @@ export default function Home() {
           <div className="carousel-indicators">
             {heroBanner?.item.hero_cards?.map((item, index) => {
               return (
-                <>
-                  <button
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide-to={index}
-                    // className="active"
-                    aria-current={index === 0 ? "true" : ""}
-                    aria-label="Slide 1"
-                    className={`${index === 0 ? "active" : ""}`}
-                  ></button>
-                </>
+                <button
+                  key={index}
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to={index}
+                  // className="active"
+                  aria-current={index === 0 ? "true" : ""}
+                  aria-label="Slide 1"
+                  className={`${index === 0 ? "active" : ""}`}
+                ></button>
               );
             })}
             {/* <button
@@ -267,10 +263,11 @@ export default function Home() {
           <div className="carousel-inner">
             {heroBanner?.item.hero_cards?.map((item, index) => {
               return (
-                <>
+                <div key={index}>
                   <Link
                     href={item.block_hero_id?.url || ""}
                     className={`carousel-item ${index === 1 ? "active" : ""}`}
+                    key={index}
                   >
                     <img
                       src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -278,7 +275,7 @@ export default function Home() {
                       alt={item.block_hero_id.headline}
                     ></img>
                   </Link>
-                </>
+                </div>
               );
             })}
           </div>

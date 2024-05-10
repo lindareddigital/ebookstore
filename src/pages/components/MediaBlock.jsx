@@ -69,7 +69,7 @@ export default function MediaBlock({ posts,video }) {
 
             {posts?.map((item,index) => {
               return (
-                <>
+                <div key={index}>
                   <Link
                     href={`/columns/${item?.id}`}
                     key={index}
@@ -83,7 +83,7 @@ export default function MediaBlock({ posts,video }) {
                     <div className="desc">{item.title}</div>
                     {/* <div className="desc">{item.posts_id.tags}</div> */}
                   </Link>
-                </>
+                </div>
               );
             })}
 

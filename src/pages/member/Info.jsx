@@ -49,7 +49,7 @@ export default function Info({ info }) {
             生日
           </label>
           <input
-            value={info?.status}
+            value={info?.birth}
             onChange={handleChange}
             type="birth"
             className="form-control"
