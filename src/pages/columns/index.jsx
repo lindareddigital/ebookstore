@@ -41,15 +41,14 @@ export default function Share({}) {
           setMenu(data?.menu?.site_menu[0]?.menu_items);
           setSelected(data?.menu?.site_menu[0]?.menu_items[0]);
           setLength(data?.data?.posts_aggregated[0]?.countDistinct?.id);
-          console.log(
-            "ddata",
-            data?.data?.posts,
-            data?.data?.posts_aggregated[0]?.countDistinct?.id,
+          // console.log(
+          //   "ddata",
+          //   data?.data?.posts,
+          //   data?.data?.posts_aggregated[0]?.countDistinct?.id,
+          //   data?.menu?.site_menu[0]?.menu_items
+          // );
 
-            data?.menu?.site_menu[0]?.menu_items
-          );
-
-          console.log(selected);
+          // console.log(selected);
         } catch (error) {
           console.error(error);
         }
@@ -62,14 +61,10 @@ export default function Share({}) {
         const data = await response.json();
         setAllPost(data?.data?.posts);
   
-        console.log(
-          "ALL",
-          data?.data?.posts,
-     
-        );
+        // console.log("ALL",  data?.data?.posts);
 
       } catch (error) {
-        console.error("获取数据时出错：", error);
+        console.error(error);
       }
     };
 

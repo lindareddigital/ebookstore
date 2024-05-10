@@ -375,6 +375,11 @@ axobject-query@^3.2.1:
   dependencies:
     dequal "^2.0.3"
 
+babel-plugin-react-html-attrs@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.npmjs.org/babel-plugin-react-html-attrs/-/babel-plugin-react-html-attrs-3.0.5.tgz"
+  integrity sha512-o6RClilXl0T7HfVsHUE+xHV0HMBX0SzB94MMIrT52089CA6Sd4eXkY7jLHknQktFQ5UHpSXYPP0x7fUnIY97Qg==
+
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
@@ -424,9 +429,9 @@ call-bind@^1.0.0, call-bind@^1.0.2, call-bind@^1.0.4, call-bind@^1.0.5:
     set-function-length "^1.1.1"
 
 caniuse-lite@^1.0.30001406:
-  version "1.0.30001576"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001576.tgz"
-  integrity sha512-ff5BdakGe2P3SQsMsiqmt1Lc8221NR1VzHj5jXN5vBny9A6fpze94HiVV/n7XRosOlsShJcvMv5mdnpjOGCEgg==
+  version "1.0.30001617"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001617.tgz"
+  integrity sha512-mLyjzNI9I+Pix8zwcrpxEbGlfqOkF9kM3ptzmKNw5tizSyYwMe+nGLTqMK9cO+0E+Bh6TsBxNAaHWEM8xwSsmA==
 
 classnames@^2.3.2:
   version "2.5.1"
@@ -1894,7 +1899,7 @@ uuid@^8.3.2:
 
 uuid@^9.0.1:
   version "9.0.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.1.tgz"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 vary@^1:

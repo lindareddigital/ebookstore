@@ -288,16 +288,17 @@ export default function Listing() {
       return (
         <Pagination>
           <div
+            className=""
             onClick={() => {
               const prevPage = Math.max(1, Number(page) - 1);
               updatePage(prevPage);
             }}
-            className=""
           >
             <PrevIcon />
           </div>{" "}
           {pageNumbers}
           <div
+            className=""
             onClick={() => {
               const nextPage = Math.min(
                 Math.ceil(length / 5),
@@ -305,7 +306,6 @@ export default function Listing() {
               );
               updatePage(nextPage);
             }}
-            className=""
           >
             <NextIcon />
           </div>

@@ -1,8 +1,6 @@
+import { useState } from "react";
 
-
-
-export default function Info({info}) {
-
+export default function Info({ info }) {
   console.log(info);
 
   const [formData, setFormData] = useState({
@@ -25,8 +23,6 @@ export default function Info({info}) {
     // setErrors(errors);
     // setIsDisabled(Object.keys(errors).length > 0);
   };
-  
-
 
   return (
     <>

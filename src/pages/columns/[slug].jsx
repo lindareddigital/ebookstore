@@ -19,7 +19,7 @@ export default function Detail({}) {
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  // console.log("id", id);
 
   useEffect(() => {
     const fetchData = async () => {

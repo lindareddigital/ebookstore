@@ -1,10 +1,6 @@
-import apiManager from 'src/pages/api/api';
 import { useEffect, useRef, useState, useMemo } from "react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useCalc from 'src/pages/components/atoms/useCalc';
-import MobileCard from 'src/pages/components/MobileCard';
-import DesktopCard from 'src/pages/components/DesktopCard';
 import Desc from "./Desc";
 import { NextIcon } from "src/pages/components/atoms/icons/NextIcon";
 import { PrevIcon } from "src/pages/components/atoms/icons/PrevIcon";
@@ -14,6 +10,7 @@ import HomeTab from "src/pages/components/HomeTab";
 import GalleryModal from "src/pages/components/GalleryModal";
 import Navbar from "src/pages/components/molecules/Navbar";
 import Breadcrumb from "src/pages/components/molecules/Breadcrumb";
+import Error from "next/error";
 
 export default function Detail({}) {
   const [show, setShow] = useState(false);
@@ -23,7 +20,7 @@ export default function Detail({}) {
   const router = useRouter();
   const id = router.query.slug;
 
-  console.log("id", id);
+  // console.log("id", id);
   const [filteredData, setFilteredData] = useState(books);
 
   const [userId, setId] = useState("");
@@ -37,15 +34,19 @@ export default function Detail({}) {
       try {
         const res = await fetch(`/api/product/${id}`);
         const result = await res.json();
-        console.log("res", result);
-        
+        // console.log("res", result.data.product[0]);      
         setItem(result.data.product[0]);
+        return result
+        
+      } catch (error) {
+        // console.error("", error);
+      }
+    };
+    fetchData();
 
-        const categoryIds = item.tags.map(
-          (category) => category.category_id.id
-        );
+    const getProductsByCategory = async (categoryIds) => {
 
-        const response = await fetch(`/api/product/category`, {
+      const response = await fetch(`/api/product/category`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -59,85 +60,96 @@ export default function Detail({}) {
           }),
         });
         const books = await response.json();
-        setBooks(books.result.product);
+        setBooks(books?.result?.product);
+        return books
         // console.log("books", books.result.product);
-        
-      } catch (error) {
-        // console.error("", error);
+    }
+
+    const getDetailData = async () => {
+      const result = await fetchData(); 
+      // console.log(result);
+           
+      const categoryIds = result?.data?.product?.[0]?.tags?.map(
+        (category) => category.category_id.id
+      );
+      // console.log("70", categoryIds);
+
+      if (categoryIds) {
+        const result = await getProductsByCategory(categoryIds);
+        // console.log('76',result);        
+        setBooks(result?.result?.product);
       }
     };
 
-    
-
-    fetchData();
+    getDetailData();      
   }, [id]);
 
 
-    useEffect(() => {
-      const userId = localStorage.getItem("id");
-      const token = localStorage.getItem("token");
-      setId(userId);
+  useEffect(() => {
+    const userId = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
+    setId(userId);
 
-      const getUserBookMark = async () => {
-        const response = await fetch(`/api/bookmark/getUserBookMark`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: userId,
-            token: token,
-          }),
-        });
-        const books = await response.json();
+    const getUserBookMark = async () => {
+      const response = await fetch(`/api/bookmark/getUserBookMark`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: userId,
+          token: token,
+        }),
+      });
+      const books = await response.json();
 
-        if (!books?.result?.user_bookmark) return
-          // console.log("user_bookmark", books?.result?.user_bookmark);
-        // console.log(token);
-        setLogin(true);
-        if (token) {
-          setBookMark(books?.result?.user_bookmark);
-        }
+      if (!books?.result?.user_bookmark) return
+        // console.log("user_bookmark", books?.result?.user_bookmark);
+      // console.log(token);
+      setLogin(true);
+      if (token) {
+        setBookMark(books?.result?.user_bookmark);
+      }
 
-        const productIds = books?.result?.user_bookmark?.map(
-          (item) => item.product.id
-        );
+      const productIds = books?.result?.user_bookmark?.map(
+        (item) => item.product.id
+      );
 
-        setArr(productIds);
-        // console.log("arr", arr);
-      };      
-
+      setArr(productIds);
+      // console.log("arr", arr);
+    };  
+    if(token){
       getUserBookMark();
-    
+    }    
 
-      const filterByPublisher = async () => {
-        if (!arr || arr.length === 0) {
-          return;
-        }
-        const response = await fetch(`/api/product/publisher/polis-press`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            publisher: "polis-press",
-          }),
+    const filterByPublisher = async () => {
+      if (!arr || arr.length === 0) {
+        return;
+      }
+      const response = await fetch(`/api/product/publisher/polis-press`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          publisher: "polis-press",
+        }),
+      });
+
+      const books = await response.json();
+      // console.log(books?.result?.product, "all books");
+
+      if (router.pathname.includes("/member")) {
+        const filteredData = books?.result?.product?.filter((item) => {
+          return arr?.includes(item.id);
         });
+        setFilteredData(filteredData);
+        // console.log(filteredData, "filteredData");
+      }
+    };
 
-        const books = await response.json();
-        // console.log(books?.result?.product, "all books");
-
-        if (router.pathname.includes("/member")) {
-          const filteredData = books?.result?.product?.filter((item) => {
-            return arr?.includes(item.id);
-          });
-          setFilteredData(filteredData);
-          // console.log(filteredData, "filteredData");
-        }
-      };
-
-      filterByPublisher();
-    }, [arr]);
+    filterByPublisher();
+  }, [arr]);
 
     const handleChange = async (item) => {
       // console.log("click item.id", item.id);
@@ -188,12 +200,19 @@ export default function Detail({}) {
 
   // console.log("detaildetail", item);
 
+  if (!item) {
+    return <Error statusCode={404} />;
+  }
+
   return (
     <div>
       {item != null && (
         <div className="detail-page">
           <Head>
             <title>{item.title}</title>
+            { item?.meta?.map((item, index) => {
+              return <meta key={index} property={item.key} content={item.value} />;
+            })}
           </Head>
           <Navbar />
           <MenuBar />

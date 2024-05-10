@@ -72,13 +72,20 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="">我的收藏</Link>
+                    <Link
+                      href={{
+                        pathname: `/member/`,
+                        query: { tab: "collection" },
+                      }}
+                    >
+                      我的收藏
+                    </Link>
                   </li>
                   <li>
                     <Link href="">訂閱新書通知</Link>
                   </li>
                   <li>
-                    <Link href="">查詢帳密</Link>
+                    <Link href="/forgetpassword">查詢帳密</Link>
                   </li>
                 </div>
               </div>
@@ -154,7 +161,7 @@ export default function Footer() {
               <Link href="">訂閱新書通知</Link>
             </li>
             <li>
-              <Link href="">查詢帳密</Link>
+              <Link href="/forgetpassword">查詢帳密</Link>
             </li>
           </div>
           <div className="box">
@@ -186,7 +193,7 @@ export default function Footer() {
                 className="social-sqare"
               >
                 <img src="/icons/footerfb.svg"></img>
-                  <span>海濱</span>
+                <span>海濱</span>
               </Link>
               <Link
                 target="_blank"

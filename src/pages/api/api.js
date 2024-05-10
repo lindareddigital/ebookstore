@@ -567,10 +567,11 @@ class ApiManager {
             }
             tags {
               id
-            category_id {
-              id
+              category_id {
+                id
+              }
             }
-            }
+            meta
         }  
     }
     

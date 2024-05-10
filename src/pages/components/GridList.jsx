@@ -6,21 +6,15 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function GridList({ books }) {
   const [filteredData, setFilteredData] = useState(books);
-
   const router = useRouter();
   const publisher = router.query.slug?.[0];
   const [userId, setId] = useState("");
-
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
-  const [firstRender, setFirstRender] = useState(true);
 
 
   useEffect(() => {
-    // if (firstRender) {
-      setFilteredData(books);
-    //   setFirstRender(false)
-    
+      setFilteredData(books);    
   }, [books]);
 
   useEffect(() => {
@@ -41,7 +35,7 @@ export default function GridList({ books }) {
       });
       const books = await response.json();
       // console.log("user_bookmark", books?.result?.user_bookmark);
-      // console.log(token);
+      console.log(token);
       setBookMark(books?.result?.user_bookmark);
 
       const productIds = books?.result?.user_bookmark?.map(
@@ -49,11 +43,10 @@ export default function GridList({ books }) {
       );
 
       setArr(productIds);
-      // console.log("arr", arr);
+      console.log("arr", arr);
+      return bookMark
     };
-
-    getUserBookMark();
-
+    
     const filterByPublisher = async () => {
       if (!arr || arr.length === 0) {
         return;
@@ -76,11 +69,26 @@ export default function GridList({ books }) {
           return arr?.includes(item.id);
         });
         setFilteredData(filteredData);
-        // console.log(filteredData, "filteredData");
+        console.log(filteredData, "filteredData");
+        return filteredData;
       }
     };
 
-    filterByPublisher();
+
+    const getLikeData = async () => {
+      const books = await filterByPublisher();
+
+      // console.log(books);
+      
+
+      if(token){
+        getUserBookMark();
+      }
+        
+      }
+    
+    getLikeData()
+    // filterByPublisher();
   }, []);
 
   const handleChange = async (item) => {

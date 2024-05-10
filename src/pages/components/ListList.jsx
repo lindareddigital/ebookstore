@@ -42,8 +42,9 @@ export default function ListList({ books }) {
       setArr(productIds);
       // console.log("arr", arr);
     };
-
-    getUserBookMark();
+    if(token){
+      getUserBookMark();
+    }
 
     const filterByPublisher = async () => {
       if (!arr || arr.length === 0) {

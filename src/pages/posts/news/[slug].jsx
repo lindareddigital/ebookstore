@@ -41,52 +41,54 @@ export default function Detail({}) {
 
   // console.log("post data", item);
 
-  if (!item) {
-    return <Error statusCode={404} />;
-  }
 
-  return (
-    <div>
-      {item != null && (
-        <div className="detail-page column-page">
-          <Head>
-            <title>{item?.title}</title>
-          </Head>
-          <Navbar />
-          <MenuBar />
-          <div className="container-fluid fdc">
-            <Breadcrumb data={item?.category?.name} />
+  if (item)
+    return (
+      <div>
+        {item != null && (
+          <div className="detail-page column-page">
+            <Head>
+              <title>{item?.title}</title>
+            </Head>
+            <Navbar />
+            <MenuBar />
+            <div className="container-fluid fdc">
+              <Breadcrumb data={item?.category?.name} />
 
-            <div className="detail">
-              <div class="article-title">
-                <h1>{item?.title}</h1>
-              </div>
-              <div className="content">
-                <>
-                  <img
-                    onClick={() => setShow(true)}
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                    className="primary-img"
-                    alt={item?.key_image?.id}
+              <div className="detail">
+                <div className="article-title">
+                  <h1>{item?.title}</h1>
+                </div>
+                <div className="content">
+                  <>
+                    <img
+                      onClick={() => setShow(true)}
+                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                      className="primary-img"
+                      alt={item?.key_image?.id}
+                    />
+
+                    <div className="info">
+                      <h1>{item?.title}</h1>
+                      <InnerHTML text={item?.content} className="" />
+                    </div>
+                  </>
+
+                  <GalleryModal
+                    show={show}
+                    item={item}
+                    onHide={() => setShow(false)}
                   />
-
-                  <div className="info">
-                    <h1>{item?.title}</h1>
-                    <InnerHTML text={item?.content} className="" />
-                  </div>
-                </>
-
-                <GalleryModal
-                  show={show}
-                  item={item}
-                  onHide={() => setShow(false)}
-                />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
+
+    if (!item) {
+      return <Error statusCode={404} />;
+    }
 }
 

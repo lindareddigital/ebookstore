@@ -108,7 +108,7 @@ export default function Singlepage() {
   useEffect(() => {
     if (menu && slug) {
       const matchedItem = findMenuItemBySlug(menu, slug);
-      console.log("matchedItem", matchedItem, menu, slug);
+      // console.log("matchedItem", matchedItem, menu, slug);
       setMatchedMenuItem(matchedItem);
     }
   }, [menu, slug]);
@@ -169,15 +169,15 @@ export default function Singlepage() {
       setProductTotalCount(
         books?.result?.product_aggregated[0]?.countDistinct?.id
       );
-      console.log("productTotalCount", productTotalCount);
-      console.log("page", page);
+      // console.log("productTotalCount", productTotalCount);
+      // console.log("page", page);
     } catch (error) {
       console.error("Error fetching products by category:", error);
     }
   };
 
   const filterBySeries = async (query_tags) => {
-    console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
+    // console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
 
     const response = await fetch("/api/product/series", {
       method: "POST",
