@@ -2,7 +2,7 @@ import apiManager from "src/pages/api/api";
 
 export default async function handler(req, res) {
   try {
-    console.log("5566", req.body.id,req.body.token);
+    console.log("req", req.body.id,req.body.token);
 
     if (req.body.id === "") {
       return res

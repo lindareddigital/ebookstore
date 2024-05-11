@@ -103,7 +103,7 @@ export default function GridList({ books }) {
 
     if (selected != undefined) {
       //delete
-      const response = await fetch(`api/bookmark/deleteBookMark`, {
+      const response = await fetch(`/api/bookmark/deleteBookMark`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +120,7 @@ export default function GridList({ books }) {
       }
     } else {
       //add
-      const response = await fetch(`api/bookmark/addBookMark`, {
+      const response = await fetch(`/api/bookmark/addBookMark`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

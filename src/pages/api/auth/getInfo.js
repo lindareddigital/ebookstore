@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     const { email } = req.body;
 
-    console.log("7788", process.env.NEXT_PUBLIC_API_URL);
+    console.log("email", email);
     
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {

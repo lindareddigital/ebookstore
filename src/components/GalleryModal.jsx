@@ -91,7 +91,7 @@ export default function GalleryModal({ item,show, onHide }) {
           {item?.images?.map((item) => {
             {
               {
-                /* console.log("5566", item); */
+                /* console.log(item); */
               }
             }
             return (

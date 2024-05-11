@@ -31,7 +31,7 @@ export default function Singlepage() {
   const [products, setProducts] = useState(null);
   const [productTotalCount, setProductTotalCount] = useState(null);
   const [currentView, setCurrentView] = useState("grid");
-  const [myObject, setMyObject] = useState({
+  const [filterCondition, setFilterCondition] = useState({
     sort: ["-date_created"],
   });
 
@@ -85,13 +85,13 @@ export default function Singlepage() {
 
   //預設首頁資料
   const filterByPublisher = async () => {
-    const response = await fetch(`api/product/publisher/${publisher}`, {
+    const response = await fetch(`/api/product/publisher/${publisher}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
+        sort: filterCondition.sort,
         page: page,
         publisher: publisher,
         limit: limit,
@@ -130,7 +130,7 @@ export default function Singlepage() {
     } else {
       filterByPublisher();
     }
-  }, [matchedMenuItem, page, limit, myObject.sort, router]);
+  }, [matchedMenuItem, page, limit, filterCondition.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     const menuItemArray = Object.values(menu);
@@ -156,7 +156,7 @@ export default function Singlepage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          sort_by: myObject.sort,
+          sort_by: filterCondition.sort,
           publisher_slug: publisher,
           category_id: categoryIds,
           page: page,
@@ -176,7 +176,6 @@ export default function Singlepage() {
   };
 
   const filterBySeries = async (query_tags) => {
-    // console.log("filterBySeries", myObject.sort, page, query_tags, publisher);
 
     const response = await fetch("/api/product/series", {
       method: "POST",
@@ -184,7 +183,7 @@ export default function Singlepage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
+        sort: filterCondition.sort,
         page: page,
         series_tags: query_tags,
         publisher_slug: publisher,
@@ -448,7 +447,7 @@ export default function Singlepage() {
                         className="form-select"
                         aria-label="Default select example"
                         onChange={(event) => {
-                          setMyObject((prev) => ({
+                          setFilterCondition((prev) => ({
                             ...prev,
                             sort: [event.target.value],
                           }));

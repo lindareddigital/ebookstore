@@ -12,13 +12,12 @@ import Navbar from "src/components/molecules/Navbar";
 import Breadcrumb from "src/components/molecules/Breadcrumb";
 
 export default function slug({}) {
-  // const [tab, setTab] = useState("collection");
   const router = useRouter();
   const [info, setInfo] = useState(null);
   const [isLogin, setLogin] = useState(false);
   const tab = router.query.slug;
 
-  console.log('5566',tab);
+  // console.log('tab',tab);
   
 
   useEffect(() => {
@@ -52,13 +51,6 @@ export default function slug({}) {
     }
   }, []);
 
-   useEffect(() => {
-       console.log("Slug has changed from");
-     
-   }, [router.query.slug]); 
-
-
-
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpiry");
@@ -70,7 +62,6 @@ export default function slug({}) {
   };
 
   const renderContent = () => {
-    console.log("collectioncollection", tab);
     if (tab === "info") {
       return <Info info={info} />;
     }
@@ -86,7 +77,6 @@ export default function slug({}) {
     if (tab === "contribution") {
       return <Contribution />;
     }
-    console.log("tab", tab);
   };
 
 
@@ -95,7 +85,7 @@ export default function slug({}) {
       <div className="manage-page">
         <Navbar />
         <MenuBar />
-        <Breadcrumb data={"會員中心1"} />
+        <Breadcrumb data={"會員中心"} />
         {isLogin && (
           <div className="container-fluid">
             <div className="content">

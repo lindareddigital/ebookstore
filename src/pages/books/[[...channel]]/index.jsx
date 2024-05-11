@@ -21,9 +21,9 @@ export default function Listing() {
   const [books, setBooks] = useState(null);
   const [length, setLength] = useState(0);
   const categoryIds = useRef([]);
-  const [myObject, setMyObject] = useState({
+  const [filterCondition, setFilterCondition] = useState({
     sort: ["-date_created"],
-    title: ""
+    title: "",
   });
   const isFirstRendering = useRef(true);
   const [currentView, setCurrentView] = useState("grid");
@@ -48,12 +48,12 @@ export default function Listing() {
     }
   }, [siteMenu, slug]);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (matchedMenuItem && matchedMenuItem.type === "product_by_category") {
       const categoryIds = matchedMenuItem.category.map(
         (category) => category.category_id.id
       );
-      setMyObject((prev) => ({
+      setFilterCondition((prev) => ({
         ...prev,
         title: matchedMenuItem.title,
       }));
@@ -63,18 +63,18 @@ export default function Listing() {
       matchedMenuItem?.query_tags != null
     ) {
       // console.log("matchedMenuItem.query_tags", matchedMenuItem);
-      setMyObject((prev) => ({
+      setFilterCondition((prev) => ({
         ...prev,
         title: matchedMenuItem.title,
       }));
       filterBySeries(matchedMenuItem?.query_tags);
-    }else{
-      setMyObject((prev) => ({
+    } else {
+      setFilterCondition((prev) => ({
         ...prev,
         title: "",
       }));
     }
-  }, [matchedMenuItem, page, limit, myObject.sort, router]);
+  }, [matchedMenuItem, page, limit, filterCondition.sort, router]);
 
   const findMenuItemBySlug = (menu, slug) => {
     for (const menuItem of menu) {
@@ -88,13 +88,8 @@ export default function Listing() {
   };
 
   useEffect(() => {
-    // console.log("myObject", myObject);
-    // if (isFirstRendering.current) {
-    //   isFirstRendering.current = false;
-    //   return;
-    // }
     filterBooks();
-  }, [page, limit, myObject.sort,router]);
+  }, [page, limit, filterCondition.sort, router]);
 
   useEffect(() => {
 
@@ -134,7 +129,7 @@ export default function Listing() {
         } else {
           // console.log('not found');
           setTitle("");
-          setMyObject((prev) => ({
+          setFilterCondition((prev) => ({
             ...prev,
             title: "",
           }));
@@ -158,7 +153,7 @@ export default function Listing() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
+        sort: filterCondition.sort,
         page: page,
         publisher: "polis-press",
         limit: 15,
@@ -187,7 +182,7 @@ export default function Listing() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort_by: myObject.sort,
+        sort_by: filterCondition.sort,
         limit: limit,
         publisher_slug: "polis-press",
         category_id: categoryIds,
@@ -210,7 +205,7 @@ export default function Listing() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        sort: myObject.sort,
+        sort: filterCondition.sort,
         page: page,
         series_tags: query_tags,
         publisher_slug: "polis-press",
@@ -230,7 +225,7 @@ export default function Listing() {
     const categoryArr = arr?.map((item) => item?.category_id?.id);
     const check =
       arr?.[0] && arr?.[0].hasOwnProperty("category_id") ? categoryArr : arr;
-      setMyObject((prev) => ({
+      setFilterCondition((prev) => ({
         ...prev,
         arr: [check],
       }));
@@ -326,12 +321,12 @@ export default function Listing() {
           <SidebarWrapper />
           <ListAside siteMenu={siteMenu} />
           <div className="right-side">
-          {myObject.title!="" &&
-            <div className="block-title">
-              <div className="dot"></div>
-              {title} {myObject.title}
-            </div>
-          }
+            {filterCondition.title != "" && (
+              <div className="block-title">
+                <div className="dot"></div>
+                {title} {filterCondition.title}
+              </div>
+            )}
 
             <div className="listing-toolbar">
               <div className="amount">
@@ -361,7 +356,7 @@ export default function Listing() {
                     aria-label="Default select example"
                     defaultValue={"DEFAULT"}
                     onChange={(event) => {
-                      setMyObject((prev) => ({
+                      setFilterCondition((prev) => ({
                         ...prev,
                         sort: [event.target.value],
                       }));
@@ -396,7 +391,9 @@ export default function Listing() {
 
                 {panelView == "filter" &&
                   siteMenu?.map((item) => {
-                    {/* console.log(item) */}
+                    {
+                      /* console.log(item) */
+                    }
                     return (
                       <ul className="">
                         <div className="title">{item?.item?.title}</div>
@@ -406,7 +403,7 @@ export default function Listing() {
                               onClick={() =>
                                 handleClick(
                                   item.item.channel,
-                                  menuItem?.site_menu_items_id,
+                                  menuItem?.site_menu_items_id
                                 )
                               }
                             >
@@ -424,7 +421,7 @@ export default function Listing() {
                       data-value="-date_created"
                       onClick={(event) => {
                         const value = event.target.getAttribute("data-value");
-                        setMyObject((prev) => ({
+                        setFilterCondition((prev) => ({
                           ...prev,
                           sort: [value],
                         }));
@@ -436,7 +433,7 @@ export default function Listing() {
                       data-value="date_created"
                       onClick={(event) => {
                         const value = event.target.getAttribute("data-value");
-                        setMyObject((prev) => ({
+                        setFilterCondition((prev) => ({
                           ...prev,
                           sort: [value],
                         }));

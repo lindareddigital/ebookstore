@@ -56,7 +56,7 @@ export default function Share({}) {
 
     const fetchAll = async () => {
       try {
-        const response = await fetch(`api/allColumns`);
+        const response = await fetch(`/api/allColumns`);
 
         const data = await response.json();
         setAllPost(data?.data?.posts);
@@ -123,6 +123,7 @@ export default function Share({}) {
       for (let i = 1; i <= Math.ceil(length / 5); i++) {
         pageNumbers.push(
           <li
+            key={i}
             onClick={() => {
               updatePage(i);
             }}
@@ -181,8 +182,9 @@ export default function Share({}) {
               >
                 <img className="topright" src="/icons/leftboxicon.svg"></img>
 
-                {menu?.map((item) => (
+                {menu?.map((item,index) => (
                   <button
+                    key={`button-${index}`}
                     className={`nav-link ${
                       selected?.site_menu_items_id?.title ===
                       item?.site_menu_items_id?.title
@@ -225,10 +227,10 @@ export default function Share({}) {
                   </select>
                 </div>
 
-                {data?.map((item) => {
+                {data?.map((item,index) => {
                   return (
                     <>
-                      <div className="share-list-item overflow-hidden">
+                      <div key={index} className="share-list-item overflow-hidden">
                         <Link
                           href={`/columns/${item.id}`}
                           className="post-thumb"
@@ -247,9 +249,9 @@ export default function Share({}) {
                           </h4>
                           <p className="post-excerpt">專欄主題:</p>
                           <div className="post-meta">
-                            {item?.tags?.map((item) => {
+                            {item?.tags?.map((item,index) => {
                               return (
-                                <div className="post-meta-tag category">
+                                <div key={index} className="post-meta-tag category">
                                   {item}
                                 </div>
                               );
@@ -268,17 +270,16 @@ export default function Share({}) {
               </div>
 
               <div className="posts-categories">
-                {tagsWithLength?.map((item) => {
+                {tagsWithLength?.map((item,index) => {
                   return (
-                    <>
-                      <div
-                        onClick={() => handleClick(item.category_id)}
-                        className="posts-category"
-                      >
-                        <div className="">{item.name}</div>
-                        <div className="">{item.length}</div>
-                      </div>
-                    </>
+                    <div
+                      key={index}
+                      onClick={() => handleClick(item.category_id)}
+                      className="posts-category"
+                    >
+                      <div className="">{item.name}</div>
+                      <div className="">{item.length}</div>
+                    </div>
                   );
                 })}
               </div>
@@ -289,10 +290,10 @@ export default function Share({}) {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                {data?.map((item) => {
+                {data?.map((item,index) => {
                   return (
                     <>
-                      <div className="share-list-item overflow-hidden">
+                      <div key={index} className="share-list-item overflow-hidden">
                         <Link href="/" className="post-thumb">
                           <img
                             className="q-img__image"
@@ -308,9 +309,9 @@ export default function Share({}) {
                           </h4>
                           <p className="post-excerpt">專欄主題:</p>
                           <div className="post-meta">
-                            {item?.tags?.map((item) => {
+                            {item?.tags?.map((item,index) => {
                               return (
-                                <div className="post-meta-tag category">
+                                <div key={index} className="post-meta-tag category">
                                   {item}
                                 </div>
                               );

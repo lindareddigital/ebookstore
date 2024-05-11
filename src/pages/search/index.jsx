@@ -40,7 +40,7 @@ export default function Search({}) {
       decodedQuery = query.split("=")[0];
     }
 
-    console.log("decodedQuery", decodedQuery);
+    // console.log("decodedQuery", decodedQuery);
 
     const response = await fetch("/api/search", {
       method: "POST",
