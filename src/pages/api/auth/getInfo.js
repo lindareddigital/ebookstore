@@ -5,10 +5,10 @@ export default async function handler(req, res) {
   try {
     const { email } = req.body;
 
-    console.log('7788',email);
+    console.log("7788", process.env.NEXT_PUBLIC_API_URL);
     
 
-    const response = await fetch(`https://directus-cms.vicosys.com.hk/users/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -16,11 +16,11 @@ export default async function handler(req, res) {
       },
     });
 
-    const data = await response.json();
+    const result = await response.json();
 
     // console.log(data.data);
 
-    res.status(200).json({ data: data.data });
+    res.status(200).json({ result });
   } catch (error) {
     res.status(500).json({ error });
 

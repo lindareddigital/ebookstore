@@ -18,18 +18,8 @@ export default function HomeTabTwo() {
   const { next, previous } = useSwiperFunc(swiperRef);
 
 
-  const tabChange = (async(id) => {
-
-    setBooks(data.data)
-    console.log('CategoryList',data);
-      
-  });
-
   useEffect( () => {
   }, []);
-
-
-
 
   return(
     <>
@@ -68,7 +58,7 @@ export default function HomeTabTwo() {
                     >
                       <div className="book-item">
                         <img
-                          src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/${item.PrimaryImage.id}`}
                           className=""
                           alt={item.title}
                         />
@@ -106,7 +96,7 @@ export default function HomeTabTwo() {
           return (
             <div className="">
               <img
-                src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage?.id}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${item.PrimaryImage?.id}`}
                 className=""
                 alt={item.title}
               />
@@ -153,7 +143,7 @@ export default function HomeTabTwo() {
                     >
                       <div className="book-item">
                         <img
-                          src={`https://directus-cms.vicosys.com.hk/${item.PrimaryImage.id}`}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/${item.PrimaryImage.id}`}
                           className=""
                           alt={item.title}
                         />

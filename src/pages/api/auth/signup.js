@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     const { email, password } = req.body;
 
-    const response = await fetch("https://directus-cms.vicosys.com.hk/users", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

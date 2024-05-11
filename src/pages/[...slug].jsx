@@ -313,7 +313,7 @@ export default function Singlepage() {
           <div className="home-banner">
             {banner != "" && (
               <img
-                src={`https://directus-cms.vicosys.com.hk/assets/${banner}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${banner}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 className=""
                 alt="banner"
               ></img>

@@ -1,25 +1,13 @@
 import { cache } from 'react';
 import { useEffect, useRef,useState } from 'react';
-import apiManager from 'src/pages/api/api';
 import useSwiperFunc from 'src/hooks/useSwiperFunc';
 import Link from 'next/link';
-
-
 
 
 export default function Breadcrumb({data}) {
 
   const [books, setBooks] = useState([]);
-
   const url = '';
-
-
-  const tabChange = (async(id) => {
-
-    setBooks(data.data)
-    console.log('CategoryList',data);
-      
-  });
 
 
   return(

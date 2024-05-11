@@ -31,13 +31,13 @@ function Login() {
       localStorage.setItem("token", data.data.access_token);
       localStorage.setItem("email", email);
 
-       router.push("/member");
+       router.push("/member/info");
      }
    };
 
   useEffect(() => {
     if (localStorage.getItem("email") != null) {
-      router.push("/member");
+      router.push("/member/info");
     }
 
   }, []);

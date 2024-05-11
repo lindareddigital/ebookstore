@@ -51,7 +51,7 @@ export default function Download() {
                       target="_blank"
                       href={
                         !item?.external_url
-                          ? `https://directus-cms.vicosys.com.hk/assets/${item?.file?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.file?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`
                           : item?.external_url
                       }
                       className="search-btn"

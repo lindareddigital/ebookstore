@@ -221,13 +221,13 @@ export default function Search({}) {
                         >
                           <img
                             className="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             alt=""
                           ></img>
                         </Link>
                         <div className="post-info">
                           <h4 className="post-title">
-                            <Link href={`/column/${item.id}`} className="">
+                            <Link href={`/columns/${item.id}`} className="">
                               {item?.title}
                             </Link>
                           </h4>

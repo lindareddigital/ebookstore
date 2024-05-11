@@ -168,7 +168,7 @@ export default function GridList({ books }) {
                       className=""
                     >
                       <img
-                        src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                         className=""
                         alt={item.title}
                       />

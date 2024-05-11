@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const Endpoint = "https://directus-cms.vicosys.com.hk";
+const Endpoint = `${process.env.NEXT_PUBLIC_API_URL}`;
 const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 import {
   createDirectus,
@@ -92,7 +92,7 @@ class ApiManager {
   useUserToken = async (gql, token) => {
     // console.log("90", token);
 
-    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+    const client = createDirectus(`${process.env.NEXT_PUBLIC_API_URL}`)
       .with(graphql({ credentials: "include" }))
       .with(staticToken(token));
 
@@ -102,7 +102,7 @@ class ApiManager {
   };
 
   sdk = async (gql) => {
-    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+    const client = createDirectus(`${process.env.NEXT_PUBLIC_API_URL}`)
       .with(graphql({ credentials: "include" }))
       .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
 
@@ -113,7 +113,7 @@ class ApiManager {
 
   patchForm = async (token, id, transformedArray) => {
     const res = await fetch(
-      `https://directus-cms.vicosys.com.hk/items/contact_form/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/items/contact_form/${id}`,
       {
         method: "PATCH",
         headers: {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Toast from "react-bootstrap/Toast";
 import Link from "next/link";
+import { isValidEmail } from "src/utilities/tool.js";
 
 import {
   createDirectus,
@@ -43,7 +44,7 @@ export default function ContactUs() {
     const type = formData.get("type");
     const content = formData.get("content");
 
-    const client = createDirectus("https://directus-cms.vicosys.com.hk")
+    const client = createDirectus(`${process.env.NEXT_PUBLIC_API_URL}`)
       .with(rest())
       .with(staticToken(process.env.NEXT_PUBLIC_TOKEN));
 
@@ -80,7 +81,7 @@ export default function ContactUs() {
     let token = localStorage.getItem("token");
 
     const response = await fetch(
-      "https://directus-cms.vicosys.com.hk/items/contact_form",
+      `${process.env.NEXT_PUBLIC_API_URL}/items/contact_form`,
       {
         method: "POST",
         headers: {
@@ -98,10 +99,10 @@ export default function ContactUs() {
       }
     );
 
-    const data = await response.json();
-    console.log("pass form success", data.data.id);
+    const res = await response.json();
+    console.log("pass form success", res.data.id);
     setShowToast(true);
-    const id = data.data.id
+    const id = res.data.id
 
     // 有檔案才把檔案放進form
     if (fileInput.files.length > 0) {
@@ -153,10 +154,6 @@ export default function ContactUs() {
       setIsDisabled(false); 
     }
     return errors;
-  };
-
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
   return (

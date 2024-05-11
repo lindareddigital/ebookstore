@@ -7,6 +7,7 @@ import Breadcrumb from "src/components/molecules/Breadcrumb";
 import Head from "next/head";
 import Link from "next/link";
 import Toast from "react-bootstrap/Toast";
+import { isValidEmail } from "src/utilities/tool.js";
 
 
 function Forgetpassword() {
@@ -41,7 +42,7 @@ function Forgetpassword() {
       const data = await response.json();
       console.log("token", data);
       setToastContent("更改密碼成功！");
-      router.push("/member");
+      router.push("/member/info");
 
       // localStorage.setItem("token", data.data.access_token);
     } else {
@@ -87,13 +88,9 @@ function Forgetpassword() {
     return errors;
   };
 
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
   useEffect(() => {
     if (localStorage.getItem("email") != null) {
-      router.push("/member");
+      router.push("/member/info");
     }
   }, []);
 

@@ -208,8 +208,10 @@ export default function Detail({}) {
         <div className="detail-page">
           <Head>
             <title>{item.title}</title>
-            { item?.meta?.map((item, index) => {
-              return <meta key={index} property={item.key} content={item.value} />;
+            {item?.meta?.map((item, index) => {
+              return (
+                <meta key={index} property={item.key} content={item.value} />
+              );
             })}
           </Head>
           <Navbar />
@@ -222,7 +224,7 @@ export default function Detail({}) {
                 <>
                   <img
                     onClick={() => setShow(true)}
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.cover_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className="primary-img"
                     alt={item.cover_image}
                   />

@@ -235,7 +235,7 @@ export default function Share({}) {
                         >
                           <img
                             className="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             alt=""
                           ></img>
                         </Link>
@@ -296,7 +296,7 @@ export default function Share({}) {
                         <Link href="/" className="post-thumb">
                           <img
                             className="q-img__image"
-                            src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                             alt=""
                           ></img>
                         </Link>

@@ -16,12 +16,12 @@ export default async function handler(req, res) {
     console.log("deleteBookMark", user,product,id);
 
     const response = await fetch(
-      `https://directus-cms.vicosys.com.hk/items/user_bookmark/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/items/user_bookmark/${id}`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ user: user, product: product }),
       }

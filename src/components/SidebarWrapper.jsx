@@ -20,13 +20,6 @@ export default function SidebarWrapper() {
     window.scrollTo(0, 0);
   }
 
-  const tabChange = (async(id) => {
-
-    setBooks(data.data)
-    console.log('CategoryList',data);
-      
-  });
-
   return (
     <div className="sidebar-wrapper scroll-cling-top">
       {/* <div className="scroll-active"><div id="sidebar-menu-3-0" className="d-none d-lg-flex tab">

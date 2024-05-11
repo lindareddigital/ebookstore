@@ -18,6 +18,10 @@ import { Metadata } from 'next';
 //   return imageDataUrl;
 // };
 
+export const isValidEmail = (email) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 export const isInTimeRange = (start, end) =>{
   // Convert start and end times to Date objects
   const startDate = new Date(start);

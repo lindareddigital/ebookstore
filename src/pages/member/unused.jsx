@@ -33,9 +33,9 @@ export default function Manage({}) {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const res = await response.json();
           // console.log(data.data, "all data");
-          const info = data?.data?.find((item) => {
+          const info = res?.data?.find((item) => {
             return item.email === email;
           });
 

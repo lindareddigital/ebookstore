@@ -197,19 +197,19 @@ export default function Home() {
           <div className="wrapper">
             {posts?.item?.posts?.map((item,index) => {
               return (
-                  <Link
-                    href={`/posts/news/${item?.id}`}
-                    className="e-banner-product"
-                    key={index}
-                  >
-                    {/* <img
-                      src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                <Link
+                  href={`/posts/news/${item?.id}`}
+                  className="e-banner-product"
+                  key={index}
+                >
+                  {/* <img
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                       alt={item.title}
                     /> */}
 
-                    <div className="desc">{item.title}</div>
-                    <div className="desc">{item.tags}</div>
-                  </Link>
+                  <div className="desc">{item.title}</div>
+                  <div className="desc">{item.tags}</div>
+                </Link>
               );
             })}
           </div>
@@ -270,7 +270,7 @@ export default function Home() {
                     key={index}
                   >
                     <img
-                      src={`https://directus-cms.vicosys.com.hk/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item.block_hero_id.image.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                       className=""
                       alt={item.block_hero_id.headline}
                     ></img>

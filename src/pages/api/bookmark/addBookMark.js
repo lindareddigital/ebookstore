@@ -15,12 +15,12 @@ export default async function handler(req, res) {
     const token = req.body.token;
 
     const response = await fetch(
-      `https://directus-cms.vicosys.com.hk/items/user_bookmark`,
+      `${process.env.NEXT_PUBLIC_API_URL}/items/user_bookmark`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ user: user, product: product }),
       }

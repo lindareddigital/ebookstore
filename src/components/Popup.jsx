@@ -28,7 +28,7 @@ export default function Popup({ promotion, onHide,show }) {
               <Link target="_blank" href={`${promotion?.item?.url}`}>
                 <img
                   className=""
-                  src={`https://directus-cms.vicosys.com.hk/assets/${promotion?.item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${promotion?.item?.image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                 />
               </Link>
             </Modal.Body>

@@ -60,7 +60,7 @@ export default function Detail({}) {
                 <>
                   <img
                     onClick={() => setShow(true)}
-                    src={`https://directus-cms.vicosys.com.hk/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
                     className="primary-img"
                     alt={item?.key_image?.id}
                   />

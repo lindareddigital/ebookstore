@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { email, password } = req.body;
 
     const response = await fetch(
-      "https://directus-cms.vicosys.com.hk/auth/login",
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
