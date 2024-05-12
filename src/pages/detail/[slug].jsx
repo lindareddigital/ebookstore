@@ -9,64 +9,70 @@ import GalleryModal from "src/components/GalleryModal";
 import Navbar from "src/components/molecules/Navbar";
 import Breadcrumb from "src/components/molecules/Breadcrumb";
 import Error from "next/error";
+import Loading from "src/components/molecules/Loading";
 
 export default function Detail({}) {
   const [show, setShow] = useState(false);
   const [item, setItem] = useState(null);
   const [books, setBooks] = useState(null);
-
-  const router = useRouter();
-  const id = router.query.slug;
-
-  // console.log("id", id);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [filteredData, setFilteredData] = useState(books);
-
   const [userId, setId] = useState("");
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
   const [isLogin, setLogin] = useState(false);
 
+  const router = useRouter();
+  const id = router.query.slug;
+
+  // console.log("id", id);
+ 
+
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const res = await fetch(`/api/product/${id}`);
         const result = await res.json();
-        // console.log("res", result.data.product[0]);      
+        // console.log("result", result.data.product[0]);
         setItem(result.data.product[0]);
-        return result
-        
+        return result;
       } catch (error) {
-        // console.error("", error);
+        // console.log("", error);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchData();
 
     const getProductsByCategory = async (categoryIds) => {
-
       const response = await fetch(`/api/product/category`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            sort_by: ["-date_created"],
-            publisher_slug: "polis-press",
-            category_id: categoryIds,
-            page: 1,
-            limit: 5,
-          }),
-        });
-        const books = await response.json();
-        setBooks(books?.result?.product);
-        return books
-        // console.log("books", books.result.product);
-    }
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sort_by: ["-date_created"],
+          publisher_slug: "polis-press",
+          category_id: categoryIds,
+          page: 1,
+          limit: 5,
+        }),
+      });
+      const books = await response.json();
+      setBooks(books?.result?.product);
+      return books;
+      // console.log("books", books.result.product);
+    };
 
     const getDetailData = async () => {
-      const result = await fetchData(); 
+      const result = await fetchData();
       // console.log(result);
-           
+
       const categoryIds = result?.data?.product?.[0]?.tags?.map(
         (category) => category.category_id.id
       );
@@ -74,12 +80,12 @@ export default function Detail({}) {
 
       if (categoryIds) {
         const result = await getProductsByCategory(categoryIds);
-        // console.log('76',result);        
+        // console.log('76',result);
         setBooks(result?.result?.product);
       }
     };
 
-    getDetailData();      
+    getDetailData();
   }, [id]);
 
 
@@ -149,54 +155,59 @@ export default function Detail({}) {
     filterByPublisher();
   }, [arr]);
 
-    const handleChange = async (item) => {
-      // console.log("click item.id", item.id);
+  const handleChange = async (item) => {
+    // console.log("click item.id", item.id);
 
-      // console.log("bookMark", bookMark);
+    // console.log("bookMark", bookMark);
 
-      const selected = bookMark?.find((book) => book.product.id === item.id);
-      // console.log("selected", selected);
+    const selected = bookMark?.find((book) => book.product.id === item.id);
+    // console.log("selected", selected);
 
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-      if (selected != undefined) {
-        //delete
-        const response = await fetch(`/api/bookmark/deleteBookMark`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            token: token,
-            user: userId,
-            product: item.id,
-            id: selected?.id,
-          }),
-        });
-        if (response.status === 204) {
-          console.log("Bookmark deleted successfully.");
-        }
-      } else {
-        //add
-        const response = await fetch(`/api/bookmark/addBookMark`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            token: token,
-            user: userId,
-            product: item.id,
-            id: selected?.id,
-          }),
-        });
-        const data = await response.json();
-        console.log("add func", data);
+    if (selected != undefined) {
+      //delete
+      const response = await fetch(`/api/bookmark/deleteBookMark`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          user: userId,
+          product: item.id,
+          id: selected?.id,
+        }),
+      });
+      if (response.status === 204) {
+        console.log("Bookmark deleted successfully.");
       }
+    } else {
+      //add
+      const response = await fetch(`/api/bookmark/addBookMark`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          user: userId,
+          product: item.id,
+          id: selected?.id,
+        }),
+      });
+      const data = await response.json();
+      console.log("add func", data);
+    }
 
-    };
+  };
 
   // console.log("detaildetail", item);
+
+  
+  if (loading) {
+    return <Loading/>;
+  }
 
   if (!item) {
     return <Error statusCode={404} />;

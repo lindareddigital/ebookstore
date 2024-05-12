@@ -64,8 +64,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href={{
-                        pathname: `/member/`,
-                        query: { tab: "info" },
+                        pathname: `/member/info`,
                       }}
                     >
                       會員專區
@@ -74,8 +73,7 @@ export default function Footer() {
                   <li>
                     <Link
                       href={{
-                        pathname: `/member/`,
-                        query: { tab: "collection" },
+                        pathname: `/member/collection`,
                       }}
                     >
                       我的收藏
@@ -138,24 +136,12 @@ export default function Footer() {
           <div className="box">
             <li className="title">會員中心</li>
             <li>
-              <Link
-                href={{
-                  pathname: `/member/`,
-                  query: { tab: "info" },
-                }}
-              >
+              <Link href={{pathname: `/member/info`}}>
                 會員專區
               </Link>
             </li>
             <li>
-              <Link
-                href={{
-                  pathname: `/member/`,
-                  query: { tab: "collection" },
-                }}
-              >
-                我的收藏
-              </Link>
+              <Link href={{ pathname: `/member/collection` }}>我的收藏</Link>
             </li>
             <li>
               <Link href="">訂閱新書通知</Link>

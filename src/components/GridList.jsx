@@ -22,6 +22,9 @@ export default function GridList({ books }) {
     const token = localStorage.getItem("token");
     setId(userId);
 
+    console.log(userId,token);
+    
+
     const getUserBookMark = async () => {
       const response = await fetch(`/api/bookmark/getUserBookMark`, {
         method: "POST",
@@ -34,7 +37,7 @@ export default function GridList({ books }) {
         }),
       });
       const books = await response.json();
-      // console.log("user_bookmark", books?.result?.user_bookmark);
+      console.log("user_bookmark", books?.result?.user_bookmark);
       // console.log(token);
       setBookMark(books?.result?.user_bookmark);
 
@@ -72,23 +75,28 @@ export default function GridList({ books }) {
           return arr?.includes(item.id);
         });
         setFilteredData(filteredData);
-        // console.log(filteredData, "filteredData");
+        console.log(filteredData, "filteredData");
         return filteredData;
       }
     };
 
 
     const getLikeData = async () => {
-      const books = await filterByPublisher();      
+      const books = await filterByPublisher();
 
-      if(token){
+      const filteredData = books?.result?.product?.filter((item) => {
+        return arr?.includes(item.id);
+      });
+      setFilteredData(filteredData);
+      console.log(filteredData, "filteredData");
+
+      if (token) {
         getUserBookMark();
       }
-        
-    }
+    };
     
     getLikeData()
-    // filterByPublisher();
+    filterByPublisher();
   }, []);
 
   const handleChange = async (item) => {

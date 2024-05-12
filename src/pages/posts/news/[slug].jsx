@@ -23,9 +23,9 @@ export default function Detail({}) {
     const fetchData = async () => {
       try {
         const res = await fetch(`/api/posts/${id}`);
-        const data = await res.json();  
+        const result = await res.json();  
             
-        const item = data.data.posts[0];
+        const item = result.data.posts[0];
         setItem(item);
         setIsLoading(false);
       } catch (error) {
