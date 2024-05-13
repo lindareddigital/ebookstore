@@ -22,7 +22,7 @@ export default function GridList({ books }) {
     const token = localStorage.getItem("token");
     setId(userId);
 
-    console.log(userId,token);
+    console.log("userId", userId, "token", token);
     
 
     const getUserBookMark = async () => {
@@ -84,15 +84,18 @@ export default function GridList({ books }) {
     const getLikeData = async () => {
       const books = await filterByPublisher();
 
+      if (token) {
+        const result = await getUserBookMark();
+        console.log(result);
+      }
+
       const filteredData = books?.result?.product?.filter((item) => {
         return arr?.includes(item.id);
       });
       setFilteredData(filteredData);
       console.log(filteredData, "filteredData");
 
-      if (token) {
-        getUserBookMark();
-      }
+      
     };
     
     getLikeData()

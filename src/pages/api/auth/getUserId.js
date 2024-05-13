@@ -2,22 +2,21 @@
 export default async function handler(req, res) {
   try {
 
-    const id = req.body.id;    
+    const token = req.body.token
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
     if (response.ok) {
       const result = await response.json();
-      
       res.status(200).json({ result });
     } else {
       const error = new Error(

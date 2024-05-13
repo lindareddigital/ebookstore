@@ -21,30 +21,42 @@ export default function slug({}) {
   
 
   useEffect(() => {
-    if (localStorage.getItem("email") != null) {
-      const loadInfo = async () => {
-        const email = localStorage.getItem("email") || "";
+    const token = localStorage.getItem("token");
 
-        const response = await fetch(`/api/auth/getInfo`, {
+    if (localStorage.getItem("token") != null) {
+
+      const loadInfo = async () => {
+
+        const response = await fetch(`/api/auth/getUserId`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ token }),
         });
 
         if (response.ok) {
           const res = await response.json();
-          // console.log(data.data, "all data");
-          const info = res?.data?.find((item) => {
-            return item.email === email;
-          });
-
-          setInfo(info);
-          console.log("info", info);
-
-          localStorage.setItem("id", info?.id);
+          console.log(res.result.data.id, "user id");
+          localStorage.setItem("id", res.result.data.id);
         }
+
+        const id = localStorage.getItem("id");
+
+        const res = await fetch(`/api/auth/getInfo`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token,id }),
+        });
+
+         if (res.ok) {
+           const result = await res.json();
+           setInfo(result.result.data);
+          //  console.log("info", info);
+
+         }
       };
       loadInfo();
       setLogin(true);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Info({ info }) {
-  console.log(info);
+  // console.log(info);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -36,7 +36,7 @@ export default function Info({ info }) {
             姓名<span className="red-word">*</span>
           </label>
           <input
-            value={info?.first_name}
+            value={info?.first_name || ""}
             onChange={handleChange}
             type="fullname"
             className="form-control"
@@ -49,7 +49,7 @@ export default function Info({ info }) {
             生日
           </label>
           <input
-            value={info?.birth}
+            value={info?.birth || ""}
             onChange={handleChange}
             type="birth"
             className="form-control"
@@ -61,7 +61,7 @@ export default function Info({ info }) {
             電郵 <span className="red-word">*</span>
           </label>
           <input
-            value={info?.email}
+            value={info?.email || ""}
             onChange={handleChange}
             type="email"
             className="form-control"
@@ -74,7 +74,7 @@ export default function Info({ info }) {
             手機 <span className="red-word">*</span>
           </label>
           <input
-            value={info?.phone}
+            value={info?.phone || ""}
             onChange={handleChange}
             type="phone"
             className="form-control"
@@ -87,7 +87,7 @@ export default function Info({ info }) {
             地址
           </label>
           <input
-            value={info?.location}
+            value={info?.location || ""}
             onChange={handleChange}
             type="location"
             className="form-control"
