@@ -72,7 +72,7 @@ export default function GalleryModal({ item,show, onHide }) {
               setFirstSwiper(swiper);
             }
           }}
-          preloadimages={false}
+          preloadimages="false"
           rewind={true}
           // controller={{ control: secondSwiper }}
           onActiveIndexChange={onActiveIndexChange}
@@ -88,14 +88,14 @@ export default function GalleryModal({ item,show, onHide }) {
           }}
           modules={[Thumbs, FreeMode, Navigation, Controller]}
         >
-          {item?.images?.map((item) => {
+          {item?.images?.map((item,index) => {
             {
               {
                 /* console.log(item); */
               }
             }
             return (
-              <SwiperSlide key={item.directus_files_id}>
+              <SwiperSlide key={index}>
                 <img
                   className="primary-img"
                   src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.directus_files_id?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
@@ -115,9 +115,7 @@ export default function GalleryModal({ item,show, onHide }) {
           loop={true}
           rewind={true}
           slidesPerView={5}
-          // watchSlidesProgress
-          // touchRatio={0.2}
-          preloadimages={false}
+          preloadimages="false"
           slideToClickedSlide={true}
           ref={subswiperRef}
           onSwiper={setThumbsSwiper}
@@ -133,7 +131,7 @@ export default function GalleryModal({ item,show, onHide }) {
             } */
             }
             return (
-              <SwiperSlide key={i.directus_files_id}>
+              <SwiperSlide key={index}>
                 <div
                   className={`index-area ${
                     index === swiperIndex ? "active" : ""

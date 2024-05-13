@@ -160,10 +160,9 @@ export default function Posts() {
                   role="tabpanel"
                   aria-labelledby="nav-home-tab"
                 >
-                  {data?.blocks[0]?.item?.posts?.map((item) => {
+                  {data?.blocks[0]?.item?.posts?.map((item,index) => {
                     return (
-                      <>
-                        <div className="share-list-item overflow-hidden">
+                        <div key={index} className="share-list-item overflow-hidden">
                           <Link
                             href={`/posts/news/${item.id}`}
                             className="post-thumb"
@@ -185,9 +184,9 @@ export default function Posts() {
                             </h4>
                             <p className="post-excerpt">專欄主題:</p>
                             <div className="post-meta">
-                              {item?.tags?.map((item) => {
+                              {item?.tags?.map((item,index) => {
                                 return (
-                                  <div className="post-meta-tag category">
+                                  <div key={index} className="post-meta-tag category">
                                     {item}
                                   </div>
                                 );
@@ -200,7 +199,6 @@ export default function Posts() {
                             </div>
                           </div>
                         </div>
-                      </>
                     );
                   })}
                 </div>
@@ -211,47 +209,45 @@ export default function Posts() {
                   role="tabpanel"
                   aria-labelledby="nav-profile-tab"
                 >
-                  {data?.blocks[0]?.item?.posts?.map((item) => {
-                    return (
-                      <>
-                        <div className="share-list-item overflow-hidden">
-                          <Link
-                            href={`/posts/news/${item.id}`}
-                            className="post-thumb"
-                          >
-                            <img
-                              className="q-img__image"
-                              src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                              alt=""
-                            ></img>
-                          </Link>
-                          <div className="post-info">
-                            <h4 className="post-title">
-                              <Link
-                                href={`/posts/news/${item.id}`}
-                                className=""
-                              >
-                                {item?.title}
-                              </Link>
-                            </h4>
-                            <p className="post-excerpt">專欄主題:</p>
-                            <div className="post-meta">
-                              {item?.tags?.map((item) => {
-                                return (
-                                  <div className="post-meta-tag category">
-                                    {item}
-                                  </div>
-                                );
-                              })}
-                              <div className="post-meta-date">
-                                2023/09/22
-                                <div className="dot"></div>
-                                小編
-                              </div>
+                  {data?.blocks[0]?.item?.posts?.map((item,index) => {
+                    return (        
+                      <div key={index} className="share-list-item overflow-hidden">
+                        <Link
+                          href={`/posts/news/${item.id}`}
+                          className="post-thumb"
+                        >
+                          <img
+                            className="q-img__image"
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                            alt=""
+                          ></img>
+                        </Link>
+                        <div className="post-info">
+                          <h4 className="post-title">
+                            <Link
+                              href={`/posts/news/${item.id}`}
+                              className=""
+                            >
+                              {item?.title}
+                            </Link>
+                          </h4>
+                          <p className="post-excerpt">專欄主題:</p>
+                          <div className="post-meta">
+                            {item?.tags?.map((item,index) => {
+                              return (
+                                <div key={index} className="post-meta-tag category">
+                                  {item}
+                                </div>
+                              );
+                            })}
+                            <div className="post-meta-date">
+                              2023/09/22
+                              <div className="dot"></div>
+                              小編
                             </div>
                           </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })}
                 </div>

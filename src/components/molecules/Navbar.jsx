@@ -21,7 +21,13 @@ export default function Navbar({}) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    router.push(`/books/${item.slug}`, undefined, {
+
+    if (item.slug = "/") {
+      item.slug = "";
+    }
+    const slug = item.slug ? item.slug : "";
+
+    router.push(`/books/${slug}`, undefined, {
       shallow: true,
     });
   };

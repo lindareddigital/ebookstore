@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Breadcrumb({data}) {
 
   const [books, setBooks] = useState([]);
-  const url = '';
+  const url = '/';
 
 
   return(

@@ -12,14 +12,9 @@ export default function GridList({ books }) {
   const [arr, setArr] = useState([]);
   const [bookMark, setBookMark] = useState(null);
 
-
   useEffect(() => {
     setFilteredData(books);    
   }, [books]);
-
-  useEffect(() => {
-    console.log("arr changed:", arr);
-  }, [arr]); 
 
   useEffect(() => {
     const userId = localStorage.getItem("id");
@@ -55,9 +50,9 @@ export default function GridList({ books }) {
     
     const filterByPublisher = async () => {
       
-      // if (!arr || arr.length === 0) {
-      //   return;
-      // }      
+      if (!arr || arr.length === 0) {
+        return;
+      }      
 
       const response = await fetch(`/api/product/publisher/polis-press`, {
         method: "POST",
@@ -71,7 +66,6 @@ export default function GridList({ books }) {
 
       const books = await response.json();
       console.log(books?.result?.product, "all books");
-
       if (router.pathname.includes("/member")) {
 
         console.log('in member');
@@ -81,12 +75,23 @@ export default function GridList({ books }) {
         });
         setFilteredData(filteredData);
         console.log(filteredData, "filteredData");
-        return filteredData;
+        // return filteredData;
+
       }
+
     };
 
-    getUserBookMark()
-    filterByPublisher();
+    const getLikeData = async () => {
+      const books = await filterByPublisher();
+
+      if (token) {
+        const result = await getUserBookMark();
+        // console.log(result,arr);
+      }
+
+    };
+
+    getLikeData();
 
   }, []);
 
@@ -140,13 +145,8 @@ export default function GridList({ books }) {
   return (
     <>
       <div className="">
-        {/* <div className="title">{props.Title}</div>
-        <hr></hr> */}
         <div className="grid-view">
           {filteredData?.map((item,index) => {
-              {
-                /* console.log(arr?.includes(item?.id),item.id); */
-              }
               return (
                 <div key={uuidv4()} className={``}>
                   <div className="book-item">

@@ -1892,14 +1892,15 @@ footer .container-fluid{
 }
 
 .navbar-nav .nav-link {
-    text-align: left;
-    border-bottom: 1px dotted #d8d8d8;
-    color: var(--Black, #28251C) !important;
-    font-size: 18px;
-    font-weight: 900;
-    line-height: 26.06px;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
+  text-align: left;
+  border-bottom: 1px dotted #d8d8d8;
+  color: var(--Black, #28251C) !important;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 26.06px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .news-tabs{
@@ -2137,6 +2138,7 @@ footer .container-fluid{
   align-items: center;
   justify-content: center;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .post-meta{
@@ -2553,6 +2555,21 @@ footer .accordion{
 
 
 @media (max-width: 992px){
+
+.primary-swiper{
+  width: calc(100vw - 100px);
+  height: unset;
+}
+
+.modal-content .primary-img{
+  width: 100%;
+  height: auto;
+  /* aspect-ratio: 9/16; */
+}
+
+.post-meta-tag.category{
+  margin-bottom: 8px;
+}
 
 .home-recommend-tabs .swiper-button-prev{
 }

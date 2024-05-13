@@ -57,12 +57,12 @@ export default function Search({}) {
 
      setBooks(result.books.product);
      setPosts(result.posts.posts);
-     console.log(result, posts, books);
+    //  console.log(result, posts, books);
      setArr([
        result.posts?.posts_aggregated?.[0].count?.id,
        result.books?.product_aggregated?.[0].count?.id,
      ]);
-     console.log('arr',arr);
+    //  console.log('arr',arr);
      
   };
 
@@ -73,7 +73,7 @@ export default function Search({}) {
       return null;
     }
    }, [selected]);
-    console.log("length", length);
+    // console.log("length", length);
    
 
   const handleSelected = (item) => {
@@ -211,44 +211,42 @@ export default function Search({}) {
                 aria-labelledby="nav-home-tab"
               >
 
-                {posts?.map((item) => {
+                {posts?.map((item,index) => {
                   return (
-                    <>
-                      <div className="share-list-item overflow-hidden">
-                        <Link
-                          href={`/columns/${item.id}`}
-                          className="post-thumb"
-                        >
-                          <img
-                            className="q-img__image"
-                            src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
-                            alt=""
-                          ></img>
-                        </Link>
-                        <div className="post-info">
-                          <h4 className="post-title">
-                            <Link href={`/columns/${item.id}`} className="">
-                              {item?.title}
-                            </Link>
-                          </h4>
-                          <p className="post-excerpt">專欄主題:</p>
-                          <div className="post-meta">
-                            {item?.tags?.map((item) => {
-                              return (
-                                <div className="post-meta-tag category">
-                                  {item}
-                                </div>
-                              );
-                            })}
-                            <div className="post-meta-date">
-                              2023/09/22
-                              <div className="dot"></div>
-                              小編
-                            </div>
+                    <div key={index} className="share-list-item overflow-hidden">
+                      <Link
+                        href={`/columns/${item.id}`}
+                        className="post-thumb"
+                      >
+                        <img
+                          className="q-img__image"
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/assets/${item?.key_image?.id}?access_token=${process.env.NEXT_PUBLIC_TOKEN}`}
+                          alt=""
+                        ></img>
+                      </Link>
+                      <div className="post-info">
+                        <h4 className="post-title">
+                          <Link href={`/columns/${item.id}`} className="">
+                            {item?.title}
+                          </Link>
+                        </h4>
+                        <p className="post-excerpt">專欄主題:</p>
+                        <div className="post-meta">
+                          {item?.tags?.map((item,index) => {
+                            return (
+                              <div key={index} className="post-meta-tag category">
+                                {item}
+                              </div>
+                            );
+                          })}
+                          <div className="post-meta-date">
+                            2023/09/22
+                            <div className="dot"></div>
+                            小編
                           </div>
                         </div>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
               </div>

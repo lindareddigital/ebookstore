@@ -10,9 +10,8 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
 
   const handleClick = (item) => {
 
-    console.log(item);
+    // console.log(item);
     
-
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
