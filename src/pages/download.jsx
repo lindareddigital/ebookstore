@@ -33,14 +33,14 @@ export default function Download() {
       <div className="">
         <div className="download form-area">
           {data?.blocks?.map((block, index) => (
-            <>
+            <span key={`block-${index}`}>
               <div key={`block-${index}`} className="block-title">
                 <div className="dot"></div>
                 {block?.item?.title}
               </div>
 
-              {block?.item?.download_item?.map((item,index) => (
-                <div key={`item-${index}`} className="">
+              {block?.item?.download_item?.map((item, index) => (
+                <div key={`item-${index}`} className="download-item">
                   <div className="input-group">
                     <input
                       placeholder={item?.title}
@@ -62,7 +62,7 @@ export default function Download() {
                   </div>
                 </div>
               ))}
-            </>
+            </span>
           ))}
         </div>
       </div>

@@ -37,7 +37,7 @@ export default function slug({}) {
 
         if (response.ok) {
           const res = await response.json();
-          console.log(res.result.data.id, "user id");
+          // console.log(res.result.data.id, "user id");
           localStorage.setItem("id", res.result.data.id);
         }
 
@@ -60,6 +60,8 @@ export default function slug({}) {
       };
       loadInfo();
       setLogin(true);
+    }else{
+      logout()
     }
   }, []);
 
@@ -68,7 +70,7 @@ export default function slug({}) {
     localStorage.removeItem("tokenExpiry");
     localStorage.removeItem("email");
 
-    router.push(`/`, undefined, {
+    router.push(`/login`, undefined, {
       shallow: true,
     });
   };
@@ -90,8 +92,7 @@ export default function slug({}) {
       return <Contribution />;
     }
   };
-
-
+  
   return (
     <>
       <div className="manage-page">

@@ -1,32 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Info({ info }) {
   // console.log(info);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    title: "",
-    fullname: "",
-    birth: "",
-    phone: "",
-    location: "",
-  });
+   const [localInfo, setLocalInfo] = useState(info);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+  // 當 info props 改變時，更新 localInfo
+  useEffect(() => {
+    setLocalInfo(info);
+  }, [info]);
+
+  // 更新 info 物件的屬性
+  const handleChange = (key, value) => {
+    setLocalInfo({
+     ...localInfo,
+      [key]: value,
+    });
+  };
 
     // const errors = validateForm({ ...formData, [name]: value });
     // setErrors(errors);
     // setIsDisabled(Object.keys(errors).length > 0);
+
+
+
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    const fullname = formData.get("fullname");
+    const email = formData.get("email");
+    const birth = formData.get("birth");
+    const phone = formData.get("phone");
+    const location = formData.get("location");
+    const id = localStorage.getItem("id");
+
+    const response = await fetch(`/api/auth/patchInfo`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        fullname,
+        birth,
+        phone,
+        location,
+        id
+      }),
+    });
+
+    const res = await response.json();
+    console.log(res);
+   
   };
 
   return (
     <>
-      <form className="info contact-us">
+      <form onSubmit={onSubmit} className="info contact-us">
         <div className="block-title">
           <div className="dot"></div>會員資料管理
         </div>
@@ -36,11 +68,12 @@ export default function Info({ info }) {
             姓名<span className="red-word">*</span>
           </label>
           <input
-            value={info?.first_name || ""}
-            onChange={handleChange}
+            value={localInfo?.first_name || ""}
+            onChange={(e) => handleChange("name", e.target.value)}
             type="fullname"
             className="form-control"
             id="fullname"
+            name="fullname"
             aria-describedby="fullname"
           ></input>
         </div>
@@ -49,11 +82,12 @@ export default function Info({ info }) {
             生日
           </label>
           <input
-            value={info?.birth || ""}
-            onChange={handleChange}
-            type="birth"
+            value={localInfo?.birth || ""}
+            onChange={(e) => handleChange("birth", e.target.value)}
+            type="text"
             className="form-control"
             id="birth"
+            name="birth"
           ></input>
         </div>
         <div className="">
@@ -61,11 +95,12 @@ export default function Info({ info }) {
             電郵 <span className="red-word">*</span>
           </label>
           <input
-            value={info?.email || ""}
-            onChange={handleChange}
+            value={localInfo?.email || ""}
+            onChange={(e) => handleChange("email", e.target.value)}
             type="email"
             className="form-control"
             id="email"
+            name="email"
             aria-describedby="email"
           ></input>
         </div>
@@ -74,11 +109,12 @@ export default function Info({ info }) {
             手機 <span className="red-word">*</span>
           </label>
           <input
-            value={info?.phone || ""}
-            onChange={handleChange}
+            value={localInfo?.phone || ""}
+            onChange={(e) => handleChange("phone", e.target.value)}
             type="phone"
             className="form-control"
             id="phone"
+            name="phone"
             aria-describedby="phone"
           ></input>
         </div>
@@ -87,11 +123,12 @@ export default function Info({ info }) {
             地址
           </label>
           <input
-            value={info?.location || ""}
-            onChange={handleChange}
+            value={localInfo?.location || ""}
+            onChange={(e) => handleChange("location", e.target.value)}
             type="location"
             className="form-control"
             id="location"
+            name="location"
             aria-describedby="location"
           ></input>
         </div>

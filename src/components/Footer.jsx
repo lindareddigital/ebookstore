@@ -71,16 +71,14 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href={{
-                        pathname: `/member/collection`,
-                      }}
-                    >
+                    <Link href={{ pathname: `/member/collection`}}>
                       我的收藏
                     </Link>
                   </li>
                   <li>
-                    <Link href="">訂閱新書通知</Link>
+                    <Link href={{ pathname: `/member/notification` }}>
+                    訂閱新書通知
+                    </Link>
                   </li>
                   <li>
                     <Link href="/forgetpassword">查詢帳密</Link>
@@ -136,15 +134,15 @@ export default function Footer() {
           <div className="box">
             <li className="title">會員中心</li>
             <li>
-              <Link href={{pathname: `/member/info`}}>
-                會員專區
-              </Link>
+              <Link href={{ pathname: `/member/info` }}>會員專區</Link>
             </li>
             <li>
               <Link href={{ pathname: `/member/collection` }}>我的收藏</Link>
             </li>
             <li>
-              <Link href="">訂閱新書通知</Link>
+              <Link href={{ pathname: `/member/notification` }}>
+                訂閱新書通知
+              </Link>
             </li>
             <li>
               <Link href="/forgetpassword">查詢帳密</Link>

@@ -14,15 +14,19 @@ export default function GridList({ books }) {
 
 
   useEffect(() => {
-      setFilteredData(books);    
+    setFilteredData(books);    
   }, [books]);
+
+  useEffect(() => {
+    console.log("arr changed:", arr);
+  }, [arr]); 
 
   useEffect(() => {
     const userId = localStorage.getItem("id");
     const token = localStorage.getItem("token");
     setId(userId);
 
-    console.log("userId", userId, "token", token);
+    // console.log("userId", userId, "token", token);
     
 
     const getUserBookMark = async () => {
@@ -37,8 +41,7 @@ export default function GridList({ books }) {
         }),
       });
       const books = await response.json();
-      console.log("user_bookmark", books?.result?.user_bookmark);
-      // console.log(token);
+      // console.log("user_bookmark", books?.result?.user_bookmark);
       setBookMark(books?.result?.user_bookmark);
 
       const productIds = books?.result?.user_bookmark?.map(
@@ -46,14 +49,16 @@ export default function GridList({ books }) {
       );
 
       setArr(productIds);
-      console.log("arr", arr);
+      // console.log("arr", arr);
       return bookMark
     };
     
     const filterByPublisher = async () => {
-      if (!arr || arr.length === 0) {
-        return;
-      }
+      
+      // if (!arr || arr.length === 0) {
+      //   return;
+      // }      
+
       const response = await fetch(`/api/product/publisher/polis-press`, {
         method: "POST",
         headers: {
@@ -65,12 +70,12 @@ export default function GridList({ books }) {
       });
 
       const books = await response.json();
-      // console.log(books?.result?.product, "all books");
-
-      console.log(router.pathname.includes("/member"));
-
+      console.log(books?.result?.product, "all books");
 
       if (router.pathname.includes("/member")) {
+
+        console.log('in member');
+        
         const filteredData = books?.result?.product?.filter((item) => {
           return arr?.includes(item.id);
         });
@@ -80,26 +85,9 @@ export default function GridList({ books }) {
       }
     };
 
-
-    const getLikeData = async () => {
-      const books = await filterByPublisher();
-
-      if (token) {
-        const result = await getUserBookMark();
-        console.log(result);
-      }
-
-      const filteredData = books?.result?.product?.filter((item) => {
-        return arr?.includes(item.id);
-      });
-      setFilteredData(filteredData);
-      console.log(filteredData, "filteredData");
-
-      
-    };
-    
-    getLikeData()
+    getUserBookMark()
     filterByPublisher();
+
   }, []);
 
   const handleChange = async (item) => {
@@ -155,8 +143,7 @@ export default function GridList({ books }) {
         {/* <div className="title">{props.Title}</div>
         <hr></hr> */}
         <div className="grid-view">
-          {
-            filteredData?.map((item,index) => {
+          {filteredData?.map((item,index) => {
               {
                 /* console.log(arr?.includes(item?.id),item.id); */
               }

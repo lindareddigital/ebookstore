@@ -2208,9 +2208,13 @@ footer .container-fluid{
   position: relative;
 }
 
-.form-area > div:not(:last-child){
+.form-area  div:not(:last-child){
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.contactus-page .download-item{
   margin-bottom: 20px;
 }
 

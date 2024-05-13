@@ -6,7 +6,7 @@ import Head from "next/head";
 import Toast from "react-bootstrap/Toast";
 import Link from "next/link";
 import { isValidEmail } from "src/utilities/tool.js";
-
+import { useRouter } from "next/router";
 import {
   createDirectus,
   rest,
@@ -15,6 +15,7 @@ import {
 } from "@directus/sdk";
 
 export default function ContactUs() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     title: "",
@@ -28,8 +29,8 @@ export default function ContactUs() {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (localStorage.getItem("email") == null) {
-      location.replace(`/login`);
+    if (localStorage.getItem("token") == null) {
+      router.push(`/login`);
     }
   }, []);
 
