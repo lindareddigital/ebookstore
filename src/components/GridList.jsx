@@ -75,7 +75,7 @@ export default function GridList({ books }) {
         });
         setFilteredData(filteredData);
         console.log(filteredData, "filteredData");
-        // return filteredData;
+        return filteredData;
 
       }
 
@@ -83,10 +83,12 @@ export default function GridList({ books }) {
 
     const getLikeData = async () => {
       const books = await filterByPublisher();
+      console.log(books);
 
-      if (token) {
+
+      if (token && books) {
         const result = await getUserBookMark();
-        // console.log(result,arr);
+        console.log(result, arr);
       }
 
     };

@@ -7,12 +7,7 @@ import Toast from "react-bootstrap/Toast";
 import Link from "next/link";
 import { isValidEmail } from "src/utilities/tool.js";
 import { useRouter } from "next/router";
-import {
-  createDirectus,
-  rest,
-  staticToken,
-  uploadFiles,
-} from "@directus/sdk";
+import { createDirectus,rest,staticToken,uploadFiles } from "@directus/sdk";
 
 export default function ContactUs() {
   const router = useRouter();

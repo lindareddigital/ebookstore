@@ -22,6 +22,7 @@ export default function slug({}) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    // console.log(token);
 
     if (localStorage.getItem("token") != null) {
 
@@ -37,7 +38,7 @@ export default function slug({}) {
 
         if (response.ok) {
           const res = await response.json();
-          // console.log(res.result.data.id, "user id");
+          console.log(res.result.data.id, "user id");
           localStorage.setItem("id", res.result.data.id);
         }
 

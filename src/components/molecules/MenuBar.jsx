@@ -1,10 +1,8 @@
 import { useEffect, useRef,useState } from 'react';
 import Link from 'next/link';
-import useCalc from 'src/components/atoms/useCalc';
 import { useRouter } from "next/router";
 
-export default function MenuBar({ siteMenu, sendDataToParent }) {
-  const { width, mobile } = useCalc();
+export default function MenuBar({ sendDataToParent }) {
   const router = useRouter();
   const [navMenu, setNavMenu] = useState([]);
 
@@ -15,14 +13,14 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     if (typeof sendDataToParent === "function") {
       sendDataToParent(item.title);
     }
-    // console.log(item.slug);
+    console.log(item.slug);
 
-    if(item.slug = "/"){
-      item.slug = ""
-    }
+    // if(item.slug = "/"){
+    //   item.slug = ""
+    // }
     const slug = item.slug ? item.slug : "";
     
-    router.push(`/books/${slug}`, undefined, {
+    router.push(`/${slug}`, undefined, {
       shallow: true,
     });
 
@@ -38,9 +36,6 @@ export default function MenuBar({ siteMenu, sendDataToParent }) {
     };
     fetchData();
   }, []);
-
-
-  // console.log("MenuBar", all?.menu_items);
 
   return (
     <div className="menu-bar">

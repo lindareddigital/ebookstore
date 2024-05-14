@@ -8,7 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Toast from "react-bootstrap/Toast";
 import { isValidEmail } from "src/utilities/tool.js";
-
+import { createDirectus,passwordRequest,rest,staticToken } from "@directus/sdk";
 
 function Forgetpassword() {
 
@@ -29,25 +29,25 @@ function Forgetpassword() {
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
-    const password = formData.get("password");
+    // const password = formData.get("password");
 
     const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email }),
     });
     setShowToast(true);
 
     if (response.ok) {
       const data = await response.json();
-      console.log("token", data);
-      setToastContent("更改密碼成功！");
+      setToastContent("一封包含密碼重設連結的郵件已發送至您的電子郵件信箱！");
       router.push("/member/info");
 
       // localStorage.setItem("token", data.data.access_token);
     } else {
       setToastContent("更改失敗！");
     }
+
   };
 
   const handleChange = (event) => {
@@ -73,14 +73,14 @@ function Forgetpassword() {
     } else if (!isValidEmail(data.email)) {
       errors.email = "請輸入有效的郵件地址";
     }
-    if (!data.password) {
-      errors.password = "密碼不能為空";
-    }
-    if (!data.confirmPassword) {
-      errors.confirmPassword = "密碼不能為空";
-    }
+    // if (!data.password) {
+    //   errors.password = "密碼不能為空";
+    // }
+    // if (!data.confirmPassword) {
+    //   errors.confirmPassword = "密碼不能為空";
+    // }
 
-    console.log("error", errors);
+    // console.log("error", errors);
 
     if (!errors) {
       setIsDisabled(false);

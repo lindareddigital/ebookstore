@@ -31,8 +31,8 @@ export default function Info({ info }) {
 
     const fullname = formData.get("fullname");
     const email = formData.get("email");
-    const birth = formData.get("birth");
-    const phone = formData.get("phone");
+    const dob = formData.get("dob");
+    const mobile = formData.get("mobile");
     const location = formData.get("location");
     const id = localStorage.getItem("id");
 
@@ -44,15 +44,15 @@ export default function Info({ info }) {
       body: JSON.stringify({
         email,
         fullname,
-        birth,
-        phone,
+        dob,
+        mobile,
         location,
         id
       }),
     });
 
     const res = await response.json();
-    console.log(res);
+    console.log(res.result.data);
    
   };
 
@@ -78,16 +78,16 @@ export default function Info({ info }) {
           ></input>
         </div>
         <div className="">
-          <label htmlFor="birth" className="form-label">
+          <label htmlFor="dob" className="form-label">
             生日
           </label>
           <input
-            value={localInfo?.birth || ""}
-            onChange={(e) => handleChange("birth", e.target.value)}
-            type="text"
+            value={localInfo?.dob || ""}
+            onChange={(e) => handleChange("dob", e.target.value)}
+            type="date"
             className="form-control"
-            id="birth"
-            name="birth"
+            id="dob"
+            name="dob"
           ></input>
         </div>
         <div className="">
@@ -105,17 +105,17 @@ export default function Info({ info }) {
           ></input>
         </div>
         <div className="">
-          <label htmlFor="phone" className="form-label">
+          <label htmlFor="mobile" className="form-label">
             手機 <span className="red-word">*</span>
           </label>
           <input
-            value={localInfo?.phone || ""}
-            onChange={(e) => handleChange("phone", e.target.value)}
-            type="phone"
+            value={localInfo?.mobile || ""}
+            onChange={(e) => handleChange("mobile", e.target.value)}
+            type="mobile"
             className="form-control"
-            id="phone"
-            name="phone"
-            aria-describedby="phone"
+            id="mobile"
+            name="mobile"
+            aria-describedby="mobile"
           ></input>
         </div>
         <div className="">

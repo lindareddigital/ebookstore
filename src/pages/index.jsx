@@ -195,7 +195,7 @@ export default function Home() {
             <div className="trangle"></div>
           </div>
           <div className="wrapper">
-            {posts?.item?.posts?.map((item,index) => {
+            {posts?.item?.posts?.map((item, index) => {
               return (
                 <Link
                   href={`/posts/news/${item?.id}`}
@@ -221,7 +221,7 @@ export default function Home() {
         </div>
         <div
           id="carouselExampleControls"
-          className="home-banner-carousel carousel slide"
+          className="home-banner-carousel carousel slide pointer-event"
           data-bs-ride="carousel"
         >
           <div className="carousel-indicators">

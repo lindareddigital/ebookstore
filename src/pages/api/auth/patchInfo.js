@@ -2,9 +2,9 @@
 export default async function handler(req, res) {
   try {
 
-    const { fullname, birth, email, phone,location ,id } = req.body;  
+    const { fullname, dob, email, mobile,location ,id } = req.body;  
     
-    console.log('5566',{ fullname, birth, email, phone, location });
+    console.log('form',{ fullname, dob, email, mobile, location });
     
 
     const response = await fetch(
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
-        body: JSON.stringify({ fullname, birth, email, phone, location }),
+        body: JSON.stringify({ fullname, dob, email, mobile, location }),
       }
     );
 
